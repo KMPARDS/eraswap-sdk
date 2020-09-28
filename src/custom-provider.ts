@@ -11,21 +11,21 @@ import {
 } from 'ethers/lib/utils';
 import { parseEthersJsError } from './utils';
 
-class CustomLogger extends Logger {
-  throwError(
-    message: string,
-    code?: ethers.errors | undefined,
-    params?: any
-  ): never {
-    try {
-      super.throwError(message, code, params);
-    } catch (error) {
-      throw parseEthersJsError(error);
-    }
-  }
-}
+// class CustomLogger extends Logger {
+//   throwError(
+//     message: string,
+//     code?: ethers.errors | undefined,
+//     params?: any
+//   ): never {
+//     try {
+//       super.throwError(message, code, params);
+//     } catch (error) {
+//       throw parseEthersJsError(error);
+//     }
+//   }
+// }
 
-const logger = new CustomLogger(version);
+const logger = new Logger(version);
 
 export class CustomProviderBase extends ethers.providers.StaticJsonRpcProvider {
   async resolveName(name: string | Promise<string>): Promise<string> {
