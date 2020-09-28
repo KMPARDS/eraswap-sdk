@@ -27,7 +27,7 @@ class CustomLogger extends Logger {
 
 const logger = new CustomLogger(version);
 
-class _CustomProvider extends ethers.providers.StaticJsonRpcProvider {
+export class CustomProviderBase extends ethers.providers.StaticJsonRpcProvider {
   async resolveName(name: string | Promise<string>): Promise<string> {
     return await this.resolveAddress(name);
   }
@@ -197,7 +197,7 @@ class _CustomProvider extends ethers.providers.StaticJsonRpcProvider {
 
 import { addresses } from './addresses';
 
-export class CustomProvider extends _CustomProvider {
+export class CustomProvider extends CustomProviderBase {
   constructor(network: 'mainnet' | 'testnet') {
     switch (network) {
       case 'mainnet':
