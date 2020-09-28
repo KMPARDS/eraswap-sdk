@@ -1,2 +1,2 @@
-export * from './ETH';
-export * from './ESN';
+export * as ETH from './ETH';
+export * as ESN from './ESN';
