@@ -1,2 +1,4 @@
-export * as ETH from './ETH';
-export * as ESN from './ESN';
+import * as ETH from './ETH';
+import * as ESN from './ESN';
+
+export { ETH, ESN };
