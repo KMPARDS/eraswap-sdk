@@ -1,0 +1,23 @@
+{
+  "name": "eraswap",
+  "version": "1.0.0",
+  "description": "Typechain outputs of esn-contracts and utils",
+  "main": "dist/",
+  "author": "github.com/zemse",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "tsc"
+  },
+  "dependencies": {
+    "@types/node": "^14.11.2",
+    "ethers": "^5.0.14"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.3"
+  },
+  "peerDependencies": {
+    "ethers": "^5.0.14"
+  }
+}
