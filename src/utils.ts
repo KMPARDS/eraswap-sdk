@@ -1,5 +1,3 @@
-import { ethers } from 'ethers';
-
 export function routine(fn: Function, msec: number): NodeJS.Timeout {
   let working = true;
   const result = fn();
@@ -51,13 +49,18 @@ export function parseTimestampRemaining(unixTimestampSeconds: number): string {
   return parseSecondsRemaining(secondsRemaining);
 }
 
+import { Logger } from 'ethers/lib/utils';
+
 export function parseEthersJsError(error: any): string {
+  const isRevert =
+    (error?.error?.code || error?.code) === Logger.errors.CALL_EXCEPTION;
+  const reason = error?.error?.reason || error?.reason;
+  const message = error?.error?.message || error?.message;
   return (
-    (error?.error?.reason &&
-      `Error from Smart Contract ${error?.error?.reason}`) ||
-    (error?.error?.message &&
-      `Error from Blockchain: ${error?.error?.message}`) ||
-    (error?.message && `Error on UI: ${error?.message}`) ||
-    `Weird error: ${typeof error === 'object' ? JSON.stringify(error) : error}`
+    (isRevert && reason && `Error from Smart Contract ${reason}`) ||
+    (message && `Client-side error: ${message}`) ||
+    `Unknown error: ${
+      typeof error === 'object' ? JSON.stringify(error) : error
+    }`
   );
 }
