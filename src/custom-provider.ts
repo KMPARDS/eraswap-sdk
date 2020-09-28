@@ -9,7 +9,7 @@ import {
   hexStripZeros,
   hexZeroPad,
 } from 'ethers/lib/utils';
-import { renderEthersJsError } from './utils';
+import { parseEthersJsError } from './utils';
 
 class CustomLogger extends Logger {
   throwError(
@@ -20,7 +20,7 @@ class CustomLogger extends Logger {
     try {
       super.throwError(message, code, params);
     } catch (error) {
-      throw renderEthersJsError(error);
+      throw parseEthersJsError(error);
     }
   }
 }
@@ -167,7 +167,7 @@ export class CustomProviderBase extends ethers.providers.StaticJsonRpcProvider {
             ['vmtrace', 'trace'],
           ]);
         } catch (error) {
-          console.log('trace_call error:', renderEthersJsError(error));
+          console.log('trace_call error:', parseEthersJsError(error));
         }
 
         if (result?.output) {

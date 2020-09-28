@@ -30,7 +30,7 @@ export const EraswapInfo = {
   },
 };
 
-export function renderSecondsRemaining(numberOfSeconds: number): string {
+export function parseSecondsRemaining(numberOfSeconds: number): string {
   const days = Math.floor(numberOfSeconds / 60 / 60 / 24);
   const hours = Math.floor((numberOfSeconds - days * 60 * 60 * 24) / 60 / 60);
   const minutes = Math.floor(
@@ -44,14 +44,14 @@ export function renderSecondsRemaining(numberOfSeconds: number): string {
   }${minutes !== 0 ? `${minutes} minutes and ` : ''}${seconds} seconds`;
 }
 
-export function renderTimestampRemaining(unixTimestampSeconds: number): string {
+export function parseTimestampRemaining(unixTimestampSeconds: number): string {
   const currentTimestamp = Math.round(Date.now() / 1000);
   let secondsRemaining = currentTimestamp - unixTimestampSeconds;
   if (secondsRemaining < 0) secondsRemaining = 0;
-  return renderSecondsRemaining(secondsRemaining);
+  return parseSecondsRemaining(secondsRemaining);
 }
 
-export function renderEthersJsError(error: any): string {
+export function parseEthersJsError(error: any): string {
   return (
     (error?.error?.reason &&
       `Error from Smart Contract ${error?.error?.reason}`) ||
