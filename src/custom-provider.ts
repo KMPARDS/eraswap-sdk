@@ -180,3 +180,28 @@ export class CustomProvider extends ethers.providers.StaticJsonRpcProvider {
     }
   }
 }
+
+import { addresses } from './addresses';
+
+export class CustomProvider extends _CustomProvider {
+  constructor(network: 'mainnet' | 'testnet') {
+    switch (network) {
+      case 'mainnet':
+        super('https://mainnet.eraswap.network', {
+          name: 'EraSwapNetwork',
+          chainId: 5197,
+          ensAddress: addresses['production'].ESN.kycdapp,
+        });
+      case 'testnet':
+        super('https://testnet.eraswap.network', {
+          name: 'EraSwapNetwork',
+          chainId: 5196,
+          ensAddress: addresses['development'].ESN.kycdapp,
+        });
+      default:
+        throw new Error(
+          `CustomProvider needs 'mainnet' or 'testnet' as constructor arg`
+        );
+    }
+  }
+}
