@@ -13,22 +13,22 @@ $ npm i eraswap-sdk
 ## `addresses` bucket: Accessing Contract Addresses
 
 ```ts
-import { addresses } from 'eraswap-sdk';
+import { es } from 'eraswap-sdk';
 
 // Get the testing address
-const timeallyAddressTesting = addresses['development'].ESN.timeallyManager;
+const timeallyAddressTesting = es.addresses['development'].ESN.timeallyManager;
 
 // Get the mainnet address
-const timeallyAddressMainnet = addresses['production'].ESN.timeallyManager;
+const timeallyAddressMainnet = es.addresses['production'].ESN.timeallyManager;
 ```
 
 ## `typechain` bucket: Accessing Contract Typings
 
 ```ts
-import { typechain, addresses } from 'eraswap-sdk';
+import { es } from 'eraswap-sdk';
 
-const timeallyInstance = typechain.ESN.TimeAllyManagerFactory.connect(
-  addresses['development'].ESN.timeallyManager
+const timeallyInstance = es.typechain.ESN.TimeAllyManagerFactory.connect(
+  es.addresses['development'].ESN.timeallyManager
 );
 ```
 
@@ -37,28 +37,28 @@ const timeallyInstance = typechain.ESN.TimeAllyManagerFactory.connect(
 Custom provider is a modification of `ethers.js`'s `JsonRpcProvider` with Kyc Dapp integrated and better errors
 
 ```ts
-import { CustomProvider } from 'eraswap-sdk';
+import { es } from 'eraswap-sdk';
 
 // for mainnet
-const providerESN = new CustomProvider('mainnet');
+const providerESN = new es.CustomProvider('mainnet');
 
 // for testnet
-const providerESN = new CustomProvider('testnet');
+const providerESN = new es.CustomProvider('testnet');
 ```
 
-## `esutils` bucket: General Utils
+## General Utils
 
 ### Parsing Ethers.js errors.
 
 Errors in v5 have gotten ugly lately. See [ethers-io/ethers.js#871](https://github.com/ethers-io/ethers.js/issues/871). This
 
 ```ts
-import { esutils } from 'eraswap-sdk';
+import { es } from 'eraswap-sdk';
 
 try {
   await contract.methodThatThrowError();
 } catch (error) {
-  const readableError = esutils.parseEthersJsError(error); // string
+  const readableError = es.utils.parseEthersJsError(error); // string
   setDisplayMessage(`Error: ${readableError}`);
 }
 ```
@@ -66,14 +66,14 @@ try {
 ### Getting Era Swap Explorer url
 
 ```ts
-import { esutils } from 'eraswap-sdk';
+import { es } from 'eraswap-sdk';
 
-const url = esutils.EraswapInfo.getAddressHref(
+const url = es.utils.EraswapInfo.getAddressHref(
   '0xC8e1F3B9a0CdFceF9fFd2343B943989A22517b26'
 );
 // returns: https://eraswap.info/address/0xC8e1F3B9a0CdFceF9fFd2343B943989A22517b26
 
-const url = esutils.EraswapInfo.getTxHref(
+const url = es.utils.EraswapInfo.getTxHref(
   '0x200706e0608bec9ad2993b6659df036062e8fbbdc9cc61bd52c61ab106a48f44'
 );
 // returns: https://eraswap.info/txn/0x200706e0608bec9ad2993b6659df036062e8fbbdc9cc61bd52c61ab106a48f44
