@@ -206,12 +206,14 @@ export class CustomProvider extends CustomProviderBase {
           chainId: 5197,
           ensAddress: addresses['production'].ESN.kycdapp,
         });
+        break;
       case 'testnet':
         super('https://testnet.eraswap.network', {
           name: 'EraSwapNetwork',
           chainId: 5196,
           ensAddress: addresses['development'].ESN.kycdapp,
         });
+        break;
       default:
         throw new Error(
           `CustomProvider needs 'mainnet' or 'testnet' as constructor arg`
