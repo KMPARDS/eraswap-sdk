@@ -11,9 +11,23 @@ import {
 } from 'ethers/lib/utils';
 import { renderEthersJsError } from './utils';
 
-const logger = new Logger(version);
+class CustomLogger extends Logger {
+  throwError(
+    message: string,
+    code?: ethers.errors | undefined,
+    params?: any
+  ): never {
+    try {
+      super.throwError(message, code, params);
+    } catch (error) {
+      throw renderEthersJsError(error);
+    }
+  }
+}
 
-export class CustomProvider extends ethers.providers.StaticJsonRpcProvider {
+const logger = new CustomLogger(version);
+
+class _CustomProvider extends ethers.providers.StaticJsonRpcProvider {
   async resolveName(name: string | Promise<string>): Promise<string> {
     return await this.resolveAddress(name);
   }
