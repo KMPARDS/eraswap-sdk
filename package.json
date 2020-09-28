@@ -1,5 +1,5 @@
 {
-  "name": "eraswap",
+  "name": "eraswap-sdk",
   "version": "1.0.0",
   "description": "Typechain outputs of esn-contracts and utils",
   "main": "dist/",
