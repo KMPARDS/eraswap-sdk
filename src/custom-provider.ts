@@ -113,7 +113,7 @@ export class CustomProviderBase extends ethers.providers.StaticJsonRpcProvider {
   async call(
     transaction: Deferrable<TransactionRequest>,
     blockTag?: string | number | undefined
-    // @ts-ignore
+    // @ts-ignore Because including undefined makes the override  signature mismatch
   ): Promise<string> {
     try {
       const resp = await super.call(transaction, blockTag);
@@ -122,7 +122,7 @@ export class CustomProviderBase extends ethers.providers.StaticJsonRpcProvider {
       return resp;
     } catch (error) {
       const data = error?.error?.data;
-      console.log('yey', data);
+      // console.log('resp', data);
 
       if (typeof data === 'string' && data.slice(0, 9) === 'Reverted ') {
         const actualData = data.slice(9);
