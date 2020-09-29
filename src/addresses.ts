@@ -79,4 +79,4 @@ const test = {
   },
 };
 
-export const addresses = { development, production };
+export const addresses = { development, production, test };
