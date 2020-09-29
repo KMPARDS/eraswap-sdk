@@ -22,17 +22,9 @@ const timeallyAddressTesting = es.addresses['development'].ESN.timeallyManager;
 const timeallyAddressMainnet = es.addresses['production'].ESN.timeallyManager;
 ```
 
-## `typechain` bucket: Accessing Contract Typings
+You can use a env variable to easily switch between testnet and mainnet deployments.
 
-```ts
-import { es } from 'eraswap-sdk';
-
-const timeallyInstance = es.typechain.ESN.TimeAllyManagerFactory.connect(
-  es.addresses['development'].ESN.timeallyManager
-);
-```
-
-## `Customprovider`
+## `CustomProvider`
 
 Custom provider is a modification of `ethers.js`'s `JsonRpcProvider` with Kyc Dapp integrated and better errors
 
@@ -44,6 +36,33 @@ const providerESN = new es.CustomProvider('mainnet');
 
 // for testnet
 const providerESN = new es.CustomProvider('testnet');
+
+// or (a preferrable way)
+
+import { CustomProvider } from 'eraswap-sdk';
+
+const providerESN = new CustomProvider('testnet');
+```
+
+## `typechain` bucket: Accessing Contract Typings
+
+```ts
+import { es } from 'eraswap-sdk';
+
+const timeallyInstance = es.typechain.ESN.TimeAllyManagerFactory.connect(
+  es.addresses[process.env.NODE_ENV].ESN.timeallyManager,
+  providerESN
+);
+
+// another (preferrable) way to import
+
+import { PlasmaManagerFactory } from 'eraswap-sdk/dist/typechain/ETH';
+import { TimeAllyManagerFactory } from 'eraswap-sdk/dist/typechain/ESN';
+
+const timeallyInstance = TimeAllyManagerFactory.connect(
+  es.addresses[process.env.NODE_ENV].ESN.timeallyManager,
+  providerESN
+);
 ```
 
 ## General Utils
