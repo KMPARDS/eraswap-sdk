@@ -21,6 +21,7 @@ const development = {
     kycdapp: '0xC4336494606203e3907539d5b462A5cb7853B3C6',
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
+    betdeex: 'BETDEEX',
   },
 };
 
@@ -47,6 +48,7 @@ const production = {
     kycdapp: '0xC4336494606203e3907539d5b462A5cb7853B3C6',
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
+    betdeex: 'BETDEEX',
   },
 };
 
@@ -76,6 +78,7 @@ const test = {
     kycdapp: '',
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
+    betdeex: 'BETDEEX',
   },
 };
 
