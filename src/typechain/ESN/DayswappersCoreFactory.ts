@@ -18,6 +18,25 @@ const _abi = [
     inputs: [
       {
         indexed: true,
+        internalType: 'uint32',
+        name: 'seatIndex',
+        type: 'uint32',
+      },
+      {
+        indexed: true,
+        internalType: 'uint32',
+        name: 'month',
+        type: 'uint32',
+      },
+    ],
+    name: 'Active',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
         internalType: 'bytes32',
         name: 'wallet',
         type: 'bytes32',
@@ -49,6 +68,19 @@ const _abi = [
       },
     ],
     name: 'Introduce',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'uint32',
+        name: 'seatIndex',
+        type: 'uint32',
+      },
+    ],
+    name: 'KycResolved',
     type: 'event',
   },
   {
@@ -556,6 +588,44 @@ const _abi = [
         internalType: 'bool',
         name: 'isActive',
         type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint32',
+        name: '_month',
+        type: 'uint32',
+      },
+    ],
+    name: 'getTotalMonthlyActiveDayswappers',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint32',
+        name: '_month',
+        type: 'uint32',
+      },
+    ],
+    name: 'getTotalMonthlyIndefiniteRewards',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
     stateMutability: 'view',

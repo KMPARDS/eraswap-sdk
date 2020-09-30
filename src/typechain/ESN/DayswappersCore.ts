@@ -24,6 +24,8 @@ interface DayswappersCoreInterface extends ethers.utils.Interface {
     'getSeatMonthlyDataByAddress(address,uint32)': FunctionFragment;
     'getSeatMonthlyDataByAddressStrict(address,uint32)': FunctionFragment;
     'getSeatMonthlyDataByIndex(uint32,uint32)': FunctionFragment;
+    'getTotalMonthlyActiveDayswappers(uint32)': FunctionFragment;
+    'getTotalMonthlyIndefiniteRewards(uint32)': FunctionFragment;
     'isActiveAddress(address)': FunctionFragment;
     'isActiveSeat(uint32)': FunctionFragment;
     'isAuthorized(bytes32)': FunctionFragment;
@@ -83,6 +85,14 @@ interface DayswappersCoreInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: 'getSeatMonthlyDataByIndex',
     values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: 'getTotalMonthlyActiveDayswappers',
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: 'getTotalMonthlyIndefiniteRewards',
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: 'isActiveAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'isActiveSeat', values: [BigNumberish]): string;
@@ -152,6 +162,14 @@ interface DayswappersCoreInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: 'getSeatMonthlyDataByIndex', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: 'getTotalMonthlyActiveDayswappers',
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: 'getTotalMonthlyIndefiniteRewards',
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: 'isActiveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isActiveSeat', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isAuthorized', data: BytesLike): Result;
@@ -191,8 +209,10 @@ interface DayswappersCoreInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'withdrawNrtEarnings', data: BytesLike): Result;
 
   events: {
+    'Active(uint32,uint32)': EventFragment;
     'Authorised(bytes32,bool)': EventFragment;
     'Introduce(uint32,uint32)': EventFragment;
+    'KycResolved(uint32)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'Promotion(uint32,uint32)': EventFragment;
     'Reward(address,uint32,uint32,bool,bool,uint256,uint256[3])': EventFragment;
@@ -201,8 +221,10 @@ interface DayswappersCoreInterface extends ethers.utils.Interface {
     'Withdraw(uint32,bool,uint8,uint32,uint256[3])': EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: 'Active'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Authorised'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Introduce'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'KycResolved'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Promotion'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Reward'): EventFragment;
@@ -487,6 +509,34 @@ export abstract class DayswappersCore extends Contract {
       2: [BigNumber, BigNumber, BigNumber];
       3: [BigNumber, BigNumber, BigNumber];
       4: boolean;
+    }>;
+
+    getTotalMonthlyActiveDayswappers(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'getTotalMonthlyActiveDayswappers(uint32)'(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    getTotalMonthlyIndefiniteRewards(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'getTotalMonthlyIndefiniteRewards(uint32)'(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
     }>;
 
     isActiveAddress(
@@ -1169,6 +1219,26 @@ export abstract class DayswappersCore extends Contract {
     4: boolean;
   }>;
 
+  abstract getTotalMonthlyActiveDayswappers(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  abstract 'getTotalMonthlyActiveDayswappers(uint32)'(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  abstract getTotalMonthlyIndefiniteRewards(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  abstract 'getTotalMonthlyIndefiniteRewards(uint32)'(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   abstract isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<boolean>;
 
   abstract 'isActiveAddress(address)'(
@@ -1711,6 +1781,26 @@ export abstract class DayswappersCore extends Contract {
       4: boolean;
     }>;
 
+    getTotalMonthlyActiveDayswappers(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    'getTotalMonthlyActiveDayswappers(uint32)'(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getTotalMonthlyIndefiniteRewards(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    'getTotalMonthlyIndefiniteRewards(uint32)'(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<boolean>;
 
     'isActiveAddress(address)'(_networker: string, overrides?: CallOverrides): Promise<boolean>;
@@ -1965,12 +2055,16 @@ export abstract class DayswappersCore extends Contract {
   };
 
   abstract filters: {
+    Active(seatIndex: BigNumberish | null, month: BigNumberish | null): EventFilter;
+
     Authorised(wallet: BytesLike | null, newStatus: null): EventFilter;
 
     Introduce(
       introducerSeatIndex: BigNumberish | null,
       networkerSeatIndex: BigNumberish | null
     ): EventFilter;
+
+    KycResolved(seatIndex: BigNumberish | null): EventFilter;
 
     OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
 
@@ -2077,6 +2171,26 @@ export abstract class DayswappersCore extends Contract {
 
     'getSeatMonthlyDataByIndex(uint32,uint32)'(
       _seatIndex: BigNumberish,
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getTotalMonthlyActiveDayswappers(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    'getTotalMonthlyActiveDayswappers(uint32)'(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getTotalMonthlyIndefiniteRewards(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    'getTotalMonthlyIndefiniteRewards(uint32)'(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2425,6 +2539,26 @@ export abstract class DayswappersCore extends Contract {
 
     'getSeatMonthlyDataByIndex(uint32,uint32)'(
       _seatIndex: BigNumberish,
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getTotalMonthlyActiveDayswappers(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    'getTotalMonthlyActiveDayswappers(uint32)'(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getTotalMonthlyIndefiniteRewards(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    'getTotalMonthlyIndefiniteRewards(uint32)'(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

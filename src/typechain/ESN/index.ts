@@ -2,6 +2,10 @@
 /* tslint:disable */
 export * from './BatchSendTokensFactory';
 export * from './BatchSendTokens';
+export * from './BetFactory';
+export * from './Bet';
+export * from './BetDeExFactory';
+export * from './BetDeEx';
 export * from './DayswappersWithMigrationFactory';
 export * from './DayswappersWithMigration';
 export * from './AdminModeFactory';
