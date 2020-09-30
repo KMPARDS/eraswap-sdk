@@ -3,11 +3,11 @@
 This kit is intended to make it convenient to access to addresses of smart contracts related to Era Swap and common utilities.
 
 ```
-$ yarn add eraswap-sdk
+$ yarn add eraswap-sdk@latest
 
 or
 
-$ npm i eraswap-sdk
+$ npm i eraswap-sdk@latest
 ```
 
 ## `addresses` bucket: Accessing Contract Addresses
