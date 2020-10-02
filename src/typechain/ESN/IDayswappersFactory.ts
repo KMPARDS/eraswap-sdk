@@ -61,7 +61,7 @@ const _abi = [
         type: 'uint32',
       },
     ],
-    name: 'KycResolved',
+    name: 'KycResolve',
     type: 'event',
   },
   {

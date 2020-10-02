@@ -233,7 +233,7 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
     'Active(uint32,uint32)': EventFragment;
     'Authorised(bytes32,bool)': EventFragment;
     'Introduce(uint32,uint32)': EventFragment;
-    'KycResolved(uint32)': EventFragment;
+    'KycResolve(uint32)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'Promotion(uint32,uint32)': EventFragment;
     'Reward(address,uint32,uint32,bool,bool,uint256,uint256[3])': EventFragment;
@@ -245,7 +245,7 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: 'Active'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Authorised'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Introduce'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'KycResolved'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'KycResolve'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Promotion'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Reward'): EventFragment;
@@ -2189,7 +2189,7 @@ export abstract class DayswappersWithMigration extends Contract {
       networkerSeatIndex: BigNumberish | null
     ): EventFilter;
 
-    KycResolved(seatIndex: BigNumberish | null): EventFilter;
+    KycResolve(seatIndex: BigNumberish | null): EventFilter;
 
     OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
 

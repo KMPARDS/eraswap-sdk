@@ -127,7 +127,7 @@ interface IDayswappersInterface extends ethers.utils.Interface {
   events: {
     'Active(uint32,uint32)': EventFragment;
     'Introduce(uint32,uint32)': EventFragment;
-    'KycResolved(uint32)': EventFragment;
+    'KycResolve(uint32)': EventFragment;
     'Promotion(uint32,uint32)': EventFragment;
     'Reward(address,uint32,uint32,bool,bool,uint256,uint256[3])': EventFragment;
     'SeatTransfer(address,address,uint32)': EventFragment;
@@ -137,7 +137,7 @@ interface IDayswappersInterface extends ethers.utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: 'Active'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Introduce'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'KycResolved'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'KycResolve'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Promotion'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Reward'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'SeatTransfer'): EventFragment;
@@ -1328,7 +1328,7 @@ export abstract class IDayswappers extends Contract {
       networkerSeatIndex: BigNumberish | null
     ): EventFilter;
 
-    KycResolved(seatIndex: BigNumberish | null): EventFilter;
+    KycResolve(seatIndex: BigNumberish | null): EventFilter;
 
     Promotion(seatIndex: BigNumberish | null, beltIndex: BigNumberish | null): EventFilter;
 
