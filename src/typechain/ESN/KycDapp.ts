@@ -39,8 +39,7 @@ interface KycDappInterface extends ethers.utils.Interface {
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
     'resolveUsernameStrict(address)': FunctionFragment;
-    'setIdentityOwner(bytes32,address,bool)': FunctionFragment;
-    'setInitialValues()': FunctionFragment;
+    'setIdentityOwner(bytes32,address,bool,uint8)': FunctionFragment;
     'setKycDapp(address)': FunctionFragment;
     'timeallyClub()': FunctionFragment;
     'timeallyManager()': FunctionFragment;
@@ -93,9 +92,8 @@ interface KycDappInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
   encodeFunctionData(
     functionFragment: 'setIdentityOwner',
-    values: [BytesLike, string, boolean]
+    values: [BytesLike, string, boolean, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'setInitialValues', values?: undefined): string;
   encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
   encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
   encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
@@ -137,7 +135,6 @@ interface KycDappInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setIdentityOwner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setInitialValues', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
@@ -596,19 +593,17 @@ export abstract class KycDapp extends Contract {
       _username: BytesLike,
       _newContract: string,
       _isGovernanceControllable: boolean,
+      _kycStatus: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'setIdentityOwner(bytes32,address,bool)'(
+    'setIdentityOwner(bytes32,address,bool,uint8)'(
       _username: BytesLike,
       _newContract: string,
       _isGovernanceControllable: boolean,
+      _kycStatus: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
-
-    setInitialValues(overrides?: Overrides): Promise<ContractTransaction>;
-
-    'setInitialValues()'(overrides?: Overrides): Promise<ContractTransaction>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -1027,19 +1022,17 @@ export abstract class KycDapp extends Contract {
     _username: BytesLike,
     _newContract: string,
     _isGovernanceControllable: boolean,
+    _kycStatus: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  abstract 'setIdentityOwner(bytes32,address,bool)'(
+  abstract 'setIdentityOwner(bytes32,address,bool,uint8)'(
     _username: BytesLike,
     _newContract: string,
     _isGovernanceControllable: boolean,
+    _kycStatus: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
-
-  abstract setInitialValues(overrides?: Overrides): Promise<ContractTransaction>;
-
-  abstract 'setInitialValues()'(overrides?: Overrides): Promise<ContractTransaction>;
 
   abstract setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -1407,19 +1400,17 @@ export abstract class KycDapp extends Contract {
       _username: BytesLike,
       _newContract: string,
       _isGovernanceControllable: boolean,
+      _kycStatus: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'setIdentityOwner(bytes32,address,bool)'(
+    'setIdentityOwner(bytes32,address,bool,uint8)'(
       _username: BytesLike,
       _newContract: string,
       _isGovernanceControllable: boolean,
+      _kycStatus: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    setInitialValues(overrides?: CallOverrides): Promise<void>;
-
-    'setInitialValues()'(overrides?: CallOverrides): Promise<void>;
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
@@ -1732,19 +1723,17 @@ export abstract class KycDapp extends Contract {
       _username: BytesLike,
       _newContract: string,
       _isGovernanceControllable: boolean,
+      _kycStatus: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'setIdentityOwner(bytes32,address,bool)'(
+    'setIdentityOwner(bytes32,address,bool,uint8)'(
       _username: BytesLike,
       _newContract: string,
       _isGovernanceControllable: boolean,
+      _kycStatus: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
-
-    setInitialValues(overrides?: Overrides): Promise<BigNumber>;
-
-    'setInitialValues()'(overrides?: Overrides): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
@@ -2048,19 +2037,17 @@ export abstract class KycDapp extends Contract {
       _username: BytesLike,
       _newContract: string,
       _isGovernanceControllable: boolean,
+      _kycStatus: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'setIdentityOwner(bytes32,address,bool)'(
+    'setIdentityOwner(bytes32,address,bool,uint8)'(
       _username: BytesLike,
       _newContract: string,
       _isGovernanceControllable: boolean,
+      _kycStatus: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
-
-    setInitialValues(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    'setInitialValues()'(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
 
