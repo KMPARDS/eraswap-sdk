@@ -1,4 +1,4 @@
-interface Addresses {
+export interface Addresses {
   ETH: {
     network: string;
     esContract: string;
