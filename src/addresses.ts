@@ -1,10 +1,41 @@
+interface Addresses {
+  ETH: {
+    network: string;
+    esContract: string;
+    plasmaManager: string;
+    fundsManager: string;
+  };
+  ESN: {
+    reversePlasma: string;
+    fundsManager: string;
+    nrtManager: string;
+    timeallyManager: string;
+    timeallyStakingTarget: string;
+    validatorSet: string;
+    validatorManager: string;
+    randomnessManager: string;
+    blockRewardManager: string;
+    prepaidEs: string;
+    dayswappers: string;
+    kycdapp: string;
+    timeallyclub: string;
+    timeAllyPromotionalBucket: string;
+    // tsgap: string;
+    betdeex: string;
+    timeswappers: string;
+    buzcafe: string;
+    buildSurvey: string;
+    rentingDappManager: string;
+  };
+}
+
 // for developing with yarn start or npm run start
-const development = {
+const development: Addresses = {
   ETH: {
     network: 'rinkeby',
-    esContract: '0x206949aD387Ce7F35B71e9db3cB576D103123D27',
-    plasmaManager: '0x1c5b6e1ff599D1aCEd9cfCE73efab34f0688977e',
-    fundsManager: '0xBf2B93384948f57f6927C72baDEA5e0dd0182Aa5',
+    esContract: '0x843458c9E5d184DB5e52A9963C40174c911BB6B2',
+    plasmaManager: '0x38b0A265689D1D418BA7CA162c9969827642b234',
+    fundsManager: '0x5f3e262b92E2E644162C2144775C971a0Fd1B5E2',
   },
   ESN: {
     reversePlasma: '0x3bEb087e33eC0B830325991A32E3F8bb16A51317',
@@ -22,11 +53,15 @@ const development = {
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
     betdeex: 'BETDEEX',
+    timeswappers: 'TIMESWAPPERS',
+    buzcafe: 'BUZCAFE',
+    buildSurvey: 'BUILD_SURVEY',
+    rentingDappManager: 'RENTING_DAPP',
   },
 };
 
 // for building with yarn build or npm run build
-const production = {
+const production: Addresses = {
   ETH: {
     network: 'homestead',
     esContract: '0x206949aD387Ce7F35B71e9db3cB576D103123D27',
@@ -49,6 +84,10 @@ const production = {
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
     betdeex: 'BETDEEX',
+    timeswappers: 'TIMESWAPPERS',
+    buzcafe: 'BUZCAFE',
+    buildSurvey: 'BUILD_SURVEY',
+    rentingDappManager: 'RENTING_DAPP',
   },
 };
 
@@ -56,7 +95,7 @@ const production = {
 // because of following you don't get any error while doing
 // es.addresses[process.env.NODE_ENV]
 // other than that, following has ho such use
-const test = {
+const test: Addresses = {
   ETH: {
     network: 'ganache',
     esContract: '',
@@ -79,6 +118,10 @@ const test = {
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
     betdeex: 'BETDEEX',
+    timeswappers: 'TIMESWAPPERS',
+    buzcafe: 'BUZCAFE',
+    buildSurvey: 'BUILD_SURVEY',
+    rentingDappManager: 'RENTING_DAPP',
   },
 };
 
