@@ -29,6 +29,7 @@ interface DayswappersCoreInterface extends ethers.utils.Interface {
     'isActiveAddress(address)': FunctionFragment;
     'isActiveSeat(uint32)': FunctionFragment;
     'isAuthorized(bytes32)': FunctionFragment;
+    'isJoined(address)': FunctionFragment;
     'join(address)': FunctionFragment;
     'kycDapp()': FunctionFragment;
     'nrtManager()': FunctionFragment;
@@ -97,6 +98,7 @@ interface DayswappersCoreInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'isActiveAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'isActiveSeat', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'isAuthorized', values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: 'isJoined', values: [string]): string;
   encodeFunctionData(functionFragment: 'join', values: [string]): string;
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
@@ -173,6 +175,7 @@ interface DayswappersCoreInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'isActiveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isActiveSeat', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isAuthorized', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'isJoined', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'join', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
@@ -576,6 +579,20 @@ export abstract class DayswappersCore extends Contract {
 
     'isAuthorized(address)'(
       _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: boolean;
+    }>;
+
+    isJoined(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: boolean;
+    }>;
+
+    'isJoined(address)'(
+      _networker: string,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -1260,6 +1277,10 @@ export abstract class DayswappersCore extends Contract {
 
   abstract 'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
 
+  abstract isJoined(_networker: string, overrides?: CallOverrides): Promise<boolean>;
+
+  abstract 'isJoined(address)'(_networker: string, overrides?: CallOverrides): Promise<boolean>;
+
   abstract join(_introducer: string, overrides?: Overrides): Promise<ContractTransaction>;
 
   abstract 'join(address)'(
@@ -1813,6 +1834,10 @@ export abstract class DayswappersCore extends Contract {
 
     'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
 
+    isJoined(_networker: string, overrides?: CallOverrides): Promise<boolean>;
+
+    'isJoined(address)'(_networker: string, overrides?: CallOverrides): Promise<boolean>;
+
     join(_introducer: string, overrides?: CallOverrides): Promise<void>;
 
     'join(address)'(_introducer: string, overrides?: CallOverrides): Promise<void>;
@@ -2207,6 +2232,10 @@ export abstract class DayswappersCore extends Contract {
 
     'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    isJoined(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'isJoined(address)'(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     join(_introducer: string, overrides?: Overrides): Promise<BigNumber>;
 
     'join(address)'(_introducer: string, overrides?: Overrides): Promise<BigNumber>;
@@ -2587,6 +2616,13 @@ export abstract class DayswappersCore extends Contract {
 
     'isAuthorized(address)'(
       _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isJoined(_networker: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'isJoined(address)'(
+      _networker: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

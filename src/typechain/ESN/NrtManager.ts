@@ -49,6 +49,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
     'timeallyClub()': FunctionFragment;
     'timeallyManager()': FunctionFragment;
     'timeallyPromotionalBucket()': FunctionFragment;
+    'totalSupply()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'validatorManager()': FunctionFragment;
   };
@@ -90,6 +91,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
   encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
 
@@ -127,13 +129,11 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
 
   events: {
-    'AddressM(address,string)': EventFragment;
-    'AddressM2(bytes32,string)': EventFragment;
-    'Bool(bool)': EventFragment;
     'Burn(uint32,uint256)': EventFragment;
     'BurnPoolAccrue(uint32,uint256,address)': EventFragment;
     'LuckPoolAccrue(uint32,uint256,address)': EventFragment;
@@ -141,9 +141,6 @@ interface NrtManagerInterface extends ethers.utils.Interface {
     'OwnershipTransferred(address,address)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'AddressM'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'AddressM2'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Bool'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Burn'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'BurnPoolAccrue'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'LuckPoolAccrue'): EventFragment;
@@ -663,6 +660,18 @@ export abstract class NrtManager extends Contract {
       0: string;
     }>;
 
+    totalSupply(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'totalSupply()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
@@ -980,6 +989,10 @@ export abstract class NrtManager extends Contract {
 
   abstract 'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
 
+  abstract totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+  abstract 'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
@@ -1277,6 +1290,10 @@ export abstract class NrtManager extends Contract {
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
 
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
@@ -1293,12 +1310,6 @@ export abstract class NrtManager extends Contract {
   };
 
   abstract filters: {
-    AddressM(a: null, m: null): EventFilter;
-
-    AddressM2(a: null, m: null): EventFilter;
-
-    Bool(b: null): EventFilter;
-
     Burn(nrtMonth: BigNumberish | null, value: null): EventFilter;
 
     BurnPoolAccrue(nrtMonth: BigNumberish | null, value: null, sender: null): EventFilter;
@@ -1582,6 +1593,10 @@ export abstract class NrtManager extends Contract {
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
@@ -1888,6 +1903,10 @@ export abstract class NrtManager extends Contract {
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.

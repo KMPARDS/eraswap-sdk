@@ -711,6 +711,25 @@ const _abi = [
     inputs: [
       {
         internalType: 'address',
+        name: '_networker',
+        type: 'address',
+      },
+    ],
+    name: 'isJoined',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
         name: '_introducer',
         type: 'address',
       },

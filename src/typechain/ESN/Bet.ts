@@ -15,10 +15,12 @@ import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
 
 interface BetInterface extends ethers.utils.Interface {
   functions: {
+    '_owner()': FunctionFragment;
     'betBalanceInExaEs(address)': FunctionFragment;
     'bettorBetAmountInExaEsByChoice(address,uint256)': FunctionFragment;
     'bettorHasClaimed(address)': FunctionFragment;
     'category()': FunctionFragment;
+    'creationTimestamp()': FunctionFragment;
     'dayswappers()': FunctionFragment;
     'description()': FunctionFragment;
     'downVotes()': FunctionFragment;
@@ -26,7 +28,7 @@ interface BetInterface extends ethers.utils.Interface {
     'endBet(uint8)': FunctionFragment;
     'endTimestamp()': FunctionFragment;
     'endedBy()': FunctionFragment;
-    'enterBet(uint8,uint256)': FunctionFragment;
+    'enterBet(uint8)': FunctionFragment;
     'finalResult()': FunctionFragment;
     'getNumberOfChoiceBettors(uint256)': FunctionFragment;
     'initialize(address,string,uint8,uint8,uint256,uint256,bool,uint256,address)': FunctionFragment;
@@ -60,6 +62,7 @@ interface BetInterface extends ethers.utils.Interface {
     'withdrawPrize(address)': FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: '_owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'betBalanceInExaEs', values: [string]): string;
   encodeFunctionData(
     functionFragment: 'bettorBetAmountInExaEsByChoice',
@@ -67,6 +70,7 @@ interface BetInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: 'bettorHasClaimed', values: [string]): string;
   encodeFunctionData(functionFragment: 'category', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'creationTimestamp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
   encodeFunctionData(functionFragment: 'description', values?: undefined): string;
   encodeFunctionData(functionFragment: 'downVotes', values?: undefined): string;
@@ -74,7 +78,7 @@ interface BetInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'endBet', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'endTimestamp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'endedBy', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'enterBet', values: [BigNumberish, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'enterBet', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'finalResult', values?: undefined): string;
   encodeFunctionData(functionFragment: 'getNumberOfChoiceBettors', values: [BigNumberish]): string;
   encodeFunctionData(
@@ -123,10 +127,12 @@ interface BetInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'withdrawPrize', values: [string]): string;
 
+  decodeFunctionResult(functionFragment: '_owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'betBalanceInExaEs', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'bettorBetAmountInExaEsByChoice', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'bettorHasClaimed', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'category', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'creationTimestamp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'description', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'downVotes', data: BytesLike): Result;
@@ -194,6 +200,18 @@ export abstract class Bet extends Contract {
   abstract interface: BetInterface;
 
   abstract functions: {
+    _owner(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: string;
+    }>;
+
+    '_owner()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: string;
+    }>;
+
     betBalanceInExaEs(
       arg0: string,
       overrides?: CallOverrides
@@ -248,6 +266,18 @@ export abstract class Bet extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       0: number;
+    }>;
+
+    creationTimestamp(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'creationTimestamp()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
     }>;
 
     dayswappers(
@@ -328,23 +358,16 @@ export abstract class Bet extends Contract {
 
     /**
      * this function is used to place a bet on available choice
-     * @param _betTokensInExaEs is amount of bet
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    enterBet(
-      _choice: BigNumberish,
-      _betTokensInExaEs: BigNumberish,
-      overrides?: PayableOverrides
-    ): Promise<ContractTransaction>;
+    enterBet(_choice: BigNumberish, overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     /**
      * this function is used to place a bet on available choice
-     * @param _betTokensInExaEs is amount of bet
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    'enterBet(uint8,uint256)'(
+    'enterBet(uint8)'(
       _choice: BigNumberish,
-      _betTokensInExaEs: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
@@ -784,6 +807,10 @@ export abstract class Bet extends Contract {
     ): Promise<ContractTransaction>;
   };
 
+  abstract _owner(overrides?: CallOverrides): Promise<string>;
+
+  abstract '_owner()'(overrides?: CallOverrides): Promise<string>;
+
   abstract betBalanceInExaEs(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   abstract 'betBalanceInExaEs(address)'(
@@ -810,6 +837,10 @@ export abstract class Bet extends Contract {
   abstract category(overrides?: CallOverrides): Promise<number>;
 
   abstract 'category()'(overrides?: CallOverrides): Promise<number>;
+
+  abstract creationTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+  abstract 'creationTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   abstract dayswappers(overrides?: CallOverrides): Promise<string>;
 
@@ -852,23 +883,19 @@ export abstract class Bet extends Contract {
 
   /**
    * this function is used to place a bet on available choice
-   * @param _betTokensInExaEs is amount of bet
    * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
    */
   abstract enterBet(
     _choice: BigNumberish,
-    _betTokensInExaEs: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   /**
    * this function is used to place a bet on available choice
-   * @param _betTokensInExaEs is amount of bet
    * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
    */
-  abstract 'enterBet(uint8,uint256)'(
+  abstract 'enterBet(uint8)'(
     _choice: BigNumberish,
-    _betTokensInExaEs: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
@@ -1113,6 +1140,10 @@ export abstract class Bet extends Contract {
   ): Promise<ContractTransaction>;
 
   abstract callStatic: {
+    _owner(overrides?: CallOverrides): Promise<string>;
+
+    '_owner()'(overrides?: CallOverrides): Promise<string>;
+
     betBalanceInExaEs(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'betBalanceInExaEs(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1136,6 +1167,10 @@ export abstract class Bet extends Contract {
     category(overrides?: CallOverrides): Promise<number>;
 
     'category()'(overrides?: CallOverrides): Promise<number>;
+
+    creationTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'creationTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
@@ -1175,25 +1210,15 @@ export abstract class Bet extends Contract {
 
     /**
      * this function is used to place a bet on available choice
-     * @param _betTokensInExaEs is amount of bet
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    enterBet(
-      _choice: BigNumberish,
-      _betTokensInExaEs: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    enterBet(_choice: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     /**
      * this function is used to place a bet on available choice
-     * @param _betTokensInExaEs is amount of bet
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    'enterBet(uint8,uint256)'(
-      _choice: BigNumberish,
-      _betTokensInExaEs: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'enterBet(uint8)'(_choice: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     finalResult(overrides?: CallOverrides): Promise<number>;
 
@@ -1436,6 +1461,10 @@ export abstract class Bet extends Contract {
   };
 
   abstract estimateGas: {
+    _owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    '_owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     betBalanceInExaEs(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'betBalanceInExaEs(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1459,6 +1488,10 @@ export abstract class Bet extends Contract {
     category(overrides?: CallOverrides): Promise<BigNumber>;
 
     'category()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    creationTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'creationTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1498,25 +1531,15 @@ export abstract class Bet extends Contract {
 
     /**
      * this function is used to place a bet on available choice
-     * @param _betTokensInExaEs is amount of bet
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    enterBet(
-      _choice: BigNumberish,
-      _betTokensInExaEs: BigNumberish,
-      overrides?: PayableOverrides
-    ): Promise<BigNumber>;
+    enterBet(_choice: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
 
     /**
      * this function is used to place a bet on available choice
-     * @param _betTokensInExaEs is amount of bet
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    'enterBet(uint8,uint256)'(
-      _choice: BigNumberish,
-      _betTokensInExaEs: BigNumberish,
-      overrides?: PayableOverrides
-    ): Promise<BigNumber>;
+    'enterBet(uint8)'(_choice: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
 
     finalResult(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1745,6 +1768,10 @@ export abstract class Bet extends Contract {
   };
 
   abstract populateTransaction: {
+    _owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    '_owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     betBalanceInExaEs(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'betBalanceInExaEs(address)'(
@@ -1774,6 +1801,10 @@ export abstract class Bet extends Contract {
     category(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'category()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    creationTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'creationTimestamp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1813,23 +1844,16 @@ export abstract class Bet extends Contract {
 
     /**
      * this function is used to place a bet on available choice
-     * @param _betTokensInExaEs is amount of bet
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    enterBet(
-      _choice: BigNumberish,
-      _betTokensInExaEs: BigNumberish,
-      overrides?: PayableOverrides
-    ): Promise<PopulatedTransaction>;
+    enterBet(_choice: BigNumberish, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     /**
      * this function is used to place a bet on available choice
-     * @param _betTokensInExaEs is amount of bet
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    'enterBet(uint8,uint256)'(
+    'enterBet(uint8)'(
       _choice: BigNumberish,
-      _betTokensInExaEs: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 

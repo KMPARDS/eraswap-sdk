@@ -35,6 +35,7 @@ interface IDayswappersInterface extends ethers.utils.Interface {
     'resolveKyc(address)': FunctionFragment;
     'rewardToTree(address,uint256,uint256[3])': FunctionFragment;
     'transferSeat(address)': FunctionFragment;
+    'volumeTarget()': FunctionFragment;
     'withdrawDefiniteEarnings(address,uint32,uint8)': FunctionFragment;
     'withdrawNrtEarnings(address,uint32,uint8)': FunctionFragment;
   };
@@ -86,6 +87,7 @@ interface IDayswappersInterface extends ethers.utils.Interface {
     values: [string, BigNumberish, [BigNumberish, BigNumberish, BigNumberish]]
   ): string;
   encodeFunctionData(functionFragment: 'transferSeat', values: [string]): string;
+  encodeFunctionData(functionFragment: 'volumeTarget', values?: undefined): string;
   encodeFunctionData(
     functionFragment: 'withdrawDefiniteEarnings',
     values: [string, BigNumberish, BigNumberish]
@@ -121,6 +123,7 @@ interface IDayswappersInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'resolveKyc', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'rewardToTree', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferSeat', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'volumeTarget', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'withdrawDefiniteEarnings', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'withdrawNrtEarnings', data: BytesLike): Result;
 
@@ -539,6 +542,18 @@ export abstract class IDayswappers extends Contract {
 
     'transferSeat(address)'(_newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
 
+    volumeTarget(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'volumeTarget()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
     withdrawDefiniteEarnings(
       _stakingContract: string,
       _month: BigNumberish,
@@ -926,6 +941,10 @@ export abstract class IDayswappers extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  abstract volumeTarget(overrides?: CallOverrides): Promise<BigNumber>;
+
+  abstract 'volumeTarget()'(overrides?: CallOverrides): Promise<BigNumber>;
+
   abstract withdrawDefiniteEarnings(
     _stakingContract: string,
     _month: BigNumberish,
@@ -1291,6 +1310,10 @@ export abstract class IDayswappers extends Contract {
 
     'transferSeat(address)'(_newOwner: string, overrides?: CallOverrides): Promise<void>;
 
+    volumeTarget(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'volumeTarget()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     withdrawDefiniteEarnings(
       _stakingContract: string,
       _month: BigNumberish,
@@ -1537,6 +1560,10 @@ export abstract class IDayswappers extends Contract {
 
     'transferSeat(address)'(_newOwner: string, overrides?: Overrides): Promise<BigNumber>;
 
+    volumeTarget(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'volumeTarget()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     withdrawDefiniteEarnings(
       _stakingContract: string,
       _month: BigNumberish,
@@ -1762,6 +1789,10 @@ export abstract class IDayswappers extends Contract {
       _newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
+
+    volumeTarget(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'volumeTarget()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdrawDefiniteEarnings(
       _stakingContract: string,

@@ -26,7 +26,7 @@ interface BetDeExInterface extends ethers.utils.Interface {
     'kycDapp()': FunctionFragment;
     'nrtManager()': FunctionFragment;
     'owner()': FunctionFragment;
-    'payRewards(uint256,uint256)': FunctionFragment;
+    'payRewards(address,uint256,uint256)': FunctionFragment;
     'prepaidEs()': FunctionFragment;
     'randomnessManager()': FunctionFragment;
     'renounceOwnership()': FunctionFragment;
@@ -63,7 +63,10 @@ interface BetDeExInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'payRewards', values: [BigNumberish, BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: 'payRewards',
+    values: [string, BigNumberish, BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
@@ -308,12 +311,14 @@ export abstract class BetDeEx extends Contract {
     }>;
 
     payRewards(
+      _bettor: string,
       _treeAmount: BigNumberish,
       _introducerAmount: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'payRewards(uint256,uint256)'(
+    'payRewards(address,uint256,uint256)'(
+      _bettor: string,
       _treeAmount: BigNumberish,
       _introducerAmount: BigNumberish,
       overrides?: PayableOverrides
@@ -600,12 +605,14 @@ export abstract class BetDeEx extends Contract {
   abstract 'owner()'(overrides?: CallOverrides): Promise<string>;
 
   abstract payRewards(
+    _bettor: string,
     _treeAmount: BigNumberish,
     _introducerAmount: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  abstract 'payRewards(uint256,uint256)'(
+  abstract 'payRewards(address,uint256,uint256)'(
+    _bettor: string,
     _treeAmount: BigNumberish,
     _introducerAmount: BigNumberish,
     overrides?: PayableOverrides
@@ -808,12 +815,14 @@ export abstract class BetDeEx extends Contract {
     'owner()'(overrides?: CallOverrides): Promise<string>;
 
     payRewards(
+      _bettor: string,
       _treeAmount: BigNumberish,
       _introducerAmount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'payRewards(uint256,uint256)'(
+    'payRewards(address,uint256,uint256)'(
+      _bettor: string,
       _treeAmount: BigNumberish,
       _introducerAmount: BigNumberish,
       overrides?: CallOverrides
@@ -1025,12 +1034,14 @@ export abstract class BetDeEx extends Contract {
     'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     payRewards(
+      _bettor: string,
       _treeAmount: BigNumberish,
       _introducerAmount: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'payRewards(uint256,uint256)'(
+    'payRewards(address,uint256,uint256)'(
+      _bettor: string,
       _treeAmount: BigNumberish,
       _introducerAmount: BigNumberish,
       overrides?: PayableOverrides
@@ -1222,12 +1233,14 @@ export abstract class BetDeEx extends Contract {
     'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     payRewards(
+      _bettor: string,
       _treeAmount: BigNumberish,
       _introducerAmount: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'payRewards(uint256,uint256)'(
+    'payRewards(address,uint256,uint256)'(
+      _bettor: string,
       _treeAmount: BigNumberish,
       _introducerAmount: BigNumberish,
       overrides?: PayableOverrides
