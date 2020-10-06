@@ -1,6 +1,6 @@
 {
   "name": "eraswap-sdk",
-  "version": "1.0.6-commit.88934170",
+  "version": "1.0.7-commit.3757c1c2",
   "description": "Typechain outputs of esn-contracts and utils. Commit tag of KMPARDS/esn-contracts is included in the version.",
   "main": "dist/",
   "author": "github.com/zemse",
