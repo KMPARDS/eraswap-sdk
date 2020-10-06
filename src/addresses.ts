@@ -22,6 +22,7 @@ export interface Addresses {
     timeAllyPromotionalBucket: string;
     // tsgap: string;
     betdeex: string;
+    betImplementation: string;
     timeswappers: string;
     buzcafe: string;
     buildSurvey: string;
@@ -53,6 +54,7 @@ const development: Addresses = {
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
     betdeex: 'BETDEEX',
+    betImplementation: 'BET_IMPLEMENTATION',
     timeswappers: 'TIMESWAPPERS',
     buzcafe: 'BUZCAFE',
     buildSurvey: 'BUILD_SURVEY',
@@ -84,6 +86,7 @@ const production: Addresses = {
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
     betdeex: 'BETDEEX',
+    betImplementation: 'BET_IMPLEMENTATION',
     timeswappers: 'TIMESWAPPERS',
     buzcafe: 'BUZCAFE',
     buildSurvey: 'BUILD_SURVEY',
@@ -118,6 +121,7 @@ const test: Addresses = {
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
     betdeex: 'BETDEEX',
+    betImplementation: 'BET_IMPLEMENTATION',
     timeswappers: 'TIMESWAPPERS',
     buzcafe: 'BUZCAFE',
     buildSurvey: 'BUILD_SURVEY',
