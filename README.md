@@ -10,6 +10,8 @@ or
 $ npm i eraswap-sdk@latest
 ```
 
+> Please note that Era Swap SDK requires that you are using TypeScript 3.8+
+
 ## `addresses` bucket: Accessing Contract Addresses
 
 ```ts
