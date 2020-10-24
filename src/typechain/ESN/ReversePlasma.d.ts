@@ -21,9 +21,11 @@ interface ReversePlasmaInterface extends ethers.utils.Interface {
     'getValidator(uint256)': FunctionFragment;
     'isValidator(address)': FunctionFragment;
     'latestBlockNumber()': FunctionFragment;
+    'owner()': FunctionFragment;
     'proposeBlock(uint256,bytes32,bytes32)': FunctionFragment;
-    'setInitialValues(address,uint256,address[])': FunctionFragment;
-    'tokenOnETH()': FunctionFragment;
+    'setInitialValues(uint256,address[])': FunctionFragment;
+    'setValidators(address[])': FunctionFragment;
+    'transferOwnership(address)': FunctionFragment;
   };
 
   encodeFunctionData(
@@ -49,15 +51,17 @@ interface ReversePlasmaInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'getValidator', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'isValidator', values: [string]): string;
   encodeFunctionData(functionFragment: 'latestBlockNumber', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(
     functionFragment: 'proposeBlock',
     values: [BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: 'setInitialValues',
-    values: [string, BigNumberish, string[]]
+    values: [BigNumberish, string[]]
   ): string;
-  encodeFunctionData(functionFragment: 'tokenOnETH', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'setValidators', values: [string[]]): string;
+  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
 
   decodeFunctionResult(functionFragment: 'finalizeProposal', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'findProposal', data: BytesLike): Result;
@@ -70,15 +74,19 @@ interface ReversePlasmaInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'getValidator', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isValidator', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'latestBlockNumber', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'proposeBlock', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setInitialValues', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'tokenOnETH', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setValidators', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
 
   events: {
     'NewBlockHeader(uint256,uint256)': EventFragment;
+    'OwnershipTransferred(address,address)': EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: 'NewBlockHeader'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
 }
 
 export class ReversePlasma extends Contract {
@@ -310,7 +318,7 @@ export class ReversePlasma extends Contract {
     }>;
 
     /**
-     * TODO to be connected with Validator manager
+     * TODO beta: to be connected with Validator manager
      */
     getValidator(
       _validatorIndex: BigNumberish,
@@ -320,7 +328,7 @@ export class ReversePlasma extends Contract {
     }>;
 
     /**
-     * TODO to be connected with Validator manager
+     * TODO beta: to be connected with Validator manager
      */
     'getValidator(uint256)'(
       _validatorIndex: BigNumberish,
@@ -362,6 +370,24 @@ export class ReversePlasma extends Contract {
     }>;
 
     /**
+     * Returns the address of the current owner.
+     */
+    owner(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: string;
+    }>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    'owner()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: string;
+    }>;
+
+    /**
      * Used by Kami to propose a block.
      * @param _ethBlockNumber : ETH block number.
      * @param _receiptsRoot : ETH block receipts root.
@@ -388,36 +414,36 @@ export class ReversePlasma extends Contract {
     ): Promise<ContractTransaction>;
 
     setInitialValues(
-      _tokenOnETH: string,
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'setInitialValues(address,uint256,address[])'(
-      _tokenOnETH: string,
+    'setInitialValues(uint256,address[])'(
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    /**
-     * Era Swap ERC20 contract address.
-     */
-    tokenOnETH(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: string;
-    }>;
+    setValidators(_validators: string[], overrides?: Overrides): Promise<ContractTransaction>;
+
+    'setValidators(address[])'(
+      _validators: string[],
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
-     * Era Swap ERC20 contract address.
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'tokenOnETH()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: string;
-    }>;
+    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    'transferOwnership(address)'(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
   };
 
   /**
@@ -618,12 +644,12 @@ export class ReversePlasma extends Contract {
   ): Promise<BigNumber>;
 
   /**
-   * TODO to be connected with Validator manager
+   * TODO beta: to be connected with Validator manager
    */
   getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   /**
-   * TODO to be connected with Validator manager
+   * TODO beta: to be connected with Validator manager
    */
   'getValidator(uint256)'(
     _validatorIndex: BigNumberish,
@@ -643,6 +669,16 @@ export class ReversePlasma extends Contract {
    * The highest ETH finalised block number.
    */
   'latestBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+  /**
+   * Returns the address of the current owner.
+   */
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  /**
+   * Returns the address of the current owner.
+   */
+  'owner()'(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Used by Kami to propose a block.
@@ -671,28 +707,36 @@ export class ReversePlasma extends Contract {
   ): Promise<ContractTransaction>;
 
   setInitialValues(
-    _tokenOnETH: string,
     _startBlockNumber: BigNumberish,
     _validators: string[],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'setInitialValues(address,uint256,address[])'(
-    _tokenOnETH: string,
+  'setInitialValues(uint256,address[])'(
     _startBlockNumber: BigNumberish,
     _validators: string[],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  /**
-   * Era Swap ERC20 contract address.
-   */
-  tokenOnETH(overrides?: CallOverrides): Promise<string>;
+  setValidators(_validators: string[], overrides?: Overrides): Promise<ContractTransaction>;
+
+  'setValidators(address[])'(
+    _validators: string[],
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
-   * Era Swap ERC20 contract address.
+   * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'tokenOnETH()'(overrides?: CallOverrides): Promise<string>;
+  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+
+  /**
+   * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+   */
+  'transferOwnership(address)'(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     /**
@@ -893,12 +937,12 @@ export class ReversePlasma extends Contract {
     ): Promise<BigNumber>;
 
     /**
-     * TODO to be connected with Validator manager
+     * TODO beta: to be connected with Validator manager
      */
     getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     /**
-     * TODO to be connected with Validator manager
+     * TODO beta: to be connected with Validator manager
      */
     'getValidator(uint256)'(
       _validatorIndex: BigNumberish,
@@ -918,6 +962,16 @@ export class ReversePlasma extends Contract {
      * The highest ETH finalised block number.
      */
     'latestBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    'owner()'(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Used by Kami to propose a block.
@@ -946,32 +1000,36 @@ export class ReversePlasma extends Contract {
     ): Promise<void>;
 
     setInitialValues(
-      _tokenOnETH: string,
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'setInitialValues(address,uint256,address[])'(
-      _tokenOnETH: string,
+    'setInitialValues(uint256,address[])'(
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    /**
-     * Era Swap ERC20 contract address.
-     */
-    tokenOnETH(overrides?: CallOverrides): Promise<string>;
+    setValidators(_validators: string[], overrides?: CallOverrides): Promise<void>;
+
+    'setValidators(address[])'(_validators: string[], overrides?: CallOverrides): Promise<void>;
 
     /**
-     * Era Swap ERC20 contract address.
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'tokenOnETH()'(overrides?: CallOverrides): Promise<string>;
+    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
     NewBlockHeader(blockNumber: null, proposalId: null): EventFilter;
+
+    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
   };
 
   estimateGas: {
@@ -1125,12 +1183,12 @@ export class ReversePlasma extends Contract {
     ): Promise<BigNumber>;
 
     /**
-     * TODO to be connected with Validator manager
+     * TODO beta: to be connected with Validator manager
      */
     getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
-     * TODO to be connected with Validator manager
+     * TODO beta: to be connected with Validator manager
      */
     'getValidator(uint256)'(
       _validatorIndex: BigNumberish,
@@ -1150,6 +1208,16 @@ export class ReversePlasma extends Contract {
      * The highest ETH finalised block number.
      */
     'latestBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Used by Kami to propose a block.
@@ -1178,28 +1246,30 @@ export class ReversePlasma extends Contract {
     ): Promise<BigNumber>;
 
     setInitialValues(
-      _tokenOnETH: string,
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'setInitialValues(address,uint256,address[])'(
-      _tokenOnETH: string,
+    'setInitialValues(uint256,address[])'(
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    /**
-     * Era Swap ERC20 contract address.
-     */
-    tokenOnETH(overrides?: CallOverrides): Promise<BigNumber>;
+    setValidators(_validators: string[], overrides?: Overrides): Promise<BigNumber>;
+
+    'setValidators(address[])'(_validators: string[], overrides?: Overrides): Promise<BigNumber>;
 
     /**
-     * Era Swap ERC20 contract address.
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'tokenOnETH()'(overrides?: CallOverrides): Promise<BigNumber>;
+    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1356,7 +1426,7 @@ export class ReversePlasma extends Contract {
     ): Promise<PopulatedTransaction>;
 
     /**
-     * TODO to be connected with Validator manager
+     * TODO beta: to be connected with Validator manager
      */
     getValidator(
       _validatorIndex: BigNumberish,
@@ -1364,7 +1434,7 @@ export class ReversePlasma extends Contract {
     ): Promise<PopulatedTransaction>;
 
     /**
-     * TODO to be connected with Validator manager
+     * TODO beta: to be connected with Validator manager
      */
     'getValidator(uint256)'(
       _validatorIndex: BigNumberish,
@@ -1387,6 +1457,16 @@ export class ReversePlasma extends Contract {
      * The highest ETH finalised block number.
      */
     'latestBlockNumber()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Used by Kami to propose a block.
@@ -1415,27 +1495,35 @@ export class ReversePlasma extends Contract {
     ): Promise<PopulatedTransaction>;
 
     setInitialValues(
-      _tokenOnETH: string,
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'setInitialValues(address,uint256,address[])'(
-      _tokenOnETH: string,
+    'setInitialValues(uint256,address[])'(
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    /**
-     * Era Swap ERC20 contract address.
-     */
-    tokenOnETH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    setValidators(_validators: string[], overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    'setValidators(address[])'(
+      _validators: string[],
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
-     * Era Swap ERC20 contract address.
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'tokenOnETH()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    'transferOwnership(address)'(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
   };
 }

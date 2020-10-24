@@ -21,7 +21,6 @@ interface PetLiquidFundsBucketInterface extends ethers.utils.Interface {
     'owner()': FunctionFragment;
     'petContract()': FunctionFragment;
     'prepaidEs()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'withdrawFunds(bool,uint256)': FunctionFragment;
   };
@@ -31,7 +30,6 @@ interface PetLiquidFundsBucketInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'petContract', values?: undefined): string;
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'withdrawFunds', values: [boolean, BigNumberish]): string;
 
@@ -40,7 +38,6 @@ interface PetLiquidFundsBucketInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'petContract', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'withdrawFunds', data: BytesLike): Result;
 
@@ -149,24 +146,6 @@ export class PetLiquidFundsBucket extends Contract {
     }>;
 
     /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
     transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
@@ -254,16 +233,6 @@ export class PetLiquidFundsBucket extends Contract {
   'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
 
   /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
-  /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
   transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
@@ -346,16 +315,6 @@ export class PetLiquidFundsBucket extends Contract {
      * address of Era Swap ERC20 Smart Contract
      */
     'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
@@ -448,16 +407,6 @@ export class PetLiquidFundsBucket extends Contract {
     'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
     transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
@@ -541,16 +490,6 @@ export class PetLiquidFundsBucket extends Contract {
      * address of Era Swap ERC20 Smart Contract
      */
     'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.

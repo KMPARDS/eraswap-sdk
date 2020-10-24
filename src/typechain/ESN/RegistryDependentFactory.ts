@@ -112,13 +112,6 @@ const _abi = [
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'renounceOwnership',
-    outputs: [],
-    stateMutability: 'pure',
-    type: 'function',
-  },
-  {
     inputs: [
       {
         internalType: 'bytes32',

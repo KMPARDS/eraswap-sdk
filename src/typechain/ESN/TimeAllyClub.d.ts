@@ -24,6 +24,7 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
     'getReward(address,uint32,address)': FunctionFragment;
     'getTotalBusinessVolume(uint32)': FunctionFragment;
     'getTotalRewards(uint32)': FunctionFragment;
+    'initialize()': FunctionFragment;
     'isAuthorized(bytes32)': FunctionFragment;
     'kycDapp()': FunctionFragment;
     'nrtManager()': FunctionFragment;
@@ -31,8 +32,6 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
     'prepaidEs()': FunctionFragment;
     'randomnessManager()': FunctionFragment;
     'receiveNrt(uint32)': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
-    'reportNewStaking(address,uint256)': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
@@ -64,6 +63,7 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'getReward', values: [string, BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'getTotalBusinessVolume', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'getTotalRewards', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
   encodeFunctionData(functionFragment: 'isAuthorized', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
@@ -71,8 +71,6 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'receiveNrt', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'reportNewStaking', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
@@ -114,6 +112,7 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'getReward', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getTotalBusinessVolume', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getTotalRewards', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isAuthorized', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
@@ -121,8 +120,6 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'reportNewStaking', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
@@ -142,12 +139,14 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
   events: {
     'Authorised(bytes32,bool)': EventFragment;
     'Business(address,address,uint32,uint256)': EventFragment;
+    'NRTReceived(uint32,uint256,address)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'Withdraw(address,address,uint32,uint256,uint256,uint256,address)': EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: 'Authorised'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Business'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'NRTReceived'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Withdraw'): EventFragment;
 }
@@ -332,6 +331,10 @@ export class TimeAllyClub extends Contract {
       0: BigNumber;
     }>;
 
+    initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
     'isAuthorized(bytes32)'(
       _username: BytesLike,
       overrides?: CallOverrides
@@ -426,36 +429,6 @@ export class TimeAllyClub extends Contract {
     'receiveNrt(uint32)'(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
-    ): Promise<ContractTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    reportNewStaking(
-      _networker: string,
-      _value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    'reportNewStaking(address,uint256)'(
-      _networker: string,
-      _value: BigNumberish,
-      overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     resolveAddress(
@@ -777,6 +750,10 @@ export class TimeAllyClub extends Contract {
 
   'getTotalRewards(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
+  initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
   'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
   'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
@@ -821,28 +798,6 @@ export class TimeAllyClub extends Contract {
   'receiveNrt(uint32)'(
     _currentNrtMonth: BigNumberish,
     overrides?: PayableOverrides
-  ): Promise<ContractTransaction>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
-  reportNewStaking(
-    _networker: string,
-    _value: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  'reportNewStaking(address,uint256)'(
-    _networker: string,
-    _value: BigNumberish,
-    overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
@@ -1092,6 +1047,10 @@ export class TimeAllyClub extends Contract {
 
     'getTotalRewards(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
+    initialize(overrides?: CallOverrides): Promise<void>;
+
+    'initialize()'(overrides?: CallOverrides): Promise<void>;
+
     'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
     'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
@@ -1131,28 +1090,6 @@ export class TimeAllyClub extends Contract {
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
     'receiveNrt(uint32)'(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
-    reportNewStaking(
-      _networker: string,
-      _value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    'reportNewStaking(address,uint256)'(
-      _networker: string,
-      _value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -1288,6 +1225,8 @@ export class TimeAllyClub extends Contract {
       value: null
     ): EventFilter;
 
+    NRTReceived(month: BigNumberish | null, amount: BigNumberish | null, sender: null): EventFilter;
+
     OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
 
     Withdraw(
@@ -1373,6 +1312,10 @@ export class TimeAllyClub extends Contract {
 
     'getTotalRewards(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
+    initialize(overrides?: PayableOverrides): Promise<BigNumber>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+
     'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1414,28 +1357,6 @@ export class TimeAllyClub extends Contract {
     'receiveNrt(uint32)'(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
-    ): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    reportNewStaking(
-      _networker: string,
-      _value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    'reportNewStaking(address,uint256)'(
-      _networker: string,
-      _value: BigNumberish,
-      overrides?: Overrides
     ): Promise<BigNumber>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1646,6 +1567,10 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
     'isAuthorized(bytes32)'(
       _username: BytesLike,
       overrides?: CallOverrides
@@ -1696,28 +1621,6 @@ export class TimeAllyClub extends Contract {
     'receiveNrt(uint32)'(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
-    ): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    reportNewStaking(
-      _networker: string,
-      _value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    'reportNewStaking(address,uint256)'(
-      _networker: string,
-      _value: BigNumberish,
-      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;

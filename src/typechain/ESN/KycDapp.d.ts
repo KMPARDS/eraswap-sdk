@@ -26,6 +26,7 @@ interface KycDappInterface extends ethers.utils.Interface {
     'getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)': FunctionFragment;
     'identities(bytes32)': FunctionFragment;
     'identityTransfer(bytes32,address)': FunctionFragment;
+    'initialize()': FunctionFragment;
     'isKycApproved(address,uint8,bytes32,bytes32)': FunctionFragment;
     'isKycLevel1(address)': FunctionFragment;
     'kycDapp()': FunctionFragment;
@@ -35,7 +36,6 @@ interface KycDappInterface extends ethers.utils.Interface {
     'proposeKycDetails(bytes32)': FunctionFragment;
     'randomnessManager()': FunctionFragment;
     'register(bytes32)': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
@@ -74,6 +74,7 @@ interface KycDappInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: 'identities', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'identityTransfer', values: [BytesLike, string]): string;
+  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
   encodeFunctionData(
     functionFragment: 'isKycApproved',
     values: [string, BigNumberish, BytesLike, BytesLike]
@@ -86,7 +87,6 @@ interface KycDappInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'proposeKycDetails', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'register', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
@@ -121,6 +121,7 @@ interface KycDappInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'getKycStatusByUsername', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'identities', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'identityTransfer', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isKycApproved', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isKycLevel1', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
@@ -130,7 +131,6 @@ interface KycDappInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'proposeKycDetails', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'register', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
@@ -393,6 +393,10 @@ export class KycDapp extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
     isKycApproved(
       _wallet: string,
       _level: BigNumberish,
@@ -515,24 +519,6 @@ export class KycDapp extends Contract {
       _newUsername: BytesLike,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
 
     resolveAddress(
       _username: BytesLike,
@@ -912,6 +898,10 @@ export class KycDapp extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
   isKycApproved(
     _wallet: string,
     _level: BigNumberish,
@@ -980,16 +970,6 @@ export class KycDapp extends Contract {
     _newUsername: BytesLike,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
   resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -1287,6 +1267,10 @@ export class KycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    initialize(overrides?: CallOverrides): Promise<void>;
+
+    'initialize()'(overrides?: CallOverrides): Promise<void>;
+
     isKycApproved(
       _wallet: string,
       _level: BigNumberish,
@@ -1352,16 +1336,6 @@ export class KycDapp extends Contract {
     register(_newUsername: BytesLike, overrides?: CallOverrides): Promise<void>;
 
     'register(bytes32)'(_newUsername: BytesLike, overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -1607,6 +1581,10 @@ export class KycDapp extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    initialize(overrides?: PayableOverrides): Promise<BigNumber>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+
     isKycApproved(
       _wallet: string,
       _level: BigNumberish,
@@ -1672,16 +1650,6 @@ export class KycDapp extends Contract {
     register(_newUsername: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
 
     'register(bytes32)'(_newUsername: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1903,6 +1871,10 @@ export class KycDapp extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
     isKycApproved(
       _wallet: string,
       _level: BigNumberish,
@@ -1974,16 +1946,6 @@ export class KycDapp extends Contract {
       _newUsername: BytesLike,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

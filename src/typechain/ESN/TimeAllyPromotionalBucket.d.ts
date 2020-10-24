@@ -3,7 +3,13 @@
 /* eslint-disable */
 
 import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  PayableOverrides,
+  CallOverrides,
+} from '@ethersproject/contracts';
 import { BytesLike } from '@ethersproject/bytes';
 import { Listener, Provider } from '@ethersproject/providers';
 import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
@@ -12,13 +18,13 @@ interface TimeAllyPromotionalBucketInterface extends ethers.utils.Interface {
   functions: {
     'claimReward(address)': FunctionFragment;
     'dayswappers()': FunctionFragment;
+    'initialize()': FunctionFragment;
     'isAuthorized(bytes32)': FunctionFragment;
     'kycDapp()': FunctionFragment;
     'nrtManager()': FunctionFragment;
     'owner()': FunctionFragment;
     'prepaidEs()': FunctionFragment;
     'randomnessManager()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
@@ -29,6 +35,7 @@ interface TimeAllyPromotionalBucketInterface extends ethers.utils.Interface {
     'timeallyClub()': FunctionFragment;
     'timeallyManager()': FunctionFragment;
     'timeallyPromotionalBucket()': FunctionFragment;
+    'totalPendingRewards()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'updateAuthorization(bytes32,bool)': FunctionFragment;
     'validatorManager()': FunctionFragment;
@@ -36,13 +43,13 @@ interface TimeAllyPromotionalBucketInterface extends ethers.utils.Interface {
 
   encodeFunctionData(functionFragment: 'claimReward', values: [string]): string;
   encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
   encodeFunctionData(functionFragment: 'isAuthorized', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
@@ -53,19 +60,20 @@ interface TimeAllyPromotionalBucketInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
   encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'totalPendingRewards', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateAuthorization', values: [BytesLike, boolean]): string;
   encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
 
   decodeFunctionResult(functionFragment: 'claimReward', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isAuthorized', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
@@ -76,17 +84,20 @@ interface TimeAllyPromotionalBucketInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'totalPendingRewards', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateAuthorization', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
 
   events: {
     'Authorised(bytes32,bool)': EventFragment;
+    'FundsAdded(address,uint256)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'StakingReward(address,uint256)': EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: 'Authorised'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'FundsAdded'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'StakingReward'): EventFragment;
 }
@@ -123,6 +134,10 @@ export class TimeAllyPromotionalBucket extends Contract {
     ): Promise<{
       0: string;
     }>;
+
+    initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     'isAuthorized(bytes32)'(
       _username: BytesLike,
@@ -202,24 +217,6 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       0: string;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
     }>;
 
     resolveAddress(
@@ -344,6 +341,18 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
+    totalPendingRewards(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'totalPendingRewards()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
@@ -393,6 +402,10 @@ export class TimeAllyPromotionalBucket extends Contract {
 
   'dayswappers()'(overrides?: CallOverrides): Promise<string>;
 
+  initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
   'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
   'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
@@ -422,16 +435,6 @@ export class TimeAllyPromotionalBucket extends Contract {
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
   'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
   resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -481,6 +484,10 @@ export class TimeAllyPromotionalBucket extends Contract {
 
   'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
 
+  totalPendingRewards(overrides?: CallOverrides): Promise<BigNumber>;
+
+  'totalPendingRewards()'(overrides?: CallOverrides): Promise<BigNumber>;
+
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
@@ -519,6 +526,10 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     'dayswappers()'(overrides?: CallOverrides): Promise<string>;
 
+    initialize(overrides?: CallOverrides): Promise<void>;
+
+    'initialize()'(overrides?: CallOverrides): Promise<void>;
+
     'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
     'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
@@ -548,16 +559,6 @@ export class TimeAllyPromotionalBucket extends Contract {
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -610,6 +611,10 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
 
+    totalPendingRewards(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'totalPendingRewards()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
@@ -640,6 +645,8 @@ export class TimeAllyPromotionalBucket extends Contract {
   filters: {
     Authorised(wallet: BytesLike | null, newStatus: null): EventFilter;
 
+    FundsAdded(source: null, amount: null): EventFilter;
+
     OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
 
     StakingReward(wallet: string | null, stakingReward: null): EventFilter;
@@ -653,6 +660,10 @@ export class TimeAllyPromotionalBucket extends Contract {
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
     'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    initialize(overrides?: PayableOverrides): Promise<BigNumber>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
 
     'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -683,16 +694,6 @@ export class TimeAllyPromotionalBucket extends Contract {
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -748,6 +749,10 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
 
+    totalPendingRewards(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'totalPendingRewards()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
@@ -787,6 +792,10 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
     'isAuthorized(bytes32)'(
       _username: BytesLike,
       overrides?: CallOverrides
@@ -822,16 +831,6 @@ export class TimeAllyPromotionalBucket extends Contract {
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -901,6 +900,10 @@ export class TimeAllyPromotionalBucket extends Contract {
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    totalPendingRewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'totalPendingRewards()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.

@@ -89,6 +89,31 @@ const _abi = [
     inputs: [
       {
         indexed: true,
+        internalType: 'uint32',
+        name: 'month',
+        type: 'uint32',
+      },
+      {
+        indexed: true,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'sender',
+        type: 'address',
+      },
+    ],
+    name: 'NRTReceived',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
         internalType: 'address',
         name: 'previousOwner',
         type: 'address',
@@ -635,6 +660,36 @@ const _abi = [
   {
     inputs: [
       {
+        components: [
+          {
+            internalType: 'uint32',
+            name: 'required',
+            type: 'uint32',
+          },
+          {
+            internalType: 'uint256',
+            name: 'distributionPercent',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'leadershipPercent',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct Dayswappers.Belt[]',
+        name: '_belts',
+        type: 'tuple[]',
+      },
+    ],
+    name: 'initialize',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'address',
         name: '_networker',
         type: 'address',
@@ -888,13 +943,6 @@ const _abi = [
     name: 'receiveNrt',
     outputs: [],
     stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'renounceOwnership',
-    outputs: [],
-    stateMutability: 'pure',
     type: 'function',
   },
   {

@@ -27,6 +27,7 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
     'getSeatMonthlyDataByIndex(uint32,uint32)': FunctionFragment;
     'getTotalMonthlyActiveDayswappers(uint32)': FunctionFragment;
     'getTotalMonthlyIndefiniteRewards(uint32)': FunctionFragment;
+    'initialize(tuple[])': FunctionFragment;
     'isActiveAddress(address)': FunctionFragment;
     'isActiveSeat(uint32)': FunctionFragment;
     'isAdminMode()': FunctionFragment;
@@ -45,7 +46,6 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
     'randomnessManager()': FunctionFragment;
     'receiveNrt(uint32)': FunctionFragment;
     'renounceAdminMode()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'reportVolume(address,uint256)': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
@@ -98,6 +98,16 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
     functionFragment: 'getTotalMonthlyIndefiniteRewards',
     values: [BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: 'initialize',
+    values: [
+      {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[]
+    ]
+  ): string;
   encodeFunctionData(functionFragment: 'isActiveAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'isActiveSeat', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'isAdminMode', values?: undefined): string;
@@ -137,7 +147,6 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'receiveNrt', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'renounceAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'reportVolume', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
@@ -189,6 +198,7 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
     functionFragment: 'getTotalMonthlyIndefiniteRewards',
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isActiveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isActiveSeat', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isAdminMode', data: BytesLike): Result;
@@ -207,7 +217,6 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'reportVolume', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
@@ -235,6 +244,7 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
     'Authorised(bytes32,bool)': EventFragment;
     'Introduce(uint32,uint32)': EventFragment;
     'KycResolve(uint32)': EventFragment;
+    'NRTReceived(uint32,uint256,address)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'Promotion(uint32,uint32)': EventFragment;
     'Reward(address,uint32,uint32,bool,bool,uint256,uint256[3])': EventFragment;
@@ -247,6 +257,7 @@ interface DayswappersWithMigrationInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: 'Authorised'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Introduce'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'KycResolve'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'NRTReceived'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Promotion'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'Reward'): EventFragment;
@@ -561,6 +572,24 @@ export class DayswappersWithMigration extends Contract {
       0: BigNumber;
     }>;
 
+    initialize(
+      _belts: {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[],
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    'initialize(tuple[])'(
+      _belts: {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[],
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
     isActiveAddress(
       _networker: string,
       overrides?: CallOverrides
@@ -790,24 +819,6 @@ export class DayswappersWithMigration extends Contract {
     renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
 
     reportVolume(
       _networker: string,
@@ -1308,6 +1319,24 @@ export class DayswappersWithMigration extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  initialize(
+    _belts: {
+      required: BigNumberish;
+      distributionPercent: BigNumberish;
+      leadershipPercent: BigNumberish;
+    }[],
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  'initialize(tuple[])'(
+    _belts: {
+      required: BigNumberish;
+      distributionPercent: BigNumberish;
+      leadershipPercent: BigNumberish;
+    }[],
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<boolean>;
 
   'isActiveAddress(address)'(_networker: string, overrides?: CallOverrides): Promise<boolean>;
@@ -1449,16 +1478,6 @@ export class DayswappersWithMigration extends Contract {
   renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
   'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
   reportVolume(
     _networker: string,
@@ -1866,6 +1885,24 @@ export class DayswappersWithMigration extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    initialize(
+      _belts: {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    'initialize(tuple[])'(
+      _belts: {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<boolean>;
 
     'isActiveAddress(address)'(_networker: string, overrides?: CallOverrides): Promise<boolean>;
@@ -1997,16 +2034,6 @@ export class DayswappersWithMigration extends Contract {
     renounceAdminMode(overrides?: CallOverrides): Promise<void>;
 
     'renounceAdminMode()'(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     reportVolume(
       _networker: string,
@@ -2163,6 +2190,8 @@ export class DayswappersWithMigration extends Contract {
 
     KycResolve(seatIndex: BigNumberish | null): EventFilter;
 
+    NRTReceived(month: BigNumberish | null, amount: BigNumberish | null, sender: null): EventFilter;
+
     OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
 
     Promotion(seatIndex: BigNumberish | null, beltIndex: BigNumberish | null): EventFilter;
@@ -2290,6 +2319,24 @@ export class DayswappersWithMigration extends Contract {
     'getTotalMonthlyIndefiniteRewards(uint32)'(
       _month: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    initialize(
+      _belts: {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[],
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    'initialize(tuple[])'(
+      _belts: {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[],
+      overrides?: Overrides
     ): Promise<BigNumber>;
 
     isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -2430,16 +2477,6 @@ export class DayswappersWithMigration extends Contract {
     renounceAdminMode(overrides?: Overrides): Promise<BigNumber>;
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     reportVolume(
       _networker: string,
@@ -2692,6 +2729,24 @@ export class DayswappersWithMigration extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    initialize(
+      _belts: {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[],
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    'initialize(tuple[])'(
+      _belts: {
+        required: BigNumberish;
+        distributionPercent: BigNumberish;
+        leadershipPercent: BigNumberish;
+      }[],
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
     isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'isActiveAddress(address)'(
@@ -2851,16 +2906,6 @@ export class DayswappersWithMigration extends Contract {
     renounceAdminMode(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     reportVolume(
       _networker: string,

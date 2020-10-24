@@ -19,7 +19,6 @@ interface EraSwapDaoInterface extends ethers.utils.Interface {
     'owner()': FunctionFragment;
     'prepaidEs()': FunctionFragment;
     'randomnessManager()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'required(uint32)': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
@@ -49,7 +48,6 @@ interface EraSwapDaoInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'required', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
@@ -72,7 +70,6 @@ interface EraSwapDaoInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'required', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
@@ -275,24 +272,6 @@ export class EraSwapDao extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       0: string;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
     }>;
 
     'required(uint32)'(
@@ -536,16 +515,6 @@ export class EraSwapDao extends Contract {
 
   'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
 
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
   'required(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
   'required()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -697,16 +666,6 @@ export class EraSwapDao extends Contract {
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     'required(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -877,16 +836,6 @@ export class EraSwapDao extends Contract {
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
-
     'required(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     'required()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1042,16 +991,6 @@ export class EraSwapDao extends Contract {
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'required(uint32)'(
       _month: BigNumberish,

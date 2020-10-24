@@ -24,7 +24,6 @@ interface NrtReceiverInterface extends ethers.utils.Interface {
     'prepaidEs()': FunctionFragment;
     'randomnessManager()': FunctionFragment;
     'receiveNrt(uint32)': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
@@ -45,7 +44,6 @@ interface NrtReceiverInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'receiveNrt', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
@@ -65,7 +63,6 @@ interface NrtReceiverInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
@@ -78,9 +75,11 @@ interface NrtReceiverInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
 
   events: {
+    'NRTReceived(uint32,uint256,address)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: 'NRTReceived'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
 }
 
@@ -205,24 +204,6 @@ export class NrtReceiver extends Contract {
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
 
     resolveAddress(
       _username: BytesLike,
@@ -396,16 +377,6 @@ export class NrtReceiver extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
   resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
   'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
@@ -500,16 +471,6 @@ export class NrtReceiver extends Contract {
      */
     'receiveNrt(uint32)'(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
     'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
@@ -561,6 +522,8 @@ export class NrtReceiver extends Contract {
   };
 
   filters: {
+    NRTReceived(month: BigNumberish | null, amount: BigNumberish | null, sender: null): EventFilter;
+
     OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
   };
 
@@ -611,16 +574,6 @@ export class NrtReceiver extends Contract {
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -728,16 +681,6 @@ export class NrtReceiver extends Contract {
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

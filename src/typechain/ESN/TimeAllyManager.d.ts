@@ -24,6 +24,7 @@ interface TimeAllyManagerInterface extends ethers.utils.Interface {
     'getMonthlyNRT(uint32)': FunctionFragment;
     'getTotalActiveStaking(uint32)': FunctionFragment;
     'increaseActiveStaking(uint256,uint32,uint32)': FunctionFragment;
+    'initialize()': FunctionFragment;
     'isAdminMode()': FunctionFragment;
     'isStakingContractValid(address)': FunctionFragment;
     'kycDapp()': FunctionFragment;
@@ -36,12 +37,12 @@ interface TimeAllyManagerInterface extends ethers.utils.Interface {
     'receiveNrt(uint32)': FunctionFragment;
     'removeStaking(address)': FunctionFragment;
     'renounceAdminMode()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
     'resolveUsernameStrict(address)': FunctionFragment;
     'sendStake(address,uint256,bool[])': FunctionFragment;
+    'setDefaultMonths(uint32)': FunctionFragment;
     'setKycDapp(address)': FunctionFragment;
     'setStakingTarget(address)': FunctionFragment;
     'splitStaking(address,uint256,uint32)': FunctionFragment;
@@ -69,6 +70,7 @@ interface TimeAllyManagerInterface extends ethers.utils.Interface {
     functionFragment: 'increaseActiveStaking',
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
   encodeFunctionData(functionFragment: 'isAdminMode', values?: undefined): string;
   encodeFunctionData(functionFragment: 'isStakingContractValid', values: [string]): string;
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
@@ -84,7 +86,6 @@ interface TimeAllyManagerInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'receiveNrt', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'removeStaking', values: [string]): string;
   encodeFunctionData(functionFragment: 'renounceAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
@@ -93,6 +94,7 @@ interface TimeAllyManagerInterface extends ethers.utils.Interface {
     functionFragment: 'sendStake',
     values: [string, BigNumberish, boolean[]]
   ): string;
+  encodeFunctionData(functionFragment: 'setDefaultMonths', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
   encodeFunctionData(functionFragment: 'setStakingTarget', values: [string]): string;
   encodeFunctionData(
@@ -116,6 +118,7 @@ interface TimeAllyManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'getMonthlyNRT', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getTotalActiveStaking', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'increaseActiveStaking', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isAdminMode', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isStakingContractValid', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
@@ -128,12 +131,12 @@ interface TimeAllyManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'removeStaking', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'sendStake', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setDefaultMonths', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setStakingTarget', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'splitStaking', data: BytesLike): Result;
@@ -147,12 +150,14 @@ interface TimeAllyManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'withdrawClaimedNrt', data: BytesLike): Result;
 
   events: {
+    'NRTReceived(uint32,uint256,address)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'StakingMerge(address,address)': EventFragment;
     'StakingSplit(address,address)': EventFragment;
     'StakingTransfer(address,address,address)': EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: 'NRTReceived'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'StakingMerge'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'StakingSplit'): EventFragment;
@@ -327,6 +332,16 @@ export class TimeAllyManager extends Contract {
       _endMonth: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
+
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     isAdminMode(
       overrides?: CallOverrides
@@ -510,24 +525,6 @@ export class TimeAllyManager extends Contract {
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
     resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
@@ -608,6 +605,16 @@ export class TimeAllyManager extends Contract {
       _initialIssTime: BigNumberish,
       _claimedMonths: boolean[],
       overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
+
+    setDefaultMonths(
+      _defaultMonths: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    'setDefaultMonths(uint32)'(
+      _defaultMonths: BigNumberish,
+      overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
@@ -871,6 +878,16 @@ export class TimeAllyManager extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  /**
+   * Allows NRT Manager contract to send NRT share for TimeAlly.
+   */
+  initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+  /**
+   * Allows NRT Manager contract to send NRT share for TimeAlly.
+   */
+  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
   isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
   'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
@@ -998,16 +1015,6 @@ export class TimeAllyManager extends Contract {
 
   'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
 
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
   resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
   'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
@@ -1048,6 +1055,16 @@ export class TimeAllyManager extends Contract {
     _initialIssTime: BigNumberish,
     _claimedMonths: boolean[],
     overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
+
+  setDefaultMonths(
+    _defaultMonths: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  'setDefaultMonths(uint32)'(
+    _defaultMonths: BigNumberish,
+    overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
@@ -1268,6 +1285,16 @@ export class TimeAllyManager extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    initialize(overrides?: CallOverrides): Promise<void>;
+
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    'initialize()'(overrides?: CallOverrides): Promise<void>;
+
     isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
     'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
@@ -1389,16 +1416,6 @@ export class TimeAllyManager extends Contract {
 
     'renounceAdminMode()'(overrides?: CallOverrides): Promise<void>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
     'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
@@ -1441,6 +1458,13 @@ export class TimeAllyManager extends Contract {
       _receiver: string,
       _initialIssTime: BigNumberish,
       _claimedMonths: boolean[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setDefaultMonths(_defaultMonths: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    'setDefaultMonths(uint32)'(
+      _defaultMonths: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1532,6 +1556,8 @@ export class TimeAllyManager extends Contract {
   };
 
   filters: {
+    NRTReceived(month: BigNumberish | null, amount: BigNumberish | null, sender: null): EventFilter;
+
     OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
 
     StakingMerge(master: string | null, child: string | null): EventFilter;
@@ -1661,6 +1687,16 @@ export class TimeAllyManager extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    initialize(overrides?: PayableOverrides): Promise<BigNumber>;
+
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+
     isAdminMode(overrides?: CallOverrides): Promise<BigNumber>;
 
     'isAdminMode()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1785,16 +1821,6 @@ export class TimeAllyManager extends Contract {
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<BigNumber>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
-
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1841,6 +1867,13 @@ export class TimeAllyManager extends Contract {
       _initialIssTime: BigNumberish,
       _claimedMonths: boolean[],
       overrides?: PayableOverrides
+    ): Promise<BigNumber>;
+
+    setDefaultMonths(_defaultMonths: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+
+    'setDefaultMonths(uint32)'(
+      _defaultMonths: BigNumberish,
+      overrides?: Overrides
     ): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
@@ -2062,6 +2095,16 @@ export class TimeAllyManager extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
     isAdminMode(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'isAdminMode()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -2192,16 +2235,6 @@ export class TimeAllyManager extends Contract {
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'resolveAddress(bytes32)'(
@@ -2260,6 +2293,16 @@ export class TimeAllyManager extends Contract {
       _initialIssTime: BigNumberish,
       _claimedMonths: boolean[],
       overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
+
+    setDefaultMonths(
+      _defaultMonths: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    'setDefaultMonths(uint32)'(
+      _defaultMonths: BigNumberish,
+      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;

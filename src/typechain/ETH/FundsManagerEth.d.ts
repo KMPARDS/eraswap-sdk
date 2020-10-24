@@ -16,7 +16,6 @@ interface FundsManagerEthInterface extends ethers.utils.Interface {
     'migrateToNewFundsManager(address)': FunctionFragment;
     'owner()': FunctionFragment;
     'plasmaManager()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'setFundsManagerESNAddress(address)': FunctionFragment;
     'setPlasmaManagerAddress(address)': FunctionFragment;
     'setToken(address)': FunctionFragment;
@@ -30,7 +29,6 @@ interface FundsManagerEthInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'migrateToNewFundsManager', values: [string]): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'plasmaManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'setFundsManagerESNAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'setPlasmaManagerAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'setToken', values: [string]): string;
@@ -43,7 +41,6 @@ interface FundsManagerEthInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'migrateToNewFundsManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'plasmaManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setFundsManagerESNAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setPlasmaManagerAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setToken', data: BytesLike): Result;
@@ -175,24 +172,6 @@ export class FundsManagerEth extends Contract {
       0: string;
     }>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
     setFundsManagerESNAddress(
       _fundsManagerESN: string,
       overrides?: Overrides
@@ -322,16 +301,6 @@ export class FundsManagerEth extends Contract {
    */
   'plasmaManager()'(overrides?: CallOverrides): Promise<string>;
 
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
   setFundsManagerESNAddress(
     _fundsManagerESN: string,
     overrides?: Overrides
@@ -447,16 +416,6 @@ export class FundsManagerEth extends Contract {
      */
     'plasmaManager()'(overrides?: CallOverrides): Promise<string>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
     setFundsManagerESNAddress(_fundsManagerESN: string, overrides?: CallOverrides): Promise<void>;
 
     'setFundsManagerESNAddress(address)'(
@@ -570,16 +529,6 @@ export class FundsManagerEth extends Contract {
      * Plasma Manager contract reference.
      */
     'plasmaManager()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     setFundsManagerESNAddress(_fundsManagerESN: string, overrides?: Overrides): Promise<BigNumber>;
 
@@ -696,16 +645,6 @@ export class FundsManagerEth extends Contract {
      * Plasma Manager contract reference.
      */
     'plasmaManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setFundsManagerESNAddress(
       _fundsManagerESN: string,

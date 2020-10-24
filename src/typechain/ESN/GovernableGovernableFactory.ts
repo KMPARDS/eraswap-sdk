@@ -5,11 +5,11 @@
 import { Contract, Signer } from 'ethers';
 import { Provider } from '@ethersproject/providers';
 
-import type { Governable } from './Governable';
+import type { GovernableGovernable } from './GovernableGovernable';
 
-export class GovernableFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): Governable {
-    return new Contract(address, _abi, signerOrProvider) as Governable;
+export class GovernableGovernableFactory {
+  static connect(address: string, signerOrProvider: Signer | Provider): GovernableGovernable {
+    return new Contract(address, _abi, signerOrProvider) as GovernableGovernable;
   }
 }
 
@@ -44,13 +44,6 @@ const _abi = [
       },
     ],
     stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'renounceOwnership',
-    outputs: [],
-    stateMutability: 'pure',
     type: 'function',
   },
   {

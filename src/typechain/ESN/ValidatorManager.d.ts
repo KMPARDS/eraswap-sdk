@@ -32,6 +32,7 @@ interface ValidatorManagerInterface extends ethers.utils.Interface {
     'getValidatorEarning(uint32,address)': FunctionFragment;
     'getValidatorIndex(uint32,address)': FunctionFragment;
     'getValidators(uint32)': FunctionFragment;
+    'initialize()': FunctionFragment;
     'kycDapp()': FunctionFragment;
     'nrtManager()': FunctionFragment;
     'owner()': FunctionFragment;
@@ -41,7 +42,6 @@ interface ValidatorManagerInterface extends ethers.utils.Interface {
     'receiveNrt(uint32)': FunctionFragment;
     'registerBlock(address)': FunctionFragment;
     'registerDelegation(uint32,bytes)': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
@@ -97,6 +97,7 @@ interface ValidatorManagerInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: 'getValidatorIndex', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'getValidators', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
@@ -112,7 +113,6 @@ interface ValidatorManagerInterface extends ethers.utils.Interface {
     functionFragment: 'registerDelegation',
     values: [BigNumberish, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
@@ -149,6 +149,7 @@ interface ValidatorManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'getValidatorEarning', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getValidatorIndex', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getValidators', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
@@ -158,7 +159,6 @@ interface ValidatorManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'registerBlock', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'registerDelegation', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
@@ -175,10 +175,12 @@ interface ValidatorManagerInterface extends ethers.utils.Interface {
 
   events: {
     'Delegation(address,uint32,address)': EventFragment;
+    'NRTReceived(uint32,uint256,address)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: 'Delegation'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'NRTReceived'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
 }
 
@@ -760,6 +762,10 @@ export class ValidatorManager extends Contract {
       }[];
     }>;
 
+    initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
     kycDapp(
       overrides?: CallOverrides
     ): Promise<{
@@ -903,24 +909,6 @@ export class ValidatorManager extends Contract {
       _extraData: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
 
     resolveAddress(
       _username: BytesLike,
@@ -1599,6 +1587,10 @@ export class ValidatorManager extends Contract {
     }[]
   >;
 
+  initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
   'kycDapp()'(overrides?: CallOverrides): Promise<string>;
@@ -1698,16 +1690,6 @@ export class ValidatorManager extends Contract {
     _extraData: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
   resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -2314,6 +2296,10 @@ export class ValidatorManager extends Contract {
       }[]
     >;
 
+    initialize(overrides?: CallOverrides): Promise<void>;
+
+    'initialize()'(overrides?: CallOverrides): Promise<void>;
+
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
     'kycDapp()'(overrides?: CallOverrides): Promise<string>;
@@ -2407,16 +2393,6 @@ export class ValidatorManager extends Contract {
       _extraData: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -2534,6 +2510,8 @@ export class ValidatorManager extends Contract {
       month: BigNumberish | null,
       validator: string | null
     ): EventFilter;
+
+    NRTReceived(month: BigNumberish | null, amount: BigNumberish | null, sender: null): EventFilter;
 
     OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
   };
@@ -2819,6 +2797,10 @@ export class ValidatorManager extends Contract {
      */
     'getValidators(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
+    initialize(overrides?: PayableOverrides): Promise<BigNumber>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
     'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2915,16 +2897,6 @@ export class ValidatorManager extends Contract {
       _extraData: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -3332,6 +3304,10 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -3431,16 +3407,6 @@ export class ValidatorManager extends Contract {
       _extraData: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

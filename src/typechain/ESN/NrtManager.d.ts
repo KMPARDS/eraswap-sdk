@@ -21,6 +21,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
     'addToBurnPool()': FunctionFragment;
     'addToLuckPool()': FunctionFragment;
     'annualNRT()': FunctionFragment;
+    'availableSupply()': FunctionFragment;
     'burnPoolBalance()': FunctionFragment;
     'currentNrtMonth()': FunctionFragment;
     'dayswappers()': FunctionFragment;
@@ -30,6 +31,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
     'getPlatform(uint256)': FunctionFragment;
     'getPlatformDetails()': FunctionFragment;
     'getPlatforms()': FunctionFragment;
+    'initialize()': FunctionFragment;
     'isAdminMode()': FunctionFragment;
     'kycDapp()': FunctionFragment;
     'lastReleaseTimestamp()': FunctionFragment;
@@ -40,7 +42,6 @@ interface NrtManagerInterface extends ethers.utils.Interface {
     'randomnessManager()': FunctionFragment;
     'releaseMonthlyNRT()': FunctionFragment;
     'renounceAdminMode()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
@@ -50,6 +51,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
     'timeallyClub()': FunctionFragment;
     'timeallyManager()': FunctionFragment;
     'timeallyPromotionalBucket()': FunctionFragment;
+    'totalNrtReleased()': FunctionFragment;
     'totalSupply()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'validatorManager()': FunctionFragment;
@@ -60,6 +62,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'addToBurnPool', values?: undefined): string;
   encodeFunctionData(functionFragment: 'addToLuckPool', values?: undefined): string;
   encodeFunctionData(functionFragment: 'annualNRT', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'availableSupply', values?: undefined): string;
   encodeFunctionData(functionFragment: 'burnPoolBalance', values?: undefined): string;
   encodeFunctionData(functionFragment: 'currentNrtMonth', values?: undefined): string;
   encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
@@ -69,6 +72,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'getPlatform', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'getPlatformDetails', values?: undefined): string;
   encodeFunctionData(functionFragment: 'getPlatforms', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
   encodeFunctionData(functionFragment: 'isAdminMode', values?: undefined): string;
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'lastReleaseTimestamp', values?: undefined): string;
@@ -79,7 +83,6 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'releaseMonthlyNRT', values?: undefined): string;
   encodeFunctionData(functionFragment: 'renounceAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
@@ -92,6 +95,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
   encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'totalNrtReleased', values?: undefined): string;
   encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
@@ -101,6 +105,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'addToBurnPool', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'addToLuckPool', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'annualNRT', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'availableSupply', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'burnPoolBalance', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'currentNrtMonth', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
@@ -110,6 +115,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'getPlatform', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getPlatformDetails', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getPlatforms', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isAdminMode', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'lastReleaseTimestamp', data: BytesLike): Result;
@@ -120,7 +126,6 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'releaseMonthlyNRT', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
@@ -130,6 +135,7 @@ interface NrtManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'totalNrtReleased', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
@@ -228,6 +234,18 @@ export class NrtManager extends Contract {
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
      */
     'annualNRT()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    availableSupply(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'availableSupply()'(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -399,6 +417,16 @@ export class NrtManager extends Contract {
       0: string[];
     }>;
 
+    /**
+     * Sets deployer wallet and timestamp.
+     */
+    initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+    /**
+     * Sets deployer wallet and timestamp.
+     */
+    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
     isAdminMode(
       overrides?: CallOverrides
     ): Promise<{
@@ -527,24 +555,6 @@ export class NrtManager extends Contract {
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
     resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
@@ -663,6 +673,24 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
+    /**
+     * Tracks total NRT released, to be able to calculate total supply.
+     */
+    totalNrtReleased(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    /**
+     * Tracks total NRT released, to be able to calculate total supply.
+     */
+    'totalNrtReleased()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
     totalSupply(
       overrides?: CallOverrides
     ): Promise<{
@@ -744,6 +772,10 @@ export class NrtManager extends Contract {
    * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
    */
   'annualNRT()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+  availableSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+  'availableSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Amount of tokens accrued for burning as per Era Swap Whitepaper.
@@ -846,6 +878,16 @@ export class NrtManager extends Contract {
    */
   'getPlatforms()'(overrides?: CallOverrides): Promise<string[]>;
 
+  /**
+   * Sets deployer wallet and timestamp.
+   */
+  initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+  /**
+   * Sets deployer wallet and timestamp.
+   */
+  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+
   isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
   'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
@@ -910,16 +952,6 @@ export class NrtManager extends Contract {
 
   'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
 
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
   resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
   'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
@@ -973,6 +1005,16 @@ export class NrtManager extends Contract {
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
   'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+
+  /**
+   * Tracks total NRT released, to be able to calculate total supply.
+   */
+  totalNrtReleased(overrides?: CallOverrides): Promise<BigNumber>;
+
+  /**
+   * Tracks total NRT released, to be able to calculate total supply.
+   */
+  'totalNrtReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1039,6 +1081,10 @@ export class NrtManager extends Contract {
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
      */
     'annualNRT()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    availableSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'availableSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
@@ -1144,6 +1190,16 @@ export class NrtManager extends Contract {
      */
     'getPlatforms()'(overrides?: CallOverrides): Promise<string[]>;
 
+    /**
+     * Sets deployer wallet and timestamp.
+     */
+    initialize(overrides?: CallOverrides): Promise<void>;
+
+    /**
+     * Sets deployer wallet and timestamp.
+     */
+    'initialize()'(overrides?: CallOverrides): Promise<void>;
+
     isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
     'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
@@ -1208,16 +1264,6 @@ export class NrtManager extends Contract {
 
     'renounceAdminMode()'(overrides?: CallOverrides): Promise<void>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
     'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
@@ -1274,6 +1320,16 @@ export class NrtManager extends Contract {
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+
+    /**
+     * Tracks total NRT released, to be able to calculate total supply.
+     */
+    totalNrtReleased(overrides?: CallOverrides): Promise<BigNumber>;
+
+    /**
+     * Tracks total NRT released, to be able to calculate total supply.
+     */
+    'totalNrtReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1357,6 +1413,10 @@ export class NrtManager extends Contract {
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
      */
     'annualNRT()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    availableSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'availableSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
@@ -1452,6 +1512,16 @@ export class NrtManager extends Contract {
      */
     'getPlatforms()'(overrides?: CallOverrides): Promise<BigNumber>;
 
+    /**
+     * Sets deployer wallet and timestamp.
+     */
+    initialize(overrides?: PayableOverrides): Promise<BigNumber>;
+
+    /**
+     * Sets deployer wallet and timestamp.
+     */
+    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+
     isAdminMode(overrides?: CallOverrides): Promise<BigNumber>;
 
     'isAdminMode()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1516,16 +1586,6 @@ export class NrtManager extends Contract {
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<BigNumber>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
-
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1585,6 +1645,16 @@ export class NrtManager extends Contract {
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    /**
+     * Tracks total NRT released, to be able to calculate total supply.
+     */
+    totalNrtReleased(overrides?: CallOverrides): Promise<BigNumber>;
+
+    /**
+     * Tracks total NRT released, to be able to calculate total supply.
+     */
+    'totalNrtReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1649,6 +1719,10 @@ export class NrtManager extends Contract {
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
      */
     'annualNRT()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    availableSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'availableSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
@@ -1750,6 +1824,16 @@ export class NrtManager extends Contract {
      */
     'getPlatforms()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    /**
+     * Sets deployer wallet and timestamp.
+     */
+    initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Sets deployer wallet and timestamp.
+     */
+    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
     isAdminMode(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'isAdminMode()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1813,16 +1897,6 @@ export class NrtManager extends Contract {
     renounceAdminMode(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1895,6 +1969,16 @@ export class NrtManager extends Contract {
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Tracks total NRT released, to be able to calculate total supply.
+     */
+    totalNrtReleased(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Tracks total NRT released, to be able to calculate total supply.
+     */
+    'totalNrtReleased()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

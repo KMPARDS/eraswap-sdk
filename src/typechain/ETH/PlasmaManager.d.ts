@@ -17,7 +17,6 @@ interface PlasmaManagerInterface extends ethers.utils.Interface {
     'isValidator(address)': FunctionFragment;
     'lastBunchIndex()': FunctionFragment;
     'owner()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'setInitialValidators(address[])': FunctionFragment;
     'submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
@@ -30,7 +29,6 @@ interface PlasmaManagerInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'isValidator', values: [string]): string;
   encodeFunctionData(functionFragment: 'lastBunchIndex', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'setInitialValidators', values: [string[]]): string;
   encodeFunctionData(
     functionFragment: 'submitBunchHeader',
@@ -45,7 +43,6 @@ interface PlasmaManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'isValidator', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'lastBunchIndex', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setInitialValidators', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'submitBunchHeader', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
@@ -211,24 +208,6 @@ export class PlasmaManager extends Contract {
       0: string;
     }>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
     setInitialValidators(
       _validators: string[],
       overrides?: Overrides
@@ -376,16 +355,6 @@ export class PlasmaManager extends Contract {
    */
   'owner()'(overrides?: CallOverrides): Promise<string>;
 
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
   setInitialValidators(_validators: string[], overrides?: Overrides): Promise<ContractTransaction>;
 
   'setInitialValidators(address[])'(
@@ -530,16 +499,6 @@ export class PlasmaManager extends Contract {
      */
     'owner()'(overrides?: CallOverrides): Promise<string>;
 
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
     setInitialValidators(_validators: string[], overrides?: CallOverrides): Promise<void>;
 
     'setInitialValidators(address[])'(
@@ -662,16 +621,6 @@ export class PlasmaManager extends Contract {
      * Returns the address of the current owner.
      */
     'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     setInitialValidators(_validators: string[], overrides?: Overrides): Promise<BigNumber>;
 
@@ -798,16 +747,6 @@ export class PlasmaManager extends Contract {
      * Returns the address of the current owner.
      */
     'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setInitialValidators(
       _validators: string[],

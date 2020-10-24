@@ -13,29 +13,39 @@ interface FundsManagerEsnInterface extends ethers.utils.Interface {
     'claimDeposit(bytes)': FunctionFragment;
     'fundsManagerETH()': FunctionFragment;
     'isTransactionClaimed(bytes32)': FunctionFragment;
+    'owner()': FunctionFragment;
     'reversePlasma()': FunctionFragment;
     'setInitialValues(address,address,address)': FunctionFragment;
     'tokenOnETH()': FunctionFragment;
+    'transferOwnership(address)': FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: 'claimDeposit', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'fundsManagerETH', values?: undefined): string;
   encodeFunctionData(functionFragment: 'isTransactionClaimed', values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'reversePlasma', values?: undefined): string;
   encodeFunctionData(
     functionFragment: 'setInitialValues',
     values: [string, string, string]
   ): string;
   encodeFunctionData(functionFragment: 'tokenOnETH', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
 
   decodeFunctionResult(functionFragment: 'claimDeposit', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'fundsManagerETH', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isTransactionClaimed', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'reversePlasma', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'setInitialValues', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'tokenOnETH', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
 
-  events: {};
+  events: {
+    'OwnershipTransferred(address,address)': EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
 }
 
 export class FundsManagerEsn extends Contract {
@@ -101,6 +111,24 @@ export class FundsManagerEsn extends Contract {
       0: boolean;
     }>;
 
+    /**
+     * Returns the address of the current owner.
+     */
+    owner(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: string;
+    }>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    'owner()'(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: string;
+    }>;
+
     reversePlasma(
       overrides?: CallOverrides
     ): Promise<{
@@ -150,6 +178,19 @@ export class FundsManagerEsn extends Contract {
     ): Promise<{
       0: string;
     }>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    'transferOwnership(address)'(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
   };
 
   /**
@@ -182,6 +223,16 @@ export class FundsManagerEsn extends Contract {
     _transactionHash: BytesLike,
     overrides?: CallOverrides
   ): Promise<boolean>;
+
+  /**
+   * Returns the address of the current owner.
+   */
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  /**
+   * Returns the address of the current owner.
+   */
+  'owner()'(overrides?: CallOverrides): Promise<string>;
 
   reversePlasma(overrides?: CallOverrides): Promise<string>;
 
@@ -217,6 +268,19 @@ export class FundsManagerEsn extends Contract {
 
   'tokenOnETH()'(overrides?: CallOverrides): Promise<string>;
 
+  /**
+   * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+   */
+  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+
+  /**
+   * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+   */
+  'transferOwnership(address)'(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     /**
      * Allows to submit a proof for a transaction done on ETH.
@@ -248,6 +312,16 @@ export class FundsManagerEsn extends Contract {
       _transactionHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    'owner()'(overrides?: CallOverrides): Promise<string>;
 
     reversePlasma(overrides?: CallOverrides): Promise<string>;
 
@@ -282,9 +356,21 @@ export class FundsManagerEsn extends Contract {
     tokenOnETH(overrides?: CallOverrides): Promise<string>;
 
     'tokenOnETH()'(overrides?: CallOverrides): Promise<string>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+  };
 
   estimateGas: {
     /**
@@ -321,6 +407,16 @@ export class FundsManagerEsn extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    /**
+     * Returns the address of the current owner.
+     */
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     reversePlasma(overrides?: CallOverrides): Promise<BigNumber>;
 
     'reversePlasma()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -354,6 +450,16 @@ export class FundsManagerEsn extends Contract {
     tokenOnETH(overrides?: CallOverrides): Promise<BigNumber>;
 
     'tokenOnETH()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -394,6 +500,16 @@ export class FundsManagerEsn extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    /**
+     * Returns the address of the current owner.
+     */
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Returns the address of the current owner.
+     */
+    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     reversePlasma(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'reversePlasma()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -427,5 +543,18 @@ export class FundsManagerEsn extends Contract {
     tokenOnETH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'tokenOnETH()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    /**
+     * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
+     */
+    'transferOwnership(address)'(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
   };
 }

@@ -12,12 +12,12 @@ interface BlockRewardInterface extends ethers.utils.Interface {
   functions: {
     'SYSTEM_ADDRESS()': FunctionFragment;
     'dayswappers()': FunctionFragment;
+    'initialize(address)': FunctionFragment;
     'kycDapp()': FunctionFragment;
     'nrtManager()': FunctionFragment;
     'owner()': FunctionFragment;
     'prepaidEs()': FunctionFragment;
     'randomnessManager()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'resolveAddress(bytes32)': FunctionFragment;
     'resolveAddressStrict(bytes32)': FunctionFragment;
     'resolveUsername(address)': FunctionFragment;
@@ -34,12 +34,12 @@ interface BlockRewardInterface extends ethers.utils.Interface {
 
   encodeFunctionData(functionFragment: 'SYSTEM_ADDRESS', values?: undefined): string;
   encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'initialize', values: [string]): string;
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
@@ -55,12 +55,12 @@ interface BlockRewardInterface extends ethers.utils.Interface {
 
   decodeFunctionResult(functionFragment: 'SYSTEM_ADDRESS', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
@@ -118,6 +118,23 @@ export class BlockReward extends Contract {
     ): Promise<{
       0: string;
     }>;
+
+    /**
+     * For mainnet _testSystemAddress to be passed is zero address.
+     * Sets test system address.
+     * @param _testSystemAddress : Testing address.
+     */
+    initialize(_testSystemAddress: string, overrides?: Overrides): Promise<ContractTransaction>;
+
+    /**
+     * For mainnet _testSystemAddress to be passed is zero address.
+     * Sets test system address.
+     * @param _testSystemAddress : Testing address.
+     */
+    'initialize(address)'(
+      _testSystemAddress: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     kycDapp(
       overrides?: CallOverrides
@@ -183,24 +200,6 @@ export class BlockReward extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       0: string;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
     }>;
 
     resolveAddress(
@@ -365,6 +364,23 @@ export class BlockReward extends Contract {
 
   'dayswappers()'(overrides?: CallOverrides): Promise<string>;
 
+  /**
+   * For mainnet _testSystemAddress to be passed is zero address.
+   * Sets test system address.
+   * @param _testSystemAddress : Testing address.
+   */
+  initialize(_testSystemAddress: string, overrides?: Overrides): Promise<ContractTransaction>;
+
+  /**
+   * For mainnet _testSystemAddress to be passed is zero address.
+   * Sets test system address.
+   * @param _testSystemAddress : Testing address.
+   */
+  'initialize(address)'(
+    _testSystemAddress: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
   'kycDapp()'(overrides?: CallOverrides): Promise<string>;
@@ -390,16 +406,6 @@ export class BlockReward extends Contract {
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
   'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
   resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -491,6 +497,20 @@ export class BlockReward extends Contract {
 
     'dayswappers()'(overrides?: CallOverrides): Promise<string>;
 
+    /**
+     * For mainnet _testSystemAddress to be passed is zero address.
+     * Sets test system address.
+     * @param _testSystemAddress : Testing address.
+     */
+    initialize(_testSystemAddress: string, overrides?: CallOverrides): Promise<void>;
+
+    /**
+     * For mainnet _testSystemAddress to be passed is zero address.
+     * Sets test system address.
+     * @param _testSystemAddress : Testing address.
+     */
+    'initialize(address)'(_testSystemAddress: string, overrides?: CallOverrides): Promise<void>;
+
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
     'kycDapp()'(overrides?: CallOverrides): Promise<string>;
@@ -516,16 +536,6 @@ export class BlockReward extends Contract {
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -628,6 +638,20 @@ export class BlockReward extends Contract {
 
     'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
 
+    /**
+     * For mainnet _testSystemAddress to be passed is zero address.
+     * Sets test system address.
+     * @param _testSystemAddress : Testing address.
+     */
+    initialize(_testSystemAddress: string, overrides?: Overrides): Promise<BigNumber>;
+
+    /**
+     * For mainnet _testSystemAddress to be passed is zero address.
+     * Sets test system address.
+     * @param _testSystemAddress : Testing address.
+     */
+    'initialize(address)'(_testSystemAddress: string, overrides?: Overrides): Promise<BigNumber>;
+
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
     'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -653,16 +677,6 @@ export class BlockReward extends Contract {
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -754,6 +768,23 @@ export class BlockReward extends Contract {
 
     'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    /**
+     * For mainnet _testSystemAddress to be passed is zero address.
+     * Sets test system address.
+     * @param _testSystemAddress : Testing address.
+     */
+    initialize(_testSystemAddress: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    /**
+     * For mainnet _testSystemAddress to be passed is zero address.
+     * Sets test system address.
+     * @param _testSystemAddress : Testing address.
+     */
+    'initialize(address)'(
+      _testSystemAddress: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -779,16 +810,6 @@ export class BlockReward extends Contract {
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

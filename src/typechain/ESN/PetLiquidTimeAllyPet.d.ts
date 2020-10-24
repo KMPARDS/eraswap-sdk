@@ -37,7 +37,6 @@ interface PetLiquidTimeAllyPetInterface extends ethers.utils.Interface {
     'pets(address,uint256)': FunctionFragment;
     'prepaidEs()': FunctionFragment;
     'renounceAdminMode()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
     'toogleAppointee(uint256,address,bool)': FunctionFragment;
     'toogleNominee(uint256,address,bool)': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
@@ -96,7 +95,6 @@ interface PetLiquidTimeAllyPetInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'pets', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
   encodeFunctionData(functionFragment: 'renounceAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(
     functionFragment: 'toogleAppointee',
     values: [BigNumberish, string, boolean]
@@ -145,7 +143,6 @@ interface PetLiquidTimeAllyPetInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'pets', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'toogleAppointee', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'toogleNominee', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
@@ -681,24 +678,6 @@ export class PetLiquidTimeAllyPet extends Contract {
     renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: void;
-    }>;
 
     /**
      * this function is used to update appointee status of a wallet address in PET
@@ -1323,16 +1302,6 @@ export class PetLiquidTimeAllyPet extends Contract {
   'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-  /**
-   * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-   */
-  'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
-
-  /**
    * this function is used to update appointee status of a wallet address in PET
    * @param _appointeeAddress : eth wallet address of appointee.
    * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
@@ -1945,16 +1914,6 @@ export class PetLiquidTimeAllyPet extends Contract {
     renounceAdminMode(overrides?: CallOverrides): Promise<void>;
 
     'renounceAdminMode()'(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     /**
      * this function is used to update appointee status of a wallet address in PET
@@ -2579,16 +2538,6 @@ export class PetLiquidTimeAllyPet extends Contract {
     'renounceAdminMode()'(overrides?: Overrides): Promise<BigNumber>;
 
     /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
      * this function is used to update appointee status of a wallet address in PET
      * @param _appointeeAddress : eth wallet address of appointee.
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
@@ -3156,16 +3105,6 @@ export class PetLiquidTimeAllyPet extends Contract {
     renounceAdminMode(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     'renounceAdminMode()'(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    renounceOwnership(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
-     */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * this function is used to update appointee status of a wallet address in PET
