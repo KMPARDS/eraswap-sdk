@@ -10,7 +10,7 @@
     "build": "tsc && yarn copy-dts",
     "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
     "start": "tsc --watch",
-    "prepublish": "tsc"
+    "prepublish": "yarn build"
   },
   "dependencies": {
     "@types/node": "^14.11.2",
