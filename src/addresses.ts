@@ -20,13 +20,15 @@ export interface Addresses {
     kycdapp: string;
     timeallyclub: string;
     timeAllyPromotionalBucket: string;
-    // tsgap: string;
     betdeex: string;
     betImplementation: string;
     timeswappers: string;
     buzcafe: string;
     buildSurvey: string;
     rentingDappManager: string;
+    tsgap: string;
+    petLiquid: string;
+    petPrepaid: string;
   };
 }
 
@@ -34,9 +36,9 @@ export interface Addresses {
 const development: Addresses = {
   ETH: {
     network: 'rinkeby',
-    esContract: '0x843458c9E5d184DB5e52A9963C40174c911BB6B2',
-    plasmaManager: '0x38b0A265689D1D418BA7CA162c9969827642b234',
-    fundsManager: '0x5f3e262b92E2E644162C2144775C971a0Fd1B5E2',
+    esContract: '0x237027559f6C07A20EBa97C837b60b9815840a42',
+    plasmaManager: '0xaaF33029B457A773C14DFdab4eDc4039E80fC5BF',
+    fundsManager: '0x10A23bbfAfc7cc3b94fa268D965F8B78543eCFE0',
   },
   ESN: {
     reversePlasma: '0x3bEb087e33eC0B830325991A32E3F8bb16A51317',
@@ -50,7 +52,7 @@ const development: Addresses = {
     blockRewardManager: 'BLOCK_REWARD',
     prepaidEs: 'PREPAID_ES',
     dayswappers: 'DAYSWAPPERS',
-    kycdapp: '0xC4336494606203e3907539d5b462A5cb7853B3C6',
+    kycdapp: '0x8b2C9732137bAD7e629139B1fDa9E6094368f6B4',
     timeallyclub: 'TIMEALLY_CLUB',
     timeAllyPromotionalBucket: 'TIMEALLY_PROMOTIONAL_BUCKET',
     betdeex: 'BETDEEX',
@@ -59,6 +61,9 @@ const development: Addresses = {
     buzcafe: 'BUZCAFE',
     buildSurvey: 'BUILD_SURVEY',
     rentingDappManager: 'RENTING_DAPP',
+    tsgap: 'TSGAP',
+    petLiquid: 'PET_LIQUID',
+    petPrepaid: 'PET_PREPAID',
   },
 };
 
@@ -91,6 +96,9 @@ const production: Addresses = {
     buzcafe: 'BUZCAFE',
     buildSurvey: 'BUILD_SURVEY',
     rentingDappManager: 'RENTING_DAPP',
+    tsgap: 'TSGAP',
+    petLiquid: 'PET_LIQUID',
+    petPrepaid: 'PET_PREPAID',
   },
 };
 
@@ -126,6 +134,9 @@ const test: Addresses = {
     buzcafe: 'BUZCAFE',
     buildSurvey: 'BUILD_SURVEY',
     rentingDappManager: 'RENTING_DAPP',
+    tsgap: 'TSGAP',
+    petLiquid: 'PET_LIQUID',
+    petPrepaid: 'PET_PREPAID',
   },
 };
 
