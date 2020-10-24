@@ -8,6 +8,7 @@ export interface Addresses {
   ESN: {
     reversePlasma: string;
     fundsManager: string;
+    proxyAdmin: string;
     nrtManager: string;
     timeallyManager: string;
     timeallyStakingTarget: string;
@@ -43,6 +44,7 @@ const development: Addresses = {
   ESN: {
     reversePlasma: '0x3bEb087e33eC0B830325991A32E3F8bb16A51317',
     fundsManager: '0xc4cfb05119Ea1F59fb5a8F949288801491D00110',
+    proxyAdmin: '0x89309551Fb7AbaaB85867ACa60404CDA649751d4',
     nrtManager: 'NRT_MANAGER',
     timeallyManager: 'TIMEALLY_MANAGER',
     timeallyStakingTarget: 'TIMEALLY_STAKING_TARGET',
@@ -71,13 +73,14 @@ const development: Addresses = {
 const production: Addresses = {
   ETH: {
     network: 'homestead',
-    esContract: '0x206949aD387Ce7F35B71e9db3cB576D103123D27',
-    plasmaManager: '0x1c5b6e1ff599D1aCEd9cfCE73efab34f0688977e',
-    fundsManager: '0xBf2B93384948f57f6927C72baDEA5e0dd0182Aa5',
+    esContract: '',
+    plasmaManager: '',
+    fundsManager: '',
   },
   ESN: {
-    reversePlasma: '0x3bEb087e33eC0B830325991A32E3F8bb16A51317',
-    fundsManager: '0xc4cfb05119Ea1F59fb5a8F949288801491D00110',
+    reversePlasma: '',
+    fundsManager: '',
+    proxyAdmin: '',
     nrtManager: 'NRT_MANAGER',
     timeallyManager: 'TIMEALLY_MANAGER',
     timeallyStakingTarget: 'TIMEALLY_STAKING_TARGET',
@@ -116,6 +119,7 @@ const test: Addresses = {
   ESN: {
     reversePlasma: '',
     fundsManager: '',
+    proxyAdmin: '',
     nrtManager: 'NRT_MANAGER',
     timeallyManager: 'TIMEALLY_MANAGER',
     timeallyStakingTarget: 'TIMEALLY_STAKING_TARGET',
