@@ -2,40 +2,18 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Signer } from 'ethers';
-import { Provider, TransactionRequest } from '@ethersproject/providers';
-import { Contract, ContractFactory, Overrides } from '@ethersproject/contracts';
+import { Contract, Signer } from 'ethers';
+import { Provider } from '@ethersproject/providers';
 
 import type { Ownable } from './Ownable';
 
-export class OwnableFactory extends ContractFactory {
-  constructor(signer?: Signer) {
-    super(_abi, _bytecode, signer);
-  }
-
-  deploy(overrides?: Overrides): Promise<Ownable> {
-    return super.deploy(overrides || {}) as Promise<Ownable>;
-  }
-  getDeployTransaction(overrides?: Overrides): TransactionRequest {
-    return super.getDeployTransaction(overrides || {});
-  }
-  attach(address: string): Ownable {
-    return super.attach(address) as Ownable;
-  }
-  connect(signer: Signer): OwnableFactory {
-    return super.connect(signer) as OwnableFactory;
-  }
+export class OwnableFactory {
   static connect(address: string, signerOrProvider: Signer | Provider): Ownable {
     return new Contract(address, _abi, signerOrProvider) as Ownable;
   }
 }
 
 const _abi = [
-  {
-    inputs: [],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
   {
     anonymous: false,
     inputs: [
@@ -89,6 +67,3 @@ const _abi = [
     type: 'function',
   },
 ];
-
-const _bytecode =
-  '0x608060405234801561001057600080fd5b50600061001b61006a565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a35061006e565b3390565b61036c8061007d6000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063715018a6146100465780638da5cb5b14610050578063f2fde38b14610081575b600080fd5b61004e6100b4565b005b61005861019a565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b61004e6004803603602081101561009757600080fd5b503573ffffffffffffffffffffffffffffffffffffffff166101b6565b6100bc61030c565b60005473ffffffffffffffffffffffffffffffffffffffff90811691161461012b576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b6000805460405173ffffffffffffffffffffffffffffffffffffffff909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080547fffffffffffffffffffffffff0000000000000000000000000000000000000000169055565b60005473ffffffffffffffffffffffffffffffffffffffff1690565b6101be61030c565b60005473ffffffffffffffffffffffffffffffffffffffff90811691161461022d576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b73ffffffffffffffffffffffffffffffffffffffff811661027f5760405162461bcd60e51b81526004018080602001828103825260268152602001806103116026913960400191505060405180910390fd5b6000805460405173ffffffffffffffffffffffffffffffffffffffff808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff92909216919091179055565b339056fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f2061646472657373a26469706673582212201170ffcd83a9828419d3550e0f8af80fc59618b6338ff5ea223a56c84244d2bc64736f6c63430007040033';

@@ -16,9 +16,13 @@ import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
 
 interface BuildSurveyInterface extends ethers.utils.Interface {
   functions: {
+    'Funds(bytes32)': FunctionFragment;
+    'Incentives(address)': FunctionFragment;
     'accessUser(bytes32,address)': FunctionFragment;
-    'addSurvey(string,uint256,bool)': FunctionFragment;
+    'addSurvey(string,string,uint256,bool)': FunctionFragment;
     'addUsers(bytes32,address[])': FunctionFragment;
+    'announceIncentive(uint256)': FunctionFragment;
+    'collectFunds(bytes32)': FunctionFragment;
     'dayswappers()': FunctionFragment;
     'kycDapp()': FunctionFragment;
     'nrtManager()': FunctionFragment;
@@ -39,12 +43,16 @@ interface BuildSurveyInterface extends ethers.utils.Interface {
     'validatorManager()': FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: 'Funds', values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: 'Incentives', values: [string]): string;
   encodeFunctionData(functionFragment: 'accessUser', values: [BytesLike, string]): string;
   encodeFunctionData(
     functionFragment: 'addSurvey',
-    values: [string, BigNumberish, boolean]
+    values: [string, string, BigNumberish, boolean]
   ): string;
   encodeFunctionData(functionFragment: 'addUsers', values: [BytesLike, string[]]): string;
+  encodeFunctionData(functionFragment: 'announceIncentive', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'collectFunds', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
@@ -64,9 +72,13 @@ interface BuildSurveyInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: 'Funds', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'Incentives', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'accessUser', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'addSurvey', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'addUsers', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'announceIncentive', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'collectFunds', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
@@ -113,6 +125,34 @@ export class BuildSurvey extends Contract {
   interface: BuildSurveyInterface;
 
   functions: {
+    Funds(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'Funds(bytes32)'(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    Incentives(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
+    'Incentives(address)'(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: BigNumber;
+    }>;
+
     accessUser(
       arg0: BytesLike,
       arg1: string,
@@ -131,13 +171,15 @@ export class BuildSurvey extends Contract {
 
     addSurvey(
       _title: string,
+      _surveyTitle: string,
       _time: BigNumberish,
       _ispublic: boolean,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'addSurvey(string,uint256,bool)'(
+    'addSurvey(string,string,uint256,bool)'(
       _title: string,
+      _surveyTitle: string,
       _time: BigNumberish,
       _ispublic: boolean,
       overrides?: PayableOverrides
@@ -146,13 +188,27 @@ export class BuildSurvey extends Contract {
     addUsers(
       _survey: BytesLike,
       users: string[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
     'addUsers(bytes32,address[])'(
       _survey: BytesLike,
       users: string[],
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
+
+    announceIncentive(_value: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+
+    'announceIncentive(uint256)'(
+      _value: BigNumberish,
       overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    collectFunds(_survey: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+    'collectFunds(bytes32)'(
+      _survey: BytesLike,
+      overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
     dayswappers(
@@ -292,13 +348,13 @@ export class BuildSurvey extends Contract {
     sendSurvey(
       _survey: BytesLike,
       _feedback: BigNumberish[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
     'sendSurvey(bytes32,uint16[])'(
       _survey: BytesLike,
       _feedback: BigNumberish[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
@@ -310,13 +366,15 @@ export class BuildSurvey extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       title: string;
+      surveyTitle: string;
       author: string;
       time: BigNumber;
       isPublic: boolean;
       0: string;
       1: string;
-      2: BigNumber;
-      3: boolean;
+      2: string;
+      3: BigNumber;
+      4: boolean;
     }>;
 
     'surveys(bytes32)'(
@@ -324,13 +382,15 @@ export class BuildSurvey extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       title: string;
+      surveyTitle: string;
       author: string;
       time: BigNumber;
       isPublic: boolean;
       0: string;
       1: string;
-      2: BigNumber;
-      3: boolean;
+      2: string;
+      3: BigNumber;
+      4: boolean;
     }>;
 
     timeallyClub(
@@ -395,6 +455,14 @@ export class BuildSurvey extends Contract {
     }>;
   };
 
+  Funds(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+
+  'Funds(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+
+  Incentives(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  'Incentives(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
   accessUser(arg0: BytesLike, arg1: string, overrides?: CallOverrides): Promise<number>;
 
   'accessUser(bytes32,address)'(
@@ -405,13 +473,15 @@ export class BuildSurvey extends Contract {
 
   addSurvey(
     _title: string,
+    _surveyTitle: string,
     _time: BigNumberish,
     _ispublic: boolean,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'addSurvey(string,uint256,bool)'(
+  'addSurvey(string,string,uint256,bool)'(
     _title: string,
+    _surveyTitle: string,
     _time: BigNumberish,
     _ispublic: boolean,
     overrides?: PayableOverrides
@@ -420,13 +490,27 @@ export class BuildSurvey extends Contract {
   addUsers(
     _survey: BytesLike,
     users: string[],
-    overrides?: Overrides
+    overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   'addUsers(bytes32,address[])'(
     _survey: BytesLike,
     users: string[],
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
+
+  announceIncentive(_value: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+
+  'announceIncentive(uint256)'(
+    _value: BigNumberish,
     overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  collectFunds(_survey: BytesLike, overrides?: PayableOverrides): Promise<ContractTransaction>;
+
+  'collectFunds(bytes32)'(
+    _survey: BytesLike,
+    overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
@@ -478,13 +562,13 @@ export class BuildSurvey extends Contract {
   sendSurvey(
     _survey: BytesLike,
     _feedback: BigNumberish[],
-    overrides?: Overrides
+    overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   'sendSurvey(bytes32,uint16[])'(
     _survey: BytesLike,
     _feedback: BigNumberish[],
-    overrides?: Overrides
+    overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
@@ -496,13 +580,15 @@ export class BuildSurvey extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     title: string;
+    surveyTitle: string;
     author: string;
     time: BigNumber;
     isPublic: boolean;
     0: string;
     1: string;
-    2: BigNumber;
-    3: boolean;
+    2: string;
+    3: BigNumber;
+    4: boolean;
   }>;
 
   'surveys(bytes32)'(
@@ -510,13 +596,15 @@ export class BuildSurvey extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     title: string;
+    surveyTitle: string;
     author: string;
     time: BigNumber;
     isPublic: boolean;
     0: string;
     1: string;
-    2: BigNumber;
-    3: boolean;
+    2: string;
+    3: BigNumber;
+    4: boolean;
   }>;
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
@@ -549,6 +637,14 @@ export class BuildSurvey extends Contract {
   'validatorManager()'(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    Funds(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'Funds(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+
+    Incentives(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'Incentives(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     accessUser(arg0: BytesLike, arg1: string, overrides?: CallOverrides): Promise<number>;
 
     'accessUser(bytes32,address)'(
@@ -559,13 +655,15 @@ export class BuildSurvey extends Contract {
 
     addSurvey(
       _title: string,
+      _surveyTitle: string,
       _time: BigNumberish,
       _ispublic: boolean,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    'addSurvey(string,uint256,bool)'(
+    'addSurvey(string,string,uint256,bool)'(
       _title: string,
+      _surveyTitle: string,
       _time: BigNumberish,
       _ispublic: boolean,
       overrides?: CallOverrides
@@ -578,6 +676,14 @@ export class BuildSurvey extends Contract {
       users: string[],
       overrides?: CallOverrides
     ): Promise<void>;
+
+    announceIncentive(_value: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    'announceIncentive(uint256)'(_value: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    collectFunds(_survey: BytesLike, overrides?: CallOverrides): Promise<void>;
+
+    'collectFunds(bytes32)'(_survey: BytesLike, overrides?: CallOverrides): Promise<void>;
 
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
@@ -649,13 +755,15 @@ export class BuildSurvey extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       title: string;
+      surveyTitle: string;
       author: string;
       time: BigNumber;
       isPublic: boolean;
       0: string;
       1: string;
-      2: BigNumber;
-      3: boolean;
+      2: string;
+      3: BigNumber;
+      4: boolean;
     }>;
 
     'surveys(bytes32)'(
@@ -663,13 +771,15 @@ export class BuildSurvey extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       title: string;
+      surveyTitle: string;
       author: string;
       time: BigNumber;
       isPublic: boolean;
       0: string;
       1: string;
-      2: BigNumber;
-      3: boolean;
+      2: string;
+      3: BigNumber;
+      4: boolean;
     }>;
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
@@ -710,6 +820,14 @@ export class BuildSurvey extends Contract {
   };
 
   estimateGas: {
+    Funds(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'Funds(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+
+    Incentives(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'Incentives(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     accessUser(arg0: BytesLike, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'accessUser(bytes32,address)'(
@@ -720,25 +838,35 @@ export class BuildSurvey extends Contract {
 
     addSurvey(
       _title: string,
+      _surveyTitle: string,
       _time: BigNumberish,
       _ispublic: boolean,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'addSurvey(string,uint256,bool)'(
+    'addSurvey(string,string,uint256,bool)'(
       _title: string,
+      _surveyTitle: string,
       _time: BigNumberish,
       _ispublic: boolean,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    addUsers(_survey: BytesLike, users: string[], overrides?: Overrides): Promise<BigNumber>;
+    addUsers(_survey: BytesLike, users: string[], overrides?: PayableOverrides): Promise<BigNumber>;
 
     'addUsers(bytes32,address[])'(
       _survey: BytesLike,
       users: string[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<BigNumber>;
+
+    announceIncentive(_value: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+
+    'announceIncentive(uint256)'(_value: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+
+    collectFunds(_survey: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
+
+    'collectFunds(bytes32)'(_survey: BytesLike, overrides?: PayableOverrides): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -795,13 +923,13 @@ export class BuildSurvey extends Contract {
     sendSurvey(
       _survey: BytesLike,
       _feedback: BigNumberish[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
     'sendSurvey(bytes32,uint16[])'(
       _survey: BytesLike,
       _feedback: BigNumberish[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
@@ -840,6 +968,14 @@ export class BuildSurvey extends Contract {
   };
 
   populateTransaction: {
+    Funds(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'Funds(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    Incentives(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'Incentives(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     accessUser(
       arg0: BytesLike,
       arg1: string,
@@ -854,13 +990,15 @@ export class BuildSurvey extends Contract {
 
     addSurvey(
       _title: string,
+      _surveyTitle: string,
       _time: BigNumberish,
       _ispublic: boolean,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'addSurvey(string,uint256,bool)'(
+    'addSurvey(string,string,uint256,bool)'(
       _title: string,
+      _surveyTitle: string,
       _time: BigNumberish,
       _ispublic: boolean,
       overrides?: PayableOverrides
@@ -869,13 +1007,27 @@ export class BuildSurvey extends Contract {
     addUsers(
       _survey: BytesLike,
       users: string[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     'addUsers(bytes32,address[])'(
       _survey: BytesLike,
       users: string[],
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
+
+    announceIncentive(_value: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    'announceIncentive(uint256)'(
+      _value: BigNumberish,
       overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    collectFunds(_survey: BytesLike, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+
+    'collectFunds(bytes32)'(
+      _survey: BytesLike,
+      overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -945,13 +1097,13 @@ export class BuildSurvey extends Contract {
     sendSurvey(
       _survey: BytesLike,
       _feedback: BigNumberish[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     'sendSurvey(bytes32,uint16[])'(
       _survey: BytesLike,
       _feedback: BigNumberish[],
-      overrides?: Overrides
+      overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;

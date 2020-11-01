@@ -3,7 +3,13 @@
 /* eslint-disable */
 
 import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  PayableOverrides,
+  CallOverrides,
+} from '@ethersproject/contracts';
 import { BytesLike } from '@ethersproject/bytes';
 import { Listener, Provider } from '@ethersproject/providers';
 import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
@@ -18,6 +24,7 @@ interface RentingDappManagerInterface extends ethers.utils.Interface {
     'kycDapp()': FunctionFragment;
     'nrtManager()': FunctionFragment;
     'owner()': FunctionFragment;
+    'payRewards(address,uint256,uint256)': FunctionFragment;
     'prepaidEs()': FunctionFragment;
     'randomnessManager()': FunctionFragment;
     'removeItem(address)': FunctionFragment;
@@ -53,6 +60,10 @@ interface RentingDappManagerInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
   encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: 'payRewards',
+    values: [string, BigNumberish, BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
   encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
   encodeFunctionData(functionFragment: 'removeItem', values: [string]): string;
@@ -75,6 +86,7 @@ interface RentingDappManagerInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'payRewards', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'removeItem', data: BytesLike): Result;
@@ -231,6 +243,20 @@ export class RentingDappManager extends Contract {
     ): Promise<{
       0: string;
     }>;
+
+    payRewards(
+      _networker: string,
+      _treeAmount: BigNumberish,
+      _introducerAmount: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
+
+    'payRewards(address,uint256,uint256)'(
+      _networker: string,
+      _treeAmount: BigNumberish,
+      _introducerAmount: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     prepaidEs(
       overrides?: CallOverrides
@@ -440,6 +466,20 @@ export class RentingDappManager extends Contract {
    */
   'owner()'(overrides?: CallOverrides): Promise<string>;
 
+  payRewards(
+    _networker: string,
+    _treeAmount: BigNumberish,
+    _introducerAmount: BigNumberish,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
+
+  'payRewards(address,uint256,uint256)'(
+    _networker: string,
+    _treeAmount: BigNumberish,
+    _introducerAmount: BigNumberish,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
+
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
   'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
@@ -559,6 +599,20 @@ export class RentingDappManager extends Contract {
      * Returns the address of the current owner.
      */
     'owner()'(overrides?: CallOverrides): Promise<string>;
+
+    payRewards(
+      _networker: string,
+      _treeAmount: BigNumberish,
+      _introducerAmount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    'payRewards(address,uint256,uint256)'(
+      _networker: string,
+      _treeAmount: BigNumberish,
+      _introducerAmount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
@@ -698,6 +752,20 @@ export class RentingDappManager extends Contract {
      */
     'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
 
+    payRewards(
+      _networker: string,
+      _treeAmount: BigNumberish,
+      _introducerAmount: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
+
+    'payRewards(address,uint256,uint256)'(
+      _networker: string,
+      _treeAmount: BigNumberish,
+      _introducerAmount: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
+
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
     'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -821,6 +889,20 @@ export class RentingDappManager extends Contract {
      * Returns the address of the current owner.
      */
     'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    payRewards(
+      _networker: string,
+      _treeAmount: BigNumberish,
+      _introducerAmount: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
+
+    'payRewards(address,uint256,uint256)'(
+      _networker: string,
+      _treeAmount: BigNumberish,
+      _introducerAmount: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

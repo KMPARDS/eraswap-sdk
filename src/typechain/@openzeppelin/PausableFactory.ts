@@ -2,40 +2,18 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Signer } from 'ethers';
-import { Provider, TransactionRequest } from '@ethersproject/providers';
-import { Contract, ContractFactory, Overrides } from '@ethersproject/contracts';
+import { Contract, Signer } from 'ethers';
+import { Provider } from '@ethersproject/providers';
 
 import type { Pausable } from './Pausable';
 
-export class PausableFactory extends ContractFactory {
-  constructor(signer?: Signer) {
-    super(_abi, _bytecode, signer);
-  }
-
-  deploy(overrides?: Overrides): Promise<Pausable> {
-    return super.deploy(overrides || {}) as Promise<Pausable>;
-  }
-  getDeployTransaction(overrides?: Overrides): TransactionRequest {
-    return super.getDeployTransaction(overrides || {});
-  }
-  attach(address: string): Pausable {
-    return super.attach(address) as Pausable;
-  }
-  connect(signer: Signer): PausableFactory {
-    return super.connect(signer) as PausableFactory;
-  }
+export class PausableFactory {
   static connect(address: string, signerOrProvider: Signer | Provider): Pausable {
     return new Contract(address, _abi, signerOrProvider) as Pausable;
   }
 }
 
 const _abi = [
-  {
-    inputs: [],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
   {
     anonymous: false,
     inputs: [
@@ -76,6 +54,3 @@ const _abi = [
     type: 'function',
   },
 ];
-
-const _bytecode =
-  '0x6080604052348015600f57600080fd5b506000805460ff191690556086806100286000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80635c975abb14602d575b600080fd5b60336047565b604080519115158252519081900360200190f35b60005460ff169056fea2646970667358221220afb42df274a3f6171db86955dca35ad1f77e502074d6814a72686db78add88a064736f6c63430007040033';

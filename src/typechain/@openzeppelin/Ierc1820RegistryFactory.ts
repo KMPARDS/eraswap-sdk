@@ -67,7 +67,7 @@ const _abi = [
       },
       {
         internalType: 'bytes32',
-        name: 'interfaceHash',
+        name: '_interfaceHash',
         type: 'bytes32',
       },
     ],
@@ -177,7 +177,7 @@ const _abi = [
       },
       {
         internalType: 'bytes32',
-        name: 'interfaceHash',
+        name: '_interfaceHash',
         type: 'bytes32',
       },
       {

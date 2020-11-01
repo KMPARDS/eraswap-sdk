@@ -9,6 +9,8 @@ export { BetDeExFactory } from './BetDeExFactory';
 export type { BetDeEx } from './BetDeEx';
 export { BuildSurveyFactory } from './BuildSurveyFactory';
 export type { BuildSurvey } from './BuildSurvey';
+export { CertificateFactory } from './CertificateFactory';
+export type { Certificate } from './Certificate';
 export { DayswappersWithMigrationFactory } from './DayswappersWithMigrationFactory';
 export type { DayswappersWithMigration } from './DayswappersWithMigration';
 export { AdminModeFactory } from './AdminModeFactory';

@@ -81,7 +81,7 @@ export class Ierc1820Registry extends Contract {
      */
     getInterfaceImplementer(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -92,7 +92,7 @@ export class Ierc1820Registry extends Contract {
      */
     'getInterfaceImplementer(address,bytes32)'(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -195,7 +195,7 @@ export class Ierc1820Registry extends Contract {
      */
     setInterfaceImplementer(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       implementer: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -205,7 +205,7 @@ export class Ierc1820Registry extends Contract {
      */
     'setInterfaceImplementer(address,bytes32,address)'(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       implementer: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -256,7 +256,7 @@ export class Ierc1820Registry extends Contract {
    */
   getInterfaceImplementer(
     account: string,
-    interfaceHash: BytesLike,
+    _interfaceHash: BytesLike,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -265,7 +265,7 @@ export class Ierc1820Registry extends Contract {
    */
   'getInterfaceImplementer(address,bytes32)'(
     account: string,
-    interfaceHash: BytesLike,
+    _interfaceHash: BytesLike,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -338,7 +338,7 @@ export class Ierc1820Registry extends Contract {
    */
   setInterfaceImplementer(
     account: string,
-    interfaceHash: BytesLike,
+    _interfaceHash: BytesLike,
     implementer: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -348,7 +348,7 @@ export class Ierc1820Registry extends Contract {
    */
   'setInterfaceImplementer(address,bytes32,address)'(
     account: string,
-    interfaceHash: BytesLike,
+    _interfaceHash: BytesLike,
     implementer: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -399,7 +399,7 @@ export class Ierc1820Registry extends Contract {
      */
     getInterfaceImplementer(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -408,7 +408,7 @@ export class Ierc1820Registry extends Contract {
      */
     'getInterfaceImplementer(address,bytes32)'(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -481,7 +481,7 @@ export class Ierc1820Registry extends Contract {
      */
     setInterfaceImplementer(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       implementer: string,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -491,7 +491,7 @@ export class Ierc1820Registry extends Contract {
      */
     'setInterfaceImplementer(address,bytes32,address)'(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       implementer: string,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -549,7 +549,7 @@ export class Ierc1820Registry extends Contract {
      */
     getInterfaceImplementer(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -558,7 +558,7 @@ export class Ierc1820Registry extends Contract {
      */
     'getInterfaceImplementer(address,bytes32)'(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -631,7 +631,7 @@ export class Ierc1820Registry extends Contract {
      */
     setInterfaceImplementer(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       implementer: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
@@ -641,7 +641,7 @@ export class Ierc1820Registry extends Contract {
      */
     'setInterfaceImplementer(address,bytes32,address)'(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       implementer: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
@@ -689,7 +689,7 @@ export class Ierc1820Registry extends Contract {
      */
     getInterfaceImplementer(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -698,7 +698,7 @@ export class Ierc1820Registry extends Contract {
      */
     'getInterfaceImplementer(address,bytes32)'(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -777,7 +777,7 @@ export class Ierc1820Registry extends Contract {
      */
     setInterfaceImplementer(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       implementer: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -787,7 +787,7 @@ export class Ierc1820Registry extends Contract {
      */
     'setInterfaceImplementer(address,bytes32,address)'(
       account: string,
-      interfaceHash: BytesLike,
+      _interfaceHash: BytesLike,
       implementer: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
