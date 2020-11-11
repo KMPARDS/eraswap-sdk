@@ -17,6 +17,52 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: 'address',
+        name: '_networker',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: '_platform',
+        type: 'address',
+      },
+    ],
+    name: 'getCurrentIncentiveSlabForNetworker',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'string',
+            name: 'label',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'target',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint32',
+            name: 'directBountyPerTenThousand',
+            type: 'uint32',
+          },
+          {
+            internalType: 'uint32',
+            name: 'treeBountyPerTenThousand',
+            type: 'uint32',
+          },
+        ],
+        internalType: 'struct ITimeAllyClub.Incentive',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'uint256',
         name: '_volume',
         type: 'uint256',

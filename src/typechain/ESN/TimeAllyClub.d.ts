@@ -17,6 +17,7 @@ import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
 interface TimeAllyClubInterface extends ethers.utils.Interface {
   functions: {
     'dayswappers()': FunctionFragment;
+    'getCurrentIncentiveSlabForNetworker(address,address)': FunctionFragment;
     'getIncentiveSlab(uint256,address)': FunctionFragment;
     'getMembershipVolume(address,uint32)': FunctionFragment;
     'getMonthlyNRT(uint32)': FunctionFragment;
@@ -50,6 +51,10 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
   };
 
   encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: 'getCurrentIncentiveSlabForNetworker',
+    values: [string, string]
+  ): string;
   encodeFunctionData(functionFragment: 'getIncentiveSlab', values: [BigNumberish, string]): string;
   encodeFunctionData(
     functionFragment: 'getMembershipVolume',
@@ -105,6 +110,10 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: 'getCurrentIncentiveSlabForNetworker',
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: 'getIncentiveSlab', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getMembershipVolume', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getMonthlyNRT', data: BytesLike): Result;
@@ -175,6 +184,40 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       0: string;
+    }>;
+
+    getCurrentIncentiveSlabForNetworker(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: {
+        label: string;
+        target: BigNumber;
+        directBountyPerTenThousand: number;
+        treeBountyPerTenThousand: number;
+        0: string;
+        1: BigNumber;
+        2: number;
+        3: number;
+      };
+    }>;
+
+    'getCurrentIncentiveSlabForNetworker(address,address)'(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: {
+        label: string;
+        target: BigNumber;
+        directBountyPerTenThousand: number;
+        treeBountyPerTenThousand: number;
+        0: string;
+        1: BigNumber;
+        2: number;
+        3: number;
+      };
     }>;
 
     getIncentiveSlab(
@@ -631,6 +674,36 @@ export class TimeAllyClub extends Contract {
 
   'dayswappers()'(overrides?: CallOverrides): Promise<string>;
 
+  getCurrentIncentiveSlabForNetworker(
+    _networker: string,
+    _platform: string,
+    overrides?: CallOverrides
+  ): Promise<{
+    label: string;
+    target: BigNumber;
+    directBountyPerTenThousand: number;
+    treeBountyPerTenThousand: number;
+    0: string;
+    1: BigNumber;
+    2: number;
+    3: number;
+  }>;
+
+  'getCurrentIncentiveSlabForNetworker(address,address)'(
+    _networker: string,
+    _platform: string,
+    overrides?: CallOverrides
+  ): Promise<{
+    label: string;
+    target: BigNumber;
+    directBountyPerTenThousand: number;
+    treeBountyPerTenThousand: number;
+    0: string;
+    1: BigNumber;
+    2: number;
+    3: number;
+  }>;
+
   getIncentiveSlab(
     _volume: BigNumberish,
     _platform: string,
@@ -927,6 +1000,36 @@ export class TimeAllyClub extends Contract {
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
     'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+
+    getCurrentIncentiveSlabForNetworker(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      label: string;
+      target: BigNumber;
+      directBountyPerTenThousand: number;
+      treeBountyPerTenThousand: number;
+      0: string;
+      1: BigNumber;
+      2: number;
+      3: number;
+    }>;
+
+    'getCurrentIncentiveSlabForNetworker(address,address)'(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      label: string;
+      target: BigNumber;
+      directBountyPerTenThousand: number;
+      treeBountyPerTenThousand: number;
+      0: string;
+      1: BigNumber;
+      2: number;
+      3: number;
+    }>;
 
     getIncentiveSlab(
       _volume: BigNumberish,
@@ -1245,6 +1348,18 @@ export class TimeAllyClub extends Contract {
 
     'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getCurrentIncentiveSlabForNetworker(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    'getCurrentIncentiveSlabForNetworker(address,address)'(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getIncentiveSlab(
       _volume: BigNumberish,
       _platform: string,
@@ -1490,6 +1605,18 @@ export class TimeAllyClub extends Contract {
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getCurrentIncentiveSlabForNetworker(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    'getCurrentIncentiveSlabForNetworker(address,address)'(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getIncentiveSlab(
       _volume: BigNumberish,

@@ -10,6 +10,7 @@ import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
 
 interface ITimeAllyClubInterface extends ethers.utils.Interface {
   functions: {
+    'getCurrentIncentiveSlabForNetworker(address,address)': FunctionFragment;
     'getIncentiveSlab(uint256,address)': FunctionFragment;
     'getMembershipVolume(address,uint32)': FunctionFragment;
     'getPlatformBusiness(address,uint32,address)': FunctionFragment;
@@ -20,6 +21,10 @@ interface ITimeAllyClubInterface extends ethers.utils.Interface {
     'withdrawPlatformIncentive(uint32,address,uint8,address)': FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: 'getCurrentIncentiveSlabForNetworker',
+    values: [string, string]
+  ): string;
   encodeFunctionData(functionFragment: 'getIncentiveSlab', values: [BigNumberish, string]): string;
   encodeFunctionData(
     functionFragment: 'getMembershipVolume',
@@ -41,6 +46,10 @@ interface ITimeAllyClubInterface extends ethers.utils.Interface {
     values: [BigNumberish, string, BigNumberish, string]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: 'getCurrentIncentiveSlabForNetworker',
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: 'getIncentiveSlab', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getMembershipVolume', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getPlatformBusiness', data: BytesLike): Result;
@@ -67,6 +76,40 @@ export class ITimeAllyClub extends Contract {
   interface: ITimeAllyClubInterface;
 
   functions: {
+    getCurrentIncentiveSlabForNetworker(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: {
+        label: string;
+        target: BigNumber;
+        directBountyPerTenThousand: number;
+        treeBountyPerTenThousand: number;
+        0: string;
+        1: BigNumber;
+        2: number;
+        3: number;
+      };
+    }>;
+
+    'getCurrentIncentiveSlabForNetworker(address,address)'(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      0: {
+        label: string;
+        target: BigNumber;
+        directBountyPerTenThousand: number;
+        treeBountyPerTenThousand: number;
+        0: string;
+        1: BigNumber;
+        2: number;
+        3: number;
+      };
+    }>;
+
     getIncentiveSlab(
       _volume: BigNumberish,
       _platform: string,
@@ -234,6 +277,36 @@ export class ITimeAllyClub extends Contract {
     ): Promise<ContractTransaction>;
   };
 
+  getCurrentIncentiveSlabForNetworker(
+    _networker: string,
+    _platform: string,
+    overrides?: CallOverrides
+  ): Promise<{
+    label: string;
+    target: BigNumber;
+    directBountyPerTenThousand: number;
+    treeBountyPerTenThousand: number;
+    0: string;
+    1: BigNumber;
+    2: number;
+    3: number;
+  }>;
+
+  'getCurrentIncentiveSlabForNetworker(address,address)'(
+    _networker: string,
+    _platform: string,
+    overrides?: CallOverrides
+  ): Promise<{
+    label: string;
+    target: BigNumber;
+    directBountyPerTenThousand: number;
+    treeBountyPerTenThousand: number;
+    0: string;
+    1: BigNumber;
+    2: number;
+    3: number;
+  }>;
+
   getIncentiveSlab(
     _volume: BigNumberish,
     _platform: string,
@@ -386,6 +459,36 @@ export class ITimeAllyClub extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    getCurrentIncentiveSlabForNetworker(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      label: string;
+      target: BigNumber;
+      directBountyPerTenThousand: number;
+      treeBountyPerTenThousand: number;
+      0: string;
+      1: BigNumber;
+      2: number;
+      3: number;
+    }>;
+
+    'getCurrentIncentiveSlabForNetworker(address,address)'(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<{
+      label: string;
+      target: BigNumber;
+      directBountyPerTenThousand: number;
+      treeBountyPerTenThousand: number;
+      0: string;
+      1: BigNumber;
+      2: number;
+      3: number;
+    }>;
+
     getIncentiveSlab(
       _volume: BigNumberish,
       _platform: string,
@@ -541,6 +644,18 @@ export class ITimeAllyClub extends Contract {
   filters: {};
 
   estimateGas: {
+    getCurrentIncentiveSlabForNetworker(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    'getCurrentIncentiveSlabForNetworker(address,address)'(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getIncentiveSlab(
       _volume: BigNumberish,
       _platform: string,
@@ -642,6 +757,18 @@ export class ITimeAllyClub extends Contract {
   };
 
   populateTransaction: {
+    getCurrentIncentiveSlabForNetworker(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    'getCurrentIncentiveSlabForNetworker(address,address)'(
+      _networker: string,
+      _platform: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getIncentiveSlab(
       _volume: BigNumberish,
       _platform: string,
