@@ -1,11 +1,6 @@
-import { ethers, version, BigNumber } from 'ethers';
+import { ethers, providers, version, BigNumber } from 'ethers';
 import { Deferrable } from '@ethersproject/properties';
 import { TransactionRequest } from '@ethersproject/abstract-provider';
-import {
-  BaseProvider,
-  FallbackProvider,
-  StaticJsonRpcProvider,
-} from '@ethersproject/providers';
 import { Logger } from '@ethersproject/logger';
 import {
   isHexString,
@@ -26,7 +21,7 @@ const logger = new Logger(version);
  * @param name: username
  */
 async function resolveAddress(
-  _this: BaseProvider,
+  _this: providers.BaseProvider,
   name: string | Promise<string>
 ): Promise<string | never> {
   name = await name;
@@ -76,7 +71,7 @@ async function resolveAddress(
  * @param address
  */
 async function resolveUsername(
-  _this: BaseProvider,
+  _this: providers.BaseProvider,
   address: string | Promise<string>
 ): Promise<string | never> {
   address = await address;
@@ -110,7 +105,7 @@ async function resolveUsername(
 /**
  * Custom Fall Back Provider, has overrided ENS methods with kyc dapp methods
  */
-export class CustomFallbackProvider extends FallbackProvider {
+export class CustomFallbackProvider extends providers.FallbackProvider {
   async resolveName(name: string | Promise<string>): Promise<string> {
     return await this.resolveAddress(name);
   }
@@ -136,7 +131,7 @@ export class CustomFallbackProvider extends FallbackProvider {
  * Custom Json Rpc Provider, has overrided ENS methods with kyc dapp methods
  * and call, estimateGas methods to trace revert reasons.
  */
-export class CustomJsonRpcProvider extends StaticJsonRpcProvider {
+export class CustomJsonRpcProvider extends providers.StaticJsonRpcProvider {
   async resolveName(name: string | Promise<string>): Promise<string> {
     return await this.resolveAddress(name);
   }
