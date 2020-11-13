@@ -1,5 +1,9 @@
 import * as typechain from './typechain';
-import { CustomProvider, CustomProviderBase } from './custom-provider';
+import {
+  CustomProvider,
+  CustomFallbackProvider,
+  CustomJsonRpcProvider,
+} from './custom-providers';
 import * as utils from './utils';
 import { addresses } from './addresses';
 
@@ -8,7 +12,15 @@ export const es = {
   utils,
   addresses,
   CustomProvider,
-  CustomProviderBase,
+  CustomFallbackProvider,
+  CustomJsonRpcProvider,
 };
 
-export { typechain, utils, addresses, CustomProvider, CustomProviderBase };
+export {
+  typechain,
+  utils,
+  addresses,
+  CustomProvider,
+  CustomFallbackProvider,
+  CustomJsonRpcProvider,
+};
