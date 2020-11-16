@@ -26,6 +26,10 @@ async function resolveAddress(
 ): Promise<string | never> {
   name = await name;
 
+  if (name === '') {
+    logger.throwError(`Empty usernames not allowed`);
+  }
+
   // If it is already an address, nothing to resolve
   try {
     return Promise.resolve(_this.formatter.address(name));
