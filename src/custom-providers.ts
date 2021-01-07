@@ -249,6 +249,11 @@ export class CustomProvider extends CustomFallbackProvider {
     switch (network) {
       case 'mainnet':
         const providers = [
+          new CustomJsonRpcProvider('https://mainnet.eraswap.network', {
+            name: 'EraSwapNetwork',
+            chainId: 5197,
+            ensAddress: addresses['production'].ESN.kycdapp,
+          }),
           new CustomJsonRpcProvider(
             'https://rpc-mumbai.mainnet.eraswap.network',
             {
@@ -257,11 +262,6 @@ export class CustomProvider extends CustomFallbackProvider {
               ensAddress: addresses['production'].ESN.kycdapp,
             }
           ),
-          new CustomJsonRpcProvider('https://mainnet.eraswap.network', {
-            name: 'EraSwapNetwork',
-            chainId: 5197,
-            ensAddress: addresses['production'].ESN.kycdapp,
-          }),
         ];
         super(providers);
         break;
