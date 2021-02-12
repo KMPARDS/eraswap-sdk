@@ -2,23 +2,38 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Ierc721ReceiverInterface extends ethers.utils.Interface {
   functions: {
-    'onERC721Received(address,address,uint256,bytes)': FunctionFragment;
+    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'onERC721Received',
+    functionFragment: "onERC721Received",
     values: [string, string, BigNumberish, BytesLike]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'onERC721Received', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -51,7 +66,7 @@ export class Ierc721Receiver extends Contract {
     /**
      * Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom} by `operator` from `from`, this function is called. It must return its Solidity selector to confirm the token transfer. If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted. The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
      */
-    'onERC721Received(address,address,uint256,bytes)'(
+    "onERC721Received(address,address,uint256,bytes)"(
       operator: string,
       from: string,
       tokenId: BigNumberish,
@@ -74,7 +89,7 @@ export class Ierc721Receiver extends Contract {
   /**
    * Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom} by `operator` from `from`, this function is called. It must return its Solidity selector to confirm the token transfer. If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted. The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
    */
-  'onERC721Received(address,address,uint256,bytes)'(
+  "onERC721Received(address,address,uint256,bytes)"(
     operator: string,
     from: string,
     tokenId: BigNumberish,
@@ -97,7 +112,7 @@ export class Ierc721Receiver extends Contract {
     /**
      * Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom} by `operator` from `from`, this function is called. It must return its Solidity selector to confirm the token transfer. If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted. The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
      */
-    'onERC721Received(address,address,uint256,bytes)'(
+    "onERC721Received(address,address,uint256,bytes)"(
       operator: string,
       from: string,
       tokenId: BigNumberish,
@@ -123,7 +138,7 @@ export class Ierc721Receiver extends Contract {
     /**
      * Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom} by `operator` from `from`, this function is called. It must return its Solidity selector to confirm the token transfer. If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted. The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
      */
-    'onERC721Received(address,address,uint256,bytes)'(
+    "onERC721Received(address,address,uint256,bytes)"(
       operator: string,
       from: string,
       tokenId: BigNumberish,
@@ -147,7 +162,7 @@ export class Ierc721Receiver extends Contract {
     /**
      * Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom} by `operator` from `from`, this function is called. It must return its Solidity selector to confirm the token transfer. If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted. The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
      */
-    'onERC721Received(address,address,uint256,bytes)'(
+    "onERC721Received(address,address,uint256,bytes)"(
       operator: string,
       from: string,
       tokenId: BigNumberish,

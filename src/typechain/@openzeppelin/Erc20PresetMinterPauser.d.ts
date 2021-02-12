@@ -2,119 +2,218 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Erc20PresetMinterPauserInterface extends ethers.utils.Interface {
   functions: {
-    'DEFAULT_ADMIN_ROLE()': FunctionFragment;
-    'MINTER_ROLE()': FunctionFragment;
-    'PAUSER_ROLE()': FunctionFragment;
-    'allowance(address,address)': FunctionFragment;
-    'approve(address,uint256)': FunctionFragment;
-    'balanceOf(address)': FunctionFragment;
-    'burn(uint256)': FunctionFragment;
-    'burnFrom(address,uint256)': FunctionFragment;
-    'decimals()': FunctionFragment;
-    'decreaseAllowance(address,uint256)': FunctionFragment;
-    'getRoleAdmin(bytes32)': FunctionFragment;
-    'getRoleMember(bytes32,uint256)': FunctionFragment;
-    'getRoleMemberCount(bytes32)': FunctionFragment;
-    'grantRole(bytes32,address)': FunctionFragment;
-    'hasRole(bytes32,address)': FunctionFragment;
-    'increaseAllowance(address,uint256)': FunctionFragment;
-    'mint(address,uint256)': FunctionFragment;
-    'name()': FunctionFragment;
-    'pause()': FunctionFragment;
-    'paused()': FunctionFragment;
-    'renounceRole(bytes32,address)': FunctionFragment;
-    'revokeRole(bytes32,address)': FunctionFragment;
-    'symbol()': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'transfer(address,uint256)': FunctionFragment;
-    'transferFrom(address,address,uint256)': FunctionFragment;
-    'unpause()': FunctionFragment;
+    "DEFAULT_ADMIN_ROLE()": FunctionFragment;
+    "MINTER_ROLE()": FunctionFragment;
+    "PAUSER_ROLE()": FunctionFragment;
+    "allowance(address,address)": FunctionFragment;
+    "approve(address,uint256)": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "burn(uint256)": FunctionFragment;
+    "burnFrom(address,uint256)": FunctionFragment;
+    "decimals()": FunctionFragment;
+    "decreaseAllowance(address,uint256)": FunctionFragment;
+    "getRoleAdmin(bytes32)": FunctionFragment;
+    "getRoleMember(bytes32,uint256)": FunctionFragment;
+    "getRoleMemberCount(bytes32)": FunctionFragment;
+    "grantRole(bytes32,address)": FunctionFragment;
+    "hasRole(bytes32,address)": FunctionFragment;
+    "increaseAllowance(address,uint256)": FunctionFragment;
+    "mint(address,uint256)": FunctionFragment;
+    "name()": FunctionFragment;
+    "pause()": FunctionFragment;
+    "paused()": FunctionFragment;
+    "renounceRole(bytes32,address)": FunctionFragment;
+    "revokeRole(bytes32,address)": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "transfer(address,uint256)": FunctionFragment;
+    "transferFrom(address,address,uint256)": FunctionFragment;
+    "unpause()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'DEFAULT_ADMIN_ROLE', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'MINTER_ROLE', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'PAUSER_ROLE', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'allowance', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'approve', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
-  encodeFunctionData(functionFragment: 'burn', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'burnFrom', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'decimals', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'decreaseAllowance', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getRoleAdmin', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'getRoleMember', values: [BytesLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getRoleMemberCount', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'grantRole', values: [BytesLike, string]): string;
-  encodeFunctionData(functionFragment: 'hasRole', values: [BytesLike, string]): string;
-  encodeFunctionData(functionFragment: 'increaseAllowance', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'mint', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'name', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'pause', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'paused', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceRole', values: [BytesLike, string]): string;
-  encodeFunctionData(functionFragment: 'revokeRole', values: [BytesLike, string]): string;
-  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transfer', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'transferFrom',
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MINTER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PAUSER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "allowance",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approve",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "burnFrom",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleMember",
+    values: [BytesLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleMemberCount",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mint",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pause", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceRole",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'unpause', values?: undefined): string;
+  encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: 'DEFAULT_ADMIN_ROLE', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'MINTER_ROLE', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'PAUSER_ROLE', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'allowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'burn', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'burnFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decimals', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decreaseAllowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRoleAdmin', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRoleMember', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRoleMemberCount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'grantRole', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'hasRole', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'increaseAllowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'pause', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'paused', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceRole', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'revokeRole', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transfer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'unpause', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MINTER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PAUSER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "burnFrom", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleMember",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleMemberCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
 
   events: {
-    'Approval(address,address,uint256)': EventFragment;
-    'Paused(address)': EventFragment;
-    'RoleAdminChanged(bytes32,bytes32,bytes32)': EventFragment;
-    'RoleGranted(bytes32,address,address)': EventFragment;
-    'RoleRevoked(bytes32,address,address)': EventFragment;
-    'Transfer(address,address,uint256)': EventFragment;
-    'Unpaused(address)': EventFragment;
+    "Approval(address,address,uint256)": EventFragment;
+    "Paused(address)": EventFragment;
+    "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
+    "RoleGranted(bytes32,address,address)": EventFragment;
+    "RoleRevoked(bytes32,address,address)": EventFragment;
+    "Transfer(address,address,uint256)": EventFragment;
+    "Unpaused(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Paused'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RoleAdminChanged'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RoleGranted'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RoleRevoked'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Unpaused'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
 }
 
 export class Erc20PresetMinterPauser extends Contract {
@@ -137,7 +236,7 @@ export class Erc20PresetMinterPauser extends Contract {
       0: string;
     }>;
 
-    'DEFAULT_ADMIN_ROLE()'(
+    "DEFAULT_ADMIN_ROLE()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -149,7 +248,7 @@ export class Erc20PresetMinterPauser extends Contract {
       0: string;
     }>;
 
-    'MINTER_ROLE()'(
+    "MINTER_ROLE()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -161,7 +260,7 @@ export class Erc20PresetMinterPauser extends Contract {
       0: string;
     }>;
 
-    'PAUSER_ROLE()'(
+    "PAUSER_ROLE()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -181,7 +280,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-allowance}.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       owner: string,
       spender: string,
       overrides?: CallOverrides
@@ -201,7 +300,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -220,7 +319,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-balanceOf}.
      */
-    'balanceOf(address)'(
+    "balanceOf(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -230,12 +329,18 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
      */
-    burn(amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    burn(
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
      */
-    'burn(uint256)'(amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    "burn(uint256)"(
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
@@ -249,7 +354,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
      */
-    'burnFrom(address,uint256)'(
+    "burnFrom(address,uint256)"(
       account: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -267,7 +372,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    'decimals()'(
+    "decimals()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -285,7 +390,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
      */
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides
@@ -304,7 +409,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    'getRoleAdmin(bytes32)'(
+    "getRoleAdmin(bytes32)"(
       role: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -325,7 +430,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    'getRoleMember(bytes32,uint256)'(
+    "getRoleMember(bytes32,uint256)"(
       role: BytesLike,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -346,7 +451,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    'getRoleMemberCount(bytes32)'(
+    "getRoleMemberCount(bytes32)"(
       role: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -365,7 +470,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'grantRole(bytes32,address)'(
+    "grantRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -385,7 +490,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    'hasRole(bytes32,address)'(
+    "hasRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -405,7 +510,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
      */
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides
@@ -414,12 +519,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    mint(to: string, amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    mint(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    'mint(address,uint256)'(
+    "mint(address,uint256)"(
       to: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -437,7 +546,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the name of the token.
      */
-    'name()'(
+    "name()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -451,7 +560,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'pause()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      * Returns true if the contract is paused, and false otherwise.
@@ -465,7 +574,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(
+    "paused()"(
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -483,7 +592,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    'renounceRole(bytes32,address)'(
+    "renounceRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -501,7 +610,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'revokeRole(bytes32,address)'(
+    "revokeRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -519,7 +628,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
      */
-    'symbol()'(
+    "symbol()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -537,7 +646,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-totalSupply}.
      */
-    'totalSupply()'(
+    "totalSupply()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -555,7 +664,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -574,7 +683,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -589,30 +698,34 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Unpauses all token transfers. See {ERC20Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'unpause()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
   };
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  'DEFAULT_ADMIN_ROLE()'(overrides?: CallOverrides): Promise<string>;
+  "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
   MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  'MINTER_ROLE()'(overrides?: CallOverrides): Promise<string>;
+  "MINTER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
   PAUSER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  'PAUSER_ROLE()'(overrides?: CallOverrides): Promise<string>;
+  "PAUSER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC20-allowance}.
    */
-  allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+  allowance(
+    owner: string,
+    spender: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * See {IERC20-allowance}.
    */
-  'allowance(address,address)'(
+  "allowance(address,address)"(
     owner: string,
     spender: string,
     overrides?: CallOverrides
@@ -630,7 +743,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
    */
-  'approve(address,uint256)'(
+  "approve(address,uint256)"(
     spender: string,
     amount: BigNumberish,
     overrides?: Overrides
@@ -644,17 +757,26 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * See {IERC20-balanceOf}.
    */
-  'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf(address)"(
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
    */
-  burn(amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  burn(
+    amount: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
    */
-  'burn(uint256)'(amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  "burn(uint256)"(
+    amount: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
@@ -668,7 +790,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
    */
-  'burnFrom(address,uint256)'(
+  "burnFrom(address,uint256)"(
     account: string,
     amount: BigNumberish,
     overrides?: Overrides
@@ -682,7 +804,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
    */
-  'decimals()'(overrides?: CallOverrides): Promise<number>;
+  "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   /**
    * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
@@ -696,7 +818,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
    */
-  'decreaseAllowance(address,uint256)'(
+  "decreaseAllowance(address,uint256)"(
     spender: string,
     subtractedValue: BigNumberish,
     overrides?: Overrides
@@ -710,17 +832,24 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
    */
-  'getRoleAdmin(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "getRoleAdmin(bytes32)"(
+    role: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
    */
-  getRoleMember(role: BytesLike, index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  getRoleMember(
+    role: BytesLike,
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
    */
-  'getRoleMember(bytes32,uint256)'(
+  "getRoleMember(bytes32,uint256)"(
     role: BytesLike,
     index: BigNumberish,
     overrides?: CallOverrides
@@ -729,22 +858,32 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
    */
-  getRoleMemberCount(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+  getRoleMemberCount(
+    role: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
    */
-  'getRoleMemberCount(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+  "getRoleMemberCount(bytes32)"(
+    role: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
    */
-  grantRole(role: BytesLike, account: string, overrides?: Overrides): Promise<ContractTransaction>;
+  grantRole(
+    role: BytesLike,
+    account: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
    */
-  'grantRole(bytes32,address)'(
+  "grantRole(bytes32,address)"(
     role: BytesLike,
     account: string,
     overrides?: Overrides
@@ -753,12 +892,16 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Returns `true` if `account` has been granted `role`.
    */
-  hasRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<boolean>;
+  hasRole(
+    role: BytesLike,
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * Returns `true` if `account` has been granted `role`.
    */
-  'hasRole(bytes32,address)'(
+  "hasRole(bytes32,address)"(
     role: BytesLike,
     account: string,
     overrides?: CallOverrides
@@ -776,7 +919,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
    */
-  'increaseAllowance(address,uint256)'(
+  "increaseAllowance(address,uint256)"(
     spender: string,
     addedValue: BigNumberish,
     overrides?: Overrides
@@ -785,12 +928,16 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
    */
-  mint(to: string, amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  mint(
+    to: string,
+    amount: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
    */
-  'mint(address,uint256)'(
+  "mint(address,uint256)"(
     to: string,
     amount: BigNumberish,
     overrides?: Overrides
@@ -804,7 +951,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Returns the name of the token.
    */
-  'name()'(overrides?: CallOverrides): Promise<string>;
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
@@ -814,7 +961,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
    */
-  'pause()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * Returns true if the contract is paused, and false otherwise.
@@ -824,7 +971,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Returns true if the contract is paused, and false otherwise.
    */
-  'paused()'(overrides?: CallOverrides): Promise<boolean>;
+  "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
   /**
    * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
@@ -838,7 +985,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
    */
-  'renounceRole(bytes32,address)'(
+  "renounceRole(bytes32,address)"(
     role: BytesLike,
     account: string,
     overrides?: Overrides
@@ -847,12 +994,16 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
    */
-  revokeRole(role: BytesLike, account: string, overrides?: Overrides): Promise<ContractTransaction>;
+  revokeRole(
+    role: BytesLike,
+    account: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
    */
-  'revokeRole(bytes32,address)'(
+  "revokeRole(bytes32,address)"(
     role: BytesLike,
     account: string,
     overrides?: Overrides
@@ -866,7 +1017,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Returns the symbol of the token, usually a shorter version of the name.
    */
-  'symbol()'(overrides?: CallOverrides): Promise<string>;
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC20-totalSupply}.
@@ -876,7 +1027,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * See {IERC20-totalSupply}.
    */
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
@@ -890,7 +1041,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
    */
-  'transfer(address,uint256)'(
+  "transfer(address,uint256)"(
     recipient: string,
     amount: BigNumberish,
     overrides?: Overrides
@@ -909,7 +1060,7 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
    */
-  'transferFrom(address,address,uint256)'(
+  "transferFrom(address,address,uint256)"(
     sender: string,
     recipient: string,
     amount: BigNumberish,
@@ -924,30 +1075,34 @@ export class Erc20PresetMinterPauser extends Contract {
   /**
    * Unpauses all token transfers. See {ERC20Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
    */
-  'unpause()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    'DEFAULT_ADMIN_ROLE()'(overrides?: CallOverrides): Promise<string>;
+    "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    'MINTER_ROLE()'(overrides?: CallOverrides): Promise<string>;
+    "MINTER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     PAUSER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    'PAUSER_ROLE()'(overrides?: CallOverrides): Promise<string>;
+    "PAUSER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC20-allowance}.
      */
-    allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-allowance}.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       owner: string,
       spender: string,
       overrides?: CallOverrides
@@ -956,12 +1111,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    approve(spender: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    approve(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -975,7 +1134,10 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-balanceOf}.
      */
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
@@ -985,17 +1147,24 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
      */
-    'burn(uint256)'(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "burn(uint256)"(
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
      */
-    burnFrom(account: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    burnFrom(
+      account: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
      */
-    'burnFrom(address,uint256)'(
+    "burnFrom(address,uint256)"(
       account: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -1009,7 +1178,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    'decimals()'(overrides?: CallOverrides): Promise<number>;
+    "decimals()"(overrides?: CallOverrides): Promise<number>;
 
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
@@ -1023,7 +1192,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
      */
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: CallOverrides
@@ -1037,17 +1206,24 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    'getRoleAdmin(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<string>;
+    "getRoleAdmin(bytes32)"(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    getRoleMember(role: BytesLike, index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getRoleMember(
+      role: BytesLike,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    'getRoleMember(bytes32,uint256)'(
+    "getRoleMember(bytes32,uint256)"(
       role: BytesLike,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1056,22 +1232,32 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    getRoleMemberCount(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoleMemberCount(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    'getRoleMemberCount(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "getRoleMemberCount(bytes32)"(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    grantRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<void>;
+    grantRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'grantRole(bytes32,address)'(
+    "grantRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1080,12 +1266,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    hasRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<boolean>;
+    hasRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    'hasRole(bytes32,address)'(
+    "hasRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1103,7 +1293,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
      */
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: CallOverrides
@@ -1112,12 +1302,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    mint(to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    mint(
+      to: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    'mint(address,uint256)'(
+    "mint(address,uint256)"(
       to: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -1131,7 +1325,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the name of the token.
      */
-    'name()'(overrides?: CallOverrides): Promise<string>;
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
@@ -1141,7 +1335,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'pause()'(overrides?: CallOverrides): Promise<void>;
+    "pause()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Returns true if the contract is paused, and false otherwise.
@@ -1151,17 +1345,21 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<boolean>;
+    "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    renounceRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<void>;
+    renounceRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    'renounceRole(bytes32,address)'(
+    "renounceRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1170,12 +1368,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    revokeRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<void>;
+    revokeRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'revokeRole(bytes32,address)'(
+    "revokeRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1189,7 +1391,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<string>;
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC20-totalSupply}.
@@ -1199,17 +1401,21 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    transfer(recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    transfer(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -1228,7 +1434,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -1243,11 +1449,15 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Unpauses all token transfers. See {ERC20Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'unpause()'(overrides?: CallOverrides): Promise<void>;
+    "unpause()"(overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
-    Approval(owner: string | null, spender: string | null, value: null): EventFilter;
+    Approval(
+      owner: string | null,
+      spender: string | null,
+      value: null
+    ): EventFilter;
 
     Paused(account: null): EventFilter;
 
@@ -1257,9 +1467,17 @@ export class Erc20PresetMinterPauser extends Contract {
       newAdminRole: BytesLike | null
     ): EventFilter;
 
-    RoleGranted(role: BytesLike | null, account: string | null, sender: string | null): EventFilter;
+    RoleGranted(
+      role: BytesLike | null,
+      account: string | null,
+      sender: string | null
+    ): EventFilter;
 
-    RoleRevoked(role: BytesLike | null, account: string | null, sender: string | null): EventFilter;
+    RoleRevoked(
+      role: BytesLike | null,
+      account: string | null,
+      sender: string | null
+    ): EventFilter;
 
     Transfer(from: string | null, to: string | null, value: null): EventFilter;
 
@@ -1269,25 +1487,29 @@ export class Erc20PresetMinterPauser extends Contract {
   estimateGas: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'DEFAULT_ADMIN_ROLE()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'MINTER_ROLE()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "MINTER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     PAUSER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'PAUSER_ROLE()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "PAUSER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-allowance}.
      */
-    allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-allowance}.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       owner: string,
       spender: string,
       overrides?: CallOverrides
@@ -1296,12 +1518,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    approve(spender: string, amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    approve(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1315,7 +1541,10 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-balanceOf}.
      */
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
@@ -1325,17 +1554,24 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
      */
-    'burn(uint256)'(amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    "burn(uint256)"(
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
      */
-    burnFrom(account: string, amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    burnFrom(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
      */
-    'burnFrom(address,uint256)'(
+    "burnFrom(address,uint256)"(
       account: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1349,7 +1585,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    'decimals()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
@@ -1363,7 +1599,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
      */
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides
@@ -1372,12 +1608,18 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoleAdmin(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    'getRoleAdmin(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "getRoleAdmin(bytes32)"(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
@@ -1391,7 +1633,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    'getRoleMember(bytes32,uint256)'(
+    "getRoleMember(bytes32,uint256)"(
       role: BytesLike,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1400,22 +1642,32 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    getRoleMemberCount(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoleMemberCount(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    'getRoleMemberCount(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "getRoleMemberCount(bytes32)"(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    grantRole(role: BytesLike, account: string, overrides?: Overrides): Promise<BigNumber>;
+    grantRole(
+      role: BytesLike,
+      account: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'grantRole(bytes32,address)'(
+    "grantRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1424,12 +1676,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    hasRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    hasRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    'hasRole(bytes32,address)'(
+    "hasRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1447,7 +1703,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
      */
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides
@@ -1456,12 +1712,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    mint(to: string, amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    mint(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    'mint(address,uint256)'(
+    "mint(address,uint256)"(
       to: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1475,7 +1735,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the name of the token.
      */
-    'name()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
@@ -1485,7 +1745,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'pause()'(overrides?: Overrides): Promise<BigNumber>;
+    "pause()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * Returns true if the contract is paused, and false otherwise.
@@ -1495,17 +1755,21 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    renounceRole(role: BytesLike, account: string, overrides?: Overrides): Promise<BigNumber>;
+    renounceRole(
+      role: BytesLike,
+      account: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    'renounceRole(bytes32,address)'(
+    "renounceRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1514,12 +1778,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    revokeRole(role: BytesLike, account: string, overrides?: Overrides): Promise<BigNumber>;
+    revokeRole(
+      role: BytesLike,
+      account: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'revokeRole(bytes32,address)'(
+    "revokeRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1533,7 +1801,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-totalSupply}.
@@ -1543,17 +1811,21 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    transfer(recipient: string, amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    transfer(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1572,7 +1844,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -1587,21 +1859,25 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Unpauses all token transfers. See {ERC20Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'unpause()'(overrides?: Overrides): Promise<BigNumber>;
+    "unpause()"(overrides?: Overrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    DEFAULT_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'DEFAULT_ADMIN_ROLE()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "DEFAULT_ADMIN_ROLE()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'MINTER_ROLE()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "MINTER_ROLE()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     PAUSER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'PAUSER_ROLE()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "PAUSER_ROLE()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC20-allowance}.
@@ -1615,7 +1891,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-allowance}.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       owner: string,
       spender: string,
       overrides?: CallOverrides
@@ -1633,7 +1909,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1642,22 +1918,34 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-balanceOf}.
      */
-    balanceOf(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    balanceOf(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC20-balanceOf}.
      */
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
      */
-    burn(amount: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    burn(
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Destroys `amount` tokens from the caller. See {ERC20-_burn}.
      */
-    'burn(uint256)'(amount: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "burn(uint256)"(
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
@@ -1671,7 +1959,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Destroys `amount` tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `amount`.
      */
-    'burnFrom(address,uint256)'(
+    "burnFrom(address,uint256)"(
       account: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1685,7 +1973,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    'decimals()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
@@ -1699,7 +1987,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
      */
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides
@@ -1708,12 +1996,15 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getRoleAdmin(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    'getRoleAdmin(bytes32)'(
+    "getRoleAdmin(bytes32)"(
       role: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1730,7 +2021,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    'getRoleMember(bytes32,uint256)'(
+    "getRoleMember(bytes32,uint256)"(
       role: BytesLike,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1739,12 +2030,15 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    getRoleMemberCount(role: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getRoleMemberCount(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    'getRoleMemberCount(bytes32)'(
+    "getRoleMemberCount(bytes32)"(
       role: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1761,7 +2055,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'grantRole(bytes32,address)'(
+    "grantRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1779,7 +2073,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    'hasRole(bytes32,address)'(
+    "hasRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1797,7 +2091,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
      */
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides
@@ -1806,12 +2100,16 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    mint(to: string, amount: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    mint(
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Creates `amount` new tokens for `to`. See {ERC20-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    'mint(address,uint256)'(
+    "mint(address,uint256)"(
       to: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1825,7 +2123,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the name of the token.
      */
-    'name()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
@@ -1835,7 +2133,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Pauses all token transfers. See {ERC20Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'pause()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "pause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns true if the contract is paused, and false otherwise.
@@ -1845,7 +2143,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
@@ -1859,7 +2157,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    'renounceRole(bytes32,address)'(
+    "renounceRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1877,7 +2175,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'revokeRole(bytes32,address)'(
+    "revokeRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1891,7 +2189,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC20-totalSupply}.
@@ -1901,7 +2199,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
@@ -1915,7 +2213,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1934,7 +2232,7 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -1949,6 +2247,6 @@ export class Erc20PresetMinterPauser extends Contract {
     /**
      * Unpauses all token transfers. See {ERC20Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'unpause()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "unpause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
   };
 }

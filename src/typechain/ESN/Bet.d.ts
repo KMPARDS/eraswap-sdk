@@ -2,87 +2,125 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface BetInterface extends ethers.utils.Interface {
   functions: {
-    '_owner()': FunctionFragment;
-    'betBalanceInExaEs(address)': FunctionFragment;
-    'bettorBetAmountInExaEsByChoice(address,uint256)': FunctionFragment;
-    'bettorHasClaimed(address)': FunctionFragment;
-    'category()': FunctionFragment;
-    'creationTimestamp()': FunctionFragment;
-    'dayswappers()': FunctionFragment;
-    'description()': FunctionFragment;
-    'downVotes()': FunctionFragment;
-    'downvote()': FunctionFragment;
-    'endBet(uint8)': FunctionFragment;
-    'endTimestamp()': FunctionFragment;
-    'endedBy()': FunctionFragment;
-    'enterBet(uint8)': FunctionFragment;
-    'finalResult()': FunctionFragment;
-    'getNumberOfChoiceBettors(uint256)': FunctionFragment;
-    'initialize(address,string,uint8,uint8,uint256,uint256,bool,uint256,address)': FunctionFragment;
-    'isDrawPossible()': FunctionFragment;
-    'kycDapp()': FunctionFragment;
-    'minimumBetInExaEs()': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'pauseTimestamp()': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'prizePercentPerThousand()': FunctionFragment;
-    'randomnessManager()': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveAddressStrict(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
-    'resolveUsernameStrict(address)': FunctionFragment;
-    'seeWinnerPrize(address)': FunctionFragment;
-    'setKycDapp(address)': FunctionFragment;
-    'subCategory()': FunctionFragment;
-    'timeallyClub()': FunctionFragment;
-    'timeallyManager()': FunctionFragment;
-    'timeallyPromotionalBucket()': FunctionFragment;
-    'totalBetTokensInExaEsByChoice(uint256)': FunctionFragment;
-    'totalContractBalance()': FunctionFragment;
-    'totalPrize()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'upVotes()': FunctionFragment;
-    'upvote()': FunctionFragment;
-    'validatorManager()': FunctionFragment;
-    'withdrawPrize(address)': FunctionFragment;
+    "Incentive()": FunctionFragment;
+    "_owner()": FunctionFragment;
+    "addComments(string)": FunctionFragment;
+    "bettorBetAmountInExaEsByChoice(address,uint256)": FunctionFragment;
+    "bettorHasClaimed(address)": FunctionFragment;
+    "category()": FunctionFragment;
+    "creationTimestamp()": FunctionFragment;
+    "dayswappers()": FunctionFragment;
+    "description()": FunctionFragment;
+    "downVotes()": FunctionFragment;
+    "downvote()": FunctionFragment;
+    "endBet(uint8)": FunctionFragment;
+    "endTimestamp()": FunctionFragment;
+    "endedBy()": FunctionFragment;
+    "enterBet(uint8)": FunctionFragment;
+    "finalResult()": FunctionFragment;
+    "getNumberOfChoiceBettors(uint256)": FunctionFragment;
+    "initialize(address,string,uint8,uint8,uint256,uint256,uint8,bool,uint256,address,string)": FunctionFragment;
+    "isDrawPossible()": FunctionFragment;
+    "kycDapp()": FunctionFragment;
+    "minimumBetInExaEs()": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "other()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "pauseTimestamp()": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "prizePercentPerThousand()": FunctionFragment;
+    "randomnessManager()": FunctionFragment;
+    "rejectBet()": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveAddressStrict(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
+    "resolveUsernameStrict(address)": FunctionFragment;
+    "seeWinnerPrize(address)": FunctionFragment;
+    "setKycDapp(address)": FunctionFragment;
+    "subCategory()": FunctionFragment;
+    "timeallyClub()": FunctionFragment;
+    "timeallyManager()": FunctionFragment;
+    "timeallyPromotionalBucket()": FunctionFragment;
+    "totalBetTokensInExaEsByChoice(uint256)": FunctionFragment;
+    "totalContractBalance()": FunctionFragment;
+    "totalPrize()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "upVotes()": FunctionFragment;
+    "upvote()": FunctionFragment;
+    "validatorManager()": FunctionFragment;
+    "withdrawPrize(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: '_owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'betBalanceInExaEs', values: [string]): string;
+  encodeFunctionData(functionFragment: "Incentive", values?: undefined): string;
+  encodeFunctionData(functionFragment: "_owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "addComments", values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'bettorBetAmountInExaEsByChoice',
+    functionFragment: "bettorBetAmountInExaEsByChoice",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'bettorHasClaimed', values: [string]): string;
-  encodeFunctionData(functionFragment: 'category', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'creationTimestamp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'description', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'downVotes', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'downvote', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'endBet', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'endTimestamp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'endedBy', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'enterBet', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'finalResult', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getNumberOfChoiceBettors', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'initialize',
+    functionFragment: "bettorHasClaimed",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "category", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "creationTimestamp",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "dayswappers",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "description",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "downVotes", values?: undefined): string;
+  encodeFunctionData(functionFragment: "downvote", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "endBet",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "endTimestamp",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "endedBy", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "enterBet",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "finalResult",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getNumberOfChoiceBettors",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
     values: [
       string,
       string,
@@ -90,98 +128,247 @@ interface BetInterface extends ethers.utils.Interface {
       BigNumberish,
       BigNumberish,
       BigNumberish,
+      BigNumberish,
       boolean,
       BigNumberish,
+      string,
       string
     ]
   ): string;
-  encodeFunctionData(functionFragment: 'isDrawPossible', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'minimumBetInExaEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'pauseTimestamp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prizePercentPerThousand', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
-  encodeFunctionData(functionFragment: 'seeWinnerPrize', values: [string]): string;
-  encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
-  encodeFunctionData(functionFragment: 'subCategory', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'totalBetTokensInExaEsByChoice',
+    functionFragment: "isDrawPossible",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "kycDapp", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "minimumBetInExaEs",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "other", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "pauseTimestamp",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "prizePercentPerThousand",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "randomnessManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "rejectBet", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddressStrict",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsernameStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "seeWinnerPrize",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "setKycDapp", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "subCategory",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyClub",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyPromotionalBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalBetTokensInExaEsByChoice",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'totalContractBalance', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalPrize', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'upVotes', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'upvote', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdrawPrize', values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "totalContractBalance",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalPrize",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "upVotes", values?: undefined): string;
+  encodeFunctionData(functionFragment: "upvote", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "validatorManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawPrize",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: '_owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'betBalanceInExaEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'bettorBetAmountInExaEsByChoice', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'bettorHasClaimed', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'category', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'creationTimestamp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'description', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'downVotes', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'downvote', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'endBet', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'endTimestamp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'endedBy', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'enterBet', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'finalResult', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getNumberOfChoiceBettors', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isDrawPossible', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'minimumBetInExaEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'pauseTimestamp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prizePercentPerThousand', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'seeWinnerPrize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'subCategory', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalBetTokensInExaEsByChoice', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalContractBalance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalPrize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'upVotes', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'upvote', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawPrize', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "Incentive", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "_owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "addComments",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "bettorBetAmountInExaEsByChoice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "bettorHasClaimed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "category", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "creationTimestamp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "dayswappers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "description",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "downVotes", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "downvote", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "endBet", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "endTimestamp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "endedBy", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "enterBet", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "finalResult",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getNumberOfChoiceBettors",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isDrawPossible",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "kycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "minimumBetInExaEs",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "other", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "pauseTimestamp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "prizePercentPerThousand",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "randomnessManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "rejectBet", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsernameStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "seeWinnerPrize",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setKycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "subCategory",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyClub",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyPromotionalBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalBetTokensInExaEsByChoice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalContractBalance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "totalPrize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "upVotes", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "upvote", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "validatorManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawPrize",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'EndBetContract(address,address,uint8,uint256)': EventFragment;
-    'NewBetting(address,address,uint8,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'TransferES(address,uint256)': EventFragment;
+    "Comments(address,string,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "TransferES(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'EndBetContract'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NewBetting'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'TransferES'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Comments"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TransferES"): EventFragment;
 }
 
 export class Bet extends Contract {
@@ -198,31 +385,39 @@ export class Bet extends Contract {
   interface: BetInterface;
 
   functions: {
+    Incentive(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: number;
+    }>;
+
+    "Incentive()"(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: number;
+    }>;
+
     _owner(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
-    '_owner()'(
+    "_owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
-    betBalanceInExaEs(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<{
-      0: BigNumber;
-    }>;
+    addComments(
+      message: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'betBalanceInExaEs(address)'(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<{
-      0: BigNumber;
-    }>;
+    "addComments(string)"(
+      message: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     bettorBetAmountInExaEsByChoice(
       arg0: string,
@@ -232,7 +427,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'bettorBetAmountInExaEsByChoice(address,uint256)'(
+    "bettorBetAmountInExaEsByChoice(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -247,7 +442,7 @@ export class Bet extends Contract {
       0: boolean;
     }>;
 
-    'bettorHasClaimed(address)'(
+    "bettorHasClaimed(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -260,7 +455,7 @@ export class Bet extends Contract {
       0: number;
     }>;
 
-    'category()'(
+    "category()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -272,7 +467,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'creationTimestamp()'(
+    "creationTimestamp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -284,7 +479,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'dayswappers()'(
+    "dayswappers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -296,7 +491,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'description()'(
+    "description()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -308,7 +503,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'downVotes()'(
+    "downVotes()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -316,19 +511,25 @@ export class Bet extends Contract {
 
     downvote(overrides?: Overrides): Promise<ContractTransaction>;
 
-    'downvote()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "downvote()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      * this function is used by manager to load correct answer
      * @param _choice is the correct choice
      */
-    endBet(_choice: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    endBet(
+      _choice: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * this function is used by manager to load correct answer
      * @param _choice is the correct choice
      */
-    'endBet(uint8)'(_choice: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    "endBet(uint8)"(
+      _choice: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     endTimestamp(
       overrides?: CallOverrides
@@ -336,7 +537,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'endTimestamp()'(
+    "endTimestamp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -348,7 +549,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'endedBy()'(
+    "endedBy()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -358,13 +559,16 @@ export class Bet extends Contract {
      * this function is used to place a bet on available choice
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    enterBet(_choice: BigNumberish, overrides?: PayableOverrides): Promise<ContractTransaction>;
+    enterBet(
+      _choice: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     /**
      * this function is used to place a bet on available choice
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    'enterBet(uint8)'(
+    "enterBet(uint8)"(
       _choice: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -375,7 +579,7 @@ export class Bet extends Contract {
       0: number;
     }>;
 
-    'finalResult()'(
+    "finalResult()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -388,7 +592,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'getNumberOfChoiceBettors(uint256)'(
+    "getNumberOfChoiceBettors(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -412,9 +616,11 @@ export class Bet extends Contract {
       _subCategory: BigNumberish,
       _minimumBetInExaEs: BigNumberish,
       _prizePercentPerThousand: BigNumberish,
+      _incentive: BigNumberish,
       _isDrawPossible: boolean,
       _pauseTimestamp: BigNumberish,
       _kycDapp: string,
+      _other: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -428,16 +634,18 @@ export class Bet extends Contract {
      * @param _prizePercentPerThousand is a form of representation of platform fee. It is a number less than or equal to 1000. For eg 2% is to be collected as platform fee then this value would be 980. If 0.2% then 998.
      * @param _subCategory is a specific category for example Football. Each category will have sub categories represented by a number (0, 1, 2, 3...)
      */
-    'initialize(address,string,uint8,uint8,uint256,uint256,bool,uint256,address)'(
+    "initialize(address,string,uint8,uint8,uint256,uint256,uint8,bool,uint256,address,string)"(
       _owner1: string,
       _description: string,
       _category: BigNumberish,
       _subCategory: BigNumberish,
       _minimumBetInExaEs: BigNumberish,
       _prizePercentPerThousand: BigNumberish,
+      _incentive: BigNumberish,
       _isDrawPossible: boolean,
       _pauseTimestamp: BigNumberish,
       _kycDapp: string,
+      _other: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -447,7 +655,7 @@ export class Bet extends Contract {
       0: boolean;
     }>;
 
-    'isDrawPossible()'(
+    "isDrawPossible()"(
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -459,7 +667,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'kycDapp()'(
+    "kycDapp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -471,7 +679,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'minimumBetInExaEs()'(
+    "minimumBetInExaEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -483,7 +691,19 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: string;
+    }>;
+
+    other(
+      overrides?: CallOverrides
+    ): Promise<{
+      0: string;
+    }>;
+
+    "other()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -501,7 +721,7 @@ export class Bet extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -513,7 +733,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'pauseTimestamp()'(
+    "pauseTimestamp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -525,7 +745,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -537,7 +757,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'prizePercentPerThousand()'(
+    "prizePercentPerThousand()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -549,11 +769,15 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'randomnessManager()'(
+    "randomnessManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
+
+    rejectBet(overrides?: Overrides): Promise<ContractTransaction>;
+
+    "rejectBet()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     resolveAddress(
       _username: BytesLike,
@@ -562,7 +786,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -576,7 +800,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -590,7 +814,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -604,7 +828,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -626,16 +850,22 @@ export class Bet extends Contract {
      * this function can be called by anyone to see how much winners are getting
      * @param _bettorAddress is address whose prize we want to see
      */
-    'seeWinnerPrize(address)'(
+    "seeWinnerPrize(address)"(
       _bettorAddress: string,
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
     }>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     subCategory(
       overrides?: CallOverrides
@@ -643,7 +873,7 @@ export class Bet extends Contract {
       0: number;
     }>;
 
-    'subCategory()'(
+    "subCategory()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -655,7 +885,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'timeallyClub()'(
+    "timeallyClub()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -667,7 +897,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'timeallyManager()'(
+    "timeallyManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -679,7 +909,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'timeallyPromotionalBucket()'(
+    "timeallyPromotionalBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -692,7 +922,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'totalBetTokensInExaEsByChoice(uint256)'(
+    "totalBetTokensInExaEsByChoice(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -711,7 +941,7 @@ export class Bet extends Contract {
     /**
      * this function gives amount of ExaEs that is total betted on this bet
      */
-    'totalContractBalance()'(
+    "totalContractBalance()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -723,7 +953,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'totalPrize()'(
+    "totalPrize()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -732,12 +962,15 @@ export class Bet extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -748,7 +981,7 @@ export class Bet extends Contract {
       0: BigNumber;
     }>;
 
-    'upVotes()'(
+    "upVotes()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -756,7 +989,7 @@ export class Bet extends Contract {
 
     upvote(overrides?: Overrides): Promise<ContractTransaction>;
 
-    'upvote()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "upvote()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     validatorManager(
       overrides?: CallOverrides
@@ -764,7 +997,7 @@ export class Bet extends Contract {
       0: string;
     }>;
 
-    'validatorManager()'(
+    "validatorManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -781,19 +1014,29 @@ export class Bet extends Contract {
     /**
      * this function will be called after bet ends and winner bettors can withdraw their prize share
      */
-    'withdrawPrize(address)'(
+    "withdrawPrize(address)"(
       _bettorAddress: string,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
   };
 
+  Incentive(overrides?: CallOverrides): Promise<number>;
+
+  "Incentive()"(overrides?: CallOverrides): Promise<number>;
+
   _owner(overrides?: CallOverrides): Promise<string>;
 
-  '_owner()'(overrides?: CallOverrides): Promise<string>;
+  "_owner()"(overrides?: CallOverrides): Promise<string>;
 
-  betBalanceInExaEs(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+  addComments(
+    message: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'betBalanceInExaEs(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "addComments(string)"(
+    message: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   bettorBetAmountInExaEsByChoice(
     arg0: string,
@@ -801,7 +1044,7 @@ export class Bet extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'bettorBetAmountInExaEsByChoice(address,uint256)'(
+  "bettorBetAmountInExaEsByChoice(address,uint256)"(
     arg0: string,
     arg1: BigNumberish,
     overrides?: CallOverrides
@@ -809,74 +1052,89 @@ export class Bet extends Contract {
 
   bettorHasClaimed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
-  'bettorHasClaimed(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+  "bettorHasClaimed(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   category(overrides?: CallOverrides): Promise<number>;
 
-  'category()'(overrides?: CallOverrides): Promise<number>;
+  "category()"(overrides?: CallOverrides): Promise<number>;
 
   creationTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'creationTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "creationTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
 
-  'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+  "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
   description(overrides?: CallOverrides): Promise<string>;
 
-  'description()'(overrides?: CallOverrides): Promise<string>;
+  "description()"(overrides?: CallOverrides): Promise<string>;
 
   downVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'downVotes()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "downVotes()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   downvote(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'downvote()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "downvote()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * this function is used by manager to load correct answer
    * @param _choice is the correct choice
    */
-  endBet(_choice: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  endBet(
+    _choice: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * this function is used by manager to load correct answer
    * @param _choice is the correct choice
    */
-  'endBet(uint8)'(_choice: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  "endBet(uint8)"(
+    _choice: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   endTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'endTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "endTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   endedBy(overrides?: CallOverrides): Promise<string>;
 
-  'endedBy()'(overrides?: CallOverrides): Promise<string>;
+  "endedBy()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * this function is used to place a bet on available choice
    * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
    */
-  enterBet(_choice: BigNumberish, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  enterBet(
+    _choice: BigNumberish,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   /**
    * this function is used to place a bet on available choice
    * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
    */
-  'enterBet(uint8)'(
+  "enterBet(uint8)"(
     _choice: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   finalResult(overrides?: CallOverrides): Promise<number>;
 
-  'finalResult()'(overrides?: CallOverrides): Promise<number>;
+  "finalResult()"(overrides?: CallOverrides): Promise<number>;
 
-  getNumberOfChoiceBettors(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getNumberOfChoiceBettors(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getNumberOfChoiceBettors(uint256)'(
+  "getNumberOfChoiceBettors(uint256)"(
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -898,9 +1156,11 @@ export class Bet extends Contract {
     _subCategory: BigNumberish,
     _minimumBetInExaEs: BigNumberish,
     _prizePercentPerThousand: BigNumberish,
+    _incentive: BigNumberish,
     _isDrawPossible: boolean,
     _pauseTimestamp: BigNumberish,
     _kycDapp: string,
+    _other: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -914,34 +1174,40 @@ export class Bet extends Contract {
    * @param _prizePercentPerThousand is a form of representation of platform fee. It is a number less than or equal to 1000. For eg 2% is to be collected as platform fee then this value would be 980. If 0.2% then 998.
    * @param _subCategory is a specific category for example Football. Each category will have sub categories represented by a number (0, 1, 2, 3...)
    */
-  'initialize(address,string,uint8,uint8,uint256,uint256,bool,uint256,address)'(
+  "initialize(address,string,uint8,uint8,uint256,uint256,uint8,bool,uint256,address,string)"(
     _owner1: string,
     _description: string,
     _category: BigNumberish,
     _subCategory: BigNumberish,
     _minimumBetInExaEs: BigNumberish,
     _prizePercentPerThousand: BigNumberish,
+    _incentive: BigNumberish,
     _isDrawPossible: boolean,
     _pauseTimestamp: BigNumberish,
     _kycDapp: string,
+    _other: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   isDrawPossible(overrides?: CallOverrides): Promise<boolean>;
 
-  'isDrawPossible()'(overrides?: CallOverrides): Promise<boolean>;
+  "isDrawPossible()"(overrides?: CallOverrides): Promise<boolean>;
 
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
-  'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+  "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
   minimumBetInExaEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'minimumBetInExaEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "minimumBetInExaEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
+
+  other(overrides?: CallOverrides): Promise<string>;
+
+  "other()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -951,75 +1217,115 @@ export class Bet extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   pauseTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'pauseTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "pauseTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   prizePercentPerThousand(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'prizePercentPerThousand()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "prizePercentPerThousand()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-  'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+  "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  rejectBet(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "rejectBet()"(overrides?: Overrides): Promise<ContractTransaction>;
 
-  resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddressStrict(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  resolveAddressStrict(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  "resolveAddressStrict(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  resolveUsernameStrict(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsernameStrict(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * this function can be called by anyone to see how much winners are getting
    * @param _bettorAddress is address whose prize we want to see
    */
-  seeWinnerPrize(_bettorAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+  seeWinnerPrize(
+    _bettorAddress: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * this function can be called by anyone to see how much winners are getting
    * @param _bettorAddress is address whose prize we want to see
    */
-  'seeWinnerPrize(address)'(_bettorAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "seeWinnerPrize(address)"(
+    _bettorAddress: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setKycDapp(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "setKycDapp(address)"(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   subCategory(overrides?: CallOverrides): Promise<number>;
 
-  'subCategory()'(overrides?: CallOverrides): Promise<number>;
+  "subCategory()"(overrides?: CallOverrides): Promise<number>;
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
-  totalBetTokensInExaEsByChoice(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  totalBetTokensInExaEsByChoice(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'totalBetTokensInExaEsByChoice(uint256)'(
+  "totalBetTokensInExaEsByChoice(uint256)"(
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -1032,58 +1338,71 @@ export class Bet extends Contract {
   /**
    * this function gives amount of ExaEs that is total betted on this bet
    */
-  'totalContractBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalContractBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   totalPrize(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'totalPrize()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalPrize()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   upVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'upVotes()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "upVotes()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   upvote(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'upvote()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "upvote()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   validatorManager(overrides?: CallOverrides): Promise<string>;
 
-  'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+  "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * this function will be called after bet ends and winner bettors can withdraw their prize share
    */
-  withdrawPrize(_bettorAddress: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  withdrawPrize(
+    _bettorAddress: string,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   /**
    * this function will be called after bet ends and winner bettors can withdraw their prize share
    */
-  'withdrawPrize(address)'(
+  "withdrawPrize(address)"(
     _bettorAddress: string,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    Incentive(overrides?: CallOverrides): Promise<number>;
+
+    "Incentive()"(overrides?: CallOverrides): Promise<number>;
+
     _owner(overrides?: CallOverrides): Promise<string>;
 
-    '_owner()'(overrides?: CallOverrides): Promise<string>;
+    "_owner()"(overrides?: CallOverrides): Promise<string>;
 
-    betBalanceInExaEs(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    addComments(message: string, overrides?: CallOverrides): Promise<void>;
 
-    'betBalanceInExaEs(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "addComments(string)"(
+      message: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     bettorBetAmountInExaEsByChoice(
       arg0: string,
@@ -1091,7 +1410,7 @@ export class Bet extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'bettorBetAmountInExaEsByChoice(address,uint256)'(
+    "bettorBetAmountInExaEsByChoice(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -1099,31 +1418,34 @@ export class Bet extends Contract {
 
     bettorHasClaimed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
-    'bettorHasClaimed(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    "bettorHasClaimed(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     category(overrides?: CallOverrides): Promise<number>;
 
-    'category()'(overrides?: CallOverrides): Promise<number>;
+    "category()"(overrides?: CallOverrides): Promise<number>;
 
     creationTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'creationTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "creationTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
     description(overrides?: CallOverrides): Promise<string>;
 
-    'description()'(overrides?: CallOverrides): Promise<string>;
+    "description()"(overrides?: CallOverrides): Promise<string>;
 
     downVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'downVotes()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "downVotes()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     downvote(overrides?: CallOverrides): Promise<void>;
 
-    'downvote()'(overrides?: CallOverrides): Promise<void>;
+    "downvote()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * this function is used by manager to load correct answer
@@ -1135,15 +1457,18 @@ export class Bet extends Contract {
      * this function is used by manager to load correct answer
      * @param _choice is the correct choice
      */
-    'endBet(uint8)'(_choice: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "endBet(uint8)"(
+      _choice: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     endTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'endTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "endTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     endedBy(overrides?: CallOverrides): Promise<string>;
 
-    'endedBy()'(overrides?: CallOverrides): Promise<string>;
+    "endedBy()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * this function is used to place a bet on available choice
@@ -1155,15 +1480,21 @@ export class Bet extends Contract {
      * this function is used to place a bet on available choice
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    'enterBet(uint8)'(_choice: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "enterBet(uint8)"(
+      _choice: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     finalResult(overrides?: CallOverrides): Promise<number>;
 
-    'finalResult()'(overrides?: CallOverrides): Promise<number>;
+    "finalResult()"(overrides?: CallOverrides): Promise<number>;
 
-    getNumberOfChoiceBettors(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getNumberOfChoiceBettors(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getNumberOfChoiceBettors(uint256)'(
+    "getNumberOfChoiceBettors(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1185,9 +1516,11 @@ export class Bet extends Contract {
       _subCategory: BigNumberish,
       _minimumBetInExaEs: BigNumberish,
       _prizePercentPerThousand: BigNumberish,
+      _incentive: BigNumberish,
       _isDrawPossible: boolean,
       _pauseTimestamp: BigNumberish,
       _kycDapp: string,
+      _other: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1201,34 +1534,40 @@ export class Bet extends Contract {
      * @param _prizePercentPerThousand is a form of representation of platform fee. It is a number less than or equal to 1000. For eg 2% is to be collected as platform fee then this value would be 980. If 0.2% then 998.
      * @param _subCategory is a specific category for example Football. Each category will have sub categories represented by a number (0, 1, 2, 3...)
      */
-    'initialize(address,string,uint8,uint8,uint256,uint256,bool,uint256,address)'(
+    "initialize(address,string,uint8,uint8,uint256,uint256,uint8,bool,uint256,address,string)"(
       _owner1: string,
       _description: string,
       _category: BigNumberish,
       _subCategory: BigNumberish,
       _minimumBetInExaEs: BigNumberish,
       _prizePercentPerThousand: BigNumberish,
+      _incentive: BigNumberish,
       _isDrawPossible: boolean,
       _pauseTimestamp: BigNumberish,
       _kycDapp: string,
+      _other: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     isDrawPossible(overrides?: CallOverrides): Promise<boolean>;
 
-    'isDrawPossible()'(overrides?: CallOverrides): Promise<boolean>;
+    "isDrawPossible()"(overrides?: CallOverrides): Promise<boolean>;
 
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
     minimumBetInExaEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'minimumBetInExaEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "minimumBetInExaEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
+
+    other(overrides?: CallOverrides): Promise<string>;
+
+    "other()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -1238,84 +1577,115 @@ export class Bet extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     pauseTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'pauseTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "pauseTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     prizePercentPerThousand(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prizePercentPerThousand()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prizePercentPerThousand()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+    rejectBet(overrides?: CallOverrides): Promise<void>;
 
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+    "rejectBet()"(overrides?: CallOverrides): Promise<void>;
 
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsernameStrict(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * this function can be called by anyone to see how much winners are getting
      * @param _bettorAddress is address whose prize we want to see
      */
-    seeWinnerPrize(_bettorAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+    seeWinnerPrize(
+      _bettorAddress: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * this function can be called by anyone to see how much winners are getting
      * @param _bettorAddress is address whose prize we want to see
      */
-    'seeWinnerPrize(address)'(
+    "seeWinnerPrize(address)"(
       _bettorAddress: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     subCategory(overrides?: CallOverrides): Promise<number>;
 
-    'subCategory()'(overrides?: CallOverrides): Promise<number>;
+    "subCategory()"(overrides?: CallOverrides): Promise<number>;
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
     totalBetTokensInExaEsByChoice(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'totalBetTokensInExaEsByChoice(uint256)'(
+    "totalBetTokensInExaEsByChoice(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1328,73 +1698,83 @@ export class Bet extends Contract {
     /**
      * this function gives amount of ExaEs that is total betted on this bet
      */
-    'totalContractBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalContractBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalPrize(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalPrize()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalPrize()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     upVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'upVotes()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "upVotes()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     upvote(overrides?: CallOverrides): Promise<void>;
 
-    'upvote()'(overrides?: CallOverrides): Promise<void>;
+    "upvote()"(overrides?: CallOverrides): Promise<void>;
 
     validatorManager(overrides?: CallOverrides): Promise<string>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * this function will be called after bet ends and winner bettors can withdraw their prize share
      */
-    withdrawPrize(_bettorAddress: string, overrides?: CallOverrides): Promise<void>;
+    withdrawPrize(
+      _bettorAddress: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * this function will be called after bet ends and winner bettors can withdraw their prize share
      */
-    'withdrawPrize(address)'(_bettorAddress: string, overrides?: CallOverrides): Promise<void>;
+    "withdrawPrize(address)"(
+      _bettorAddress: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
-    EndBetContract(
-      _ender: string | null,
-      _contractAddress: string | null,
-      _result: null,
-      _platformFee: null
-    ): EventFilter;
+    Comments(Sender: null, message: null, time: null): EventFilter;
 
-    NewBetting(
-      _betAddress: string | null,
-      _bettorAddress: string | null,
-      _choice: BigNumberish | null,
-      _betTokensInExaEs: null
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
     ): EventFilter;
-
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
 
     TransferES(_to: string | null, _tokensInExaEs: null): EventFilter;
   };
 
   estimateGas: {
+    Incentive(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "Incentive()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     _owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    '_owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "_owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    betBalanceInExaEs(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    addComments(message: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'betBalanceInExaEs(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "addComments(string)"(
+      message: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     bettorBetAmountInExaEsByChoice(
       arg0: string,
@@ -1402,39 +1782,45 @@ export class Bet extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'bettorBetAmountInExaEsByChoice(address,uint256)'(
+    "bettorBetAmountInExaEsByChoice(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    bettorHasClaimed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    bettorHasClaimed(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'bettorHasClaimed(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "bettorHasClaimed(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     category(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'category()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "category()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     creationTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'creationTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "creationTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     description(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'description()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "description()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     downVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'downVotes()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "downVotes()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     downvote(overrides?: Overrides): Promise<BigNumber>;
 
-    'downvote()'(overrides?: Overrides): Promise<BigNumber>;
+    "downvote()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * this function is used by manager to load correct answer
@@ -1446,35 +1832,47 @@ export class Bet extends Contract {
      * this function is used by manager to load correct answer
      * @param _choice is the correct choice
      */
-    'endBet(uint8)'(_choice: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    "endBet(uint8)"(
+      _choice: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     endTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'endTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "endTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     endedBy(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'endedBy()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "endedBy()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * this function is used to place a bet on available choice
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    enterBet(_choice: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
+    enterBet(
+      _choice: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * this function is used to place a bet on available choice
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    'enterBet(uint8)'(_choice: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
+    "enterBet(uint8)"(
+      _choice: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     finalResult(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'finalResult()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "finalResult()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getNumberOfChoiceBettors(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getNumberOfChoiceBettors(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getNumberOfChoiceBettors(uint256)'(
+    "getNumberOfChoiceBettors(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1496,9 +1894,11 @@ export class Bet extends Contract {
       _subCategory: BigNumberish,
       _minimumBetInExaEs: BigNumberish,
       _prizePercentPerThousand: BigNumberish,
+      _incentive: BigNumberish,
       _isDrawPossible: boolean,
       _pauseTimestamp: BigNumberish,
       _kycDapp: string,
+      _other: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1512,34 +1912,40 @@ export class Bet extends Contract {
      * @param _prizePercentPerThousand is a form of representation of platform fee. It is a number less than or equal to 1000. For eg 2% is to be collected as platform fee then this value would be 980. If 0.2% then 998.
      * @param _subCategory is a specific category for example Football. Each category will have sub categories represented by a number (0, 1, 2, 3...)
      */
-    'initialize(address,string,uint8,uint8,uint256,uint256,bool,uint256,address)'(
+    "initialize(address,string,uint8,uint8,uint256,uint256,uint8,bool,uint256,address,string)"(
       _owner1: string,
       _description: string,
       _category: BigNumberish,
       _subCategory: BigNumberish,
       _minimumBetInExaEs: BigNumberish,
       _prizePercentPerThousand: BigNumberish,
+      _incentive: BigNumberish,
       _isDrawPossible: boolean,
       _pauseTimestamp: BigNumberish,
       _kycDapp: string,
+      _other: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     isDrawPossible(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'isDrawPossible()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "isDrawPossible()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     minimumBetInExaEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'minimumBetInExaEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "minimumBetInExaEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    other(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "other()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -1549,42 +1955,64 @@ export class Bet extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     pauseTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'pauseTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "pauseTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prizePercentPerThousand(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prizePercentPerThousand()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prizePercentPerThousand()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    rejectBet(overrides?: Overrides): Promise<BigNumber>;
 
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "rejectBet()"(overrides?: Overrides): Promise<BigNumber>;
 
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsernameStrict(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1593,43 +2021,51 @@ export class Bet extends Contract {
      * this function can be called by anyone to see how much winners are getting
      * @param _bettorAddress is address whose prize we want to see
      */
-    seeWinnerPrize(_bettorAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+    seeWinnerPrize(
+      _bettorAddress: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * this function can be called by anyone to see how much winners are getting
      * @param _bettorAddress is address whose prize we want to see
      */
-    'seeWinnerPrize(address)'(
+    "seeWinnerPrize(address)"(
       _bettorAddress: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     subCategory(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'subCategory()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "subCategory()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyClub(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     totalBetTokensInExaEsByChoice(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'totalBetTokensInExaEsByChoice(uint256)'(
+    "totalBetTokensInExaEsByChoice(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1642,58 +2078,74 @@ export class Bet extends Contract {
     /**
      * this function gives amount of ExaEs that is total betted on this bet
      */
-    'totalContractBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalContractBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalPrize(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalPrize()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalPrize()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     upVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'upVotes()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "upVotes()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     upvote(overrides?: Overrides): Promise<BigNumber>;
 
-    'upvote()'(overrides?: Overrides): Promise<BigNumber>;
+    "upvote()"(overrides?: Overrides): Promise<BigNumber>;
 
     validatorManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * this function will be called after bet ends and winner bettors can withdraw their prize share
      */
-    withdrawPrize(_bettorAddress: string, overrides?: PayableOverrides): Promise<BigNumber>;
+    withdrawPrize(
+      _bettorAddress: string,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * this function will be called after bet ends and winner bettors can withdraw their prize share
      */
-    'withdrawPrize(address)'(
+    "withdrawPrize(address)"(
       _bettorAddress: string,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    Incentive(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "Incentive()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     _owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    '_owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "_owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    betBalanceInExaEs(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    addComments(
+      message: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'betBalanceInExaEs(address)'(
-      arg0: string,
-      overrides?: CallOverrides
+    "addComments(string)"(
+      message: string,
+      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     bettorBetAmountInExaEsByChoice(
@@ -1702,88 +2154,102 @@ export class Bet extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'bettorBetAmountInExaEsByChoice(address,uint256)'(
+    "bettorBetAmountInExaEsByChoice(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    bettorHasClaimed(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    bettorHasClaimed(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'bettorHasClaimed(address)'(
+    "bettorHasClaimed(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     category(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'category()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "category()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     creationTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'creationTimestamp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "creationTimestamp()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     description(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'description()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "description()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     downVotes(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'downVotes()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "downVotes()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     downvote(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'downvote()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "downvote()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      * this function is used by manager to load correct answer
      * @param _choice is the correct choice
      */
-    endBet(_choice: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    endBet(
+      _choice: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * this function is used by manager to load correct answer
      * @param _choice is the correct choice
      */
-    'endBet(uint8)'(_choice: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "endBet(uint8)"(
+      _choice: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     endTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'endTimestamp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "endTimestamp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     endedBy(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'endedBy()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "endedBy()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * this function is used to place a bet on available choice
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    enterBet(_choice: BigNumberish, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    enterBet(
+      _choice: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * this function is used to place a bet on available choice
      * @param _choice should be 0, 1, 2; no => 0, yes => 1, draw => 2
      */
-    'enterBet(uint8)'(
+    "enterBet(uint8)"(
       _choice: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     finalResult(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'finalResult()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "finalResult()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getNumberOfChoiceBettors(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getNumberOfChoiceBettors(uint256)'(
+    "getNumberOfChoiceBettors(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1805,9 +2271,11 @@ export class Bet extends Contract {
       _subCategory: BigNumberish,
       _minimumBetInExaEs: BigNumberish,
       _prizePercentPerThousand: BigNumberish,
+      _incentive: BigNumberish,
       _isDrawPossible: boolean,
       _pauseTimestamp: BigNumberish,
       _kycDapp: string,
+      _other: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
@@ -1821,34 +2289,44 @@ export class Bet extends Contract {
      * @param _prizePercentPerThousand is a form of representation of platform fee. It is a number less than or equal to 1000. For eg 2% is to be collected as platform fee then this value would be 980. If 0.2% then 998.
      * @param _subCategory is a specific category for example Football. Each category will have sub categories represented by a number (0, 1, 2, 3...)
      */
-    'initialize(address,string,uint8,uint8,uint256,uint256,bool,uint256,address)'(
+    "initialize(address,string,uint8,uint8,uint256,uint256,uint8,bool,uint256,address,string)"(
       _owner1: string,
       _description: string,
       _category: BigNumberish,
       _subCategory: BigNumberish,
       _minimumBetInExaEs: BigNumberish,
       _prizePercentPerThousand: BigNumberish,
+      _incentive: BigNumberish,
       _isDrawPossible: boolean,
       _pauseTimestamp: BigNumberish,
       _kycDapp: string,
+      _other: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     isDrawPossible(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'isDrawPossible()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "isDrawPossible()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     minimumBetInExaEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'minimumBetInExaEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "minimumBetInExaEs()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    other(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "other()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -1858,27 +2336,42 @@ export class Bet extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pauseTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'pauseTimestamp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "pauseTimestamp()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    prizePercentPerThousand(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    prizePercentPerThousand(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'prizePercentPerThousand()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prizePercentPerThousand()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "randomnessManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    rejectBet(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    "rejectBet()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1888,14 +2381,17 @@ export class Bet extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1905,7 +2401,7 @@ export class Bet extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1923,37 +2419,49 @@ export class Bet extends Contract {
      * this function can be called by anyone to see how much winners are getting
      * @param _bettorAddress is address whose prize we want to see
      */
-    'seeWinnerPrize(address)'(
+    "seeWinnerPrize(address)"(
       _bettorAddress: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     subCategory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'subCategory()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "subCategory()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyClub(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    timeallyPromotionalBucket(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     totalBetTokensInExaEsByChoice(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'totalBetTokensInExaEsByChoice(uint256)'(
+    "totalBetTokensInExaEsByChoice(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1961,41 +2469,50 @@ export class Bet extends Contract {
     /**
      * this function gives amount of ExaEs that is total betted on this bet
      */
-    totalContractBalance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    totalContractBalance(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * this function gives amount of ExaEs that is total betted on this bet
      */
-    'totalContractBalance()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalContractBalance()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     totalPrize(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'totalPrize()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalPrize()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     upVotes(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'upVotes()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "upVotes()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     upvote(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'upvote()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "upvote()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     validatorManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "validatorManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * this function will be called after bet ends and winner bettors can withdraw their prize share
@@ -2008,7 +2525,7 @@ export class Bet extends Contract {
     /**
      * this function will be called after bet ends and winner bettors can withdraw their prize share
      */
-    'withdrawPrize(address)'(
+    "withdrawPrize(address)"(
       _bettorAddress: string,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;

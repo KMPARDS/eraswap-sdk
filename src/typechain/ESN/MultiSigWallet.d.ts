@@ -2,45 +2,71 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface MultiSigWalletInterface extends ethers.utils.Interface {
   functions: {
-    'getTransactionCount(bool,bool)': FunctionFragment;
-    'getTransactionIds(uint256,uint256,bool,bool)': FunctionFragment;
-    'transactionCount()': FunctionFragment;
+    "getTransactionCount(bool,bool)": FunctionFragment;
+    "getTransactionIds(uint256,uint256,bool,bool)": FunctionFragment;
+    "transactionCount()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'getTransactionCount', values: [boolean, boolean]): string;
   encodeFunctionData(
-    functionFragment: 'getTransactionIds',
+    functionFragment: "getTransactionCount",
+    values: [boolean, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTransactionIds",
     values: [BigNumberish, BigNumberish, boolean, boolean]
   ): string;
-  encodeFunctionData(functionFragment: 'transactionCount', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "transactionCount",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'getTransactionCount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTransactionIds', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transactionCount', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getTransactionCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTransactionIds",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transactionCount",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Confirmation(address,uint256)': EventFragment;
-    'Deposit(address,uint256)': EventFragment;
-    'Execution(uint256)': EventFragment;
-    'ExecutionFailure(uint256)': EventFragment;
-    'Revocation(address,uint256)': EventFragment;
-    'Submission(uint256)': EventFragment;
+    "Confirmation(address,uint256)": EventFragment;
+    "Deposit(address,uint256)": EventFragment;
+    "Execution(uint256)": EventFragment;
+    "ExecutionFailure(uint256)": EventFragment;
+    "Revocation(address,uint256)": EventFragment;
+    "Submission(uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Confirmation'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Deposit'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Execution'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'ExecutionFailure'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Revocation'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Submission'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Confirmation"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Deposit"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Execution"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ExecutionFailure"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Revocation"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Submission"): EventFragment;
 }
 
 export class MultiSigWallet extends Contract {
@@ -76,7 +102,7 @@ export class MultiSigWallet extends Contract {
      * @param executed Include executed transactions.
      * @param pending Include pending transactions.
      */
-    'getTransactionCount(bool,bool)'(
+    "getTransactionCount(bool,bool)"(
       pending: boolean,
       executed: boolean,
       overrides?: CallOverrides
@@ -110,7 +136,7 @@ export class MultiSigWallet extends Contract {
      * @param pending Include pending transactions.
      * @param to Index end position of transaction array.
      */
-    'getTransactionIds(uint256,uint256,bool,bool)'(
+    "getTransactionIds(uint256,uint256,bool,bool)"(
       from: BigNumberish,
       to: BigNumberish,
       pending: boolean,
@@ -127,7 +153,7 @@ export class MultiSigWallet extends Contract {
       0: BigNumber;
     }>;
 
-    'transactionCount()'(
+    "transactionCount()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -150,7 +176,7 @@ export class MultiSigWallet extends Contract {
    * @param executed Include executed transactions.
    * @param pending Include pending transactions.
    */
-  'getTransactionCount(bool,bool)'(
+  "getTransactionCount(bool,bool)"(
     pending: boolean,
     executed: boolean,
     overrides?: CallOverrides
@@ -178,7 +204,7 @@ export class MultiSigWallet extends Contract {
    * @param pending Include pending transactions.
    * @param to Index end position of transaction array.
    */
-  'getTransactionIds(uint256,uint256,bool,bool)'(
+  "getTransactionIds(uint256,uint256,bool,bool)"(
     from: BigNumberish,
     to: BigNumberish,
     pending: boolean,
@@ -188,7 +214,7 @@ export class MultiSigWallet extends Contract {
 
   transactionCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'transactionCount()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "transactionCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
     /**
@@ -207,7 +233,7 @@ export class MultiSigWallet extends Contract {
      * @param executed Include executed transactions.
      * @param pending Include pending transactions.
      */
-    'getTransactionCount(bool,bool)'(
+    "getTransactionCount(bool,bool)"(
       pending: boolean,
       executed: boolean,
       overrides?: CallOverrides
@@ -235,7 +261,7 @@ export class MultiSigWallet extends Contract {
      * @param pending Include pending transactions.
      * @param to Index end position of transaction array.
      */
-    'getTransactionIds(uint256,uint256,bool,bool)'(
+    "getTransactionIds(uint256,uint256,bool,bool)"(
       from: BigNumberish,
       to: BigNumberish,
       pending: boolean,
@@ -245,11 +271,14 @@ export class MultiSigWallet extends Contract {
 
     transactionCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'transactionCount()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "transactionCount()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {
-    Confirmation(sender: string | null, transactionId: BigNumberish | null): EventFilter;
+    Confirmation(
+      sender: string | null,
+      transactionId: BigNumberish | null
+    ): EventFilter;
 
     Deposit(sender: string | null, value: null): EventFilter;
 
@@ -257,7 +286,10 @@ export class MultiSigWallet extends Contract {
 
     ExecutionFailure(transactionId: BigNumberish | null): EventFilter;
 
-    Revocation(sender: string | null, transactionId: BigNumberish | null): EventFilter;
+    Revocation(
+      sender: string | null,
+      transactionId: BigNumberish | null
+    ): EventFilter;
 
     Submission(transactionId: BigNumberish | null): EventFilter;
   };
@@ -279,7 +311,7 @@ export class MultiSigWallet extends Contract {
      * @param executed Include executed transactions.
      * @param pending Include pending transactions.
      */
-    'getTransactionCount(bool,bool)'(
+    "getTransactionCount(bool,bool)"(
       pending: boolean,
       executed: boolean,
       overrides?: CallOverrides
@@ -307,7 +339,7 @@ export class MultiSigWallet extends Contract {
      * @param pending Include pending transactions.
      * @param to Index end position of transaction array.
      */
-    'getTransactionIds(uint256,uint256,bool,bool)'(
+    "getTransactionIds(uint256,uint256,bool,bool)"(
       from: BigNumberish,
       to: BigNumberish,
       pending: boolean,
@@ -317,7 +349,7 @@ export class MultiSigWallet extends Contract {
 
     transactionCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'transactionCount()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "transactionCount()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -337,7 +369,7 @@ export class MultiSigWallet extends Contract {
      * @param executed Include executed transactions.
      * @param pending Include pending transactions.
      */
-    'getTransactionCount(bool,bool)'(
+    "getTransactionCount(bool,bool)"(
       pending: boolean,
       executed: boolean,
       overrides?: CallOverrides
@@ -365,7 +397,7 @@ export class MultiSigWallet extends Contract {
      * @param pending Include pending transactions.
      * @param to Index end position of transaction array.
      */
-    'getTransactionIds(uint256,uint256,bool,bool)'(
+    "getTransactionIds(uint256,uint256,bool,bool)"(
       from: BigNumberish,
       to: BigNumberish,
       pending: boolean,
@@ -375,6 +407,8 @@ export class MultiSigWallet extends Contract {
 
     transactionCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'transactionCount()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "transactionCount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

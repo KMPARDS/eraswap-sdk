@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { IRegistryDependent } from './IRegistryDependent';
+import type { IRegistryDependent } from "./IRegistryDependent";
 
 export class IRegistryDependentFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): IRegistryDependent {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IRegistryDependent {
     return new Contract(address, _abi, signerOrProvider) as IRegistryDependent;
   }
 }
@@ -16,28 +19,28 @@ export class IRegistryDependentFactory {
 const _abi = [
   {
     inputs: [],
-    name: 'kycDapp',
+    name: "kycDapp",
     outputs: [
       {
-        internalType: 'contract IKycDapp',
-        name: '',
-        type: 'address',
+        internalType: "contract IKycDapp",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_kycDapp',
-        type: 'address',
+        internalType: "address",
+        name: "_kycDapp",
+        type: "address",
       },
     ],
-    name: 'setKycDapp',
+    name: "setKycDapp",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

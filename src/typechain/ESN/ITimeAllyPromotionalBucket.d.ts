@@ -2,23 +2,44 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface ITimeAllyPromotionalBucketInterface extends ethers.utils.Interface {
   functions: {
-    'claimReward(address)': FunctionFragment;
-    'rewardToStaker(address,uint256)': FunctionFragment;
+    "claimReward(address)": FunctionFragment;
+    "rewardToStaker(address,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'claimReward', values: [string]): string;
-  encodeFunctionData(functionFragment: 'rewardToStaker', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "claimReward", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "rewardToStaker",
+    values: [string, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'claimReward', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'rewardToStaker', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "claimReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToStaker",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -37,9 +58,12 @@ export class ITimeAllyPromotionalBucket extends Contract {
   interface: ITimeAllyPromotionalBucketInterface;
 
   functions: {
-    claimReward(stakingContract: string, overrides?: Overrides): Promise<ContractTransaction>;
+    claimReward(
+      stakingContract: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'claimReward(address)'(
+    "claimReward(address)"(
       stakingContract: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -50,16 +74,19 @@ export class ITimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'rewardToStaker(address,uint256)'(
+    "rewardToStaker(address,uint256)"(
       _wallet: string,
       _stakingReward: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
   };
 
-  claimReward(stakingContract: string, overrides?: Overrides): Promise<ContractTransaction>;
+  claimReward(
+    stakingContract: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'claimReward(address)'(
+  "claimReward(address)"(
     stakingContract: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -70,16 +97,22 @@ export class ITimeAllyPromotionalBucket extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'rewardToStaker(address,uint256)'(
+  "rewardToStaker(address,uint256)"(
     _wallet: string,
     _stakingReward: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    claimReward(stakingContract: string, overrides?: CallOverrides): Promise<void>;
+    claimReward(
+      stakingContract: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'claimReward(address)'(stakingContract: string, overrides?: CallOverrides): Promise<void>;
+    "claimReward(address)"(
+      stakingContract: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     rewardToStaker(
       _wallet: string,
@@ -87,7 +120,7 @@ export class ITimeAllyPromotionalBucket extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'rewardToStaker(address,uint256)'(
+    "rewardToStaker(address,uint256)"(
       _wallet: string,
       _stakingReward: BigNumberish,
       overrides?: CallOverrides
@@ -97,9 +130,15 @@ export class ITimeAllyPromotionalBucket extends Contract {
   filters: {};
 
   estimateGas: {
-    claimReward(stakingContract: string, overrides?: Overrides): Promise<BigNumber>;
+    claimReward(
+      stakingContract: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'claimReward(address)'(stakingContract: string, overrides?: Overrides): Promise<BigNumber>;
+    "claimReward(address)"(
+      stakingContract: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     rewardToStaker(
       _wallet: string,
@@ -107,7 +146,7 @@ export class ITimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'rewardToStaker(address,uint256)'(
+    "rewardToStaker(address,uint256)"(
       _wallet: string,
       _stakingReward: BigNumberish,
       overrides?: Overrides
@@ -115,9 +154,12 @@ export class ITimeAllyPromotionalBucket extends Contract {
   };
 
   populateTransaction: {
-    claimReward(stakingContract: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    claimReward(
+      stakingContract: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'claimReward(address)'(
+    "claimReward(address)"(
       stakingContract: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -128,7 +170,7 @@ export class ITimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'rewardToStaker(address,uint256)'(
+    "rewardToStaker(address,uint256)"(
       _wallet: string,
       _stakingReward: BigNumberish,
       overrides?: Overrides

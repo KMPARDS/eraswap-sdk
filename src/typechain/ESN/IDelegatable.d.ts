@@ -2,23 +2,38 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface IDelegatableInterface extends ethers.utils.Interface {
   functions: {
-    'registerDelegation(uint32,bytes)': FunctionFragment;
+    "registerDelegation(uint32,bytes)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'registerDelegation',
+    functionFragment: "registerDelegation",
     values: [BigNumberish, BytesLike]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'registerDelegation', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "registerDelegation",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -43,7 +58,7 @@ export class IDelegatable extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides
@@ -56,7 +71,7 @@ export class IDelegatable extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'registerDelegation(uint32,bytes)'(
+  "registerDelegation(uint32,bytes)"(
     _month: BigNumberish,
     _extraData: BytesLike,
     overrides?: Overrides
@@ -69,7 +84,7 @@ export class IDelegatable extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: CallOverrides
@@ -85,7 +100,7 @@ export class IDelegatable extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides
@@ -99,7 +114,7 @@ export class IDelegatable extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides

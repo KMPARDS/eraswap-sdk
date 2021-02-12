@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Signer } from 'ethers';
-import { Provider, TransactionRequest } from '@ethersproject/providers';
-import { Contract, ContractFactory, Overrides } from '@ethersproject/contracts';
+import {Signer} from "ethers";
+import {Provider, TransactionRequest} from "@ethersproject/providers";
+import {Contract, ContractFactory, Overrides} from "@ethersproject/contracts";
 
-import type { ReentrancyGuard } from './ReentrancyGuard';
+import type {ReentrancyGuard} from "./ReentrancyGuard";
 
 export class ReentrancyGuardFactory extends ContractFactory {
   constructor(signer?: Signer) {
@@ -25,7 +25,10 @@ export class ReentrancyGuardFactory extends ContractFactory {
   connect(signer: Signer): ReentrancyGuardFactory {
     return super.connect(signer) as ReentrancyGuardFactory;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): ReentrancyGuard {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ReentrancyGuard {
     return new Contract(address, _abi, signerOrProvider) as ReentrancyGuard;
   }
 }
@@ -33,10 +36,10 @@ export class ReentrancyGuardFactory extends ContractFactory {
 const _abi = [
   {
     inputs: [],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
 ];
 
 const _bytecode =
-  '0x6080604052348015600f57600080fd5b506001600055603f8060226000396000f3fe6080604052600080fdfea2646970667358221220a766e3a2496c088a0ffe5ba80ce1cb7eaa267562db7bf819405ed672d1a7651764736f6c63430007040033';
+  "0x6080604052348015600f57600080fd5b506001600055603f8060226000396000f3fe6080604052600080fdfea26469706673582212202d24f6063332abbc5441b7c5440137c588a89ae35a0b8acdfac378d65353a81764736f6c63430007020033";

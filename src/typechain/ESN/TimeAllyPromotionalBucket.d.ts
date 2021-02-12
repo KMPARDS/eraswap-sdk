@@ -2,104 +2,216 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface TimeAllyPromotionalBucketInterface extends ethers.utils.Interface {
   functions: {
-    'claimReward(address)': FunctionFragment;
-    'dayswappers()': FunctionFragment;
-    'initialize()': FunctionFragment;
-    'isAuthorized(bytes32)': FunctionFragment;
-    'kycDapp()': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'randomnessManager()': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveAddressStrict(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
-    'resolveUsernameStrict(address)': FunctionFragment;
-    'rewardToStaker(address,uint256)': FunctionFragment;
-    'setKycDapp(address)': FunctionFragment;
-    'stakingRewards(address)': FunctionFragment;
-    'timeallyClub()': FunctionFragment;
-    'timeallyManager()': FunctionFragment;
-    'timeallyPromotionalBucket()': FunctionFragment;
-    'totalPendingRewards()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'updateAuthorization(bytes32,bool)': FunctionFragment;
-    'validatorManager()': FunctionFragment;
+    "claimReward(address)": FunctionFragment;
+    "dayswappers()": FunctionFragment;
+    "initialize()": FunctionFragment;
+    "isAuthorized(bytes32)": FunctionFragment;
+    "kycDapp()": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "randomnessManager()": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveAddressStrict(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
+    "resolveUsernameStrict(address)": FunctionFragment;
+    "rewardToStaker(address,uint256)": FunctionFragment;
+    "setKycDapp(address)": FunctionFragment;
+    "stakingRewards(address)": FunctionFragment;
+    "timeallyClub()": FunctionFragment;
+    "timeallyManager()": FunctionFragment;
+    "timeallyPromotionalBucket()": FunctionFragment;
+    "totalPendingRewards()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "updateAuthorization(bytes32,bool)": FunctionFragment;
+    "validatorManager()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'claimReward', values: [string]): string;
-  encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'isAuthorized', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
-  encodeFunctionData(functionFragment: 'rewardToStaker', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
-  encodeFunctionData(functionFragment: 'stakingRewards', values: [string]): string;
-  encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalPendingRewards', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'updateAuthorization', values: [BytesLike, boolean]): string;
-  encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
+  encodeFunctionData(functionFragment: "claimReward", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "dayswappers",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isAuthorized",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "kycDapp", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "randomnessManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddressStrict",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsernameStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardToStaker",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "setKycDapp", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "stakingRewards",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyClub",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyPromotionalBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalPendingRewards",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateAuthorization",
+    values: [BytesLike, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "validatorManager",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'claimReward', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isAuthorized', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'rewardToStaker', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'stakingRewards', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalPendingRewards', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updateAuthorization', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "claimReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "dayswappers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isAuthorized",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "kycDapp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "randomnessManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsernameStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToStaker",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setKycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "stakingRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyClub",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyPromotionalBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalPendingRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateAuthorization",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "validatorManager",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Authorised(bytes32,bool)': EventFragment;
-    'FundsAdded(address,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'StakingReward(address,uint256)': EventFragment;
+    "Authorised(bytes32,bool)": EventFragment;
+    "FundsAdded(address,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "StakingReward(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Authorised'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'FundsAdded'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'StakingReward'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Authorised"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "FundsAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StakingReward"): EventFragment;
 }
 
 export class TimeAllyPromotionalBucket extends Contract {
@@ -116,9 +228,12 @@ export class TimeAllyPromotionalBucket extends Contract {
   interface: TimeAllyPromotionalBucketInterface;
 
   functions: {
-    claimReward(stakingContract: string, overrides?: Overrides): Promise<ContractTransaction>;
+    claimReward(
+      stakingContract: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'claimReward(address)'(
+    "claimReward(address)"(
       stakingContract: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -129,7 +244,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'dayswappers()'(
+    "dayswappers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -137,16 +252,16 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-    'isAuthorized(bytes32)'(
+    "isAuthorized(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
     }>;
 
-    'isAuthorized(address)'(
+    "isAuthorized(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -159,7 +274,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'kycDapp()'(
+    "kycDapp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -171,7 +286,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -189,7 +304,7 @@ export class TimeAllyPromotionalBucket extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -201,7 +316,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -213,7 +328,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'randomnessManager()'(
+    "randomnessManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -226,7 +341,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -240,7 +355,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -254,7 +369,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -268,7 +383,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -281,15 +396,21 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'rewardToStaker(address,uint256)'(
+    "rewardToStaker(address,uint256)"(
       _wallet: string,
       _stakingReward: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     stakingRewards(
       arg0: string,
@@ -298,7 +419,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: BigNumber;
     }>;
 
-    'stakingRewards(address)'(
+    "stakingRewards(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -311,7 +432,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'timeallyClub()'(
+    "timeallyClub()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -323,7 +444,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'timeallyManager()'(
+    "timeallyManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -335,7 +456,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'timeallyPromotionalBucket()'(
+    "timeallyPromotionalBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -347,7 +468,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: BigNumber;
     }>;
 
-    'totalPendingRewards()'(
+    "totalPendingRewards()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -356,12 +477,15 @@ export class TimeAllyPromotionalBucket extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -372,7 +496,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -384,39 +508,48 @@ export class TimeAllyPromotionalBucket extends Contract {
       0: string;
     }>;
 
-    'validatorManager()'(
+    "validatorManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
   };
 
-  claimReward(stakingContract: string, overrides?: Overrides): Promise<ContractTransaction>;
+  claimReward(
+    stakingContract: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'claimReward(address)'(
+  "claimReward(address)"(
     stakingContract: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
 
-  'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+  "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
   initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-  'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  "isAuthorized(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
+  "isAuthorized(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
-  'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+  "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -426,31 +559,52 @@ export class TimeAllyPromotionalBucket extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-  'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+  "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddressStrict(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddressStrict(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddressStrict(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  resolveUsernameStrict(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsernameStrict(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   rewardToStaker(
     _wallet: string,
@@ -458,45 +612,57 @@ export class TimeAllyPromotionalBucket extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'rewardToStaker(address,uint256)'(
+  "rewardToStaker(address,uint256)"(
     _wallet: string,
     _stakingReward: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setKycDapp(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "setKycDapp(address)"(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   stakingRewards(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'stakingRewards(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "stakingRewards(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
   totalPendingRewards(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'totalPendingRewards()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalPendingRewards()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -507,7 +673,7 @@ export class TimeAllyPromotionalBucket extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'updateAuthorization(bytes32,bool)'(
+  "updateAuthorization(bytes32,bool)"(
     _username: BytesLike,
     _newStatus: boolean,
     overrides?: Overrides
@@ -515,32 +681,44 @@ export class TimeAllyPromotionalBucket extends Contract {
 
   validatorManager(overrides?: CallOverrides): Promise<string>;
 
-  'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+  "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    claimReward(stakingContract: string, overrides?: CallOverrides): Promise<void>;
+    claimReward(
+      stakingContract: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'claimReward(address)'(stakingContract: string, overrides?: CallOverrides): Promise<void>;
+    "claimReward(address)"(
+      stakingContract: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
     initialize(overrides?: CallOverrides): Promise<void>;
 
-    'initialize()'(overrides?: CallOverrides): Promise<void>;
+    "initialize()"(overrides?: CallOverrides): Promise<void>;
 
-    'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    "isAuthorized(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
+    "isAuthorized(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -550,34 +728,55 @@ export class TimeAllyPromotionalBucket extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsernameStrict(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     rewardToStaker(
       _wallet: string,
@@ -585,7 +784,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'rewardToStaker(address,uint256)'(
+    "rewardToStaker(address,uint256)"(
       _wallet: string,
       _stakingReward: BigNumberish,
       overrides?: CallOverrides
@@ -593,37 +792,49 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     stakingRewards(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'stakingRewards(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "stakingRewards(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
     totalPendingRewards(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalPendingRewards()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalPendingRewards()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     updateAuthorization(
       _username: BytesLike,
@@ -631,7 +842,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: CallOverrides
@@ -639,7 +850,7 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<string>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -647,35 +858,50 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     FundsAdded(source: null, amount: null): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
 
     StakingReward(wallet: string | null, stakingReward: null): EventFilter;
   };
 
   estimateGas: {
-    claimReward(stakingContract: string, overrides?: Overrides): Promise<BigNumber>;
+    claimReward(
+      stakingContract: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'claimReward(address)'(stakingContract: string, overrides?: Overrides): Promise<BigNumber>;
+    "claimReward(address)"(
+      stakingContract: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     initialize(overrides?: PayableOverrides): Promise<BigNumber>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "initialize()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
-    'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "isAuthorized(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "isAuthorized(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -685,34 +911,52 @@ export class TimeAllyPromotionalBucket extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsernameStrict(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -723,7 +967,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'rewardToStaker(address,uint256)'(
+    "rewardToStaker(address,uint256)"(
       _wallet: string,
       _stakingReward: BigNumberish,
       overrides?: Overrides
@@ -731,37 +975,51 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     stakingRewards(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'stakingRewards(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "stakingRewards(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     timeallyClub(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     totalPendingRewards(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalPendingRewards()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalPendingRewards()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     updateAuthorization(
       _username: BytesLike,
@@ -769,7 +1027,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -777,42 +1035,45 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    claimReward(stakingContract: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    claimReward(
+      stakingContract: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'claimReward(address)'(
+    "claimReward(address)"(
       stakingContract: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
-    'isAuthorized(bytes32)'(
+    "isAuthorized(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'isAuthorized(address)'(
+    "isAuthorized(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -822,19 +1083,24 @@ export class TimeAllyPromotionalBucket extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "randomnessManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -844,14 +1110,17 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -861,7 +1130,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -872,48 +1141,70 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'rewardToStaker(address,uint256)'(
+    "rewardToStaker(address,uint256)"(
       _wallet: string,
       _stakingReward: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    stakingRewards(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    stakingRewards(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'stakingRewards(address)'(
+    "stakingRewards(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     timeallyClub(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    timeallyPromotionalBucket(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    totalPendingRewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    totalPendingRewards(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'totalPendingRewards()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalPendingRewards()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -924,7 +1215,7 @@ export class TimeAllyPromotionalBucket extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -932,6 +1223,8 @@ export class TimeAllyPromotionalBucket extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "validatorManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

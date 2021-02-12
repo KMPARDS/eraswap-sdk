@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { Ierc777Sender } from './Ierc777Sender';
+import type { Ierc777Sender } from "./Ierc777Sender";
 
 export class Ierc777SenderFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): Ierc777Sender {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): Ierc777Sender {
     return new Contract(address, _abi, signerOrProvider) as Ierc777Sender;
   }
 }
@@ -17,39 +20,39 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'operator',
-        type: 'address',
+        internalType: "address",
+        name: "operator",
+        type: "address",
       },
       {
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
+        internalType: "address",
+        name: "from",
+        type: "address",
       },
       {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
+        internalType: "address",
+        name: "to",
+        type: "address",
       },
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
       },
       {
-        internalType: 'bytes',
-        name: 'userData',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "userData",
+        type: "bytes",
       },
       {
-        internalType: 'bytes',
-        name: 'operatorData',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "operatorData",
+        type: "bytes",
       },
     ],
-    name: 'tokensToSend',
+    name: "tokensToSend",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

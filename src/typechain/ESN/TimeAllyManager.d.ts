@@ -2,166 +2,344 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface TimeAllyManagerInterface extends ethers.utils.Interface {
   functions: {
-    'dayswappers()': FunctionFragment;
-    'decreaseActiveStaking(uint256,uint32,uint32)': FunctionFragment;
-    'defaultMonths()': FunctionFragment;
-    'emitStakingMerge(address)': FunctionFragment;
-    'emitStakingTransfer(address,address)': FunctionFragment;
-    'getMonthlyNRT(uint32)': FunctionFragment;
-    'getTotalActiveStaking(uint32)': FunctionFragment;
-    'increaseActiveStaking(uint256,uint32,uint32)': FunctionFragment;
-    'initialize()': FunctionFragment;
-    'isAdminMode()': FunctionFragment;
-    'isStakingContractValid(address)': FunctionFragment;
-    'kycDapp()': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'prepaidFallback(address,uint256)': FunctionFragment;
-    'processNrtReward(uint256,uint8)': FunctionFragment;
-    'randomnessManager()': FunctionFragment;
-    'receiveNrt(uint32)': FunctionFragment;
-    'removeStaking(address)': FunctionFragment;
-    'renounceAdminMode()': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveAddressStrict(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
-    'resolveUsernameStrict(address)': FunctionFragment;
-    'sendStake(address,uint256,bool[])': FunctionFragment;
-    'setDefaultMonths(uint32)': FunctionFragment;
-    'setKycDapp(address)': FunctionFragment;
-    'setStakingTarget(address)': FunctionFragment;
-    'splitStaking(address,uint256,uint32)': FunctionFragment;
-    'stake()': FunctionFragment;
-    'stakingTarget()': FunctionFragment;
-    'timeallyClub()': FunctionFragment;
-    'timeallyManager()': FunctionFragment;
-    'timeallyPromotionalBucket()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'validatorManager()': FunctionFragment;
-    'withdrawClaimedNrt(uint256)': FunctionFragment;
+    "dayswappers()": FunctionFragment;
+    "decreaseActiveStaking(uint256,uint32,uint32)": FunctionFragment;
+    "defaultMonths()": FunctionFragment;
+    "emitStakingMerge(address)": FunctionFragment;
+    "emitStakingTransfer(address,address)": FunctionFragment;
+    "getMonthlyNRT(uint32)": FunctionFragment;
+    "getTotalActiveStaking(uint32)": FunctionFragment;
+    "increaseActiveStaking(uint256,uint32,uint32)": FunctionFragment;
+    "initialize()": FunctionFragment;
+    "isAdminMode()": FunctionFragment;
+    "isStakingContractValid(address)": FunctionFragment;
+    "kycDapp()": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "prepaidFallback(address,uint256)": FunctionFragment;
+    "processNrtReward(uint256,uint8)": FunctionFragment;
+    "randomnessManager()": FunctionFragment;
+    "receiveNrt(uint32)": FunctionFragment;
+    "removeStaking(address)": FunctionFragment;
+    "renounceAdminMode()": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveAddressStrict(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
+    "resolveUsernameStrict(address)": FunctionFragment;
+    "sendStake(address,uint256,bool[])": FunctionFragment;
+    "setDefaultMonths(uint32)": FunctionFragment;
+    "setKycDapp(address)": FunctionFragment;
+    "setStakingTarget(address)": FunctionFragment;
+    "splitStaking(address,uint256,uint32)": FunctionFragment;
+    "stake()": FunctionFragment;
+    "stakingTarget()": FunctionFragment;
+    "timeallyClub()": FunctionFragment;
+    "timeallyManager()": FunctionFragment;
+    "timeallyPromotionalBucket()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "validatorManager()": FunctionFragment;
+    "withdrawClaimedNrt(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'decreaseActiveStaking',
+    functionFragment: "dayswappers",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseActiveStaking",
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'defaultMonths', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'emitStakingMerge', values: [string]): string;
-  encodeFunctionData(functionFragment: 'emitStakingTransfer', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'getMonthlyNRT', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getTotalActiveStaking', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'increaseActiveStaking',
+    functionFragment: "defaultMonths",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emitStakingMerge",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emitStakingTransfer",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMonthlyNRT",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTotalActiveStaking",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseActiveStaking",
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'isAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'isStakingContractValid', values: [string]): string;
-  encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidFallback', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'processNrtReward',
+    functionFragment: "initialize",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isAdminMode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isStakingContractValid",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "kycDapp", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "prepaidFallback",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "processNrtReward",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'receiveNrt', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'removeStaking', values: [string]): string;
-  encodeFunctionData(functionFragment: 'renounceAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'sendStake',
+    functionFragment: "randomnessManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "receiveNrt",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "removeStaking",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceAdminMode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddressStrict",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsernameStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendStake",
     values: [string, BigNumberish, boolean[]]
   ): string;
-  encodeFunctionData(functionFragment: 'setDefaultMonths', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
-  encodeFunctionData(functionFragment: 'setStakingTarget', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'splitStaking',
+    functionFragment: "setDefaultMonths",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "setKycDapp", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "setStakingTarget",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "splitStaking",
     values: [string, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'stake', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'stakingTarget', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdrawClaimedNrt', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "stake", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "stakingTarget",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyClub",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyPromotionalBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "validatorManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawClaimedNrt",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decreaseActiveStaking', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'defaultMonths', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'emitStakingMerge', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'emitStakingTransfer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getMonthlyNRT', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalActiveStaking', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'increaseActiveStaking', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isStakingContractValid', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidFallback', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'processNrtReward', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'removeStaking', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'sendStake', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setDefaultMonths', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setStakingTarget', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'splitStaking', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'stake', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'stakingTarget', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawClaimedNrt', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "dayswappers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseActiveStaking",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultMonths",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emitStakingMerge",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emitStakingTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMonthlyNRT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalActiveStaking",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseActiveStaking",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isAdminMode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isStakingContractValid",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "kycDapp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "prepaidFallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "processNrtReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "randomnessManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "receiveNrt", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "removeStaking",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceAdminMode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsernameStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "sendStake", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setDefaultMonths",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setKycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setStakingTarget",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "splitStaking",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "stake", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "stakingTarget",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyClub",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyPromotionalBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "validatorManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawClaimedNrt",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'NRTReceived(uint32,uint256,address)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'StakingMerge(address,address)': EventFragment;
-    'StakingSplit(address,address)': EventFragment;
-    'StakingTransfer(address,address,address)': EventFragment;
+    "NRTReceived(uint32,uint256,address)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "StakingMerge(address,address)": EventFragment;
+    "StakingSplit(address,address)": EventFragment;
+    "StakingTransfer(address,address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'NRTReceived'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'StakingMerge'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'StakingSplit'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'StakingTransfer'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NRTReceived"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StakingMerge"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StakingSplit"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StakingTransfer"): EventFragment;
 }
 
 export class TimeAllyManager extends Contract {
@@ -184,7 +362,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'dayswappers()'(
+    "dayswappers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -211,7 +389,7 @@ export class TimeAllyManager extends Contract {
      * @param _endMonth : Month upto which decreasing should be done
      * @param _startMonth : Month from which decreasing should be done
      */
-    'decreaseActiveStaking(uint256,uint32,uint32)'(
+    "decreaseActiveStaking(uint256,uint32,uint32)"(
       _amount: BigNumberish,
       _startMonth: BigNumberish,
       _endMonth: BigNumberish,
@@ -230,7 +408,7 @@ export class TimeAllyManager extends Contract {
     /**
      * Default months for stakings.
      */
-    'defaultMonths()'(
+    "defaultMonths()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -241,14 +419,17 @@ export class TimeAllyManager extends Contract {
      * Emits a StakingMerge event.
      * @param _childStaking : Address of new staking contract created my master staking.
      */
-    emitStakingMerge(_childStaking: string, overrides?: Overrides): Promise<ContractTransaction>;
+    emitStakingMerge(
+      _childStaking: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Called by any valid staking contract when it splits.
      * Emits a StakingMerge event.
      * @param _childStaking : Address of new staking contract created my master staking.
      */
-    'emitStakingMerge(address)'(
+    "emitStakingMerge(address)"(
       _childStaking: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -271,7 +452,7 @@ export class TimeAllyManager extends Contract {
      * @param _newOwner : Address of receiver.
      * @param _oldOwner : Address of sender.
      */
-    'emitStakingTransfer(address,address)'(
+    "emitStakingTransfer(address,address)"(
       _oldOwner: string,
       _newOwner: string,
       overrides?: Overrides
@@ -284,7 +465,7 @@ export class TimeAllyManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getMonthlyNRT(uint32)'(
+    "getMonthlyNRT(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -298,7 +479,7 @@ export class TimeAllyManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getTotalActiveStaking(uint32)'(
+    "getTotalActiveStaking(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -326,7 +507,7 @@ export class TimeAllyManager extends Contract {
      * @param _endMonth : Month upto which increasing should be done
      * @param _startMonth : Month from which increasing should be done
      */
-    'increaseActiveStaking(uint256,uint32,uint32)'(
+    "increaseActiveStaking(uint256,uint32,uint32)"(
       _amount: BigNumberish,
       _startMonth: BigNumberish,
       _endMonth: BigNumberish,
@@ -341,7 +522,7 @@ export class TimeAllyManager extends Contract {
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     isAdminMode(
       overrides?: CallOverrides
@@ -349,7 +530,7 @@ export class TimeAllyManager extends Contract {
       0: boolean;
     }>;
 
-    'isAdminMode()'(
+    "isAdminMode()"(
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -372,7 +553,7 @@ export class TimeAllyManager extends Contract {
      * Checks if a given address is a valid and active staking contract.
      * @param _stakingContract : An address to check.
      */
-    'isStakingContractValid(address)'(
+    "isStakingContractValid(address)"(
       _stakingContract: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -385,7 +566,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'kycDapp()'(
+    "kycDapp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -397,7 +578,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -415,7 +596,7 @@ export class TimeAllyManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -427,7 +608,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -451,7 +632,7 @@ export class TimeAllyManager extends Contract {
      * @param _sender : The msg.sender in prepaid contract's transfer method.
      * @param _value : Amount of prepaid ES tokens transferred.
      */
-    'prepaidFallback(address,uint256)'(
+    "prepaidFallback(address,uint256)"(
       _sender: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -475,7 +656,7 @@ export class TimeAllyManager extends Contract {
      * @param _reward : Amount of reward to be processed.
      * @param _rewardType : 0 => Liquid, 1 => Prepaid, 2 => Staked.
      */
-    'processNrtReward(uint256,uint8)'(
+    "processNrtReward(uint256,uint8)"(
       _reward: BigNumberish,
       _rewardType: BigNumberish,
       overrides?: Overrides
@@ -487,7 +668,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'randomnessManager()'(
+    "randomnessManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -504,7 +685,7 @@ export class TimeAllyManager extends Contract {
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -513,17 +694,23 @@ export class TimeAllyManager extends Contract {
      * Removes the staking from valid staking.
      * @param _owner : Address of owner (for emiting the event).
      */
-    removeStaking(_owner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    removeStaking(
+      _owner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Removes the staking from valid staking.
      * @param _owner : Address of owner (for emiting the event).
      */
-    'removeStaking(address)'(_owner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "removeStaking(address)"(
+      _owner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     resolveAddress(
       _username: BytesLike,
@@ -532,7 +719,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -546,7 +733,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -560,7 +747,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -574,7 +761,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -600,7 +787,7 @@ export class TimeAllyManager extends Contract {
      * @param _initialIssTime : IssTime Limit to be given initially.
      * @param _receiver : Address of receipent of the staking contract.
      */
-    'sendStake(address,uint256,bool[])'(
+    "sendStake(address,uint256,bool[])"(
       _receiver: string,
       _initialIssTime: BigNumberish,
       _claimedMonths: boolean[],
@@ -612,18 +799,27 @@ export class TimeAllyManager extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'setDefaultMonths(uint32)'(
+    "setDefaultMonths(uint32)"(
       _defaultMonths: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    setStakingTarget(_stakingTarget: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setStakingTarget(
+      _stakingTarget: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setStakingTarget(address)'(
+    "setStakingTarget(address)"(
       _stakingTarget: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -647,7 +843,7 @@ export class TimeAllyManager extends Contract {
      * @param _masterEndMonth : Extension end month of master staking for adjusting the total active stakings.
      * @param _owner : Owner of the master staking, is set as owner of the new staking that is created.
      */
-    'splitStaking(address,uint256,uint32)'(
+    "splitStaking(address,uint256,uint32)"(
       _owner: string,
       _initialIssTime: BigNumberish,
       _masterEndMonth: BigNumberish,
@@ -662,7 +858,7 @@ export class TimeAllyManager extends Contract {
     /**
      * Deploys a new staking contract with value sent.
      */
-    'stake()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "stake()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     stakingTarget(
       overrides?: CallOverrides
@@ -670,7 +866,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'stakingTarget()'(
+    "stakingTarget()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -682,7 +878,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'timeallyClub()'(
+    "timeallyClub()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -694,7 +890,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'timeallyManager()'(
+    "timeallyManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -706,7 +902,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'timeallyPromotionalBucket()'(
+    "timeallyPromotionalBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -715,12 +911,15 @@ export class TimeAllyManager extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -731,7 +930,7 @@ export class TimeAllyManager extends Contract {
       0: string;
     }>;
 
-    'validatorManager()'(
+    "validatorManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -750,7 +949,7 @@ export class TimeAllyManager extends Contract {
      * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
      * @param _amount : Amount of claimed NRT rewards by stakers.
      */
-    'withdrawClaimedNrt(uint256)'(
+    "withdrawClaimedNrt(uint256)"(
       _amount: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -758,7 +957,7 @@ export class TimeAllyManager extends Contract {
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
 
-  'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+  "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Used by staking contracts when need to topup, split, merge, issTime and destroy.
@@ -781,7 +980,7 @@ export class TimeAllyManager extends Contract {
    * @param _endMonth : Month upto which decreasing should be done
    * @param _startMonth : Month from which decreasing should be done
    */
-  'decreaseActiveStaking(uint256,uint32,uint32)'(
+  "decreaseActiveStaking(uint256,uint32,uint32)"(
     _amount: BigNumberish,
     _startMonth: BigNumberish,
     _endMonth: BigNumberish,
@@ -796,21 +995,24 @@ export class TimeAllyManager extends Contract {
   /**
    * Default months for stakings.
    */
-  'defaultMonths()'(overrides?: CallOverrides): Promise<number>;
+  "defaultMonths()"(overrides?: CallOverrides): Promise<number>;
 
   /**
    * Called by any valid staking contract when it splits.
    * Emits a StakingMerge event.
    * @param _childStaking : Address of new staking contract created my master staking.
    */
-  emitStakingMerge(_childStaking: string, overrides?: Overrides): Promise<ContractTransaction>;
+  emitStakingMerge(
+    _childStaking: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Called by any valid staking contract when it splits.
    * Emits a StakingMerge event.
    * @param _childStaking : Address of new staking contract created my master staking.
    */
-  'emitStakingMerge(address)'(
+  "emitStakingMerge(address)"(
     _childStaking: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -833,19 +1035,28 @@ export class TimeAllyManager extends Contract {
    * @param _newOwner : Address of receiver.
    * @param _oldOwner : Address of sender.
    */
-  'emitStakingTransfer(address,address)'(
+  "emitStakingTransfer(address,address)"(
     _oldOwner: string,
     _newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getMonthlyNRT(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  "getMonthlyNRT(uint32)"(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  getTotalActiveStaking(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getTotalActiveStaking(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getTotalActiveStaking(uint32)'(
+  "getTotalActiveStaking(uint32)"(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -871,7 +1082,7 @@ export class TimeAllyManager extends Contract {
    * @param _endMonth : Month upto which increasing should be done
    * @param _startMonth : Month from which increasing should be done
    */
-  'increaseActiveStaking(uint256,uint32,uint32)'(
+  "increaseActiveStaking(uint256,uint32,uint32)"(
     _amount: BigNumberish,
     _startMonth: BigNumberish,
     _endMonth: BigNumberish,
@@ -886,36 +1097,39 @@ export class TimeAllyManager extends Contract {
   /**
    * Allows NRT Manager contract to send NRT share for TimeAlly.
    */
-  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
-  'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
+  "isAdminMode()"(overrides?: CallOverrides): Promise<boolean>;
 
   /**
    * An address once a valid staking contract, is no longer a valid one if it is destroyed.
    * Checks if a given address is a valid and active staking contract.
    * @param _stakingContract : An address to check.
    */
-  isStakingContractValid(_stakingContract: string, overrides?: CallOverrides): Promise<boolean>;
+  isStakingContractValid(
+    _stakingContract: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * An address once a valid staking contract, is no longer a valid one if it is destroyed.
    * Checks if a given address is a valid and active staking contract.
    * @param _stakingContract : An address to check.
    */
-  'isStakingContractValid(address)'(
+  "isStakingContractValid(address)"(
     _stakingContract: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
-  'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+  "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -925,11 +1139,11 @@ export class TimeAllyManager extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Used for creating a staking using prepaid ES
@@ -949,7 +1163,7 @@ export class TimeAllyManager extends Contract {
    * @param _sender : The msg.sender in prepaid contract's transfer method.
    * @param _value : Amount of prepaid ES tokens transferred.
    */
-  'prepaidFallback(address,uint256)'(
+  "prepaidFallback(address,uint256)"(
     _sender: string,
     _value: BigNumberish,
     overrides?: Overrides
@@ -973,7 +1187,7 @@ export class TimeAllyManager extends Contract {
    * @param _reward : Amount of reward to be processed.
    * @param _rewardType : 0 => Liquid, 1 => Prepaid, 2 => Staked.
    */
-  'processNrtReward(uint256,uint8)'(
+  "processNrtReward(uint256,uint8)"(
     _reward: BigNumberish,
     _rewardType: BigNumberish,
     overrides?: Overrides
@@ -981,7 +1195,7 @@ export class TimeAllyManager extends Contract {
 
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-  'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+  "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Allows NRT Manager contract to send NRT share for TimeAlly.
@@ -994,7 +1208,7 @@ export class TimeAllyManager extends Contract {
   /**
    * Allows NRT Manager contract to send NRT share for TimeAlly.
    */
-  'receiveNrt(uint32)'(
+  "receiveNrt(uint32)"(
     _currentNrtMonth: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
@@ -1003,33 +1217,60 @@ export class TimeAllyManager extends Contract {
    * Removes the staking from valid staking.
    * @param _owner : Address of owner (for emiting the event).
    */
-  removeStaking(_owner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  removeStaking(
+    _owner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Removes the staking from valid staking.
    * @param _owner : Address of owner (for emiting the event).
    */
-  'removeStaking(address)'(_owner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "removeStaking(address)"(
+    _owner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "renounceAdminMode()"(overrides?: Overrides): Promise<ContractTransaction>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddressStrict(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddressStrict(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddressStrict(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  resolveUsernameStrict(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsernameStrict(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Used in admin mode to send initial stakings.
@@ -1050,7 +1291,7 @@ export class TimeAllyManager extends Contract {
    * @param _initialIssTime : IssTime Limit to be given initially.
    * @param _receiver : Address of receipent of the staking contract.
    */
-  'sendStake(address,uint256,bool[])'(
+  "sendStake(address,uint256,bool[])"(
     _receiver: string,
     _initialIssTime: BigNumberish,
     _claimedMonths: boolean[],
@@ -1062,18 +1303,27 @@ export class TimeAllyManager extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'setDefaultMonths(uint32)'(
+  "setDefaultMonths(uint32)"(
     _defaultMonths: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setKycDapp(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "setKycDapp(address)"(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  setStakingTarget(_stakingTarget: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setStakingTarget(
+    _stakingTarget: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setStakingTarget(address)'(
+  "setStakingTarget(address)"(
     _stakingTarget: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -1097,7 +1347,7 @@ export class TimeAllyManager extends Contract {
    * @param _masterEndMonth : Extension end month of master staking for adjusting the total active stakings.
    * @param _owner : Owner of the master staking, is set as owner of the new staking that is created.
    */
-  'splitStaking(address,uint256,uint32)'(
+  "splitStaking(address,uint256,uint32)"(
     _owner: string,
     _initialIssTime: BigNumberish,
     _masterEndMonth: BigNumberish,
@@ -1112,40 +1362,43 @@ export class TimeAllyManager extends Contract {
   /**
    * Deploys a new staking contract with value sent.
    */
-  'stake()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "stake()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   stakingTarget(overrides?: CallOverrides): Promise<string>;
 
-  'stakingTarget()'(overrides?: CallOverrides): Promise<string>;
+  "stakingTarget()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   validatorManager(overrides?: CallOverrides): Promise<string>;
 
-  'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+  "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
@@ -1160,7 +1413,7 @@ export class TimeAllyManager extends Contract {
    * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
    * @param _amount : Amount of claimed NRT rewards by stakers.
    */
-  'withdrawClaimedNrt(uint256)'(
+  "withdrawClaimedNrt(uint256)"(
     _amount: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
@@ -1168,7 +1421,7 @@ export class TimeAllyManager extends Contract {
   callStatic: {
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Used by staking contracts when need to topup, split, merge, issTime and destroy.
@@ -1191,7 +1444,7 @@ export class TimeAllyManager extends Contract {
      * @param _endMonth : Month upto which decreasing should be done
      * @param _startMonth : Month from which decreasing should be done
      */
-    'decreaseActiveStaking(uint256,uint32,uint32)'(
+    "decreaseActiveStaking(uint256,uint32,uint32)"(
       _amount: BigNumberish,
       _startMonth: BigNumberish,
       _endMonth: BigNumberish,
@@ -1206,21 +1459,27 @@ export class TimeAllyManager extends Contract {
     /**
      * Default months for stakings.
      */
-    'defaultMonths()'(overrides?: CallOverrides): Promise<number>;
+    "defaultMonths()"(overrides?: CallOverrides): Promise<number>;
 
     /**
      * Called by any valid staking contract when it splits.
      * Emits a StakingMerge event.
      * @param _childStaking : Address of new staking contract created my master staking.
      */
-    emitStakingMerge(_childStaking: string, overrides?: CallOverrides): Promise<void>;
+    emitStakingMerge(
+      _childStaking: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Called by any valid staking contract when it splits.
      * Emits a StakingMerge event.
      * @param _childStaking : Address of new staking contract created my master staking.
      */
-    'emitStakingMerge(address)'(_childStaking: string, overrides?: CallOverrides): Promise<void>;
+    "emitStakingMerge(address)"(
+      _childStaking: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Called by any valid staking contract when it transfers ownership.
@@ -1240,19 +1499,28 @@ export class TimeAllyManager extends Contract {
      * @param _newOwner : Address of receiver.
      * @param _oldOwner : Address of sender.
      */
-    'emitStakingTransfer(address,address)'(
+    "emitStakingTransfer(address,address)"(
       _oldOwner: string,
       _newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMonthlyNRT(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getTotalActiveStaking(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalActiveStaking(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTotalActiveStaking(uint32)'(
+    "getTotalActiveStaking(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1278,7 +1546,7 @@ export class TimeAllyManager extends Contract {
      * @param _endMonth : Month upto which increasing should be done
      * @param _startMonth : Month from which increasing should be done
      */
-    'increaseActiveStaking(uint256,uint32,uint32)'(
+    "increaseActiveStaking(uint256,uint32,uint32)"(
       _amount: BigNumberish,
       _startMonth: BigNumberish,
       _endMonth: BigNumberish,
@@ -1293,36 +1561,39 @@ export class TimeAllyManager extends Contract {
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'initialize()'(overrides?: CallOverrides): Promise<void>;
+    "initialize()"(overrides?: CallOverrides): Promise<void>;
 
     isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<boolean>;
 
     /**
      * An address once a valid staking contract, is no longer a valid one if it is destroyed.
      * Checks if a given address is a valid and active staking contract.
      * @param _stakingContract : An address to check.
      */
-    isStakingContractValid(_stakingContract: string, overrides?: CallOverrides): Promise<boolean>;
+    isStakingContractValid(
+      _stakingContract: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * An address once a valid staking contract, is no longer a valid one if it is destroyed.
      * Checks if a given address is a valid and active staking contract.
      * @param _stakingContract : An address to check.
      */
-    'isStakingContractValid(address)'(
+    "isStakingContractValid(address)"(
       _stakingContract: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -1332,11 +1603,11 @@ export class TimeAllyManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Used for creating a staking using prepaid ES
@@ -1356,7 +1627,7 @@ export class TimeAllyManager extends Contract {
      * @param _sender : The msg.sender in prepaid contract's transfer method.
      * @param _value : Amount of prepaid ES tokens transferred.
      */
-    'prepaidFallback(address,uint256)'(
+    "prepaidFallback(address,uint256)"(
       _sender: string,
       _value: BigNumberish,
       overrides?: CallOverrides
@@ -1380,7 +1651,7 @@ export class TimeAllyManager extends Contract {
      * @param _reward : Amount of reward to be processed.
      * @param _rewardType : 0 => Liquid, 1 => Prepaid, 2 => Staked.
      */
-    'processNrtReward(uint256,uint8)'(
+    "processNrtReward(uint256,uint8)"(
       _reward: BigNumberish,
       _rewardType: BigNumberish,
       overrides?: CallOverrides
@@ -1388,17 +1659,23 @@ export class TimeAllyManager extends Contract {
 
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    receiveNrt(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    receiveNrt(
+      _currentNrtMonth: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'receiveNrt(uint32)'(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "receiveNrt(uint32)"(
+      _currentNrtMonth: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Removes the staking from valid staking.
@@ -1410,30 +1687,54 @@ export class TimeAllyManager extends Contract {
      * Removes the staking from valid staking.
      * @param _owner : Address of owner (for emiting the event).
      */
-    'removeStaking(address)'(_owner: string, overrides?: CallOverrides): Promise<void>;
+    "removeStaking(address)"(
+      _owner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     renounceAdminMode(overrides?: CallOverrides): Promise<void>;
 
-    'renounceAdminMode()'(overrides?: CallOverrides): Promise<void>;
+    "renounceAdminMode()"(overrides?: CallOverrides): Promise<void>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsernameStrict(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Used in admin mode to send initial stakings.
@@ -1454,27 +1755,39 @@ export class TimeAllyManager extends Contract {
      * @param _initialIssTime : IssTime Limit to be given initially.
      * @param _receiver : Address of receipent of the staking contract.
      */
-    'sendStake(address,uint256,bool[])'(
+    "sendStake(address,uint256,bool[])"(
       _receiver: string,
       _initialIssTime: BigNumberish,
       _claimedMonths: boolean[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setDefaultMonths(_defaultMonths: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    setDefaultMonths(
+      _defaultMonths: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setDefaultMonths(uint32)'(
+    "setDefaultMonths(uint32)"(
       _defaultMonths: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setStakingTarget(_stakingTarget: string, overrides?: CallOverrides): Promise<void>;
+    setStakingTarget(
+      _stakingTarget: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setStakingTarget(address)'(_stakingTarget: string, overrides?: CallOverrides): Promise<void>;
+    "setStakingTarget(address)"(
+      _stakingTarget: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Creates the child contract when spliting a staking, updates active stakings and emits event
@@ -1495,7 +1808,7 @@ export class TimeAllyManager extends Contract {
      * @param _masterEndMonth : Extension end month of master staking for adjusting the total active stakings.
      * @param _owner : Owner of the master staking, is set as owner of the new staking that is created.
      */
-    'splitStaking(address,uint256,uint32)'(
+    "splitStaking(address,uint256,uint32)"(
       _owner: string,
       _initialIssTime: BigNumberish,
       _masterEndMonth: BigNumberish,
@@ -1510,67 +1823,90 @@ export class TimeAllyManager extends Contract {
     /**
      * Deploys a new staking contract with value sent.
      */
-    'stake()'(overrides?: CallOverrides): Promise<void>;
+    "stake()"(overrides?: CallOverrides): Promise<void>;
 
     stakingTarget(overrides?: CallOverrides): Promise<string>;
 
-    'stakingTarget()'(overrides?: CallOverrides): Promise<string>;
+    "stakingTarget()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     validatorManager(overrides?: CallOverrides): Promise<string>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
      * @param _amount : Amount of claimed NRT rewards by stakers.
      */
-    withdrawClaimedNrt(_amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    withdrawClaimedNrt(
+      _amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
      * @param _amount : Amount of claimed NRT rewards by stakers.
      */
-    'withdrawClaimedNrt(uint256)'(_amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "withdrawClaimedNrt(uint256)"(
+      _amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
-    NRTReceived(month: BigNumberish | null, amount: BigNumberish | null, sender: null): EventFilter;
+    NRTReceived(
+      month: BigNumberish | null,
+      amount: BigNumberish | null,
+      sender: null
+    ): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
 
     StakingMerge(master: string | null, child: string | null): EventFilter;
 
     StakingSplit(master: string | null, child: string | null): EventFilter;
 
-    StakingTransfer(from: string | null, to: string | null, staking: string | null): EventFilter;
+    StakingTransfer(
+      from: string | null,
+      to: string | null,
+      staking: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Used by staking contracts when need to topup, split, merge, issTime and destroy.
@@ -1593,7 +1929,7 @@ export class TimeAllyManager extends Contract {
      * @param _endMonth : Month upto which decreasing should be done
      * @param _startMonth : Month from which decreasing should be done
      */
-    'decreaseActiveStaking(uint256,uint32,uint32)'(
+    "decreaseActiveStaking(uint256,uint32,uint32)"(
       _amount: BigNumberish,
       _startMonth: BigNumberish,
       _endMonth: BigNumberish,
@@ -1608,21 +1944,27 @@ export class TimeAllyManager extends Contract {
     /**
      * Default months for stakings.
      */
-    'defaultMonths()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "defaultMonths()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Called by any valid staking contract when it splits.
      * Emits a StakingMerge event.
      * @param _childStaking : Address of new staking contract created my master staking.
      */
-    emitStakingMerge(_childStaking: string, overrides?: Overrides): Promise<BigNumber>;
+    emitStakingMerge(
+      _childStaking: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Called by any valid staking contract when it splits.
      * Emits a StakingMerge event.
      * @param _childStaking : Address of new staking contract created my master staking.
      */
-    'emitStakingMerge(address)'(_childStaking: string, overrides?: Overrides): Promise<BigNumber>;
+    "emitStakingMerge(address)"(
+      _childStaking: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Called by any valid staking contract when it transfers ownership.
@@ -1642,19 +1984,28 @@ export class TimeAllyManager extends Contract {
      * @param _newOwner : Address of receiver.
      * @param _oldOwner : Address of sender.
      */
-    'emitStakingTransfer(address,address)'(
+    "emitStakingTransfer(address,address)"(
       _oldOwner: string,
       _newOwner: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMonthlyNRT(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getTotalActiveStaking(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalActiveStaking(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTotalActiveStaking(uint32)'(
+    "getTotalActiveStaking(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1680,7 +2031,7 @@ export class TimeAllyManager extends Contract {
      * @param _endMonth : Month upto which increasing should be done
      * @param _startMonth : Month from which increasing should be done
      */
-    'increaseActiveStaking(uint256,uint32,uint32)'(
+    "increaseActiveStaking(uint256,uint32,uint32)"(
       _amount: BigNumberish,
       _startMonth: BigNumberish,
       _endMonth: BigNumberish,
@@ -1695,36 +2046,39 @@ export class TimeAllyManager extends Contract {
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "initialize()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     isAdminMode(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * An address once a valid staking contract, is no longer a valid one if it is destroyed.
      * Checks if a given address is a valid and active staking contract.
      * @param _stakingContract : An address to check.
      */
-    isStakingContractValid(_stakingContract: string, overrides?: CallOverrides): Promise<BigNumber>;
+    isStakingContractValid(
+      _stakingContract: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * An address once a valid staking contract, is no longer a valid one if it is destroyed.
      * Checks if a given address is a valid and active staking contract.
      * @param _stakingContract : An address to check.
      */
-    'isStakingContractValid(address)'(
+    "isStakingContractValid(address)"(
       _stakingContract: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -1734,11 +2088,11 @@ export class TimeAllyManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Used for creating a staking using prepaid ES
@@ -1758,7 +2112,7 @@ export class TimeAllyManager extends Contract {
      * @param _sender : The msg.sender in prepaid contract's transfer method.
      * @param _value : Amount of prepaid ES tokens transferred.
      */
-    'prepaidFallback(address,uint256)'(
+    "prepaidFallback(address,uint256)"(
       _sender: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1782,7 +2136,7 @@ export class TimeAllyManager extends Contract {
      * @param _reward : Amount of reward to be processed.
      * @param _rewardType : 0 => Liquid, 1 => Prepaid, 2 => Staked.
      */
-    'processNrtReward(uint256,uint8)'(
+    "processNrtReward(uint256,uint8)"(
       _reward: BigNumberish,
       _rewardType: BigNumberish,
       overrides?: Overrides
@@ -1790,17 +2144,20 @@ export class TimeAllyManager extends Contract {
 
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    receiveNrt(_currentNrtMonth: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
+    receiveNrt(
+      _currentNrtMonth: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
@@ -1815,30 +2172,51 @@ export class TimeAllyManager extends Contract {
      * Removes the staking from valid staking.
      * @param _owner : Address of owner (for emiting the event).
      */
-    'removeStaking(address)'(_owner: string, overrides?: Overrides): Promise<BigNumber>;
+    "removeStaking(address)"(
+      _owner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     renounceAdminMode(overrides?: Overrides): Promise<BigNumber>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<BigNumber>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsernameStrict(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1862,27 +2240,39 @@ export class TimeAllyManager extends Contract {
      * @param _initialIssTime : IssTime Limit to be given initially.
      * @param _receiver : Address of receipent of the staking contract.
      */
-    'sendStake(address,uint256,bool[])'(
+    "sendStake(address,uint256,bool[])"(
       _receiver: string,
       _initialIssTime: BigNumberish,
       _claimedMonths: boolean[],
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    setDefaultMonths(_defaultMonths: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    setDefaultMonths(
+      _defaultMonths: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'setDefaultMonths(uint32)'(
+    "setDefaultMonths(uint32)"(
       _defaultMonths: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    setStakingTarget(_stakingTarget: string, overrides?: Overrides): Promise<BigNumber>;
+    setStakingTarget(
+      _stakingTarget: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'setStakingTarget(address)'(_stakingTarget: string, overrides?: Overrides): Promise<BigNumber>;
+    "setStakingTarget(address)"(
+      _stakingTarget: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Creates the child contract when spliting a staking, updates active stakings and emits event
@@ -1903,7 +2293,7 @@ export class TimeAllyManager extends Contract {
      * @param _masterEndMonth : Extension end month of master staking for adjusting the total active stakings.
      * @param _owner : Owner of the master staking, is set as owner of the new staking that is created.
      */
-    'splitStaking(address,uint256,uint32)'(
+    "splitStaking(address,uint256,uint32)"(
       _owner: string,
       _initialIssTime: BigNumberish,
       _masterEndMonth: BigNumberish,
@@ -1918,49 +2308,60 @@ export class TimeAllyManager extends Contract {
     /**
      * Deploys a new staking contract with value sent.
      */
-    'stake()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "stake()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     stakingTarget(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'stakingTarget()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "stakingTarget()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyClub(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     validatorManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
      * @param _amount : Amount of claimed NRT rewards by stakers.
      */
-    withdrawClaimedNrt(_amount: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
+    withdrawClaimedNrt(
+      _amount: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
      * @param _amount : Amount of claimed NRT rewards by stakers.
      */
-    'withdrawClaimedNrt(uint256)'(
+    "withdrawClaimedNrt(uint256)"(
       _amount: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
@@ -1969,7 +2370,7 @@ export class TimeAllyManager extends Contract {
   populateTransaction: {
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Used by staking contracts when need to topup, split, merge, issTime and destroy.
@@ -1992,7 +2393,7 @@ export class TimeAllyManager extends Contract {
      * @param _endMonth : Month upto which decreasing should be done
      * @param _startMonth : Month from which decreasing should be done
      */
-    'decreaseActiveStaking(uint256,uint32,uint32)'(
+    "decreaseActiveStaking(uint256,uint32,uint32)"(
       _amount: BigNumberish,
       _startMonth: BigNumberish,
       _endMonth: BigNumberish,
@@ -2007,21 +2408,24 @@ export class TimeAllyManager extends Contract {
     /**
      * Default months for stakings.
      */
-    'defaultMonths()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "defaultMonths()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Called by any valid staking contract when it splits.
      * Emits a StakingMerge event.
      * @param _childStaking : Address of new staking contract created my master staking.
      */
-    emitStakingMerge(_childStaking: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    emitStakingMerge(
+      _childStaking: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Called by any valid staking contract when it splits.
      * Emits a StakingMerge event.
      * @param _childStaking : Address of new staking contract created my master staking.
      */
-    'emitStakingMerge(address)'(
+    "emitStakingMerge(address)"(
       _childStaking: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -2044,15 +2448,18 @@ export class TimeAllyManager extends Contract {
      * @param _newOwner : Address of receiver.
      * @param _oldOwner : Address of sender.
      */
-    'emitStakingTransfer(address,address)'(
+    "emitStakingTransfer(address,address)"(
       _oldOwner: string,
       _newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getMonthlyNRT(uint32)'(
+    "getMonthlyNRT(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2062,7 +2469,7 @@ export class TimeAllyManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getTotalActiveStaking(uint32)'(
+    "getTotalActiveStaking(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2088,7 +2495,7 @@ export class TimeAllyManager extends Contract {
      * @param _endMonth : Month upto which increasing should be done
      * @param _startMonth : Month from which increasing should be done
      */
-    'increaseActiveStaking(uint256,uint32,uint32)'(
+    "increaseActiveStaking(uint256,uint32,uint32)"(
       _amount: BigNumberish,
       _startMonth: BigNumberish,
       _endMonth: BigNumberish,
@@ -2103,11 +2510,11 @@ export class TimeAllyManager extends Contract {
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     isAdminMode(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * An address once a valid staking contract, is no longer a valid one if it is destroyed.
@@ -2124,18 +2531,18 @@ export class TimeAllyManager extends Contract {
      * Checks if a given address is a valid and active staking contract.
      * @param _stakingContract : An address to check.
      */
-    'isStakingContractValid(address)'(
+    "isStakingContractValid(address)"(
       _stakingContract: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -2145,11 +2552,11 @@ export class TimeAllyManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Used for creating a staking using prepaid ES
@@ -2169,7 +2576,7 @@ export class TimeAllyManager extends Contract {
      * @param _sender : The msg.sender in prepaid contract's transfer method.
      * @param _value : Amount of prepaid ES tokens transferred.
      */
-    'prepaidFallback(address,uint256)'(
+    "prepaidFallback(address,uint256)"(
       _sender: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -2193,7 +2600,7 @@ export class TimeAllyManager extends Contract {
      * @param _reward : Amount of reward to be processed.
      * @param _rewardType : 0 => Liquid, 1 => Prepaid, 2 => Staked.
      */
-    'processNrtReward(uint256,uint8)'(
+    "processNrtReward(uint256,uint8)"(
       _reward: BigNumberish,
       _rewardType: BigNumberish,
       overrides?: Overrides
@@ -2201,7 +2608,9 @@ export class TimeAllyManager extends Contract {
 
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "randomnessManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
@@ -2214,7 +2623,7 @@ export class TimeAllyManager extends Contract {
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
@@ -2223,21 +2632,30 @@ export class TimeAllyManager extends Contract {
      * Removes the staking from valid staking.
      * @param _owner : Address of owner (for emiting the event).
      */
-    removeStaking(_owner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    removeStaking(
+      _owner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Removes the staking from valid staking.
      * @param _owner : Address of owner (for emiting the event).
      */
-    'removeStaking(address)'(_owner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "removeStaking(address)"(
+      _owner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     renounceAdminMode(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2247,14 +2665,17 @@ export class TimeAllyManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2264,7 +2685,7 @@ export class TimeAllyManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2288,7 +2709,7 @@ export class TimeAllyManager extends Contract {
      * @param _initialIssTime : IssTime Limit to be given initially.
      * @param _receiver : Address of receipent of the staking contract.
      */
-    'sendStake(address,uint256,bool[])'(
+    "sendStake(address,uint256,bool[])"(
       _receiver: string,
       _initialIssTime: BigNumberish,
       _claimedMonths: boolean[],
@@ -2300,18 +2721,27 @@ export class TimeAllyManager extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'setDefaultMonths(uint32)'(
+    "setDefaultMonths(uint32)"(
       _defaultMonths: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    setStakingTarget(_stakingTarget: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setStakingTarget(
+      _stakingTarget: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setStakingTarget(address)'(
+    "setStakingTarget(address)"(
       _stakingTarget: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -2335,7 +2765,7 @@ export class TimeAllyManager extends Contract {
      * @param _masterEndMonth : Extension end month of master staking for adjusting the total active stakings.
      * @param _owner : Owner of the master staking, is set as owner of the new staking that is created.
      */
-    'splitStaking(address,uint256,uint32)'(
+    "splitStaking(address,uint256,uint32)"(
       _owner: string,
       _initialIssTime: BigNumberish,
       _masterEndMonth: BigNumberish,
@@ -2350,40 +2780,51 @@ export class TimeAllyManager extends Contract {
     /**
      * Deploys a new staking contract with value sent.
      */
-    'stake()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "stake()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     stakingTarget(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'stakingTarget()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "stakingTarget()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyClub(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    timeallyPromotionalBucket(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     validatorManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "validatorManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
@@ -2398,7 +2839,7 @@ export class TimeAllyManager extends Contract {
      * Withdraws the NRT rewards claimed by stakers (to process native token replacement).
      * @param _amount : Amount of claimed NRT rewards by stakers.
      */
-    'withdrawClaimedNrt(uint256)'(
+    "withdrawClaimedNrt(uint256)"(
       _amount: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;

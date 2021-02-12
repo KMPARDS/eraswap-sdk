@@ -2,104 +2,191 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface IValidatorManagerInterface extends ethers.utils.Interface {
   functions: {
-    'getAdjustedAmount(uint256,uint256,uint256)': FunctionFragment;
-    'getDelegatorByAddress(uint32,address,address)': FunctionFragment;
-    'getDelegatorByIndex(uint32,uint256,uint256)': FunctionFragment;
-    'getDelegatorIndex(uint32,uint256,address)': FunctionFragment;
-    'getLuckyValidatorAddress()': FunctionFragment;
-    'getTotalAdjustedStakings(uint32)': FunctionFragment;
-    'getTotalBlocksSealed(uint32)': FunctionFragment;
-    'getValidatorByAddress(uint32,address)': FunctionFragment;
-    'getValidatorByIndex(uint32,uint256)': FunctionFragment;
-    'getValidatorEarning(uint32,address)': FunctionFragment;
-    'getValidatorIndex(uint32,address)': FunctionFragment;
-    'getValidators(uint32)': FunctionFragment;
-    'pickValidator(uint32,uint256)': FunctionFragment;
-    'registerBlock(address)': FunctionFragment;
-    'registerDelegation(uint32,bytes)': FunctionFragment;
-    'setCommission(uint32,uint256)': FunctionFragment;
-    'withdrawCommission(uint32)': FunctionFragment;
-    'withdrawDelegationShare(uint32,address,address)': FunctionFragment;
+    "getAdjustedAmount(uint256,uint256,uint256)": FunctionFragment;
+    "getDelegatorByAddress(uint32,address,address)": FunctionFragment;
+    "getDelegatorByIndex(uint32,uint256,uint256)": FunctionFragment;
+    "getDelegatorIndex(uint32,uint256,address)": FunctionFragment;
+    "getLuckyValidatorAddress()": FunctionFragment;
+    "getTotalAdjustedStakings(uint32)": FunctionFragment;
+    "getTotalBlocksSealed(uint32)": FunctionFragment;
+    "getValidatorByAddress(uint32,address)": FunctionFragment;
+    "getValidatorByIndex(uint32,uint256)": FunctionFragment;
+    "getValidatorEarning(uint32,address)": FunctionFragment;
+    "getValidatorIndex(uint32,address)": FunctionFragment;
+    "getValidators(uint32)": FunctionFragment;
+    "pickValidator(uint32,uint256)": FunctionFragment;
+    "registerBlock(address)": FunctionFragment;
+    "registerDelegation(uint32,bytes)": FunctionFragment;
+    "setCommission(uint32,uint256)": FunctionFragment;
+    "withdrawCommission(uint32)": FunctionFragment;
+    "withdrawDelegationShare(uint32,address,address)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'getAdjustedAmount',
+    functionFragment: "getAdjustedAmount",
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getDelegatorByAddress',
+    functionFragment: "getDelegatorByAddress",
     values: [BigNumberish, string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getDelegatorByIndex',
+    functionFragment: "getDelegatorByIndex",
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getDelegatorIndex',
+    functionFragment: "getDelegatorIndex",
     values: [BigNumberish, BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: 'getLuckyValidatorAddress', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getTotalAdjustedStakings', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getTotalBlocksSealed', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'getValidatorByAddress',
+    functionFragment: "getLuckyValidatorAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTotalAdjustedStakings",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTotalBlocksSealed",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getValidatorByAddress",
     values: [BigNumberish, string]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getValidatorByIndex',
+    functionFragment: "getValidatorByIndex",
     values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getValidatorEarning',
+    functionFragment: "getValidatorEarning",
     values: [BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: 'getValidatorIndex', values: [BigNumberish, string]): string;
-  encodeFunctionData(functionFragment: 'getValidators', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'pickValidator',
+    functionFragment: "getValidatorIndex",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getValidators",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pickValidator",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'registerBlock', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'registerDelegation',
+    functionFragment: "registerBlock",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerDelegation",
     values: [BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'setCommission',
+    functionFragment: "setCommission",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'withdrawCommission', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'withdrawDelegationShare',
+    functionFragment: "withdrawCommission",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawDelegationShare",
     values: [BigNumberish, string, string]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'getAdjustedAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDelegatorByAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDelegatorByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDelegatorIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getLuckyValidatorAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalAdjustedStakings', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalBlocksSealed', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidatorByAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidatorByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidatorEarning', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidatorIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidators', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'pickValidator', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'registerBlock', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'registerDelegation', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setCommission', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawCommission', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawDelegationShare', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getAdjustedAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDelegatorByAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDelegatorByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDelegatorIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getLuckyValidatorAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalAdjustedStakings",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalBlocksSealed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidatorByAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidatorByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidatorEarning",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidatorIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidators",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pickValidator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerBlock",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerDelegation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCommission",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawCommission",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawDelegationShare",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -127,7 +214,7 @@ export class IValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getAdjustedAmount(uint256,uint256,uint256)'(
+    "getAdjustedAmount(uint256,uint256,uint256)"(
       _amount: BigNumberish,
       _base: BigNumberish,
       _premiumFactor: BigNumberish,
@@ -152,7 +239,7 @@ export class IValidatorManager extends Contract {
       };
     }>;
 
-    'getDelegatorByAddress(uint32,address,address)'(
+    "getDelegatorByAddress(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -184,7 +271,7 @@ export class IValidatorManager extends Contract {
       };
     }>;
 
-    'getDelegatorByIndex(uint32,uint256,uint256)'(
+    "getDelegatorByIndex(uint32,uint256,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _delegatorIndex: BigNumberish,
@@ -209,7 +296,7 @@ export class IValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getDelegatorIndex(uint32,uint256,address)'(
+    "getDelegatorIndex(uint32,uint256,address)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _stakingContract: string,
@@ -218,9 +305,13 @@ export class IValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    getLuckyValidatorAddress(overrides?: Overrides): Promise<ContractTransaction>;
+    getLuckyValidatorAddress(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'getLuckyValidatorAddress()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "getLuckyValidatorAddress()"(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     getTotalAdjustedStakings(
       _month: BigNumberish,
@@ -229,7 +320,7 @@ export class IValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getTotalAdjustedStakings(uint32)'(
+    "getTotalAdjustedStakings(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -243,7 +334,7 @@ export class IValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getTotalBlocksSealed(uint32)'(
+    "getTotalBlocksSealed(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -287,7 +378,7 @@ export class IValidatorManager extends Contract {
       };
     }>;
 
-    'getValidatorByAddress(uint32,address)'(
+    "getValidatorByAddress(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -361,7 +452,7 @@ export class IValidatorManager extends Contract {
       };
     }>;
 
-    'getValidatorByIndex(uint32,uint256)'(
+    "getValidatorByIndex(uint32,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
@@ -404,7 +495,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'getValidatorEarning(uint32,address)'(
+    "getValidatorEarning(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: Overrides
@@ -418,7 +509,7 @@ export class IValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getValidatorIndex(uint32,address)'(
+    "getValidatorIndex(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -462,7 +553,7 @@ export class IValidatorManager extends Contract {
       }[];
     }>;
 
-    'getValidators(uint32)'(
+    "getValidators(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -506,7 +597,7 @@ export class IValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'pickValidator(uint32,uint256)'(
+    "pickValidator(uint32,uint256)"(
       _month: BigNumberish,
       _seed: BigNumberish,
       overrides?: CallOverrides
@@ -514,9 +605,15 @@ export class IValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    registerBlock(_sealer: string, overrides?: Overrides): Promise<ContractTransaction>;
+    registerBlock(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'registerBlock(address)'(_sealer: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "registerBlock(address)"(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     registerDelegation(
       _month: BigNumberish,
@@ -524,7 +621,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides
@@ -536,15 +633,18 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'setCommission(uint32,uint256)'(
+    "setCommission(uint32,uint256)"(
       _month: BigNumberish,
       _perThousandCommission: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    withdrawCommission(_month: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    withdrawCommission(
+      _month: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'withdrawCommission(uint32)'(
+    "withdrawCommission(uint32)"(
       _month: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -556,7 +656,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'withdrawDelegationShare(uint32,address,address)'(
+    "withdrawDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -571,7 +671,7 @@ export class IValidatorManager extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'getAdjustedAmount(uint256,uint256,uint256)'(
+  "getAdjustedAmount(uint256,uint256,uint256)"(
     _amount: BigNumberish,
     _base: BigNumberish,
     _premiumFactor: BigNumberish,
@@ -592,7 +692,7 @@ export class IValidatorManager extends Contract {
     2: boolean;
   }>;
 
-  'getDelegatorByAddress(uint32,address,address)'(
+  "getDelegatorByAddress(uint32,address,address)"(
     _month: BigNumberish,
     _validator: string,
     _stakingContract: string,
@@ -620,7 +720,7 @@ export class IValidatorManager extends Contract {
     2: boolean;
   }>;
 
-  'getDelegatorByIndex(uint32,uint256,uint256)'(
+  "getDelegatorByIndex(uint32,uint256,uint256)"(
     _month: BigNumberish,
     _validatorIndex: BigNumberish,
     _delegatorIndex: BigNumberish,
@@ -641,7 +741,7 @@ export class IValidatorManager extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'getDelegatorIndex(uint32,uint256,address)'(
+  "getDelegatorIndex(uint32,uint256,address)"(
     _month: BigNumberish,
     _validatorIndex: BigNumberish,
     _stakingContract: string,
@@ -650,18 +750,26 @@ export class IValidatorManager extends Contract {
 
   getLuckyValidatorAddress(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'getLuckyValidatorAddress()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "getLuckyValidatorAddress()"(
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  getTotalAdjustedStakings(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-  'getTotalAdjustedStakings(uint32)'(
+  getTotalAdjustedStakings(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  getTotalBlocksSealed(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  "getTotalAdjustedStakings(uint32)"(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getTotalBlocksSealed(uint32)'(
+  getTotalBlocksSealed(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "getTotalBlocksSealed(uint32)"(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -701,7 +809,7 @@ export class IValidatorManager extends Contract {
     }[];
   }>;
 
-  'getValidatorByAddress(uint32,address)'(
+  "getValidatorByAddress(uint32,address)"(
     _month: BigNumberish,
     _validator: string,
     overrides?: CallOverrides
@@ -771,7 +879,7 @@ export class IValidatorManager extends Contract {
     }[];
   }>;
 
-  'getValidatorByIndex(uint32,uint256)'(
+  "getValidatorByIndex(uint32,uint256)"(
     _month: BigNumberish,
     _validatorIndex: BigNumberish,
     overrides?: CallOverrides
@@ -812,7 +920,7 @@ export class IValidatorManager extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'getValidatorEarning(uint32,address)'(
+  "getValidatorEarning(uint32,address)"(
     _month: BigNumberish,
     _validator: string,
     overrides?: Overrides
@@ -824,7 +932,7 @@ export class IValidatorManager extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'getValidatorIndex(uint32,address)'(
+  "getValidatorIndex(uint32,address)"(
     _month: BigNumberish,
     _validator: string,
     overrides?: CallOverrides
@@ -866,7 +974,7 @@ export class IValidatorManager extends Contract {
     }[]
   >;
 
-  'getValidators(uint32)'(
+  "getValidators(uint32)"(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
@@ -908,15 +1016,21 @@ export class IValidatorManager extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'pickValidator(uint32,uint256)'(
+  "pickValidator(uint32,uint256)"(
     _month: BigNumberish,
     _seed: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  registerBlock(_sealer: string, overrides?: Overrides): Promise<ContractTransaction>;
+  registerBlock(
+    _sealer: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'registerBlock(address)'(_sealer: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "registerBlock(address)"(
+    _sealer: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   registerDelegation(
     _month: BigNumberish,
@@ -924,7 +1038,7 @@ export class IValidatorManager extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'registerDelegation(uint32,bytes)'(
+  "registerDelegation(uint32,bytes)"(
     _month: BigNumberish,
     _extraData: BytesLike,
     overrides?: Overrides
@@ -936,15 +1050,18 @@ export class IValidatorManager extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'setCommission(uint32,uint256)'(
+  "setCommission(uint32,uint256)"(
     _month: BigNumberish,
     _perThousandCommission: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  withdrawCommission(_month: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  withdrawCommission(
+    _month: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'withdrawCommission(uint32)'(
+  "withdrawCommission(uint32)"(
     _month: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -956,7 +1073,7 @@ export class IValidatorManager extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'withdrawDelegationShare(uint32,address,address)'(
+  "withdrawDelegationShare(uint32,address,address)"(
     _month: BigNumberish,
     _validator: string,
     _stakingContract: string,
@@ -971,7 +1088,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getAdjustedAmount(uint256,uint256,uint256)'(
+    "getAdjustedAmount(uint256,uint256,uint256)"(
       _amount: BigNumberish,
       _base: BigNumberish,
       _premiumFactor: BigNumberish,
@@ -992,7 +1109,7 @@ export class IValidatorManager extends Contract {
       2: boolean;
     }>;
 
-    'getDelegatorByAddress(uint32,address,address)'(
+    "getDelegatorByAddress(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -1020,7 +1137,7 @@ export class IValidatorManager extends Contract {
       2: boolean;
     }>;
 
-    'getDelegatorByIndex(uint32,uint256,uint256)'(
+    "getDelegatorByIndex(uint32,uint256,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _delegatorIndex: BigNumberish,
@@ -1041,7 +1158,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getDelegatorIndex(uint32,uint256,address)'(
+    "getDelegatorIndex(uint32,uint256,address)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _stakingContract: string,
@@ -1050,18 +1167,24 @@ export class IValidatorManager extends Contract {
 
     getLuckyValidatorAddress(overrides?: CallOverrides): Promise<string>;
 
-    'getLuckyValidatorAddress()'(overrides?: CallOverrides): Promise<string>;
+    "getLuckyValidatorAddress()"(overrides?: CallOverrides): Promise<string>;
 
-    getTotalAdjustedStakings(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getTotalAdjustedStakings(uint32)'(
+    getTotalAdjustedStakings(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getTotalBlocksSealed(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getTotalAdjustedStakings(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTotalBlocksSealed(uint32)'(
+    getTotalBlocksSealed(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getTotalBlocksSealed(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1101,7 +1224,7 @@ export class IValidatorManager extends Contract {
       }[];
     }>;
 
-    'getValidatorByAddress(uint32,address)'(
+    "getValidatorByAddress(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -1171,7 +1294,7 @@ export class IValidatorManager extends Contract {
       }[];
     }>;
 
-    'getValidatorByIndex(uint32,uint256)'(
+    "getValidatorByIndex(uint32,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
@@ -1212,7 +1335,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getValidatorEarning(uint32,address)'(
+    "getValidatorEarning(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -1224,7 +1347,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getValidatorIndex(uint32,address)'(
+    "getValidatorIndex(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -1266,7 +1389,7 @@ export class IValidatorManager extends Contract {
       }[]
     >;
 
-    'getValidators(uint32)'(
+    "getValidators(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
@@ -1308,7 +1431,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'pickValidator(uint32,uint256)'(
+    "pickValidator(uint32,uint256)"(
       _month: BigNumberish,
       _seed: BigNumberish,
       overrides?: CallOverrides
@@ -1316,7 +1439,10 @@ export class IValidatorManager extends Contract {
 
     registerBlock(_sealer: string, overrides?: CallOverrides): Promise<void>;
 
-    'registerBlock(address)'(_sealer: string, overrides?: CallOverrides): Promise<void>;
+    "registerBlock(address)"(
+      _sealer: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     registerDelegation(
       _month: BigNumberish,
@@ -1324,7 +1450,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: CallOverrides
@@ -1336,15 +1462,21 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'setCommission(uint32,uint256)'(
+    "setCommission(uint32,uint256)"(
       _month: BigNumberish,
       _perThousandCommission: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    withdrawCommission(_month: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    withdrawCommission(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'withdrawCommission(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "withdrawCommission(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     withdrawDelegationShare(
       _month: BigNumberish,
@@ -1353,7 +1485,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'withdrawDelegationShare(uint32,address,address)'(
+    "withdrawDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -1371,7 +1503,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getAdjustedAmount(uint256,uint256,uint256)'(
+    "getAdjustedAmount(uint256,uint256,uint256)"(
       _amount: BigNumberish,
       _base: BigNumberish,
       _premiumFactor: BigNumberish,
@@ -1385,7 +1517,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getDelegatorByAddress(uint32,address,address)'(
+    "getDelegatorByAddress(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -1399,7 +1531,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getDelegatorByIndex(uint32,uint256,uint256)'(
+    "getDelegatorByIndex(uint32,uint256,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _delegatorIndex: BigNumberish,
@@ -1413,7 +1545,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getDelegatorIndex(uint32,uint256,address)'(
+    "getDelegatorIndex(uint32,uint256,address)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _stakingContract: string,
@@ -1422,18 +1554,24 @@ export class IValidatorManager extends Contract {
 
     getLuckyValidatorAddress(overrides?: Overrides): Promise<BigNumber>;
 
-    'getLuckyValidatorAddress()'(overrides?: Overrides): Promise<BigNumber>;
+    "getLuckyValidatorAddress()"(overrides?: Overrides): Promise<BigNumber>;
 
-    getTotalAdjustedStakings(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getTotalAdjustedStakings(uint32)'(
+    getTotalAdjustedStakings(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getTotalBlocksSealed(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getTotalAdjustedStakings(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTotalBlocksSealed(uint32)'(
+    getTotalBlocksSealed(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getTotalBlocksSealed(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1444,7 +1582,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getValidatorByAddress(uint32,address)'(
+    "getValidatorByAddress(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -1456,7 +1594,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getValidatorByIndex(uint32,uint256)'(
+    "getValidatorByIndex(uint32,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
@@ -1468,7 +1606,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'getValidatorEarning(uint32,address)'(
+    "getValidatorEarning(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: Overrides
@@ -1480,15 +1618,21 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getValidatorIndex(uint32,address)'(
+    "getValidatorIndex(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getValidators(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getValidators(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getValidators(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getValidators(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     pickValidator(
       _month: BigNumberish,
@@ -1496,7 +1640,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'pickValidator(uint32,uint256)'(
+    "pickValidator(uint32,uint256)"(
       _month: BigNumberish,
       _seed: BigNumberish,
       overrides?: CallOverrides
@@ -1504,7 +1648,10 @@ export class IValidatorManager extends Contract {
 
     registerBlock(_sealer: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'registerBlock(address)'(_sealer: string, overrides?: Overrides): Promise<BigNumber>;
+    "registerBlock(address)"(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     registerDelegation(
       _month: BigNumberish,
@@ -1512,7 +1659,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides
@@ -1524,15 +1671,21 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'setCommission(uint32,uint256)'(
+    "setCommission(uint32,uint256)"(
       _month: BigNumberish,
       _perThousandCommission: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    withdrawCommission(_month: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    withdrawCommission(
+      _month: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'withdrawCommission(uint32)'(_month: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    "withdrawCommission(uint32)"(
+      _month: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     withdrawDelegationShare(
       _month: BigNumberish,
@@ -1541,7 +1694,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'withdrawDelegationShare(uint32,address,address)'(
+    "withdrawDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -1557,7 +1710,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getAdjustedAmount(uint256,uint256,uint256)'(
+    "getAdjustedAmount(uint256,uint256,uint256)"(
       _amount: BigNumberish,
       _base: BigNumberish,
       _premiumFactor: BigNumberish,
@@ -1571,7 +1724,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getDelegatorByAddress(uint32,address,address)'(
+    "getDelegatorByAddress(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -1585,7 +1738,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getDelegatorByIndex(uint32,uint256,uint256)'(
+    "getDelegatorByIndex(uint32,uint256,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _delegatorIndex: BigNumberish,
@@ -1599,23 +1752,27 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getDelegatorIndex(uint32,uint256,address)'(
+    "getDelegatorIndex(uint32,uint256,address)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _stakingContract: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getLuckyValidatorAddress(overrides?: Overrides): Promise<PopulatedTransaction>;
+    getLuckyValidatorAddress(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'getLuckyValidatorAddress()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "getLuckyValidatorAddress()"(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     getTotalAdjustedStakings(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getTotalAdjustedStakings(uint32)'(
+    "getTotalAdjustedStakings(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1625,7 +1782,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getTotalBlocksSealed(uint32)'(
+    "getTotalBlocksSealed(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1636,7 +1793,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getValidatorByAddress(uint32,address)'(
+    "getValidatorByAddress(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -1648,7 +1805,7 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getValidatorByIndex(uint32,uint256)'(
+    "getValidatorByIndex(uint32,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
@@ -1660,7 +1817,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'getValidatorEarning(uint32,address)'(
+    "getValidatorEarning(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: Overrides
@@ -1672,15 +1829,18 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getValidatorIndex(uint32,address)'(
+    "getValidatorIndex(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getValidators(_month: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getValidators(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getValidators(uint32)'(
+    "getValidators(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1691,15 +1851,21 @@ export class IValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'pickValidator(uint32,uint256)'(
+    "pickValidator(uint32,uint256)"(
       _month: BigNumberish,
       _seed: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    registerBlock(_sealer: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    registerBlock(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'registerBlock(address)'(_sealer: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "registerBlock(address)"(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     registerDelegation(
       _month: BigNumberish,
@@ -1707,7 +1873,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides
@@ -1719,15 +1885,18 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'setCommission(uint32,uint256)'(
+    "setCommission(uint32,uint256)"(
       _month: BigNumberish,
       _perThousandCommission: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    withdrawCommission(_month: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    withdrawCommission(
+      _month: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'withdrawCommission(uint32)'(
+    "withdrawCommission(uint32)"(
       _month: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -1739,7 +1908,7 @@ export class IValidatorManager extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'withdrawDelegationShare(uint32,address,address)'(
+    "withdrawDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,

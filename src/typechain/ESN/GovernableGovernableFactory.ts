@@ -2,14 +2,21 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { GovernableGovernable } from './GovernableGovernable';
+import type { GovernableGovernable } from "./GovernableGovernable";
 
 export class GovernableGovernableFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): GovernableGovernable {
-    return new Contract(address, _abi, signerOrProvider) as GovernableGovernable;
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): GovernableGovernable {
+    return new Contract(
+      address,
+      _abi,
+      signerOrProvider
+    ) as GovernableGovernable;
   }
 }
 
@@ -19,44 +26,44 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'previousOwner',
-        type: 'address',
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'OwnershipTransferred',
-    type: 'event',
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
     inputs: [],
-    name: 'owner',
+    name: "owner",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'transferOwnership',
+    name: "transferOwnership",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

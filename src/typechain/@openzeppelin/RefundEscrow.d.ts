@@ -2,73 +2,116 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface RefundEscrowInterface extends ethers.utils.Interface {
   functions: {
-    'beneficiary()': FunctionFragment;
-    'beneficiaryWithdraw()': FunctionFragment;
-    'close()': FunctionFragment;
-    'deposit(address)': FunctionFragment;
-    'depositsOf(address)': FunctionFragment;
-    'enableRefunds()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
-    'state()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'withdraw(address)': FunctionFragment;
-    'withdrawalAllowed(address)': FunctionFragment;
+    "beneficiary()": FunctionFragment;
+    "beneficiaryWithdraw()": FunctionFragment;
+    "close()": FunctionFragment;
+    "deposit(address)": FunctionFragment;
+    "depositsOf(address)": FunctionFragment;
+    "enableRefunds()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
+    "state()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "withdraw(address)": FunctionFragment;
+    "withdrawalAllowed(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'beneficiary', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'beneficiaryWithdraw', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'close', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'deposit', values: [string]): string;
-  encodeFunctionData(functionFragment: 'depositsOf', values: [string]): string;
-  encodeFunctionData(functionFragment: 'enableRefunds', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'state', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'withdraw', values: [string]): string;
-  encodeFunctionData(functionFragment: 'withdrawalAllowed', values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "beneficiary",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "beneficiaryWithdraw",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "close", values?: undefined): string;
+  encodeFunctionData(functionFragment: "deposit", values: [string]): string;
+  encodeFunctionData(functionFragment: "depositsOf", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "enableRefunds",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "state", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "withdraw", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "withdrawalAllowed",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'beneficiary', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'beneficiaryWithdraw', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'close', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'deposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'depositsOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'enableRefunds', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'state', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawalAllowed', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "beneficiary",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "beneficiaryWithdraw",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "close", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "depositsOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "enableRefunds",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "state", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawalAllowed",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Deposited(address,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'RefundsClosed()': EventFragment;
-    'RefundsEnabled()': EventFragment;
-    'Withdrawn(address,uint256)': EventFragment;
+    "Deposited(address,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "RefundsClosed()": EventFragment;
+    "RefundsEnabled()": EventFragment;
+    "Withdrawn(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Deposited'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RefundsClosed'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RefundsEnabled'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Withdrawn'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Deposited"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RefundsClosed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RefundsEnabled"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdrawn"): EventFragment;
 }
 
 export class RefundEscrow extends Contract {
@@ -95,7 +138,7 @@ export class RefundEscrow extends Contract {
 
     /**
      */
-    'beneficiary()'(
+    "beneficiary()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -109,7 +152,9 @@ export class RefundEscrow extends Contract {
     /**
      * Withdraws the beneficiary's funds.
      */
-    'beneficiaryWithdraw()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "beneficiaryWithdraw()"(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
@@ -119,19 +164,22 @@ export class RefundEscrow extends Contract {
     /**
      * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
      */
-    'close()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "close()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      * Stores funds that may later be refunded.
      * @param refundee The address funds will be sent to if a refund occurs.
      */
-    deposit(refundee: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+    deposit(
+      refundee: string,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Stores funds that may later be refunded.
      * @param refundee The address funds will be sent to if a refund occurs.
      */
-    'deposit(address)'(
+    "deposit(address)"(
       refundee: string,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -143,7 +191,7 @@ export class RefundEscrow extends Contract {
       0: BigNumber;
     }>;
 
-    'depositsOf(address)'(
+    "depositsOf(address)"(
       payee: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -158,7 +206,7 @@ export class RefundEscrow extends Contract {
     /**
      * Allows for refunds to take place, rejecting further deposits.
      */
-    'enableRefunds()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "enableRefunds()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -172,7 +220,7 @@ export class RefundEscrow extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -186,7 +234,7 @@ export class RefundEscrow extends Contract {
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
      */
-    'renounceOwnership()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      */
@@ -198,7 +246,7 @@ export class RefundEscrow extends Contract {
 
     /**
      */
-    'state()'(
+    "state()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -207,12 +255,15 @@ export class RefundEscrow extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -221,13 +272,19 @@ export class RefundEscrow extends Contract {
      * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee The address whose funds will be withdrawn and transferred to.
      */
-    withdraw(payee: string, overrides?: Overrides): Promise<ContractTransaction>;
+    withdraw(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee The address whose funds will be withdrawn and transferred to.
      */
-    'withdraw(address)'(payee: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "withdraw(address)"(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
@@ -242,7 +299,7 @@ export class RefundEscrow extends Contract {
     /**
      * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
      */
-    'withdrawalAllowed(address)'(
+    "withdrawalAllowed(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -256,7 +313,7 @@ export class RefundEscrow extends Contract {
 
   /**
    */
-  'beneficiary()'(overrides?: CallOverrides): Promise<string>;
+  "beneficiary()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Withdraws the beneficiary's funds.
@@ -266,7 +323,7 @@ export class RefundEscrow extends Contract {
   /**
    * Withdraws the beneficiary's funds.
    */
-  'beneficiaryWithdraw()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "beneficiaryWithdraw()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
@@ -276,23 +333,32 @@ export class RefundEscrow extends Contract {
   /**
    * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
    */
-  'close()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "close()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * Stores funds that may later be refunded.
    * @param refundee The address funds will be sent to if a refund occurs.
    */
-  deposit(refundee: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  deposit(
+    refundee: string,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Stores funds that may later be refunded.
    * @param refundee The address funds will be sent to if a refund occurs.
    */
-  'deposit(address)'(refundee: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "deposit(address)"(
+    refundee: string,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   depositsOf(payee: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'depositsOf(address)'(payee: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "depositsOf(address)"(
+    payee: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Allows for refunds to take place, rejecting further deposits.
@@ -302,7 +368,7 @@ export class RefundEscrow extends Contract {
   /**
    * Allows for refunds to take place, rejecting further deposits.
    */
-  'enableRefunds()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "enableRefunds()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * Returns the address of the current owner.
@@ -312,7 +378,7 @@ export class RefundEscrow extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
@@ -322,7 +388,7 @@ export class RefundEscrow extends Contract {
   /**
    * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
    */
-  'renounceOwnership()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    */
@@ -330,17 +396,20 @@ export class RefundEscrow extends Contract {
 
   /**
    */
-  'state()'(overrides?: CallOverrides): Promise<number>;
+  "state()"(overrides?: CallOverrides): Promise<number>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -355,7 +424,10 @@ export class RefundEscrow extends Contract {
    * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
    * @param payee The address whose funds will be withdrawn and transferred to.
    */
-  'withdraw(address)'(payee: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "withdraw(address)"(
+    payee: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
@@ -365,7 +437,10 @@ export class RefundEscrow extends Contract {
   /**
    * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
    */
-  'withdrawalAllowed(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+  "withdrawalAllowed(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     /**
@@ -374,7 +449,7 @@ export class RefundEscrow extends Contract {
 
     /**
      */
-    'beneficiary()'(overrides?: CallOverrides): Promise<string>;
+    "beneficiary()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Withdraws the beneficiary's funds.
@@ -384,7 +459,7 @@ export class RefundEscrow extends Contract {
     /**
      * Withdraws the beneficiary's funds.
      */
-    'beneficiaryWithdraw()'(overrides?: CallOverrides): Promise<void>;
+    "beneficiaryWithdraw()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
@@ -394,7 +469,7 @@ export class RefundEscrow extends Contract {
     /**
      * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
      */
-    'close()'(overrides?: CallOverrides): Promise<void>;
+    "close()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Stores funds that may later be refunded.
@@ -406,11 +481,17 @@ export class RefundEscrow extends Contract {
      * Stores funds that may later be refunded.
      * @param refundee The address funds will be sent to if a refund occurs.
      */
-    'deposit(address)'(refundee: string, overrides?: CallOverrides): Promise<void>;
+    "deposit(address)"(
+      refundee: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     depositsOf(payee: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'depositsOf(address)'(payee: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "depositsOf(address)"(
+      payee: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Allows for refunds to take place, rejecting further deposits.
@@ -420,7 +501,7 @@ export class RefundEscrow extends Contract {
     /**
      * Allows for refunds to take place, rejecting further deposits.
      */
-    'enableRefunds()'(overrides?: CallOverrides): Promise<void>;
+    "enableRefunds()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Returns the address of the current owner.
@@ -430,7 +511,7 @@ export class RefundEscrow extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
@@ -440,7 +521,7 @@ export class RefundEscrow extends Contract {
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
      */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      */
@@ -448,17 +529,23 @@ export class RefundEscrow extends Contract {
 
     /**
      */
-    'state()'(overrides?: CallOverrides): Promise<number>;
+    "state()"(overrides?: CallOverrides): Promise<number>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
@@ -470,23 +557,35 @@ export class RefundEscrow extends Contract {
      * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee The address whose funds will be withdrawn and transferred to.
      */
-    'withdraw(address)'(payee: string, overrides?: CallOverrides): Promise<void>;
+    "withdraw(address)"(
+      payee: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
      */
-    withdrawalAllowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    withdrawalAllowed(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
      */
-    'withdrawalAllowed(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    "withdrawalAllowed(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
     Deposited(payee: string | null, weiAmount: null): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
 
     RefundsClosed(): EventFilter;
 
@@ -502,7 +601,7 @@ export class RefundEscrow extends Contract {
 
     /**
      */
-    'beneficiary()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "beneficiary()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Withdraws the beneficiary's funds.
@@ -512,7 +611,7 @@ export class RefundEscrow extends Contract {
     /**
      * Withdraws the beneficiary's funds.
      */
-    'beneficiaryWithdraw()'(overrides?: Overrides): Promise<BigNumber>;
+    "beneficiaryWithdraw()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
@@ -522,7 +621,7 @@ export class RefundEscrow extends Contract {
     /**
      * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
      */
-    'close()'(overrides?: Overrides): Promise<BigNumber>;
+    "close()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * Stores funds that may later be refunded.
@@ -534,11 +633,17 @@ export class RefundEscrow extends Contract {
      * Stores funds that may later be refunded.
      * @param refundee The address funds will be sent to if a refund occurs.
      */
-    'deposit(address)'(refundee: string, overrides?: PayableOverrides): Promise<BigNumber>;
+    "deposit(address)"(
+      refundee: string,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     depositsOf(payee: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'depositsOf(address)'(payee: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "depositsOf(address)"(
+      payee: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Allows for refunds to take place, rejecting further deposits.
@@ -548,7 +653,7 @@ export class RefundEscrow extends Contract {
     /**
      * Allows for refunds to take place, rejecting further deposits.
      */
-    'enableRefunds()'(overrides?: Overrides): Promise<BigNumber>;
+    "enableRefunds()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -558,7 +663,7 @@ export class RefundEscrow extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
@@ -568,7 +673,7 @@ export class RefundEscrow extends Contract {
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
      */
-    'renounceOwnership()'(overrides?: Overrides): Promise<BigNumber>;
+    "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      */
@@ -576,17 +681,23 @@ export class RefundEscrow extends Contract {
 
     /**
      */
-    'state()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "state()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
@@ -598,17 +709,26 @@ export class RefundEscrow extends Contract {
      * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee The address whose funds will be withdrawn and transferred to.
      */
-    'withdraw(address)'(payee: string, overrides?: Overrides): Promise<BigNumber>;
+    "withdraw(address)"(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
      */
-    withdrawalAllowed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    withdrawalAllowed(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
      */
-    'withdrawalAllowed(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "withdrawalAllowed(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -618,7 +738,7 @@ export class RefundEscrow extends Contract {
 
     /**
      */
-    'beneficiary()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "beneficiary()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Withdraws the beneficiary's funds.
@@ -628,7 +748,9 @@ export class RefundEscrow extends Contract {
     /**
      * Withdraws the beneficiary's funds.
      */
-    'beneficiaryWithdraw()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "beneficiaryWithdraw()"(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
@@ -638,26 +760,35 @@ export class RefundEscrow extends Contract {
     /**
      * Allows for the beneficiary to withdraw their funds, rejecting further deposits.
      */
-    'close()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "close()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      * Stores funds that may later be refunded.
      * @param refundee The address funds will be sent to if a refund occurs.
      */
-    deposit(refundee: string, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
-
-    /**
-     * Stores funds that may later be refunded.
-     * @param refundee The address funds will be sent to if a refund occurs.
-     */
-    'deposit(address)'(
+    deposit(
       refundee: string,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    depositsOf(payee: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    /**
+     * Stores funds that may later be refunded.
+     * @param refundee The address funds will be sent to if a refund occurs.
+     */
+    "deposit(address)"(
+      refundee: string,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'depositsOf(address)'(payee: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    depositsOf(
+      payee: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "depositsOf(address)"(
+      payee: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Allows for refunds to take place, rejecting further deposits.
@@ -667,7 +798,7 @@ export class RefundEscrow extends Contract {
     /**
      * Allows for refunds to take place, rejecting further deposits.
      */
-    'enableRefunds()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "enableRefunds()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -677,7 +808,7 @@ export class RefundEscrow extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
@@ -687,7 +818,7 @@ export class RefundEscrow extends Contract {
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
      */
-    'renounceOwnership()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      */
@@ -695,17 +826,20 @@ export class RefundEscrow extends Contract {
 
     /**
      */
-    'state()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "state()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -714,23 +848,32 @@ export class RefundEscrow extends Contract {
      * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee The address whose funds will be withdrawn and transferred to.
      */
-    withdraw(payee: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    withdraw(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee The address whose funds will be withdrawn and transferred to.
      */
-    'withdraw(address)'(payee: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "withdraw(address)"(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
      */
-    withdrawalAllowed(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    withdrawalAllowed(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns whether refundees can withdraw their deposits (be refunded). The overridden function receives a 'payee' argument, but we ignore it here since the condition is global, not per-payee.
      */
-    'withdrawalAllowed(address)'(
+    "withdrawalAllowed(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

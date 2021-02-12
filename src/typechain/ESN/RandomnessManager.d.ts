@@ -2,23 +2,47 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface RandomnessManagerInterface extends ethers.utils.Interface {
   functions: {
-    'getRandomBytes(uint256)': FunctionFragment;
-    'getRandomBytes32()': FunctionFragment;
+    "getRandomBytes(uint256)": FunctionFragment;
+    "getRandomBytes32()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'getRandomBytes', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getRandomBytes32', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getRandomBytes",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRandomBytes32",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'getRandomBytes', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRandomBytes32', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getRandomBytes",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRandomBytes32",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -50,7 +74,7 @@ export class RandomnessManager extends Contract {
      * Generates pseudo random bytes as per requirement
      * @param _numberOfBytes Number of bytes32
      */
-    'getRandomBytes(uint256)'(
+    "getRandomBytes(uint256)"(
       _numberOfBytes: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -63,20 +87,23 @@ export class RandomnessManager extends Contract {
     /**
      * Generates pseudo random bytes
      */
-    'getRandomBytes32()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "getRandomBytes32()"(overrides?: Overrides): Promise<ContractTransaction>;
   };
 
   /**
    * Generates pseudo random bytes as per requirement
    * @param _numberOfBytes Number of bytes32
    */
-  getRandomBytes(_numberOfBytes: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  getRandomBytes(
+    _numberOfBytes: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Generates pseudo random bytes as per requirement
    * @param _numberOfBytes Number of bytes32
    */
-  'getRandomBytes(uint256)'(
+  "getRandomBytes(uint256)"(
     _numberOfBytes: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -89,20 +116,23 @@ export class RandomnessManager extends Contract {
   /**
    * Generates pseudo random bytes
    */
-  'getRandomBytes32()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "getRandomBytes32()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   callStatic: {
     /**
      * Generates pseudo random bytes as per requirement
      * @param _numberOfBytes Number of bytes32
      */
-    getRandomBytes(_numberOfBytes: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getRandomBytes(
+      _numberOfBytes: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Generates pseudo random bytes as per requirement
      * @param _numberOfBytes Number of bytes32
      */
-    'getRandomBytes(uint256)'(
+    "getRandomBytes(uint256)"(
       _numberOfBytes: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -115,7 +145,7 @@ export class RandomnessManager extends Contract {
     /**
      * Generates pseudo random bytes
      */
-    'getRandomBytes32()'(overrides?: CallOverrides): Promise<string>;
+    "getRandomBytes32()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
@@ -125,13 +155,16 @@ export class RandomnessManager extends Contract {
      * Generates pseudo random bytes as per requirement
      * @param _numberOfBytes Number of bytes32
      */
-    getRandomBytes(_numberOfBytes: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    getRandomBytes(
+      _numberOfBytes: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Generates pseudo random bytes as per requirement
      * @param _numberOfBytes Number of bytes32
      */
-    'getRandomBytes(uint256)'(
+    "getRandomBytes(uint256)"(
       _numberOfBytes: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
@@ -144,7 +177,7 @@ export class RandomnessManager extends Contract {
     /**
      * Generates pseudo random bytes
      */
-    'getRandomBytes32()'(overrides?: Overrides): Promise<BigNumber>;
+    "getRandomBytes32()"(overrides?: Overrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -161,7 +194,7 @@ export class RandomnessManager extends Contract {
      * Generates pseudo random bytes as per requirement
      * @param _numberOfBytes Number of bytes32
      */
-    'getRandomBytes(uint256)'(
+    "getRandomBytes(uint256)"(
       _numberOfBytes: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -174,6 +207,6 @@ export class RandomnessManager extends Contract {
     /**
      * Generates pseudo random bytes
      */
-    'getRandomBytes32()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "getRandomBytes32()"(overrides?: Overrides): Promise<PopulatedTransaction>;
   };
 }

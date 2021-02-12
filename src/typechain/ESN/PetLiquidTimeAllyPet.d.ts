@@ -2,179 +2,276 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PetLiquidTimeAllyPetInterface extends ethers.utils.Interface {
   functions: {
-    'appointeeVote(address,uint256)': FunctionFragment;
-    'calculatePowerBoosterAmount(address,uint256)': FunctionFragment;
-    'createPETPlan(uint256,uint256)': FunctionFragment;
-    'deployer()': FunctionFragment;
-    'fundsBucket()': FunctionFragment;
-    'getDepositMonth(address,uint256)': FunctionFragment;
-    'getMonthlyDepositedAmount(address,uint256,uint256)': FunctionFragment;
-    'getNomineeAllowedTimestamp(address,uint256,uint256)': FunctionFragment;
-    'getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)': FunctionFragment;
-    'isAdminMode()': FunctionFragment;
-    'makeDeposit(address,uint256,uint256,bool)': FunctionFragment;
-    'makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)': FunctionFragment;
-    'migrateDeposit(address,uint256,uint256,bool,uint256)': FunctionFragment;
-    'migratePET(uint256,uint256,uint256)': FunctionFragment;
-    'newPET(uint256,uint256)': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'petPlans(uint256)': FunctionFragment;
-    'pets(address,uint256)': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'renounceAdminMode()': FunctionFragment;
-    'toogleAppointee(uint256,address,bool)': FunctionFragment;
-    'toogleNominee(uint256,address,bool)': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'updatePlanStatus(uint256,bool)': FunctionFragment;
-    'viewAppointation(address,uint256,address)': FunctionFragment;
-    'viewNomination(address,uint256,address)': FunctionFragment;
-    'withdrawAnnuity(address,uint256,uint256)': FunctionFragment;
-    'withdrawPowerBooster(address,uint256,uint256)': FunctionFragment;
+    "appointeeVote(address,uint256)": FunctionFragment;
+    "calculatePowerBoosterAmount(address,uint256)": FunctionFragment;
+    "createPETPlan(uint256,uint256)": FunctionFragment;
+    "deployer()": FunctionFragment;
+    "fundsBucket()": FunctionFragment;
+    "getDepositMonth(address,uint256)": FunctionFragment;
+    "getMonthlyDepositedAmount(address,uint256,uint256)": FunctionFragment;
+    "getNomineeAllowedTimestamp(address,uint256,uint256)": FunctionFragment;
+    "getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)": FunctionFragment;
+    "isAdminMode()": FunctionFragment;
+    "makeDeposit(address,uint256,uint256,bool)": FunctionFragment;
+    "makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)": FunctionFragment;
+    "migrateDeposit(address,uint256,uint256,bool,uint256)": FunctionFragment;
+    "migratePET(address,uint256,uint256,uint256)": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "petPlans(uint256)": FunctionFragment;
+    "pets(address,uint256)": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "renounceAdminMode()": FunctionFragment;
+    "toogleAppointee(uint256,address,bool)": FunctionFragment;
+    "toogleNominee(uint256,address,bool)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "updatePlanStatus(uint256,bool)": FunctionFragment;
+    "viewAppointation(address,uint256,address)": FunctionFragment;
+    "viewNomination(address,uint256,address)": FunctionFragment;
+    "withdrawAnnuity(address,uint256,uint256)": FunctionFragment;
+    "withdrawPowerBooster(address,uint256,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'appointeeVote', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'calculatePowerBoosterAmount',
+    functionFragment: "appointeeVote",
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'createPETPlan',
+    functionFragment: "calculatePowerBoosterAmount",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "createPETPlan",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'deployer', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'fundsBucket', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getDepositMonth', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'getMonthlyDepositedAmount',
+    functionFragment: "fundsBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDepositMonth",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMonthlyDepositedAmount",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getNomineeAllowedTimestamp',
+    functionFragment: "getNomineeAllowedTimestamp",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getSumOfMonthlyAnnuity',
+    functionFragment: "getSumOfMonthlyAnnuity",
     values: [string, BigNumberish, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'isAdminMode', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'makeDeposit',
+    functionFragment: "isAdminMode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "makeDeposit",
     values: [string, BigNumberish, BigNumberish, boolean]
   ): string;
   encodeFunctionData(
-    functionFragment: 'makeFrequencyModeDeposit',
+    functionFragment: "makeFrequencyModeDeposit",
     values: [string, BigNumberish, BigNumberish, BigNumberish, boolean]
   ): string;
   encodeFunctionData(
-    functionFragment: 'migrateDeposit',
+    functionFragment: "migrateDeposit",
     values: [string, BigNumberish, BigNumberish, boolean, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'migratePET',
-    values: [BigNumberish, BigNumberish, BigNumberish]
+    functionFragment: "migratePET",
+    values: [string, BigNumberish, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'newPET', values: [BigNumberish, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'petPlans', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'pets', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceAdminMode', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'toogleAppointee',
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "petPlans",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pets",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceAdminMode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "toogleAppointee",
     values: [BigNumberish, string, boolean]
   ): string;
   encodeFunctionData(
-    functionFragment: 'toogleNominee',
+    functionFragment: "toogleNominee",
     values: [BigNumberish, string, boolean]
   ): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'updatePlanStatus', values: [BigNumberish, boolean]): string;
   encodeFunctionData(
-    functionFragment: 'viewAppointation',
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updatePlanStatus",
+    values: [BigNumberish, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "viewAppointation",
     values: [string, BigNumberish, string]
   ): string;
   encodeFunctionData(
-    functionFragment: 'viewNomination',
+    functionFragment: "viewNomination",
     values: [string, BigNumberish, string]
   ): string;
   encodeFunctionData(
-    functionFragment: 'withdrawAnnuity',
+    functionFragment: "withdrawAnnuity",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'withdrawPowerBooster',
+    functionFragment: "withdrawPowerBooster",
     values: [string, BigNumberish, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'appointeeVote', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'calculatePowerBoosterAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'createPETPlan', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'deployer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'fundsBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDepositMonth', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getMonthlyDepositedAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getNomineeAllowedTimestamp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getSumOfMonthlyAnnuity', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'makeDeposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'makeFrequencyModeDeposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'migrateDeposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'migratePET', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'newPET', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'petPlans', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'pets', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'toogleAppointee', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'toogleNominee', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updatePlanStatus', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'viewAppointation', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'viewNomination', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawAnnuity', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawPowerBooster', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "appointeeVote",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "calculatePowerBoosterAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "createPETPlan",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "deployer", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "fundsBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDepositMonth",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMonthlyDepositedAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getNomineeAllowedTimestamp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getSumOfMonthlyAnnuity",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isAdminMode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "makeDeposit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "makeFrequencyModeDeposit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "migrateDeposit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "migratePET", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "petPlans", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceAdminMode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "toogleAppointee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "toogleNominee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updatePlanStatus",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "viewAppointation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "viewNomination",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawAnnuity",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawPowerBooster",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'AnnuityWithdrawl(address,uint256,uint256,uint256,uint256,address)': EventFragment;
-    'AppointeeUpdated(address,uint256,address,bool)': EventFragment;
-    'AppointeeVoted(address,uint256,address)': EventFragment;
-    'BoosterBurn(address,uint256,uint256)': EventFragment;
-    'NewDeposit(address,uint256,uint256,uint256,address,bool)': EventFragment;
-    'NewPET(address,uint256,uint256)': EventFragment;
-    'NewPETPlan(uint256,uint256,uint256)': EventFragment;
-    'NomineeUpdated(address,uint256,address,bool)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'PowerBoosterWithdrawl(address,uint256,uint256,uint256,address)': EventFragment;
+    "AnnuityWithdrawl(address,uint256,uint256,uint256,uint256,address)": EventFragment;
+    "AppointeeUpdated(address,uint256,address,bool)": EventFragment;
+    "AppointeeVoted(address,uint256,address)": EventFragment;
+    "BoosterBurn(address,uint256,uint256)": EventFragment;
+    "NewDeposit(address,uint256,uint256,uint256,address,bool)": EventFragment;
+    "NewPET(address,uint256,uint256)": EventFragment;
+    "NewPETPlan(uint256,uint256,uint256)": EventFragment;
+    "NomineeUpdated(address,uint256,address,bool)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "PowerBoosterWithdrawl(address,uint256,uint256,uint256,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'AnnuityWithdrawl'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'AppointeeUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'AppointeeVoted'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'BoosterBurn'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NewDeposit'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NewPET'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NewPETPlan'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NomineeUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'PowerBoosterWithdrawl'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AnnuityWithdrawl"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AppointeeUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AppointeeVoted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BoosterBurn"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewDeposit"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewPET"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewPETPlan"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NomineeUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PowerBoosterWithdrawl"): EventFragment;
 }
 
 export class PetLiquidTimeAllyPet extends Contract {
@@ -209,7 +306,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'appointeeVote(address,uint256)'(
+    "appointeeVote(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: Overrides
@@ -233,7 +330,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'calculatePowerBoosterAmount(address,uint256)'(
+    "calculatePowerBoosterAmount(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -257,7 +354,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _minimumMonthlyCommitmentAmount : minimum PET monthly amount in exaES
      * @param _monthlyBenefitFactorPerThousand : this is per 1000; i.e 200 for 20%
      */
-    'createPETPlan(uint256,uint256)'(
+    "createPETPlan(uint256,uint256)"(
       _minimumMonthlyCommitmentAmount: BigNumberish,
       _monthlyBenefitFactorPerThousand: BigNumberish,
       overrides?: Overrides
@@ -275,7 +372,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of the deployer
      */
-    'deployer()'(
+    "deployer()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -293,7 +390,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of fundsBucket from which tokens to be pulled for giving benefits
      */
-    'fundsBucket()'(
+    "fundsBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -317,7 +414,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'getDepositMonth(address,uint256)'(
+    "getDepositMonth(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -346,7 +443,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'getMonthlyDepositedAmount(address,uint256,uint256)'(
+    "getMonthlyDepositedAmount(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _monthId: BigNumberish,
@@ -376,7 +473,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker address portfolio
      * @param _stakerAddress : address of staker who has a PET
      */
-    'getNomineeAllowedTimestamp(address,uint256,uint256)'(
+    "getNomineeAllowedTimestamp(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _annuityMonthId: BigNumberish,
@@ -409,7 +506,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _stakerAddress : address of staker who has a PET
      * @param _startAnnuityMonthId : this is the month (inclusive) to start from
      */
-    'getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)'(
+    "getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _startAnnuityMonthId: BigNumberish,
@@ -425,7 +522,7 @@ export class PetLiquidTimeAllyPet extends Contract {
       0: boolean;
     }>;
 
-    'isAdminMode()'(
+    "isAdminMode()"(
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -455,7 +552,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _stakerAddress : address of staker who has a PET
      * @param _usePrepaidES : should prepaidES be used
      */
-    'makeDeposit(address,uint256,uint256,bool)'(
+    "makeDeposit(address,uint256,uint256,bool)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _depositAmount: BigNumberish,
@@ -490,7 +587,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _totalDepositAmount : total amount to deposit for 12 months
      * @param _usePrepaidES : should prepaidES be used
      */
-    'makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)'(
+    "makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _totalDepositAmount: BigNumberish,
@@ -508,7 +605,7 @@ export class PetLiquidTimeAllyPet extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'migrateDeposit(address,uint256,uint256,bool,uint256)'(
+    "migrateDeposit(address,uint256,uint256,bool,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _depositAmount: BigNumberish,
@@ -517,14 +614,13 @@ export class PetLiquidTimeAllyPet extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
+    /**
+     * this function is used by anyone to create a new PET
+     * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
+     * @param _planId : id of PET in staker portfolio
+     */
     migratePET(
-      _planId: BigNumberish,
-      _monthlyCommitmentAmount: BigNumberish,
-      _timestamp: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    'migratePET(uint256,uint256,uint256)'(
+      _stakerAddress: string,
       _planId: BigNumberish,
       _monthlyCommitmentAmount: BigNumberish,
       _timestamp: BigNumberish,
@@ -536,20 +632,11 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
      * @param _planId : id of PET in staker portfolio
      */
-    newPET(
+    "migratePET(address,uint256,uint256,uint256)"(
+      _stakerAddress: string,
       _planId: BigNumberish,
       _monthlyCommitmentAmount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    /**
-     * this function is used by anyone to create a new PET
-     * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
-     * @param _planId : id of PET in staker portfolio
-     */
-    'newPET(uint256,uint256)'(
-      _planId: BigNumberish,
-      _monthlyCommitmentAmount: BigNumberish,
+      _timestamp: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -559,7 +646,7 @@ export class PetLiquidTimeAllyPet extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -577,7 +664,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -601,7 +688,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * storage for multiple PET plans
      */
-    'petPlans(uint256)'(
+    "petPlans(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -638,7 +725,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * storage for PETs deployed by stakers
      */
-    'pets(address,uint256)'(
+    "pets(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -669,7 +756,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of Era Swap Token ERC20 Smart Contract
      */
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -677,7 +764,7 @@ export class PetLiquidTimeAllyPet extends Contract {
 
     renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      * this function is used to update appointee status of a wallet address in PET
@@ -698,7 +785,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
      * @param _petId : id of PET in staker portfolio.
      */
-    'toogleAppointee(uint256,address,bool)'(
+    "toogleAppointee(uint256,address,bool)"(
       _petId: BigNumberish,
       _appointeeAddress: string,
       _newAppointeeStatus: boolean,
@@ -724,7 +811,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _nomineeAddress : eth wallet address of nominee.
      * @param _petId : id of PET in staker portfolio.
      */
-    'toogleNominee(uint256,address,bool)'(
+    "toogleNominee(uint256,address,bool)"(
       _petId: BigNumberish,
       _nomineeAddress: string,
       _newNomineeStatus: boolean,
@@ -734,12 +821,15 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -762,7 +852,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _newStatus : true or false.
      * @param _planId : select a plan to make it inactive
      */
-    'updatePlanStatus(uint256,bool)'(
+    "updatePlanStatus(uint256,bool)"(
       _planId: BigNumberish,
       _newStatus: boolean,
       overrides?: Overrides
@@ -789,7 +879,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'viewAppointation(address,uint256,address)'(
+    "viewAppointation(address,uint256,address)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _appointeeAddress: string,
@@ -819,7 +909,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'viewNomination(address,uint256,address)'(
+    "viewNomination(address,uint256,address)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _nomineeAddress: string,
@@ -847,7 +937,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker address portfolio
      * @param _stakerAddress : address of staker who has a PET
      */
-    'withdrawAnnuity(address,uint256,uint256)'(
+    "withdrawAnnuity(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _endAnnuityMonthId: BigNumberish,
@@ -873,7 +963,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _powerBoosterId : this is serial of power booster
      * @param _stakerAddress : address of staker who has a PET
      */
-    'withdrawPowerBooster(address,uint256,uint256)'(
+    "withdrawPowerBooster(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _powerBoosterId: BigNumberish,
@@ -899,7 +989,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _petId : id of PET in staker portfolio.
    * @param _stakerAddress : address of initiater of this PET.
    */
-  'appointeeVote(address,uint256)'(
+  "appointeeVote(address,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     overrides?: Overrides
@@ -921,7 +1011,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _petId : id of PET in staket address portfolio
    * @param _stakerAddress : address of staker who has PET
    */
-  'calculatePowerBoosterAmount(address,uint256)'(
+  "calculatePowerBoosterAmount(address,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     overrides?: CallOverrides
@@ -943,7 +1033,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _minimumMonthlyCommitmentAmount : minimum PET monthly amount in exaES
    * @param _monthlyBenefitFactorPerThousand : this is per 1000; i.e 200 for 20%
    */
-  'createPETPlan(uint256,uint256)'(
+  "createPETPlan(uint256,uint256)"(
     _minimumMonthlyCommitmentAmount: BigNumberish,
     _monthlyBenefitFactorPerThousand: BigNumberish,
     overrides?: Overrides
@@ -957,7 +1047,7 @@ export class PetLiquidTimeAllyPet extends Contract {
   /**
    * address storage of the deployer
    */
-  'deployer()'(overrides?: CallOverrides): Promise<string>;
+  "deployer()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * address storage of fundsBucket from which tokens to be pulled for giving benefits
@@ -967,7 +1057,7 @@ export class PetLiquidTimeAllyPet extends Contract {
   /**
    * address storage of fundsBucket from which tokens to be pulled for giving benefits
    */
-  'fundsBucket()'(overrides?: CallOverrides): Promise<string>;
+  "fundsBucket()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * this function is used to get the current month of a PET
@@ -985,7 +1075,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _petId : id of PET in staket address portfolio
    * @param _stakerAddress : address of staker who has PET
    */
-  'getDepositMonth(address,uint256)'(
+  "getDepositMonth(address,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     overrides?: CallOverrides
@@ -1010,7 +1100,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _petId : id of PET in staket address portfolio
    * @param _stakerAddress : address of staker who has PET
    */
-  'getMonthlyDepositedAmount(address,uint256,uint256)'(
+  "getMonthlyDepositedAmount(address,uint256,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _monthId: BigNumberish,
@@ -1036,7 +1126,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _petId : id of PET in staker address portfolio
    * @param _stakerAddress : address of staker who has a PET
    */
-  'getNomineeAllowedTimestamp(address,uint256,uint256)'(
+  "getNomineeAllowedTimestamp(address,uint256,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _annuityMonthId: BigNumberish,
@@ -1065,7 +1155,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _stakerAddress : address of staker who has a PET
    * @param _startAnnuityMonthId : this is the month (inclusive) to start from
    */
-  'getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)'(
+  "getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _startAnnuityMonthId: BigNumberish,
@@ -1075,7 +1165,7 @@ export class PetLiquidTimeAllyPet extends Contract {
 
   isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
-  'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
+  "isAdminMode()"(overrides?: CallOverrides): Promise<boolean>;
 
   /**
    * ERC20 approve is required to be done for this contract earlier if prepaidES   is not selected, enough funds must be there in the funds bucket contract   and also deposit can be done by nominee
@@ -1101,7 +1191,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _stakerAddress : address of staker who has a PET
    * @param _usePrepaidES : should prepaidES be used
    */
-  'makeDeposit(address,uint256,uint256,bool)'(
+  "makeDeposit(address,uint256,uint256,bool)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _depositAmount: BigNumberish,
@@ -1136,7 +1226,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _totalDepositAmount : total amount to deposit for 12 months
    * @param _usePrepaidES : should prepaidES be used
    */
-  'makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)'(
+  "makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _totalDepositAmount: BigNumberish,
@@ -1154,7 +1244,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'migrateDeposit(address,uint256,uint256,bool,uint256)'(
+  "migrateDeposit(address,uint256,uint256,bool,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _depositAmount: BigNumberish,
@@ -1163,14 +1253,13 @@ export class PetLiquidTimeAllyPet extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
+  /**
+   * this function is used by anyone to create a new PET
+   * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
+   * @param _planId : id of PET in staker portfolio
+   */
   migratePET(
-    _planId: BigNumberish,
-    _monthlyCommitmentAmount: BigNumberish,
-    _timestamp: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  'migratePET(uint256,uint256,uint256)'(
+    _stakerAddress: string,
     _planId: BigNumberish,
     _monthlyCommitmentAmount: BigNumberish,
     _timestamp: BigNumberish,
@@ -1182,26 +1271,17 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
    * @param _planId : id of PET in staker portfolio
    */
-  newPET(
+  "migratePET(address,uint256,uint256,uint256)"(
+    _stakerAddress: string,
     _planId: BigNumberish,
     _monthlyCommitmentAmount: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  /**
-   * this function is used by anyone to create a new PET
-   * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
-   * @param _planId : id of PET in staker portfolio
-   */
-  'newPET(uint256,uint256)'(
-    _planId: BigNumberish,
-    _monthlyCommitmentAmount: BigNumberish,
+    _timestamp: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -1211,7 +1291,7 @@ export class PetLiquidTimeAllyPet extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * storage for multiple PET plans
@@ -1231,7 +1311,7 @@ export class PetLiquidTimeAllyPet extends Contract {
   /**
    * storage for multiple PET plans
    */
-  'petPlans(uint256)'(
+  "petPlans(uint256)"(
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<{
@@ -1268,7 +1348,7 @@ export class PetLiquidTimeAllyPet extends Contract {
   /**
    * storage for PETs deployed by stakers
    */
-  'pets(address,uint256)'(
+  "pets(address,uint256)"(
     arg0: string,
     arg1: BigNumberish,
     overrides?: CallOverrides
@@ -1295,11 +1375,11 @@ export class PetLiquidTimeAllyPet extends Contract {
   /**
    * address storage of Era Swap Token ERC20 Smart Contract
    */
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "renounceAdminMode()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * this function is used to update appointee status of a wallet address in PET
@@ -1320,7 +1400,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
    * @param _petId : id of PET in staker portfolio.
    */
-  'toogleAppointee(uint256,address,bool)'(
+  "toogleAppointee(uint256,address,bool)"(
     _petId: BigNumberish,
     _appointeeAddress: string,
     _newAppointeeStatus: boolean,
@@ -1346,7 +1426,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _nomineeAddress : eth wallet address of nominee.
    * @param _petId : id of PET in staker portfolio.
    */
-  'toogleNominee(uint256,address,bool)'(
+  "toogleNominee(uint256,address,bool)"(
     _petId: BigNumberish,
     _nomineeAddress: string,
     _newNomineeStatus: boolean,
@@ -1356,12 +1436,15 @@ export class PetLiquidTimeAllyPet extends Contract {
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -1384,7 +1467,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _newStatus : true or false.
    * @param _planId : select a plan to make it inactive
    */
-  'updatePlanStatus(uint256,bool)'(
+  "updatePlanStatus(uint256,bool)"(
     _planId: BigNumberish,
     _newStatus: boolean,
     overrides?: Overrides
@@ -1409,7 +1492,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _petId : id of PET in staker portfolio.
    * @param _stakerAddress : address of initiater of this PET.
    */
-  'viewAppointation(address,uint256,address)'(
+  "viewAppointation(address,uint256,address)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _appointeeAddress: string,
@@ -1435,7 +1518,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _petId : id of PET in staker portfolio.
    * @param _stakerAddress : address of initiater of this PET.
    */
-  'viewNomination(address,uint256,address)'(
+  "viewNomination(address,uint256,address)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _nomineeAddress: string,
@@ -1461,7 +1544,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _petId : id of PET in staker address portfolio
    * @param _stakerAddress : address of staker who has a PET
    */
-  'withdrawAnnuity(address,uint256,uint256)'(
+  "withdrawAnnuity(address,uint256,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _endAnnuityMonthId: BigNumberish,
@@ -1487,7 +1570,7 @@ export class PetLiquidTimeAllyPet extends Contract {
    * @param _powerBoosterId : this is serial of power booster
    * @param _stakerAddress : address of staker who has a PET
    */
-  'withdrawPowerBooster(address,uint256,uint256)'(
+  "withdrawPowerBooster(address,uint256,uint256)"(
     _stakerAddress: string,
     _petId: BigNumberish,
     _powerBoosterId: BigNumberish,
@@ -1513,7 +1596,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'appointeeVote(address,uint256)'(
+    "appointeeVote(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -1535,7 +1618,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'calculatePowerBoosterAmount(address,uint256)'(
+    "calculatePowerBoosterAmount(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -1557,7 +1640,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _minimumMonthlyCommitmentAmount : minimum PET monthly amount in exaES
      * @param _monthlyBenefitFactorPerThousand : this is per 1000; i.e 200 for 20%
      */
-    'createPETPlan(uint256,uint256)'(
+    "createPETPlan(uint256,uint256)"(
       _minimumMonthlyCommitmentAmount: BigNumberish,
       _monthlyBenefitFactorPerThousand: BigNumberish,
       overrides?: CallOverrides
@@ -1571,7 +1654,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of the deployer
      */
-    'deployer()'(overrides?: CallOverrides): Promise<string>;
+    "deployer()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * address storage of fundsBucket from which tokens to be pulled for giving benefits
@@ -1581,7 +1664,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of fundsBucket from which tokens to be pulled for giving benefits
      */
-    'fundsBucket()'(overrides?: CallOverrides): Promise<string>;
+    "fundsBucket()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * this function is used to get the current month of a PET
@@ -1599,7 +1682,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'getDepositMonth(address,uint256)'(
+    "getDepositMonth(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -1624,7 +1707,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'getMonthlyDepositedAmount(address,uint256,uint256)'(
+    "getMonthlyDepositedAmount(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _monthId: BigNumberish,
@@ -1650,7 +1733,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker address portfolio
      * @param _stakerAddress : address of staker who has a PET
      */
-    'getNomineeAllowedTimestamp(address,uint256,uint256)'(
+    "getNomineeAllowedTimestamp(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _annuityMonthId: BigNumberish,
@@ -1679,7 +1762,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _stakerAddress : address of staker who has a PET
      * @param _startAnnuityMonthId : this is the month (inclusive) to start from
      */
-    'getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)'(
+    "getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _startAnnuityMonthId: BigNumberish,
@@ -1689,7 +1772,7 @@ export class PetLiquidTimeAllyPet extends Contract {
 
     isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<boolean>;
 
     /**
      * ERC20 approve is required to be done for this contract earlier if prepaidES   is not selected, enough funds must be there in the funds bucket contract   and also deposit can be done by nominee
@@ -1715,7 +1798,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _stakerAddress : address of staker who has a PET
      * @param _usePrepaidES : should prepaidES be used
      */
-    'makeDeposit(address,uint256,uint256,bool)'(
+    "makeDeposit(address,uint256,uint256,bool)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _depositAmount: BigNumberish,
@@ -1750,7 +1833,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _totalDepositAmount : total amount to deposit for 12 months
      * @param _usePrepaidES : should prepaidES be used
      */
-    'makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)'(
+    "makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _totalDepositAmount: BigNumberish,
@@ -1768,7 +1851,7 @@ export class PetLiquidTimeAllyPet extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'migrateDeposit(address,uint256,uint256,bool,uint256)'(
+    "migrateDeposit(address,uint256,uint256,bool,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _depositAmount: BigNumberish,
@@ -1777,14 +1860,13 @@ export class PetLiquidTimeAllyPet extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    /**
+     * this function is used by anyone to create a new PET
+     * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
+     * @param _planId : id of PET in staker portfolio
+     */
     migratePET(
-      _planId: BigNumberish,
-      _monthlyCommitmentAmount: BigNumberish,
-      _timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    'migratePET(uint256,uint256,uint256)'(
+      _stakerAddress: string,
       _planId: BigNumberish,
       _monthlyCommitmentAmount: BigNumberish,
       _timestamp: BigNumberish,
@@ -1796,26 +1878,17 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
      * @param _planId : id of PET in staker portfolio
      */
-    newPET(
+    "migratePET(address,uint256,uint256,uint256)"(
+      _stakerAddress: string,
       _planId: BigNumberish,
       _monthlyCommitmentAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    /**
-     * this function is used by anyone to create a new PET
-     * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
-     * @param _planId : id of PET in staker portfolio
-     */
-    'newPET(uint256,uint256)'(
-      _planId: BigNumberish,
-      _monthlyCommitmentAmount: BigNumberish,
+      _timestamp: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -1825,7 +1898,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * storage for multiple PET plans
@@ -1845,7 +1918,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * storage for multiple PET plans
      */
-    'petPlans(uint256)'(
+    "petPlans(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -1882,7 +1955,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * storage for PETs deployed by stakers
      */
-    'pets(address,uint256)'(
+    "pets(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -1909,11 +1982,11 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of Era Swap Token ERC20 Smart Contract
      */
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     renounceAdminMode(overrides?: CallOverrides): Promise<void>;
 
-    'renounceAdminMode()'(overrides?: CallOverrides): Promise<void>;
+    "renounceAdminMode()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * this function is used to update appointee status of a wallet address in PET
@@ -1934,7 +2007,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
      * @param _petId : id of PET in staker portfolio.
      */
-    'toogleAppointee(uint256,address,bool)'(
+    "toogleAppointee(uint256,address,bool)"(
       _petId: BigNumberish,
       _appointeeAddress: string,
       _newAppointeeStatus: boolean,
@@ -1960,7 +2033,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _nomineeAddress : eth wallet address of nominee.
      * @param _petId : id of PET in staker portfolio.
      */
-    'toogleNominee(uint256,address,bool)'(
+    "toogleNominee(uint256,address,bool)"(
       _petId: BigNumberish,
       _nomineeAddress: string,
       _newNomineeStatus: boolean,
@@ -1970,12 +2043,18 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * pets already initiated by a plan will continue only new will be restricted
@@ -1995,7 +2074,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _newStatus : true or false.
      * @param _planId : select a plan to make it inactive
      */
-    'updatePlanStatus(uint256,bool)'(
+    "updatePlanStatus(uint256,bool)"(
       _planId: BigNumberish,
       _newStatus: boolean,
       overrides?: CallOverrides
@@ -2020,7 +2099,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'viewAppointation(address,uint256,address)'(
+    "viewAppointation(address,uint256,address)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _appointeeAddress: string,
@@ -2046,7 +2125,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'viewNomination(address,uint256,address)'(
+    "viewNomination(address,uint256,address)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _nomineeAddress: string,
@@ -2072,7 +2151,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker address portfolio
      * @param _stakerAddress : address of staker who has a PET
      */
-    'withdrawAnnuity(address,uint256,uint256)'(
+    "withdrawAnnuity(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _endAnnuityMonthId: BigNumberish,
@@ -2098,7 +2177,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _powerBoosterId : this is serial of power booster
      * @param _stakerAddress : address of staker who has a PET
      */
-    'withdrawPowerBooster(address,uint256,uint256)'(
+    "withdrawPowerBooster(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _powerBoosterId: BigNumberish,
@@ -2140,7 +2219,11 @@ export class PetLiquidTimeAllyPet extends Contract {
       _usingPrepaidES: null
     ): EventFilter;
 
-    NewPET(_staker: string | null, _petId: null, _monthlyCommitmentAmount: null): EventFilter;
+    NewPET(
+      _staker: string | null,
+      _petId: null,
+      _monthlyCommitmentAmount: null
+    ): EventFilter;
 
     NewPETPlan(
       _minimumMonthlyCommitmentAmount: null,
@@ -2155,7 +2238,10 @@ export class PetLiquidTimeAllyPet extends Contract {
       _nomineeStatus: null
     ): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
 
     PowerBoosterWithdrawl(
       _staker: string | null,
@@ -2185,7 +2271,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'appointeeVote(address,uint256)'(
+    "appointeeVote(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: Overrides
@@ -2207,7 +2293,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'calculatePowerBoosterAmount(address,uint256)'(
+    "calculatePowerBoosterAmount(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -2229,7 +2315,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _minimumMonthlyCommitmentAmount : minimum PET monthly amount in exaES
      * @param _monthlyBenefitFactorPerThousand : this is per 1000; i.e 200 for 20%
      */
-    'createPETPlan(uint256,uint256)'(
+    "createPETPlan(uint256,uint256)"(
       _minimumMonthlyCommitmentAmount: BigNumberish,
       _monthlyBenefitFactorPerThousand: BigNumberish,
       overrides?: Overrides
@@ -2243,7 +2329,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of the deployer
      */
-    'deployer()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "deployer()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * address storage of fundsBucket from which tokens to be pulled for giving benefits
@@ -2253,7 +2339,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of fundsBucket from which tokens to be pulled for giving benefits
      */
-    'fundsBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "fundsBucket()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * this function is used to get the current month of a PET
@@ -2271,7 +2357,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'getDepositMonth(address,uint256)'(
+    "getDepositMonth(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -2296,7 +2382,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'getMonthlyDepositedAmount(address,uint256,uint256)'(
+    "getMonthlyDepositedAmount(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _monthId: BigNumberish,
@@ -2322,7 +2408,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker address portfolio
      * @param _stakerAddress : address of staker who has a PET
      */
-    'getNomineeAllowedTimestamp(address,uint256,uint256)'(
+    "getNomineeAllowedTimestamp(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _annuityMonthId: BigNumberish,
@@ -2351,7 +2437,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _stakerAddress : address of staker who has a PET
      * @param _startAnnuityMonthId : this is the month (inclusive) to start from
      */
-    'getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)'(
+    "getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _startAnnuityMonthId: BigNumberish,
@@ -2361,7 +2447,7 @@ export class PetLiquidTimeAllyPet extends Contract {
 
     isAdminMode(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * ERC20 approve is required to be done for this contract earlier if prepaidES   is not selected, enough funds must be there in the funds bucket contract   and also deposit can be done by nominee
@@ -2387,7 +2473,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _stakerAddress : address of staker who has a PET
      * @param _usePrepaidES : should prepaidES be used
      */
-    'makeDeposit(address,uint256,uint256,bool)'(
+    "makeDeposit(address,uint256,uint256,bool)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _depositAmount: BigNumberish,
@@ -2422,7 +2508,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _totalDepositAmount : total amount to deposit for 12 months
      * @param _usePrepaidES : should prepaidES be used
      */
-    'makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)'(
+    "makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _totalDepositAmount: BigNumberish,
@@ -2440,7 +2526,7 @@ export class PetLiquidTimeAllyPet extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'migrateDeposit(address,uint256,uint256,bool,uint256)'(
+    "migrateDeposit(address,uint256,uint256,bool,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _depositAmount: BigNumberish,
@@ -2449,14 +2535,13 @@ export class PetLiquidTimeAllyPet extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
+    /**
+     * this function is used by anyone to create a new PET
+     * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
+     * @param _planId : id of PET in staker portfolio
+     */
     migratePET(
-      _planId: BigNumberish,
-      _monthlyCommitmentAmount: BigNumberish,
-      _timestamp: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    'migratePET(uint256,uint256,uint256)'(
+      _stakerAddress: string,
       _planId: BigNumberish,
       _monthlyCommitmentAmount: BigNumberish,
       _timestamp: BigNumberish,
@@ -2468,26 +2553,17 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
      * @param _planId : id of PET in staker portfolio
      */
-    newPET(
+    "migratePET(address,uint256,uint256,uint256)"(
+      _stakerAddress: string,
       _planId: BigNumberish,
       _monthlyCommitmentAmount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    /**
-     * this function is used by anyone to create a new PET
-     * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
-     * @param _planId : id of PET in staker portfolio
-     */
-    'newPET(uint256,uint256)'(
-      _planId: BigNumberish,
-      _monthlyCommitmentAmount: BigNumberish,
+      _timestamp: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -2497,7 +2573,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * storage for multiple PET plans
@@ -2507,17 +2583,24 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * storage for multiple PET plans
      */
-    'petPlans(uint256)'(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "petPlans(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * storage for PETs deployed by stakers
      */
-    pets(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    pets(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * storage for PETs deployed by stakers
      */
-    'pets(address,uint256)'(
+    "pets(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -2531,11 +2614,11 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of Era Swap Token ERC20 Smart Contract
      */
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceAdminMode(overrides?: Overrides): Promise<BigNumber>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<BigNumber>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * this function is used to update appointee status of a wallet address in PET
@@ -2556,7 +2639,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
      * @param _petId : id of PET in staker portfolio.
      */
-    'toogleAppointee(uint256,address,bool)'(
+    "toogleAppointee(uint256,address,bool)"(
       _petId: BigNumberish,
       _appointeeAddress: string,
       _newAppointeeStatus: boolean,
@@ -2582,7 +2665,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _nomineeAddress : eth wallet address of nominee.
      * @param _petId : id of PET in staker portfolio.
      */
-    'toogleNominee(uint256,address,bool)'(
+    "toogleNominee(uint256,address,bool)"(
       _petId: BigNumberish,
       _nomineeAddress: string,
       _newNomineeStatus: boolean,
@@ -2592,12 +2675,18 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * pets already initiated by a plan will continue only new will be restricted
@@ -2617,7 +2706,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _newStatus : true or false.
      * @param _planId : select a plan to make it inactive
      */
-    'updatePlanStatus(uint256,bool)'(
+    "updatePlanStatus(uint256,bool)"(
       _planId: BigNumberish,
       _newStatus: boolean,
       overrides?: Overrides
@@ -2642,7 +2731,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'viewAppointation(address,uint256,address)'(
+    "viewAppointation(address,uint256,address)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _appointeeAddress: string,
@@ -2668,7 +2757,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'viewNomination(address,uint256,address)'(
+    "viewNomination(address,uint256,address)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _nomineeAddress: string,
@@ -2694,7 +2783,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker address portfolio
      * @param _stakerAddress : address of staker who has a PET
      */
-    'withdrawAnnuity(address,uint256,uint256)'(
+    "withdrawAnnuity(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _endAnnuityMonthId: BigNumberish,
@@ -2720,7 +2809,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _powerBoosterId : this is serial of power booster
      * @param _stakerAddress : address of staker who has a PET
      */
-    'withdrawPowerBooster(address,uint256,uint256)'(
+    "withdrawPowerBooster(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _powerBoosterId: BigNumberish,
@@ -2747,7 +2836,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'appointeeVote(address,uint256)'(
+    "appointeeVote(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: Overrides
@@ -2769,7 +2858,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'calculatePowerBoosterAmount(address,uint256)'(
+    "calculatePowerBoosterAmount(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -2791,7 +2880,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _minimumMonthlyCommitmentAmount : minimum PET monthly amount in exaES
      * @param _monthlyBenefitFactorPerThousand : this is per 1000; i.e 200 for 20%
      */
-    'createPETPlan(uint256,uint256)'(
+    "createPETPlan(uint256,uint256)"(
       _minimumMonthlyCommitmentAmount: BigNumberish,
       _monthlyBenefitFactorPerThousand: BigNumberish,
       overrides?: Overrides
@@ -2805,7 +2894,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of the deployer
      */
-    'deployer()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "deployer()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * address storage of fundsBucket from which tokens to be pulled for giving benefits
@@ -2815,7 +2904,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of fundsBucket from which tokens to be pulled for giving benefits
      */
-    'fundsBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "fundsBucket()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * this function is used to get the current month of a PET
@@ -2833,7 +2922,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'getDepositMonth(address,uint256)'(
+    "getDepositMonth(address,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       overrides?: CallOverrides
@@ -2858,7 +2947,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staket address portfolio
      * @param _stakerAddress : address of staker who has PET
      */
-    'getMonthlyDepositedAmount(address,uint256,uint256)'(
+    "getMonthlyDepositedAmount(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _monthId: BigNumberish,
@@ -2884,7 +2973,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker address portfolio
      * @param _stakerAddress : address of staker who has a PET
      */
-    'getNomineeAllowedTimestamp(address,uint256,uint256)'(
+    "getNomineeAllowedTimestamp(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _annuityMonthId: BigNumberish,
@@ -2913,7 +3002,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _stakerAddress : address of staker who has a PET
      * @param _startAnnuityMonthId : this is the month (inclusive) to start from
      */
-    'getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)'(
+    "getSumOfMonthlyAnnuity(address,uint256,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _startAnnuityMonthId: BigNumberish,
@@ -2923,7 +3012,7 @@ export class PetLiquidTimeAllyPet extends Contract {
 
     isAdminMode(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * ERC20 approve is required to be done for this contract earlier if prepaidES   is not selected, enough funds must be there in the funds bucket contract   and also deposit can be done by nominee
@@ -2949,7 +3038,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _stakerAddress : address of staker who has a PET
      * @param _usePrepaidES : should prepaidES be used
      */
-    'makeDeposit(address,uint256,uint256,bool)'(
+    "makeDeposit(address,uint256,uint256,bool)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _depositAmount: BigNumberish,
@@ -2984,7 +3073,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _totalDepositAmount : total amount to deposit for 12 months
      * @param _usePrepaidES : should prepaidES be used
      */
-    'makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)'(
+    "makeFrequencyModeDeposit(address,uint256,uint256,uint256,bool)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _totalDepositAmount: BigNumberish,
@@ -3002,7 +3091,7 @@ export class PetLiquidTimeAllyPet extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'migrateDeposit(address,uint256,uint256,bool,uint256)'(
+    "migrateDeposit(address,uint256,uint256,bool,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _depositAmount: BigNumberish,
@@ -3011,14 +3100,13 @@ export class PetLiquidTimeAllyPet extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
+    /**
+     * this function is used by anyone to create a new PET
+     * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
+     * @param _planId : id of PET in staker portfolio
+     */
     migratePET(
-      _planId: BigNumberish,
-      _monthlyCommitmentAmount: BigNumberish,
-      _timestamp: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    'migratePET(uint256,uint256,uint256)'(
+      _stakerAddress: string,
       _planId: BigNumberish,
       _monthlyCommitmentAmount: BigNumberish,
       _timestamp: BigNumberish,
@@ -3030,26 +3118,17 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
      * @param _planId : id of PET in staker portfolio
      */
-    newPET(
+    "migratePET(address,uint256,uint256,uint256)"(
+      _stakerAddress: string,
       _planId: BigNumberish,
       _monthlyCommitmentAmount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    /**
-     * this function is used by anyone to create a new PET
-     * @param _monthlyCommitmentAmount : PET monthly commitment amount in exaES
-     * @param _planId : id of PET in staker portfolio
-     */
-    'newPET(uint256,uint256)'(
-      _planId: BigNumberish,
-      _monthlyCommitmentAmount: BigNumberish,
+      _timestamp: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -3059,17 +3138,20 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * storage for multiple PET plans
      */
-    petPlans(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    petPlans(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * storage for multiple PET plans
      */
-    'petPlans(uint256)'(
+    "petPlans(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3086,7 +3168,7 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * storage for PETs deployed by stakers
      */
-    'pets(address,uint256)'(
+    "pets(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -3100,11 +3182,11 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * address storage of Era Swap Token ERC20 Smart Contract
      */
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceAdminMode(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      * this function is used to update appointee status of a wallet address in PET
@@ -3125,7 +3207,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
      * @param _petId : id of PET in staker portfolio.
      */
-    'toogleAppointee(uint256,address,bool)'(
+    "toogleAppointee(uint256,address,bool)"(
       _petId: BigNumberish,
       _appointeeAddress: string,
       _newAppointeeStatus: boolean,
@@ -3151,7 +3233,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _nomineeAddress : eth wallet address of nominee.
      * @param _petId : id of PET in staker portfolio.
      */
-    'toogleNominee(uint256,address,bool)'(
+    "toogleNominee(uint256,address,bool)"(
       _petId: BigNumberish,
       _nomineeAddress: string,
       _newNomineeStatus: boolean,
@@ -3161,12 +3243,15 @@ export class PetLiquidTimeAllyPet extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -3189,7 +3274,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _newStatus : true or false.
      * @param _planId : select a plan to make it inactive
      */
-    'updatePlanStatus(uint256,bool)'(
+    "updatePlanStatus(uint256,bool)"(
       _planId: BigNumberish,
       _newStatus: boolean,
       overrides?: Overrides
@@ -3214,7 +3299,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'viewAppointation(address,uint256,address)'(
+    "viewAppointation(address,uint256,address)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _appointeeAddress: string,
@@ -3240,7 +3325,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker portfolio.
      * @param _stakerAddress : address of initiater of this PET.
      */
-    'viewNomination(address,uint256,address)'(
+    "viewNomination(address,uint256,address)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _nomineeAddress: string,
@@ -3266,7 +3351,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _petId : id of PET in staker address portfolio
      * @param _stakerAddress : address of staker who has a PET
      */
-    'withdrawAnnuity(address,uint256,uint256)'(
+    "withdrawAnnuity(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _endAnnuityMonthId: BigNumberish,
@@ -3292,7 +3377,7 @@ export class PetLiquidTimeAllyPet extends Contract {
      * @param _powerBoosterId : this is serial of power booster
      * @param _stakerAddress : address of staker who has a PET
      */
-    'withdrawPowerBooster(address,uint256,uint256)'(
+    "withdrawPowerBooster(address,uint256,uint256)"(
       _stakerAddress: string,
       _petId: BigNumberish,
       _powerBoosterId: BigNumberish,

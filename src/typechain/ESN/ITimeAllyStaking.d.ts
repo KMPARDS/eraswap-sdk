@@ -2,26 +2,47 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface ITimeAllyStakingInterface extends ethers.utils.Interface {
   functions: {
-    'increaseIssTime(uint256)': FunctionFragment;
-    'principal()': FunctionFragment;
-    'startMonth()': FunctionFragment;
+    "increaseIssTime(uint256)": FunctionFragment;
+    "principal()": FunctionFragment;
+    "startMonth()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'increaseIssTime', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'principal', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'startMonth', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "increaseIssTime",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "principal", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "startMonth",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'increaseIssTime', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'principal', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'startMonth', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseIssTime",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "principal", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "startMonth", data: BytesLike): Result;
 
   events: {};
 }
@@ -45,7 +66,7 @@ export class ITimeAllyStaking extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'increaseIssTime(uint256)'(
+    "increaseIssTime(uint256)"(
       _increaseValue: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -56,7 +77,7 @@ export class ITimeAllyStaking extends Contract {
       0: BigNumber;
     }>;
 
-    'principal()'(
+    "principal()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -68,7 +89,7 @@ export class ITimeAllyStaking extends Contract {
       0: number;
     }>;
 
-    'startMonth()'(
+    "startMonth()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -80,53 +101,59 @@ export class ITimeAllyStaking extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'increaseIssTime(uint256)'(
+  "increaseIssTime(uint256)"(
     _increaseValue: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   principal(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'principal()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "principal()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   startMonth(overrides?: CallOverrides): Promise<number>;
 
-  'startMonth()'(overrides?: CallOverrides): Promise<number>;
+  "startMonth()"(overrides?: CallOverrides): Promise<number>;
 
   callStatic: {
-    increaseIssTime(_increaseValue: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    increaseIssTime(
+      _increaseValue: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'increaseIssTime(uint256)'(
+    "increaseIssTime(uint256)"(
       _increaseValue: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     principal(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'principal()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "principal()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     startMonth(overrides?: CallOverrides): Promise<number>;
 
-    'startMonth()'(overrides?: CallOverrides): Promise<number>;
+    "startMonth()"(overrides?: CallOverrides): Promise<number>;
   };
 
   filters: {};
 
   estimateGas: {
-    increaseIssTime(_increaseValue: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    increaseIssTime(
+      _increaseValue: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'increaseIssTime(uint256)'(
+    "increaseIssTime(uint256)"(
       _increaseValue: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     principal(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'principal()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "principal()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     startMonth(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'startMonth()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "startMonth()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -135,17 +162,17 @@ export class ITimeAllyStaking extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'increaseIssTime(uint256)'(
+    "increaseIssTime(uint256)"(
       _increaseValue: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     principal(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'principal()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "principal()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     startMonth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'startMonth()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "startMonth()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

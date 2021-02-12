@@ -2,23 +2,35 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface GsnRecipientInterface extends ethers.utils.Interface {
   functions: {
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)': FunctionFragment;
-    'getHubAddr()': FunctionFragment;
-    'postRelayedCall(bytes,bool,uint256,bytes32)': FunctionFragment;
-    'preRelayedCall(bytes)': FunctionFragment;
-    'relayHubVersion()': FunctionFragment;
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)": FunctionFragment;
+    "getHubAddr()": FunctionFragment;
+    "postRelayedCall(bytes,bool,uint256,bytes32)": FunctionFragment;
+    "preRelayedCall(bytes)": FunctionFragment;
+    "relayHubVersion()": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'acceptRelayedCall',
+    functionFragment: "acceptRelayedCall",
     values: [
       string,
       string,
@@ -31,25 +43,46 @@ interface GsnRecipientInterface extends ethers.utils.Interface {
       BigNumberish
     ]
   ): string;
-  encodeFunctionData(functionFragment: 'getHubAddr', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'postRelayedCall',
+    functionFragment: "getHubAddr",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "postRelayedCall",
     values: [BytesLike, boolean, BigNumberish, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'preRelayedCall', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'relayHubVersion', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "preRelayedCall",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "relayHubVersion",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'acceptRelayedCall', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getHubAddr', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'postRelayedCall', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'preRelayedCall', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'relayHubVersion', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "acceptRelayedCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getHubAddr", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "postRelayedCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "preRelayedCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "relayHubVersion",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'RelayHubChanged(address,address)': EventFragment;
+    "RelayHubChanged(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'RelayHubChanged'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RelayHubChanged"): EventFragment;
 }
 
 export class GsnRecipient extends Contract {
@@ -88,7 +121,7 @@ export class GsnRecipient extends Contract {
     /**
      * Called by {IRelayHub} to validate if this recipient accepts being charged for a relayed call. Note that the recipient will be charged regardless of the execution result of the relayed call (i.e. if it reverts or not). The relay request was originated by `from` and will be served by `relay`. `encodedFunction` is the relayed call calldata, so its first four bytes are the function selector. The relayed call will be forwarded `gasLimit` gas, and the transaction executed with a gas price of at least `gasPrice`. ``relay``'s fee is `transactionFee`, and the recipient will be charged at most `maxPossibleCharge` (in wei). `nonce` is the sender's (`from`) nonce for replay attack protection in {IRelayHub}, and `approvalData` is a optional parameter that can be used to hold a signature over all or some of the previous values. Returns a tuple, where the first value is used to indicate approval (0) or rejection (custom non-zero error code, values 1 to 10 are reserved) and the second one is data to be passed to the other {IRelayRecipient} functions. {acceptRelayedCall} is called with 50k gas: if it runs out during execution, the request will be considered rejected. A regular revert will also trigger a rejection.
      */
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
       relay: string,
       from: string,
       encodedFunction: BytesLike,
@@ -116,7 +149,7 @@ export class GsnRecipient extends Contract {
     /**
      * Returns the address of the {IRelayHub} contract for this recipient.
      */
-    'getHubAddr()'(
+    "getHubAddr()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -136,7 +169,7 @@ export class GsnRecipient extends Contract {
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'postRelayedCall(bytes,bool,uint256,bytes32)'(
+    "postRelayedCall(bytes,bool,uint256,bytes32)"(
       context: BytesLike,
       success: boolean,
       actualCharge: BigNumberish,
@@ -147,12 +180,15 @@ export class GsnRecipient extends Contract {
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    preRelayedCall(context: BytesLike, overrides?: Overrides): Promise<ContractTransaction>;
+    preRelayedCall(
+      context: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'preRelayedCall(bytes)'(
+    "preRelayedCall(bytes)"(
       context: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -169,7 +205,7 @@ export class GsnRecipient extends Contract {
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
      */
-    'relayHubVersion()'(
+    "relayHubVersion()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -198,7 +234,7 @@ export class GsnRecipient extends Contract {
   /**
    * Called by {IRelayHub} to validate if this recipient accepts being charged for a relayed call. Note that the recipient will be charged regardless of the execution result of the relayed call (i.e. if it reverts or not). The relay request was originated by `from` and will be served by `relay`. `encodedFunction` is the relayed call calldata, so its first four bytes are the function selector. The relayed call will be forwarded `gasLimit` gas, and the transaction executed with a gas price of at least `gasPrice`. ``relay``'s fee is `transactionFee`, and the recipient will be charged at most `maxPossibleCharge` (in wei). `nonce` is the sender's (`from`) nonce for replay attack protection in {IRelayHub}, and `approvalData` is a optional parameter that can be used to hold a signature over all or some of the previous values. Returns a tuple, where the first value is used to indicate approval (0) or rejection (custom non-zero error code, values 1 to 10 are reserved) and the second one is data to be passed to the other {IRelayRecipient} functions. {acceptRelayedCall} is called with 50k gas: if it runs out during execution, the request will be considered rejected. A regular revert will also trigger a rejection.
    */
-  'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+  "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
     relay: string,
     from: string,
     encodedFunction: BytesLike,
@@ -222,7 +258,7 @@ export class GsnRecipient extends Contract {
   /**
    * Returns the address of the {IRelayHub} contract for this recipient.
    */
-  'getHubAddr()'(overrides?: CallOverrides): Promise<string>;
+  "getHubAddr()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
@@ -238,7 +274,7 @@ export class GsnRecipient extends Contract {
   /**
    * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
    */
-  'postRelayedCall(bytes,bool,uint256,bytes32)'(
+  "postRelayedCall(bytes,bool,uint256,bytes32)"(
     context: BytesLike,
     success: boolean,
     actualCharge: BigNumberish,
@@ -249,12 +285,18 @@ export class GsnRecipient extends Contract {
   /**
    * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
    */
-  preRelayedCall(context: BytesLike, overrides?: Overrides): Promise<ContractTransaction>;
+  preRelayedCall(
+    context: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
    */
-  'preRelayedCall(bytes)'(context: BytesLike, overrides?: Overrides): Promise<ContractTransaction>;
+  "preRelayedCall(bytes)"(
+    context: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
@@ -264,7 +306,7 @@ export class GsnRecipient extends Contract {
   /**
    * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
    */
-  'relayHubVersion()'(overrides?: CallOverrides): Promise<string>;
+  "relayHubVersion()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     /**
@@ -289,7 +331,7 @@ export class GsnRecipient extends Contract {
     /**
      * Called by {IRelayHub} to validate if this recipient accepts being charged for a relayed call. Note that the recipient will be charged regardless of the execution result of the relayed call (i.e. if it reverts or not). The relay request was originated by `from` and will be served by `relay`. `encodedFunction` is the relayed call calldata, so its first four bytes are the function selector. The relayed call will be forwarded `gasLimit` gas, and the transaction executed with a gas price of at least `gasPrice`. ``relay``'s fee is `transactionFee`, and the recipient will be charged at most `maxPossibleCharge` (in wei). `nonce` is the sender's (`from`) nonce for replay attack protection in {IRelayHub}, and `approvalData` is a optional parameter that can be used to hold a signature over all or some of the previous values. Returns a tuple, where the first value is used to indicate approval (0) or rejection (custom non-zero error code, values 1 to 10 are reserved) and the second one is data to be passed to the other {IRelayRecipient} functions. {acceptRelayedCall} is called with 50k gas: if it runs out during execution, the request will be considered rejected. A regular revert will also trigger a rejection.
      */
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
       relay: string,
       from: string,
       encodedFunction: BytesLike,
@@ -313,7 +355,7 @@ export class GsnRecipient extends Contract {
     /**
      * Returns the address of the {IRelayHub} contract for this recipient.
      */
-    'getHubAddr()'(overrides?: CallOverrides): Promise<string>;
+    "getHubAddr()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
@@ -329,7 +371,7 @@ export class GsnRecipient extends Contract {
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'postRelayedCall(bytes,bool,uint256,bytes32)'(
+    "postRelayedCall(bytes,bool,uint256,bytes32)"(
       context: BytesLike,
       success: boolean,
       actualCharge: BigNumberish,
@@ -340,12 +382,18 @@ export class GsnRecipient extends Contract {
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    preRelayedCall(context: BytesLike, overrides?: CallOverrides): Promise<string>;
+    preRelayedCall(
+      context: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'preRelayedCall(bytes)'(context: BytesLike, overrides?: CallOverrides): Promise<string>;
+    "preRelayedCall(bytes)"(
+      context: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
@@ -355,11 +403,14 @@ export class GsnRecipient extends Contract {
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
      */
-    'relayHubVersion()'(overrides?: CallOverrides): Promise<string>;
+    "relayHubVersion()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
-    RelayHubChanged(oldRelayHub: string | null, newRelayHub: string | null): EventFilter;
+    RelayHubChanged(
+      oldRelayHub: string | null,
+      newRelayHub: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
@@ -382,7 +433,7 @@ export class GsnRecipient extends Contract {
     /**
      * Called by {IRelayHub} to validate if this recipient accepts being charged for a relayed call. Note that the recipient will be charged regardless of the execution result of the relayed call (i.e. if it reverts or not). The relay request was originated by `from` and will be served by `relay`. `encodedFunction` is the relayed call calldata, so its first four bytes are the function selector. The relayed call will be forwarded `gasLimit` gas, and the transaction executed with a gas price of at least `gasPrice`. ``relay``'s fee is `transactionFee`, and the recipient will be charged at most `maxPossibleCharge` (in wei). `nonce` is the sender's (`from`) nonce for replay attack protection in {IRelayHub}, and `approvalData` is a optional parameter that can be used to hold a signature over all or some of the previous values. Returns a tuple, where the first value is used to indicate approval (0) or rejection (custom non-zero error code, values 1 to 10 are reserved) and the second one is data to be passed to the other {IRelayRecipient} functions. {acceptRelayedCall} is called with 50k gas: if it runs out during execution, the request will be considered rejected. A regular revert will also trigger a rejection.
      */
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
       relay: string,
       from: string,
       encodedFunction: BytesLike,
@@ -403,7 +454,7 @@ export class GsnRecipient extends Contract {
     /**
      * Returns the address of the {IRelayHub} contract for this recipient.
      */
-    'getHubAddr()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getHubAddr()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
@@ -419,7 +470,7 @@ export class GsnRecipient extends Contract {
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'postRelayedCall(bytes,bool,uint256,bytes32)'(
+    "postRelayedCall(bytes,bool,uint256,bytes32)"(
       context: BytesLike,
       success: boolean,
       actualCharge: BigNumberish,
@@ -430,12 +481,18 @@ export class GsnRecipient extends Contract {
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    preRelayedCall(context: BytesLike, overrides?: Overrides): Promise<BigNumber>;
+    preRelayedCall(
+      context: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'preRelayedCall(bytes)'(context: BytesLike, overrides?: Overrides): Promise<BigNumber>;
+    "preRelayedCall(bytes)"(
+      context: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
@@ -445,7 +502,7 @@ export class GsnRecipient extends Contract {
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
      */
-    'relayHubVersion()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "relayHubVersion()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -468,7 +525,7 @@ export class GsnRecipient extends Contract {
     /**
      * Called by {IRelayHub} to validate if this recipient accepts being charged for a relayed call. Note that the recipient will be charged regardless of the execution result of the relayed call (i.e. if it reverts or not). The relay request was originated by `from` and will be served by `relay`. `encodedFunction` is the relayed call calldata, so its first four bytes are the function selector. The relayed call will be forwarded `gasLimit` gas, and the transaction executed with a gas price of at least `gasPrice`. ``relay``'s fee is `transactionFee`, and the recipient will be charged at most `maxPossibleCharge` (in wei). `nonce` is the sender's (`from`) nonce for replay attack protection in {IRelayHub}, and `approvalData` is a optional parameter that can be used to hold a signature over all or some of the previous values. Returns a tuple, where the first value is used to indicate approval (0) or rejection (custom non-zero error code, values 1 to 10 are reserved) and the second one is data to be passed to the other {IRelayRecipient} functions. {acceptRelayedCall} is called with 50k gas: if it runs out during execution, the request will be considered rejected. A regular revert will also trigger a rejection.
      */
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
       relay: string,
       from: string,
       encodedFunction: BytesLike,
@@ -489,7 +546,7 @@ export class GsnRecipient extends Contract {
     /**
      * Returns the address of the {IRelayHub} contract for this recipient.
      */
-    'getHubAddr()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getHubAddr()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
@@ -505,7 +562,7 @@ export class GsnRecipient extends Contract {
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'postRelayedCall(bytes,bool,uint256,bytes32)'(
+    "postRelayedCall(bytes,bool,uint256,bytes32)"(
       context: BytesLike,
       success: boolean,
       actualCharge: BigNumberish,
@@ -516,12 +573,15 @@ export class GsnRecipient extends Contract {
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    preRelayedCall(context: BytesLike, overrides?: Overrides): Promise<PopulatedTransaction>;
+    preRelayedCall(
+      context: BytesLike,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'preRelayedCall(bytes)'(
+    "preRelayedCall(bytes)"(
       context: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -534,6 +594,8 @@ export class GsnRecipient extends Contract {
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
      */
-    'relayHubVersion()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "relayHubVersion()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

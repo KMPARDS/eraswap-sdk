@@ -2,46 +2,65 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PetPrepaidFundsBucketInterface extends ethers.utils.Interface {
   functions: {
-    'addFunds()': FunctionFragment;
-    'deployer()': FunctionFragment;
-    'petContract()': FunctionFragment;
-    'token()': FunctionFragment;
-    'withdrawFunds(bool,uint256)': FunctionFragment;
+    "addFunds()": FunctionFragment;
+    "deployer()": FunctionFragment;
+    "petContract()": FunctionFragment;
+    "token()": FunctionFragment;
+    "withdrawFunds(bool,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'addFunds', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'deployer', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'petContract', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'token', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdrawFunds', values: [boolean, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "addFunds", values?: undefined): string;
+  encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "petContract",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "token", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "withdrawFunds",
+    values: [boolean, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'addFunds', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'deployer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'petContract', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'token', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawFunds', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "addFunds", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "deployer", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "petContract",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawFunds",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'FundsDeposited(address,uint256)': EventFragment;
-    'FundsWithdrawn(address,uint256)': EventFragment;
+    "FundsDeposited(address,uint256)": EventFragment;
+    "FundsWithdrawn(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'FundsDeposited'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'FundsWithdrawn'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "FundsDeposited"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "FundsWithdrawn"): EventFragment;
 }
 
 export class PetPrepaidFundsBucket extends Contract {
@@ -68,7 +87,7 @@ export class PetPrepaidFundsBucket extends Contract {
      * ERC20 approve is required to be done for this contract earlier
      * this function is used by well wishers to add funds to the fund bucket of PET
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     /**
      * address of the maintainer
@@ -82,7 +101,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of the maintainer
      */
-    'deployer()'(
+    "deployer()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -100,7 +119,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of PET Smart Contract
      */
-    'petContract()'(
+    "petContract()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -118,7 +137,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of Era Swap ERC20 Smart Contract
      */
-    'token()'(
+    "token()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -136,7 +155,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
      */
-    'withdrawFunds(bool,uint256)'(
+    "withdrawFunds(bool,uint256)"(
       _withdrawEverything: boolean,
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides
@@ -153,7 +172,7 @@ export class PetPrepaidFundsBucket extends Contract {
    * ERC20 approve is required to be done for this contract earlier
    * this function is used by well wishers to add funds to the fund bucket of PET
    */
-  'addFunds()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "addFunds()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   /**
    * address of the maintainer
@@ -163,7 +182,7 @@ export class PetPrepaidFundsBucket extends Contract {
   /**
    * address of the maintainer
    */
-  'deployer()'(overrides?: CallOverrides): Promise<string>;
+  "deployer()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * address of PET Smart Contract
@@ -173,7 +192,7 @@ export class PetPrepaidFundsBucket extends Contract {
   /**
    * address of PET Smart Contract
    */
-  'petContract()'(overrides?: CallOverrides): Promise<string>;
+  "petContract()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * address of Era Swap ERC20 Smart Contract
@@ -183,7 +202,7 @@ export class PetPrepaidFundsBucket extends Contract {
   /**
    * address of Era Swap ERC20 Smart Contract
    */
-  'token()'(overrides?: CallOverrides): Promise<string>;
+  "token()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * this function makes it possible for deployer to withdraw unallocated ES
@@ -197,7 +216,7 @@ export class PetPrepaidFundsBucket extends Contract {
   /**
    * this function makes it possible for deployer to withdraw unallocated ES
    */
-  'withdrawFunds(bool,uint256)'(
+  "withdrawFunds(bool,uint256)"(
     _withdrawEverything: boolean,
     _withdrawlAmount: BigNumberish,
     overrides?: Overrides
@@ -214,7 +233,7 @@ export class PetPrepaidFundsBucket extends Contract {
      * ERC20 approve is required to be done for this contract earlier
      * this function is used by well wishers to add funds to the fund bucket of PET
      */
-    'addFunds()'(overrides?: CallOverrides): Promise<void>;
+    "addFunds()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * address of the maintainer
@@ -224,7 +243,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of the maintainer
      */
-    'deployer()'(overrides?: CallOverrides): Promise<string>;
+    "deployer()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * address of PET Smart Contract
@@ -234,7 +253,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of PET Smart Contract
      */
-    'petContract()'(overrides?: CallOverrides): Promise<string>;
+    "petContract()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * address of Era Swap ERC20 Smart Contract
@@ -244,7 +263,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of Era Swap ERC20 Smart Contract
      */
-    'token()'(overrides?: CallOverrides): Promise<string>;
+    "token()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
@@ -258,7 +277,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
      */
-    'withdrawFunds(bool,uint256)'(
+    "withdrawFunds(bool,uint256)"(
       _withdrawEverything: boolean,
       _withdrawlAmount: BigNumberish,
       overrides?: CallOverrides
@@ -282,7 +301,7 @@ export class PetPrepaidFundsBucket extends Contract {
      * ERC20 approve is required to be done for this contract earlier
      * this function is used by well wishers to add funds to the fund bucket of PET
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     /**
      * address of the maintainer
@@ -292,7 +311,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of the maintainer
      */
-    'deployer()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "deployer()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * address of PET Smart Contract
@@ -302,7 +321,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of PET Smart Contract
      */
-    'petContract()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "petContract()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * address of Era Swap ERC20 Smart Contract
@@ -312,7 +331,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of Era Swap ERC20 Smart Contract
      */
-    'token()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "token()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
@@ -326,7 +345,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
      */
-    'withdrawFunds(bool,uint256)'(
+    "withdrawFunds(bool,uint256)"(
       _withdrawEverything: boolean,
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides
@@ -344,7 +363,7 @@ export class PetPrepaidFundsBucket extends Contract {
      * ERC20 approve is required to be done for this contract earlier
      * this function is used by well wishers to add funds to the fund bucket of PET
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     /**
      * address of the maintainer
@@ -354,7 +373,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of the maintainer
      */
-    'deployer()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "deployer()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * address of PET Smart Contract
@@ -364,7 +383,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of PET Smart Contract
      */
-    'petContract()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "petContract()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * address of Era Swap ERC20 Smart Contract
@@ -374,7 +393,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * address of Era Swap ERC20 Smart Contract
      */
-    'token()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "token()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
@@ -388,7 +407,7 @@ export class PetPrepaidFundsBucket extends Contract {
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
      */
-    'withdrawFunds(bool,uint256)'(
+    "withdrawFunds(bool,uint256)"(
       _withdrawEverything: boolean,
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides

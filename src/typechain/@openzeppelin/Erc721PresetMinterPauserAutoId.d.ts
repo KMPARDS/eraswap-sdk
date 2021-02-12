@@ -2,139 +2,257 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
-interface Erc721PresetMinterPauserAutoIdInterface extends ethers.utils.Interface {
+interface Erc721PresetMinterPauserAutoIdInterface
+  extends ethers.utils.Interface {
   functions: {
-    'DEFAULT_ADMIN_ROLE()': FunctionFragment;
-    'MINTER_ROLE()': FunctionFragment;
-    'PAUSER_ROLE()': FunctionFragment;
-    'approve(address,uint256)': FunctionFragment;
-    'balanceOf(address)': FunctionFragment;
-    'baseURI()': FunctionFragment;
-    'burn(uint256)': FunctionFragment;
-    'getApproved(uint256)': FunctionFragment;
-    'getRoleAdmin(bytes32)': FunctionFragment;
-    'getRoleMember(bytes32,uint256)': FunctionFragment;
-    'getRoleMemberCount(bytes32)': FunctionFragment;
-    'grantRole(bytes32,address)': FunctionFragment;
-    'hasRole(bytes32,address)': FunctionFragment;
-    'isApprovedForAll(address,address)': FunctionFragment;
-    'mint(address)': FunctionFragment;
-    'name()': FunctionFragment;
-    'ownerOf(uint256)': FunctionFragment;
-    'pause()': FunctionFragment;
-    'paused()': FunctionFragment;
-    'renounceRole(bytes32,address)': FunctionFragment;
-    'revokeRole(bytes32,address)': FunctionFragment;
-    'safeTransferFrom(address,address,uint256)': FunctionFragment;
-    'setApprovalForAll(address,bool)': FunctionFragment;
-    'supportsInterface(bytes4)': FunctionFragment;
-    'symbol()': FunctionFragment;
-    'tokenByIndex(uint256)': FunctionFragment;
-    'tokenOfOwnerByIndex(address,uint256)': FunctionFragment;
-    'tokenURI(uint256)': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'transferFrom(address,address,uint256)': FunctionFragment;
-    'unpause()': FunctionFragment;
+    "DEFAULT_ADMIN_ROLE()": FunctionFragment;
+    "MINTER_ROLE()": FunctionFragment;
+    "PAUSER_ROLE()": FunctionFragment;
+    "approve(address,uint256)": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "baseURI()": FunctionFragment;
+    "burn(uint256)": FunctionFragment;
+    "getApproved(uint256)": FunctionFragment;
+    "getRoleAdmin(bytes32)": FunctionFragment;
+    "getRoleMember(bytes32,uint256)": FunctionFragment;
+    "getRoleMemberCount(bytes32)": FunctionFragment;
+    "grantRole(bytes32,address)": FunctionFragment;
+    "hasRole(bytes32,address)": FunctionFragment;
+    "isApprovedForAll(address,address)": FunctionFragment;
+    "mint(address)": FunctionFragment;
+    "name()": FunctionFragment;
+    "ownerOf(uint256)": FunctionFragment;
+    "pause()": FunctionFragment;
+    "paused()": FunctionFragment;
+    "renounceRole(bytes32,address)": FunctionFragment;
+    "revokeRole(bytes32,address)": FunctionFragment;
+    "safeTransferFrom(address,address,uint256)": FunctionFragment;
+    "setApprovalForAll(address,bool)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "tokenByIndex(uint256)": FunctionFragment;
+    "tokenOfOwnerByIndex(address,uint256)": FunctionFragment;
+    "tokenURI(uint256)": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "transferFrom(address,address,uint256)": FunctionFragment;
+    "unpause()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'DEFAULT_ADMIN_ROLE', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'MINTER_ROLE', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'PAUSER_ROLE', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'approve', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
-  encodeFunctionData(functionFragment: 'baseURI', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'burn', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getApproved', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getRoleAdmin', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'getRoleMember', values: [BytesLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getRoleMemberCount', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'grantRole', values: [BytesLike, string]): string;
-  encodeFunctionData(functionFragment: 'hasRole', values: [BytesLike, string]): string;
-  encodeFunctionData(functionFragment: 'isApprovedForAll', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'mint', values: [string]): string;
-  encodeFunctionData(functionFragment: 'name', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'ownerOf', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'pause', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'paused', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceRole', values: [BytesLike, string]): string;
-  encodeFunctionData(functionFragment: 'revokeRole', values: [BytesLike, string]): string;
   encodeFunctionData(
-    functionFragment: 'safeTransferFrom',
-    values: [string, string, BigNumberish]
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: 'setApprovalForAll', values: [string, boolean]): string;
-  encodeFunctionData(functionFragment: 'supportsInterface', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'tokenByIndex', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'tokenOfOwnerByIndex',
+    functionFragment: "MINTER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PAUSER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approve",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'tokenURI', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(functionFragment: "baseURI", values?: undefined): string;
+  encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'transferFrom',
+    functionFragment: "getApproved",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleMember",
+    values: [BytesLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleMemberCount",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isApprovedForAll",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(functionFragment: "mint", values: [string]): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "ownerOf",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "pause", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceRole",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "safeTransferFrom",
     values: [string, string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'unpause', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "setApprovalForAll",
+    values: [string, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "tokenByIndex",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "tokenOfOwnerByIndex",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "tokenURI",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom",
+    values: [string, string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: 'DEFAULT_ADMIN_ROLE', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'MINTER_ROLE', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'PAUSER_ROLE', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'baseURI', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'burn', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getApproved', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRoleAdmin', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRoleMember', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRoleMemberCount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'grantRole', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'hasRole', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isApprovedForAll', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'ownerOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'pause', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'paused', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceRole', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'revokeRole', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'safeTransferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setApprovalForAll', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'supportsInterface', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'tokenByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'tokenOfOwnerByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'tokenURI', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'unpause', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MINTER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PAUSER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "baseURI", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getApproved",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleMember",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleMemberCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "safeTransferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "tokenByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "tokenOfOwnerByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
 
   events: {
-    'Approval(address,address,uint256)': EventFragment;
-    'ApprovalForAll(address,address,bool)': EventFragment;
-    'Paused(address)': EventFragment;
-    'RoleAdminChanged(bytes32,bytes32,bytes32)': EventFragment;
-    'RoleGranted(bytes32,address,address)': EventFragment;
-    'RoleRevoked(bytes32,address,address)': EventFragment;
-    'Transfer(address,address,uint256)': EventFragment;
-    'Unpaused(address)': EventFragment;
+    "Approval(address,address,uint256)": EventFragment;
+    "ApprovalForAll(address,address,bool)": EventFragment;
+    "Paused(address)": EventFragment;
+    "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
+    "RoleGranted(bytes32,address,address)": EventFragment;
+    "RoleRevoked(bytes32,address,address)": EventFragment;
+    "Transfer(address,address,uint256)": EventFragment;
+    "Unpaused(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'ApprovalForAll'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Paused'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RoleAdminChanged'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RoleGranted'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RoleRevoked'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Unpaused'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
 }
 
 export class Erc721PresetMinterPauserAutoId extends Contract {
@@ -157,7 +275,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
       0: string;
     }>;
 
-    'DEFAULT_ADMIN_ROLE()'(
+    "DEFAULT_ADMIN_ROLE()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -169,7 +287,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
       0: string;
     }>;
 
-    'MINTER_ROLE()'(
+    "MINTER_ROLE()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -181,7 +299,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
       0: string;
     }>;
 
-    'PAUSER_ROLE()'(
+    "PAUSER_ROLE()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -190,12 +308,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-approve}.
      */
-    approve(to: string, tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    approve(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See {IERC721-approve}.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides
@@ -214,7 +336,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-balanceOf}.
      */
-    'balanceOf(address)'(
+    "balanceOf(address)"(
       owner: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -233,7 +355,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
      */
-    'baseURI()'(
+    "baseURI()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -242,12 +364,18 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    burn(tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    burn(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    'burn(uint256)'(tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    "burn(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See {IERC721-getApproved}.
@@ -262,7 +390,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-getApproved}.
      */
-    'getApproved(uint256)'(
+    "getApproved(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -282,7 +410,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    'getRoleAdmin(bytes32)'(
+    "getRoleAdmin(bytes32)"(
       role: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -303,7 +431,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    'getRoleMember(bytes32,uint256)'(
+    "getRoleMember(bytes32,uint256)"(
       role: BytesLike,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -324,7 +452,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    'getRoleMemberCount(bytes32)'(
+    "getRoleMemberCount(bytes32)"(
       role: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -343,7 +471,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'grantRole(bytes32,address)'(
+    "grantRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -363,7 +491,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    'hasRole(bytes32,address)'(
+    "hasRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -385,7 +513,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       owner: string,
       operator: string,
       overrides?: CallOverrides
@@ -401,7 +529,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Creates a new token for `to`. Its token ID will be automatically assigned (and available on the emitted {IERC721-Transfer} event), and the token URI autogenerated based on the base URI passed at construction. See {ERC721-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    'mint(address)'(to: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "mint(address)"(
+      to: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See {IERC721Metadata-name}.
@@ -415,7 +546,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-name}.
      */
-    'name()'(
+    "name()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -434,7 +565,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-ownerOf}.
      */
-    'ownerOf(uint256)'(
+    "ownerOf(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -449,7 +580,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Pauses all token transfers. See {ERC721Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'pause()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      * Returns true if the contract is paused, and false otherwise.
@@ -463,7 +594,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(
+    "paused()"(
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -481,7 +612,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    'renounceRole(bytes32,address)'(
+    "renounceRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -499,7 +630,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'revokeRole(bytes32,address)'(
+    "revokeRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -508,7 +639,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -518,7 +649,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -538,7 +669,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -557,7 +688,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -576,7 +707,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-symbol}.
      */
-    'symbol()'(
+    "symbol()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -595,7 +726,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    'tokenByIndex(uint256)'(
+    "tokenByIndex(uint256)"(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -616,7 +747,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
-    'tokenOfOwnerByIndex(address,uint256)'(
+    "tokenOfOwnerByIndex(address,uint256)"(
       owner: string,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -637,7 +768,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    'tokenURI(uint256)'(
+    "tokenURI(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -656,7 +787,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-totalSupply}.
      */
-    'totalSupply()'(
+    "totalSupply()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -675,7 +806,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-transferFrom}.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -690,30 +821,34 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Unpauses all token transfers. See {ERC721Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'unpause()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
   };
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  'DEFAULT_ADMIN_ROLE()'(overrides?: CallOverrides): Promise<string>;
+  "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
   MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  'MINTER_ROLE()'(overrides?: CallOverrides): Promise<string>;
+  "MINTER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
   PAUSER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  'PAUSER_ROLE()'(overrides?: CallOverrides): Promise<string>;
+  "PAUSER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC721-approve}.
    */
-  approve(to: string, tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  approve(
+    to: string,
+    tokenId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC721-approve}.
    */
-  'approve(address,uint256)'(
+  "approve(address,uint256)"(
     to: string,
     tokenId: BigNumberish,
     overrides?: Overrides
@@ -727,7 +862,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721-balanceOf}.
    */
-  'balanceOf(address)'(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf(address)"(
+    owner: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
@@ -737,27 +875,39 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
    */
-  'baseURI()'(overrides?: CallOverrides): Promise<string>;
+  "baseURI()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
    */
-  burn(tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  burn(
+    tokenId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
    */
-  'burn(uint256)'(tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  "burn(uint256)"(
+    tokenId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC721-getApproved}.
    */
-  getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  getApproved(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * See {IERC721-getApproved}.
    */
-  'getApproved(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "getApproved(uint256)"(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
@@ -767,17 +917,24 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
    */
-  'getRoleAdmin(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "getRoleAdmin(bytes32)"(
+    role: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
    */
-  getRoleMember(role: BytesLike, index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  getRoleMember(
+    role: BytesLike,
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
    */
-  'getRoleMember(bytes32,uint256)'(
+  "getRoleMember(bytes32,uint256)"(
     role: BytesLike,
     index: BigNumberish,
     overrides?: CallOverrides
@@ -786,22 +943,32 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
    */
-  getRoleMemberCount(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+  getRoleMemberCount(
+    role: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
    */
-  'getRoleMemberCount(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+  "getRoleMemberCount(bytes32)"(
+    role: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
    */
-  grantRole(role: BytesLike, account: string, overrides?: Overrides): Promise<ContractTransaction>;
+  grantRole(
+    role: BytesLike,
+    account: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
    */
-  'grantRole(bytes32,address)'(
+  "grantRole(bytes32,address)"(
     role: BytesLike,
     account: string,
     overrides?: Overrides
@@ -810,12 +977,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Returns `true` if `account` has been granted `role`.
    */
-  hasRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<boolean>;
+  hasRole(
+    role: BytesLike,
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * Returns `true` if `account` has been granted `role`.
    */
-  'hasRole(bytes32,address)'(
+  "hasRole(bytes32,address)"(
     role: BytesLike,
     account: string,
     overrides?: CallOverrides
@@ -824,12 +995,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721-isApprovedForAll}.
    */
-  isApprovedForAll(owner: string, operator: string, overrides?: CallOverrides): Promise<boolean>;
+  isApprovedForAll(
+    owner: string,
+    operator: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC721-isApprovedForAll}.
    */
-  'isApprovedForAll(address,address)'(
+  "isApprovedForAll(address,address)"(
     owner: string,
     operator: string,
     overrides?: CallOverrides
@@ -843,7 +1018,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Creates a new token for `to`. Its token ID will be automatically assigned (and available on the emitted {IERC721-Transfer} event), and the token URI autogenerated based on the base URI passed at construction. See {ERC721-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
    */
-  'mint(address)'(to: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "mint(address)"(
+    to: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC721Metadata-name}.
@@ -853,7 +1031,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721Metadata-name}.
    */
-  'name()'(overrides?: CallOverrides): Promise<string>;
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC721-ownerOf}.
@@ -863,7 +1041,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721-ownerOf}.
    */
-  'ownerOf(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "ownerOf(uint256)"(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Pauses all token transfers. See {ERC721Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
@@ -873,7 +1054,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Pauses all token transfers. See {ERC721Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
    */
-  'pause()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * Returns true if the contract is paused, and false otherwise.
@@ -883,7 +1064,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Returns true if the contract is paused, and false otherwise.
    */
-  'paused()'(overrides?: CallOverrides): Promise<boolean>;
+  "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
   /**
    * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
@@ -897,7 +1078,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
    */
-  'renounceRole(bytes32,address)'(
+  "renounceRole(bytes32,address)"(
     role: BytesLike,
     account: string,
     overrides?: Overrides
@@ -906,12 +1087,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
    */
-  revokeRole(role: BytesLike, account: string, overrides?: Overrides): Promise<ContractTransaction>;
+  revokeRole(
+    role: BytesLike,
+    account: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
    */
-  'revokeRole(bytes32,address)'(
+  "revokeRole(bytes32,address)"(
     role: BytesLike,
     account: string,
     overrides?: Overrides
@@ -920,7 +1105,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721-safeTransferFrom}.
    */
-  'safeTransferFrom(address,address,uint256)'(
+  "safeTransferFrom(address,address,uint256)"(
     from: string,
     to: string,
     tokenId: BigNumberish,
@@ -930,7 +1115,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721-safeTransferFrom}.
    */
-  'safeTransferFrom(address,address,uint256,bytes)'(
+  "safeTransferFrom(address,address,uint256,bytes)"(
     from: string,
     to: string,
     tokenId: BigNumberish,
@@ -950,7 +1135,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721-setApprovalForAll}.
    */
-  'setApprovalForAll(address,bool)'(
+  "setApprovalForAll(address,bool)"(
     operator: string,
     approved: boolean,
     overrides?: Overrides
@@ -959,12 +1144,18 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  'supportsInterface(bytes4)'(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  "supportsInterface(bytes4)"(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC721Metadata-symbol}.
@@ -974,17 +1165,23 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721Metadata-symbol}.
    */
-  'symbol()'(overrides?: CallOverrides): Promise<string>;
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC721Enumerable-tokenByIndex}.
    */
-  tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  tokenByIndex(
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * See {IERC721Enumerable-tokenByIndex}.
    */
-  'tokenByIndex(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  "tokenByIndex(uint256)"(
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * See {IERC721Enumerable-tokenOfOwnerByIndex}.
@@ -998,7 +1195,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721Enumerable-tokenOfOwnerByIndex}.
    */
-  'tokenOfOwnerByIndex(address,uint256)'(
+  "tokenOfOwnerByIndex(address,uint256)"(
     owner: string,
     index: BigNumberish,
     overrides?: CallOverrides
@@ -1012,7 +1209,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721Metadata-tokenURI}.
    */
-  'tokenURI(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "tokenURI(uint256)"(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * See {IERC721Enumerable-totalSupply}.
@@ -1022,7 +1222,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721Enumerable-totalSupply}.
    */
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * See {IERC721-transferFrom}.
@@ -1037,7 +1237,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * See {IERC721-transferFrom}.
    */
-  'transferFrom(address,address,uint256)'(
+  "transferFrom(address,address,uint256)"(
     from: string,
     to: string,
     tokenId: BigNumberish,
@@ -1052,30 +1252,34 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   /**
    * Unpauses all token transfers. See {ERC721Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
    */
-  'unpause()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    'DEFAULT_ADMIN_ROLE()'(overrides?: CallOverrides): Promise<string>;
+    "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    'MINTER_ROLE()'(overrides?: CallOverrides): Promise<string>;
+    "MINTER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     PAUSER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    'PAUSER_ROLE()'(overrides?: CallOverrides): Promise<string>;
+    "PAUSER_ROLE()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC721-approve}.
      */
-    approve(to: string, tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    approve(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * See {IERC721-approve}.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       to: string,
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -1089,7 +1293,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-balanceOf}.
      */
-    'balanceOf(address)'(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
@@ -1099,7 +1306,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
      */
-    'baseURI()'(overrides?: CallOverrides): Promise<string>;
+    "baseURI()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
@@ -1109,17 +1316,26 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    'burn(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "burn(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getApproved(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    'getApproved(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    "getApproved(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
@@ -1129,17 +1345,24 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    'getRoleAdmin(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<string>;
+    "getRoleAdmin(bytes32)"(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    getRoleMember(role: BytesLike, index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getRoleMember(
+      role: BytesLike,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    'getRoleMember(bytes32,uint256)'(
+    "getRoleMember(bytes32,uint256)"(
       role: BytesLike,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1148,22 +1371,32 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    getRoleMemberCount(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoleMemberCount(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    'getRoleMemberCount(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "getRoleMemberCount(bytes32)"(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    grantRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<void>;
+    grantRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'grantRole(bytes32,address)'(
+    "grantRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1172,12 +1405,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    hasRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<boolean>;
+    hasRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    'hasRole(bytes32,address)'(
+    "hasRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1186,12 +1423,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    isApprovedForAll(owner: string, operator: string, overrides?: CallOverrides): Promise<boolean>;
+    isApprovedForAll(
+      owner: string,
+      operator: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       owner: string,
       operator: string,
       overrides?: CallOverrides
@@ -1205,7 +1446,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Creates a new token for `to`. Its token ID will be automatically assigned (and available on the emitted {IERC721-Transfer} event), and the token URI autogenerated based on the base URI passed at construction. See {ERC721-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    'mint(address)'(to: string, overrides?: CallOverrides): Promise<void>;
+    "mint(address)"(to: string, overrides?: CallOverrides): Promise<void>;
 
     /**
      * See {IERC721Metadata-name}.
@@ -1215,7 +1456,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<string>;
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC721-ownerOf}.
@@ -1225,7 +1466,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-ownerOf}.
      */
-    'ownerOf(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    "ownerOf(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Pauses all token transfers. See {ERC721Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
@@ -1235,7 +1479,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Pauses all token transfers. See {ERC721Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'pause()'(overrides?: CallOverrides): Promise<void>;
+    "pause()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Returns true if the contract is paused, and false otherwise.
@@ -1245,17 +1489,21 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<boolean>;
+    "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    renounceRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<void>;
+    renounceRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    'renounceRole(bytes32,address)'(
+    "renounceRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1264,12 +1512,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    revokeRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<void>;
+    revokeRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'revokeRole(bytes32,address)'(
+    "revokeRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1278,7 +1530,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1288,7 +1540,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1308,7 +1560,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: CallOverrides
@@ -1317,12 +1569,15 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -1335,17 +1590,23 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<string>;
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    'tokenByIndex(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "tokenByIndex(uint256)"(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
@@ -1359,7 +1620,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
-    'tokenOfOwnerByIndex(address,uint256)'(
+    "tokenOfOwnerByIndex(address,uint256)"(
       owner: string,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1373,7 +1634,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    'tokenURI(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    "tokenURI(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * See {IERC721Enumerable-totalSupply}.
@@ -1383,7 +1647,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721-transferFrom}.
@@ -1398,7 +1662,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-transferFrom}.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1413,7 +1677,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Unpauses all token transfers. See {ERC721Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'unpause()'(overrides?: CallOverrides): Promise<void>;
+    "unpause()"(overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
@@ -1423,7 +1687,11 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
       tokenId: BigNumberish | null
     ): EventFilter;
 
-    ApprovalForAll(owner: string | null, operator: string | null, approved: null): EventFilter;
+    ApprovalForAll(
+      owner: string | null,
+      operator: string | null,
+      approved: null
+    ): EventFilter;
 
     Paused(account: null): EventFilter;
 
@@ -1433,11 +1701,23 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
       newAdminRole: BytesLike | null
     ): EventFilter;
 
-    RoleGranted(role: BytesLike | null, account: string | null, sender: string | null): EventFilter;
+    RoleGranted(
+      role: BytesLike | null,
+      account: string | null,
+      sender: string | null
+    ): EventFilter;
 
-    RoleRevoked(role: BytesLike | null, account: string | null, sender: string | null): EventFilter;
+    RoleRevoked(
+      role: BytesLike | null,
+      account: string | null,
+      sender: string | null
+    ): EventFilter;
 
-    Transfer(from: string | null, to: string | null, tokenId: BigNumberish | null): EventFilter;
+    Transfer(
+      from: string | null,
+      to: string | null,
+      tokenId: BigNumberish | null
+    ): EventFilter;
 
     Unpaused(account: null): EventFilter;
   };
@@ -1445,25 +1725,29 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
   estimateGas: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'DEFAULT_ADMIN_ROLE()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "DEFAULT_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'MINTER_ROLE()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "MINTER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     PAUSER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'PAUSER_ROLE()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "PAUSER_ROLE()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721-approve}.
      */
-    approve(to: string, tokenId: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    approve(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-approve}.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides
@@ -1477,7 +1761,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-balanceOf}.
      */
-    'balanceOf(address)'(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
@@ -1487,7 +1774,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
      */
-    'baseURI()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "baseURI()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
@@ -1497,27 +1784,42 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    'burn(uint256)'(tokenId: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    "burn(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getApproved(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    'getApproved(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getApproved(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoleAdmin(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    'getRoleAdmin(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "getRoleAdmin(bytes32)"(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
@@ -1531,7 +1833,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    'getRoleMember(bytes32,uint256)'(
+    "getRoleMember(bytes32,uint256)"(
       role: BytesLike,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1540,22 +1842,32 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    getRoleMemberCount(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoleMemberCount(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    'getRoleMemberCount(bytes32)'(role: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "getRoleMemberCount(bytes32)"(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    grantRole(role: BytesLike, account: string, overrides?: Overrides): Promise<BigNumber>;
+    grantRole(
+      role: BytesLike,
+      account: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'grantRole(bytes32,address)'(
+    "grantRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1564,12 +1876,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    hasRole(role: BytesLike, account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    hasRole(
+      role: BytesLike,
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    'hasRole(bytes32,address)'(
+    "hasRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1587,7 +1903,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       owner: string,
       operator: string,
       overrides?: CallOverrides
@@ -1601,7 +1917,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Creates a new token for `to`. Its token ID will be automatically assigned (and available on the emitted {IERC721-Transfer} event), and the token URI autogenerated based on the base URI passed at construction. See {ERC721-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    'mint(address)'(to: string, overrides?: Overrides): Promise<BigNumber>;
+    "mint(address)"(to: string, overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * See {IERC721Metadata-name}.
@@ -1611,17 +1927,23 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721-ownerOf}.
      */
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    ownerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-ownerOf}.
      */
-    'ownerOf(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "ownerOf(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Pauses all token transfers. See {ERC721Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
@@ -1631,7 +1953,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Pauses all token transfers. See {ERC721Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'pause()'(overrides?: Overrides): Promise<BigNumber>;
+    "pause()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * Returns true if the contract is paused, and false otherwise.
@@ -1641,17 +1963,21 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    renounceRole(role: BytesLike, account: string, overrides?: Overrides): Promise<BigNumber>;
+    renounceRole(
+      role: BytesLike,
+      account: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    'renounceRole(bytes32,address)'(
+    "renounceRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1660,12 +1986,16 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    revokeRole(role: BytesLike, account: string, overrides?: Overrides): Promise<BigNumber>;
+    revokeRole(
+      role: BytesLike,
+      account: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'revokeRole(bytes32,address)'(
+    "revokeRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1674,7 +2004,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1684,7 +2014,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1704,7 +2034,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -1713,12 +2043,15 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1731,17 +2064,23 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    'tokenByIndex(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "tokenByIndex(uint256)"(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
@@ -1755,7 +2094,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
-    'tokenOfOwnerByIndex(address,uint256)'(
+    "tokenOfOwnerByIndex(address,uint256)"(
       owner: string,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1764,12 +2103,18 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenURI(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    'tokenURI(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "tokenURI(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-totalSupply}.
@@ -1779,7 +2124,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721-transferFrom}.
@@ -1794,7 +2139,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-transferFrom}.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1809,21 +2154,25 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Unpauses all token transfers. See {ERC721Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'unpause()'(overrides?: Overrides): Promise<BigNumber>;
+    "unpause()"(overrides?: Overrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    DEFAULT_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'DEFAULT_ADMIN_ROLE()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "DEFAULT_ADMIN_ROLE()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'MINTER_ROLE()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "MINTER_ROLE()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     PAUSER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'PAUSER_ROLE()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "PAUSER_ROLE()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-approve}.
@@ -1837,7 +2186,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-approve}.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides
@@ -1846,12 +2195,18 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-balanceOf}.
      */
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    balanceOf(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-balanceOf}.
      */
-    'balanceOf(address)'(owner: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balanceOf(address)"(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
@@ -1861,27 +2216,36 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
      */
-    'baseURI()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "baseURI()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    burn(tokenId: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    burn(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    'burn(uint256)'(tokenId: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "burn(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getApproved(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    'getApproved(uint256)'(
+    "getApproved(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1889,12 +2253,15 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getRoleAdmin(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.
      */
-    'getRoleAdmin(bytes32)'(
+    "getRoleAdmin(bytes32)"(
       role: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1911,7 +2278,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.
      */
-    'getRoleMember(bytes32,uint256)'(
+    "getRoleMember(bytes32,uint256)"(
       role: BytesLike,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1920,12 +2287,15 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    getRoleMemberCount(role: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getRoleMemberCount(
+      role: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.
      */
-    'getRoleMemberCount(bytes32)'(
+    "getRoleMemberCount(bytes32)"(
       role: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1942,7 +2312,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'grantRole(bytes32,address)'(
+    "grantRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -1960,7 +2330,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns `true` if `account` has been granted `role`.
      */
-    'hasRole(bytes32,address)'(
+    "hasRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -1978,7 +2348,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       owner: string,
       operator: string,
       overrides?: CallOverrides
@@ -1992,7 +2362,10 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Creates a new token for `to`. Its token ID will be automatically assigned (and available on the emitted {IERC721-Transfer} event), and the token URI autogenerated based on the base URI passed at construction. See {ERC721-_mint}. Requirements: - the caller must have the `MINTER_ROLE`.
      */
-    'mint(address)'(to: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "mint(address)"(
+      to: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721Metadata-name}.
@@ -2002,17 +2375,20 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-ownerOf}.
      */
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    ownerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-ownerOf}.
      */
-    'ownerOf(uint256)'(
+    "ownerOf(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2025,7 +2401,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Pauses all token transfers. See {ERC721Pausable} and {Pausable-_pause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'pause()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "pause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns true if the contract is paused, and false otherwise.
@@ -2035,7 +2411,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
@@ -2049,7 +2425,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.
      */
-    'renounceRole(bytes32,address)'(
+    "renounceRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -2067,7 +2443,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.
      */
-    'revokeRole(bytes32,address)'(
+    "revokeRole(bytes32,address)"(
       role: BytesLike,
       account: string,
       overrides?: Overrides
@@ -2076,7 +2452,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -2086,7 +2462,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -2106,7 +2482,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -2123,7 +2499,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2136,17 +2512,20 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    'tokenByIndex(uint256)'(
+    "tokenByIndex(uint256)"(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2163,7 +2542,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
-    'tokenOfOwnerByIndex(address,uint256)'(
+    "tokenOfOwnerByIndex(address,uint256)"(
       owner: string,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -2172,12 +2551,15 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    tokenURI(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    'tokenURI(uint256)'(
+    "tokenURI(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2190,7 +2572,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721Enumerable-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-transferFrom}.
@@ -2205,7 +2587,7 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * See {IERC721-transferFrom}.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -2220,6 +2602,6 @@ export class Erc721PresetMinterPauserAutoId extends Contract {
     /**
      * Unpauses all token transfers. See {ERC721Pausable} and {Pausable-_unpause}. Requirements: - the caller must have the `PAUSER_ROLE`.
      */
-    'unpause()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "unpause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
   };
 }

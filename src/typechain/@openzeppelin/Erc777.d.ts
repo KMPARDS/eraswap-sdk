@@ -2,98 +2,170 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Erc777Interface extends ethers.utils.Interface {
   functions: {
-    'allowance(address,address)': FunctionFragment;
-    'approve(address,uint256)': FunctionFragment;
-    'authorizeOperator(address)': FunctionFragment;
-    'balanceOf(address)': FunctionFragment;
-    'burn(uint256,bytes)': FunctionFragment;
-    'decimals()': FunctionFragment;
-    'defaultOperators()': FunctionFragment;
-    'granularity()': FunctionFragment;
-    'isOperatorFor(address,address)': FunctionFragment;
-    'name()': FunctionFragment;
-    'operatorBurn(address,uint256,bytes,bytes)': FunctionFragment;
-    'operatorSend(address,address,uint256,bytes,bytes)': FunctionFragment;
-    'revokeOperator(address)': FunctionFragment;
-    'send(address,uint256,bytes)': FunctionFragment;
-    'symbol()': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'transfer(address,uint256)': FunctionFragment;
-    'transferFrom(address,address,uint256)': FunctionFragment;
+    "allowance(address,address)": FunctionFragment;
+    "approve(address,uint256)": FunctionFragment;
+    "authorizeOperator(address)": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "burn(uint256,bytes)": FunctionFragment;
+    "decimals()": FunctionFragment;
+    "defaultOperators()": FunctionFragment;
+    "granularity()": FunctionFragment;
+    "isOperatorFor(address,address)": FunctionFragment;
+    "name()": FunctionFragment;
+    "operatorBurn(address,uint256,bytes,bytes)": FunctionFragment;
+    "operatorSend(address,address,uint256,bytes,bytes)": FunctionFragment;
+    "revokeOperator(address)": FunctionFragment;
+    "send(address,uint256,bytes)": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "transfer(address,uint256)": FunctionFragment;
+    "transferFrom(address,address,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'allowance', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'approve', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'authorizeOperator', values: [string]): string;
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
-  encodeFunctionData(functionFragment: 'burn', values: [BigNumberish, BytesLike]): string;
-  encodeFunctionData(functionFragment: 'decimals', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'defaultOperators', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'granularity', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'isOperatorFor', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'name', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'operatorBurn',
+    functionFragment: "allowance",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approve",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "authorizeOperator",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "burn",
+    values: [BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "defaultOperators",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "granularity",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isOperatorFor",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "operatorBurn",
     values: [string, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'operatorSend',
+    functionFragment: "operatorSend",
     values: [string, string, BigNumberish, BytesLike, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'revokeOperator', values: [string]): string;
-  encodeFunctionData(functionFragment: 'send', values: [string, BigNumberish, BytesLike]): string;
-  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transfer', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'transferFrom',
+    functionFragment: "revokeOperator",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "send",
+    values: [string, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'allowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'authorizeOperator', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'burn', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decimals', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'defaultOperators', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'granularity', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isOperatorFor', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'operatorBurn', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'operatorSend', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'revokeOperator', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'send', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transfer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferFrom', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "authorizeOperator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultOperators",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "granularity",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isOperatorFor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "operatorBurn",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "operatorSend",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeOperator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "send", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Approval(address,address,uint256)': EventFragment;
-    'AuthorizedOperator(address,address)': EventFragment;
-    'Burned(address,address,uint256,bytes,bytes)': EventFragment;
-    'Minted(address,address,uint256,bytes,bytes)': EventFragment;
-    'RevokedOperator(address,address)': EventFragment;
-    'Sent(address,address,address,uint256,bytes,bytes)': EventFragment;
-    'Transfer(address,address,uint256)': EventFragment;
+    "Approval(address,address,uint256)": EventFragment;
+    "AuthorizedOperator(address,address)": EventFragment;
+    "Burned(address,address,uint256,bytes,bytes)": EventFragment;
+    "Minted(address,address,uint256,bytes,bytes)": EventFragment;
+    "RevokedOperator(address,address)": EventFragment;
+    "Sent(address,address,address,uint256,bytes,bytes)": EventFragment;
+    "Transfer(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'AuthorizedOperator'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Burned'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Minted'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RevokedOperator'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Sent'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AuthorizedOperator"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Burned"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RevokedOperator"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Sent"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
 export class Erc777 extends Contract {
@@ -124,7 +196,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-allowance}. Note that operator and allowance concepts are orthogonal: operators may not have allowance, and accounts with allowance may not be operators themselves.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       holder: string,
       spender: string,
       overrides?: CallOverrides
@@ -144,7 +216,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-approve}. Note that accounts cannot have allowance issued by their operators.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       value: BigNumberish,
       overrides?: Overrides
@@ -153,12 +225,15 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-authorizeOperator}.
      */
-    authorizeOperator(operator: string, overrides?: Overrides): Promise<ContractTransaction>;
+    authorizeOperator(
+      operator: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See {IERC777-authorizeOperator}.
      */
-    'authorizeOperator(address)'(
+    "authorizeOperator(address)"(
       operator: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -176,7 +251,7 @@ export class Erc777 extends Contract {
     /**
      * Returns the amount of tokens owned by an account (`tokenHolder`).
      */
-    'balanceOf(address)'(
+    "balanceOf(address)"(
       tokenHolder: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -195,7 +270,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-burn}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    'burn(uint256,bytes)'(
+    "burn(uint256,bytes)"(
       amount: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
@@ -213,7 +288,7 @@ export class Erc777 extends Contract {
     /**
      * See {ERC20-decimals}. Always returns 18, as per the [ERC777 EIP](https://eips.ethereum.org/EIPS/eip-777#backward-compatibility).
      */
-    'decimals()'(
+    "decimals()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -231,7 +306,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-defaultOperators}.
      */
-    'defaultOperators()'(
+    "defaultOperators()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string[];
@@ -249,7 +324,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-granularity}. This implementation always returns `1`.
      */
-    'granularity()'(
+    "granularity()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -269,7 +344,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-isOperatorFor}.
      */
-    'isOperatorFor(address,address)'(
+    "isOperatorFor(address,address)"(
       operator: string,
       tokenHolder: string,
       overrides?: CallOverrides
@@ -289,7 +364,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-name}.
      */
-    'name()'(
+    "name()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -309,7 +384,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
      */
-    'operatorBurn(address,uint256,bytes,bytes)'(
+    "operatorBurn(address,uint256,bytes,bytes)"(
       account: string,
       amount: BigNumberish,
       data: BytesLike,
@@ -332,7 +407,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-operatorSend}. Emits {Sent} and {IERC20-Transfer} events.
      */
-    'operatorSend(address,address,uint256,bytes,bytes)'(
+    "operatorSend(address,address,uint256,bytes,bytes)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -344,12 +419,15 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-revokeOperator}.
      */
-    revokeOperator(operator: string, overrides?: Overrides): Promise<ContractTransaction>;
+    revokeOperator(
+      operator: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See {IERC777-revokeOperator}.
      */
-    'revokeOperator(address)'(
+    "revokeOperator(address)"(
       operator: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -367,7 +445,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-send}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    'send(address,uint256,bytes)'(
+    "send(address,uint256,bytes)"(
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
@@ -386,7 +464,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-symbol}.
      */
-    'symbol()'(
+    "symbol()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -404,7 +482,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-totalSupply}.
      */
-    'totalSupply()'(
+    "totalSupply()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -422,7 +500,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -441,7 +519,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-transferFrom}. Note that operator and allowance concepts are orthogonal: operators cannot call `transferFrom` (unless they have allowance), and accounts with allowance cannot call `operatorSend` (unless they are operators). Emits {Sent}, {IERC20-Transfer} and {IERC20-Approval} events.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       holder: string,
       recipient: string,
       amount: BigNumberish,
@@ -452,12 +530,16 @@ export class Erc777 extends Contract {
   /**
    * See {IERC20-allowance}. Note that operator and allowance concepts are orthogonal: operators may not have allowance, and accounts with allowance may not be operators themselves.
    */
-  allowance(holder: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+  allowance(
+    holder: string,
+    spender: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * See {IERC20-allowance}. Note that operator and allowance concepts are orthogonal: operators may not have allowance, and accounts with allowance may not be operators themselves.
    */
-  'allowance(address,address)'(
+  "allowance(address,address)"(
     holder: string,
     spender: string,
     overrides?: CallOverrides
@@ -475,7 +557,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC20-approve}. Note that accounts cannot have allowance issued by their operators.
    */
-  'approve(address,uint256)'(
+  "approve(address,uint256)"(
     spender: string,
     value: BigNumberish,
     overrides?: Overrides
@@ -484,12 +566,15 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-authorizeOperator}.
    */
-  authorizeOperator(operator: string, overrides?: Overrides): Promise<ContractTransaction>;
+  authorizeOperator(
+    operator: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC777-authorizeOperator}.
    */
-  'authorizeOperator(address)'(
+  "authorizeOperator(address)"(
     operator: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -502,17 +587,24 @@ export class Erc777 extends Contract {
   /**
    * Returns the amount of tokens owned by an account (`tokenHolder`).
    */
-  'balanceOf(address)'(tokenHolder: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf(address)"(
+    tokenHolder: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * See {IERC777-burn}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
    */
-  burn(amount: BigNumberish, data: BytesLike, overrides?: Overrides): Promise<ContractTransaction>;
+  burn(
+    amount: BigNumberish,
+    data: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC777-burn}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
    */
-  'burn(uint256,bytes)'(
+  "burn(uint256,bytes)"(
     amount: BigNumberish,
     data: BytesLike,
     overrides?: Overrides
@@ -526,7 +618,7 @@ export class Erc777 extends Contract {
   /**
    * See {ERC20-decimals}. Always returns 18, as per the [ERC777 EIP](https://eips.ethereum.org/EIPS/eip-777#backward-compatibility).
    */
-  'decimals()'(overrides?: CallOverrides): Promise<number>;
+  "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   /**
    * See {IERC777-defaultOperators}.
@@ -536,7 +628,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-defaultOperators}.
    */
-  'defaultOperators()'(overrides?: CallOverrides): Promise<string[]>;
+  "defaultOperators()"(overrides?: CallOverrides): Promise<string[]>;
 
   /**
    * See {IERC777-granularity}. This implementation always returns `1`.
@@ -546,17 +638,21 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-granularity}. This implementation always returns `1`.
    */
-  'granularity()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "granularity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * See {IERC777-isOperatorFor}.
    */
-  isOperatorFor(operator: string, tokenHolder: string, overrides?: CallOverrides): Promise<boolean>;
+  isOperatorFor(
+    operator: string,
+    tokenHolder: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC777-isOperatorFor}.
    */
-  'isOperatorFor(address,address)'(
+  "isOperatorFor(address,address)"(
     operator: string,
     tokenHolder: string,
     overrides?: CallOverrides
@@ -570,7 +666,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-name}.
    */
-  'name()'(overrides?: CallOverrides): Promise<string>;
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
@@ -586,7 +682,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
    */
-  'operatorBurn(address,uint256,bytes,bytes)'(
+  "operatorBurn(address,uint256,bytes,bytes)"(
     account: string,
     amount: BigNumberish,
     data: BytesLike,
@@ -609,7 +705,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-operatorSend}. Emits {Sent} and {IERC20-Transfer} events.
    */
-  'operatorSend(address,address,uint256,bytes,bytes)'(
+  "operatorSend(address,address,uint256,bytes,bytes)"(
     sender: string,
     recipient: string,
     amount: BigNumberish,
@@ -621,12 +717,18 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-revokeOperator}.
    */
-  revokeOperator(operator: string, overrides?: Overrides): Promise<ContractTransaction>;
+  revokeOperator(
+    operator: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC777-revokeOperator}.
    */
-  'revokeOperator(address)'(operator: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "revokeOperator(address)"(
+    operator: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC777-send}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
@@ -641,7 +743,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-send}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
    */
-  'send(address,uint256,bytes)'(
+  "send(address,uint256,bytes)"(
     recipient: string,
     amount: BigNumberish,
     data: BytesLike,
@@ -656,7 +758,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-symbol}.
    */
-  'symbol()'(overrides?: CallOverrides): Promise<string>;
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC777-totalSupply}.
@@ -666,7 +768,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC777-totalSupply}.
    */
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
@@ -680,7 +782,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
    */
-  'transfer(address,uint256)'(
+  "transfer(address,uint256)"(
     recipient: string,
     amount: BigNumberish,
     overrides?: Overrides
@@ -699,7 +801,7 @@ export class Erc777 extends Contract {
   /**
    * See {IERC20-transferFrom}. Note that operator and allowance concepts are orthogonal: operators cannot call `transferFrom` (unless they have allowance), and accounts with allowance cannot call `operatorSend` (unless they are operators). Emits {Sent}, {IERC20-Transfer} and {IERC20-Approval} events.
    */
-  'transferFrom(address,address,uint256)'(
+  "transferFrom(address,address,uint256)"(
     holder: string,
     recipient: string,
     amount: BigNumberish,
@@ -710,12 +812,16 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-allowance}. Note that operator and allowance concepts are orthogonal: operators may not have allowance, and accounts with allowance may not be operators themselves.
      */
-    allowance(holder: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      holder: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-allowance}. Note that operator and allowance concepts are orthogonal: operators may not have allowance, and accounts with allowance may not be operators themselves.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       holder: string,
       spender: string,
       overrides?: CallOverrides
@@ -724,12 +830,16 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-approve}. Note that accounts cannot have allowance issued by their operators.
      */
-    approve(spender: string, value: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    approve(
+      spender: string,
+      value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC20-approve}. Note that accounts cannot have allowance issued by their operators.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       value: BigNumberish,
       overrides?: CallOverrides
@@ -738,32 +848,48 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-authorizeOperator}.
      */
-    authorizeOperator(operator: string, overrides?: CallOverrides): Promise<void>;
+    authorizeOperator(
+      operator: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * See {IERC777-authorizeOperator}.
      */
-    'authorizeOperator(address)'(operator: string, overrides?: CallOverrides): Promise<void>;
+    "authorizeOperator(address)"(
+      operator: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Returns the amount of tokens owned by an account (`tokenHolder`).
      */
-    balanceOf(tokenHolder: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(
+      tokenHolder: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the amount of tokens owned by an account (`tokenHolder`).
      */
-    'balanceOf(address)'(tokenHolder: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      tokenHolder: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC777-burn}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    burn(amount: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
+    burn(
+      amount: BigNumberish,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * See {IERC777-burn}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    'burn(uint256,bytes)'(
+    "burn(uint256,bytes)"(
       amount: BigNumberish,
       data: BytesLike,
       overrides?: CallOverrides
@@ -777,7 +903,7 @@ export class Erc777 extends Contract {
     /**
      * See {ERC20-decimals}. Always returns 18, as per the [ERC777 EIP](https://eips.ethereum.org/EIPS/eip-777#backward-compatibility).
      */
-    'decimals()'(overrides?: CallOverrides): Promise<number>;
+    "decimals()"(overrides?: CallOverrides): Promise<number>;
 
     /**
      * See {IERC777-defaultOperators}.
@@ -787,7 +913,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-defaultOperators}.
      */
-    'defaultOperators()'(overrides?: CallOverrides): Promise<string[]>;
+    "defaultOperators()"(overrides?: CallOverrides): Promise<string[]>;
 
     /**
      * See {IERC777-granularity}. This implementation always returns `1`.
@@ -797,7 +923,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-granularity}. This implementation always returns `1`.
      */
-    'granularity()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "granularity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC777-isOperatorFor}.
@@ -811,7 +937,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-isOperatorFor}.
      */
-    'isOperatorFor(address,address)'(
+    "isOperatorFor(address,address)"(
       operator: string,
       tokenHolder: string,
       overrides?: CallOverrides
@@ -825,7 +951,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<string>;
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
@@ -841,7 +967,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
      */
-    'operatorBurn(address,uint256,bytes,bytes)'(
+    "operatorBurn(address,uint256,bytes,bytes)"(
       account: string,
       amount: BigNumberish,
       data: BytesLike,
@@ -864,7 +990,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-operatorSend}. Emits {Sent} and {IERC20-Transfer} events.
      */
-    'operatorSend(address,address,uint256,bytes,bytes)'(
+    "operatorSend(address,address,uint256,bytes,bytes)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -881,7 +1007,10 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-revokeOperator}.
      */
-    'revokeOperator(address)'(operator: string, overrides?: CallOverrides): Promise<void>;
+    "revokeOperator(address)"(
+      operator: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * See {IERC777-send}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
@@ -896,7 +1025,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-send}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    'send(address,uint256,bytes)'(
+    "send(address,uint256,bytes)"(
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
@@ -911,7 +1040,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<string>;
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC777-totalSupply}.
@@ -921,17 +1050,21 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
      */
-    transfer(recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    transfer(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -950,7 +1083,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-transferFrom}. Note that operator and allowance concepts are orthogonal: operators cannot call `transferFrom` (unless they have allowance), and accounts with allowance cannot call `operatorSend` (unless they are operators). Emits {Sent}, {IERC20-Transfer} and {IERC20-Approval} events.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       holder: string,
       recipient: string,
       amount: BigNumberish,
@@ -959,9 +1092,16 @@ export class Erc777 extends Contract {
   };
 
   filters: {
-    Approval(owner: string | null, spender: string | null, value: null): EventFilter;
+    Approval(
+      owner: string | null,
+      spender: string | null,
+      value: null
+    ): EventFilter;
 
-    AuthorizedOperator(operator: string | null, tokenHolder: string | null): EventFilter;
+    AuthorizedOperator(
+      operator: string | null,
+      tokenHolder: string | null
+    ): EventFilter;
 
     Burned(
       operator: string | null,
@@ -979,7 +1119,10 @@ export class Erc777 extends Contract {
       operatorData: null
     ): EventFilter;
 
-    RevokedOperator(operator: string | null, tokenHolder: string | null): EventFilter;
+    RevokedOperator(
+      operator: string | null,
+      tokenHolder: string | null
+    ): EventFilter;
 
     Sent(
       operator: string | null,
@@ -997,12 +1140,16 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-allowance}. Note that operator and allowance concepts are orthogonal: operators may not have allowance, and accounts with allowance may not be operators themselves.
      */
-    allowance(holder: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      holder: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-allowance}. Note that operator and allowance concepts are orthogonal: operators may not have allowance, and accounts with allowance may not be operators themselves.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       holder: string,
       spender: string,
       overrides?: CallOverrides
@@ -1011,12 +1158,16 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-approve}. Note that accounts cannot have allowance issued by their operators.
      */
-    approve(spender: string, value: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    approve(
+      spender: string,
+      value: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-approve}. Note that accounts cannot have allowance issued by their operators.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       value: BigNumberish,
       overrides?: Overrides
@@ -1025,32 +1176,48 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-authorizeOperator}.
      */
-    authorizeOperator(operator: string, overrides?: Overrides): Promise<BigNumber>;
+    authorizeOperator(
+      operator: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC777-authorizeOperator}.
      */
-    'authorizeOperator(address)'(operator: string, overrides?: Overrides): Promise<BigNumber>;
+    "authorizeOperator(address)"(
+      operator: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the amount of tokens owned by an account (`tokenHolder`).
      */
-    balanceOf(tokenHolder: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(
+      tokenHolder: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the amount of tokens owned by an account (`tokenHolder`).
      */
-    'balanceOf(address)'(tokenHolder: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      tokenHolder: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC777-burn}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    burn(amount: BigNumberish, data: BytesLike, overrides?: Overrides): Promise<BigNumber>;
+    burn(
+      amount: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC777-burn}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    'burn(uint256,bytes)'(
+    "burn(uint256,bytes)"(
       amount: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
@@ -1064,7 +1231,7 @@ export class Erc777 extends Contract {
     /**
      * See {ERC20-decimals}. Always returns 18, as per the [ERC777 EIP](https://eips.ethereum.org/EIPS/eip-777#backward-compatibility).
      */
-    'decimals()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC777-defaultOperators}.
@@ -1074,7 +1241,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-defaultOperators}.
      */
-    'defaultOperators()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "defaultOperators()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC777-granularity}. This implementation always returns `1`.
@@ -1084,7 +1251,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-granularity}. This implementation always returns `1`.
      */
-    'granularity()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "granularity()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC777-isOperatorFor}.
@@ -1098,7 +1265,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-isOperatorFor}.
      */
-    'isOperatorFor(address,address)'(
+    "isOperatorFor(address,address)"(
       operator: string,
       tokenHolder: string,
       overrides?: CallOverrides
@@ -1112,7 +1279,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
@@ -1128,7 +1295,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
      */
-    'operatorBurn(address,uint256,bytes,bytes)'(
+    "operatorBurn(address,uint256,bytes,bytes)"(
       account: string,
       amount: BigNumberish,
       data: BytesLike,
@@ -1151,7 +1318,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-operatorSend}. Emits {Sent} and {IERC20-Transfer} events.
      */
-    'operatorSend(address,address,uint256,bytes,bytes)'(
+    "operatorSend(address,address,uint256,bytes,bytes)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -1168,7 +1335,10 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-revokeOperator}.
      */
-    'revokeOperator(address)'(operator: string, overrides?: Overrides): Promise<BigNumber>;
+    "revokeOperator(address)"(
+      operator: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC777-send}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
@@ -1183,7 +1353,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-send}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    'send(address,uint256,bytes)'(
+    "send(address,uint256,bytes)"(
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
@@ -1198,7 +1368,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC777-totalSupply}.
@@ -1208,17 +1378,21 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
      */
-    transfer(recipient: string, amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    transfer(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1237,7 +1411,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-transferFrom}. Note that operator and allowance concepts are orthogonal: operators cannot call `transferFrom` (unless they have allowance), and accounts with allowance cannot call `operatorSend` (unless they are operators). Emits {Sent}, {IERC20-Transfer} and {IERC20-Approval} events.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       holder: string,
       recipient: string,
       amount: BigNumberish,
@@ -1258,7 +1432,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-allowance}. Note that operator and allowance concepts are orthogonal: operators may not have allowance, and accounts with allowance may not be operators themselves.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       holder: string,
       spender: string,
       overrides?: CallOverrides
@@ -1276,7 +1450,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-approve}. Note that accounts cannot have allowance issued by their operators.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       value: BigNumberish,
       overrides?: Overrides
@@ -1285,12 +1459,15 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-authorizeOperator}.
      */
-    authorizeOperator(operator: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    authorizeOperator(
+      operator: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC777-authorizeOperator}.
      */
-    'authorizeOperator(address)'(
+    "authorizeOperator(address)"(
       operator: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -1298,12 +1475,15 @@ export class Erc777 extends Contract {
     /**
      * Returns the amount of tokens owned by an account (`tokenHolder`).
      */
-    balanceOf(tokenHolder: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    balanceOf(
+      tokenHolder: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the amount of tokens owned by an account (`tokenHolder`).
      */
-    'balanceOf(address)'(
+    "balanceOf(address)"(
       tokenHolder: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1320,7 +1500,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-burn}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    'burn(uint256,bytes)'(
+    "burn(uint256,bytes)"(
       amount: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
@@ -1334,7 +1514,7 @@ export class Erc777 extends Contract {
     /**
      * See {ERC20-decimals}. Always returns 18, as per the [ERC777 EIP](https://eips.ethereum.org/EIPS/eip-777#backward-compatibility).
      */
-    'decimals()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC777-defaultOperators}.
@@ -1344,7 +1524,9 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-defaultOperators}.
      */
-    'defaultOperators()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "defaultOperators()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC777-granularity}. This implementation always returns `1`.
@@ -1354,7 +1536,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-granularity}. This implementation always returns `1`.
      */
-    'granularity()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "granularity()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC777-isOperatorFor}.
@@ -1368,7 +1550,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-isOperatorFor}.
      */
-    'isOperatorFor(address,address)'(
+    "isOperatorFor(address,address)"(
       operator: string,
       tokenHolder: string,
       overrides?: CallOverrides
@@ -1382,7 +1564,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
@@ -1398,7 +1580,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-operatorBurn}. Emits {Burned} and {IERC20-Transfer} events.
      */
-    'operatorBurn(address,uint256,bytes,bytes)'(
+    "operatorBurn(address,uint256,bytes,bytes)"(
       account: string,
       amount: BigNumberish,
       data: BytesLike,
@@ -1421,7 +1603,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-operatorSend}. Emits {Sent} and {IERC20-Transfer} events.
      */
-    'operatorSend(address,address,uint256,bytes,bytes)'(
+    "operatorSend(address,address,uint256,bytes,bytes)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -1433,12 +1615,15 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-revokeOperator}.
      */
-    revokeOperator(operator: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    revokeOperator(
+      operator: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC777-revokeOperator}.
      */
-    'revokeOperator(address)'(
+    "revokeOperator(address)"(
       operator: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -1456,7 +1641,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-send}. Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
-    'send(address,uint256,bytes)'(
+    "send(address,uint256,bytes)"(
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
@@ -1471,7 +1656,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC777-totalSupply}.
@@ -1481,7 +1666,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC777-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
@@ -1495,7 +1680,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-transfer}. Unlike `send`, `recipient` is _not_ required to implement the {IERC777Recipient} interface if it is a contract. Also emits a {Sent} event.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1514,7 +1699,7 @@ export class Erc777 extends Contract {
     /**
      * See {IERC20-transferFrom}. Note that operator and allowance concepts are orthogonal: operators cannot call `transferFrom` (unless they have allowance), and accounts with allowance cannot call `operatorSend` (unless they are operators). Emits {Sent}, {IERC20-Transfer} and {IERC20-Approval} events.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       holder: string,
       recipient: string,
       amount: BigNumberish,

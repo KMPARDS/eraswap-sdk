@@ -2,32 +2,56 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Erc1155HolderInterface extends ethers.utils.Interface {
   functions: {
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)': FunctionFragment;
-    'onERC1155Received(address,address,uint256,uint256,bytes)': FunctionFragment;
-    'supportsInterface(bytes4)': FunctionFragment;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'onERC1155BatchReceived',
+    functionFragment: "onERC1155BatchReceived",
     values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'onERC1155Received',
+    functionFragment: "onERC1155Received",
     values: [string, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'supportsInterface', values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'onERC1155BatchReceived', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'onERC1155Received', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'supportsInterface', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155BatchReceived",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -55,7 +79,7 @@ export class Erc1155Holder extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish[],
@@ -73,7 +97,7 @@ export class Erc1155Holder extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'onERC1155Received(address,address,uint256,uint256,bytes)'(
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
@@ -95,7 +119,7 @@ export class Erc1155Holder extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -112,7 +136,7 @@ export class Erc1155Holder extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+  "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
     arg0: string,
     arg1: string,
     arg2: BigNumberish[],
@@ -130,7 +154,7 @@ export class Erc1155Holder extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'onERC1155Received(address,address,uint256,uint256,bytes)'(
+  "onERC1155Received(address,address,uint256,uint256,bytes)"(
     arg0: string,
     arg1: string,
     arg2: BigNumberish,
@@ -142,12 +166,18 @@ export class Erc1155Holder extends Contract {
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  'supportsInterface(bytes4)'(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  "supportsInterface(bytes4)"(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     onERC1155BatchReceived(
@@ -159,7 +189,7 @@ export class Erc1155Holder extends Contract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish[],
@@ -177,7 +207,7 @@ export class Erc1155Holder extends Contract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    'onERC1155Received(address,address,uint256,uint256,bytes)'(
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
@@ -189,12 +219,15 @@ export class Erc1155Holder extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -212,7 +245,7 @@ export class Erc1155Holder extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish[],
@@ -230,7 +263,7 @@ export class Erc1155Holder extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'onERC1155Received(address,address,uint256,uint256,bytes)'(
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
@@ -242,12 +275,15 @@ export class Erc1155Holder extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -263,7 +299,7 @@ export class Erc1155Holder extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish[],
@@ -281,7 +317,7 @@ export class Erc1155Holder extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'onERC1155Received(address,address,uint256,uint256,bytes)'(
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
@@ -301,7 +337,7 @@ export class Erc1155Holder extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

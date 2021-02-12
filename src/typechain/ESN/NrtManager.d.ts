@@ -2,159 +2,355 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface NrtManagerInterface extends ethers.utils.Interface {
   functions: {
-    'BURN_ADDR()': FunctionFragment;
-    'SECONDS_IN_MONTH()': FunctionFragment;
-    'addToBurnPool()': FunctionFragment;
-    'addToLuckPool()': FunctionFragment;
-    'annualNRT()': FunctionFragment;
-    'availableSupply()': FunctionFragment;
-    'burnPoolBalance()': FunctionFragment;
-    'currentNrtMonth()': FunctionFragment;
-    'dayswappers()': FunctionFragment;
-    'getBurnAmount()': FunctionFragment;
-    'getPerThousand(uint256)': FunctionFragment;
-    'getPerThousands()': FunctionFragment;
-    'getPlatform(uint256)': FunctionFragment;
-    'getPlatformDetails()': FunctionFragment;
-    'getPlatforms()': FunctionFragment;
-    'initialize()': FunctionFragment;
-    'isAdminMode()': FunctionFragment;
-    'kycDapp()': FunctionFragment;
-    'lastReleaseTimestamp()': FunctionFragment;
-    'luckPoolBalance()': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'randomnessManager()': FunctionFragment;
-    'releaseMonthlyNRT()': FunctionFragment;
-    'renounceAdminMode()': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveAddressStrict(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
-    'resolveUsernameStrict(address)': FunctionFragment;
-    'setKycDapp(address)': FunctionFragment;
-    'setPlatforms(bytes32[],uint256[])': FunctionFragment;
-    'timeallyClub()': FunctionFragment;
-    'timeallyManager()': FunctionFragment;
-    'timeallyPromotionalBucket()': FunctionFragment;
-    'totalNrtReleased()': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'validatorManager()': FunctionFragment;
+    "BURN_ADDR()": FunctionFragment;
+    "SECONDS_IN_MONTH()": FunctionFragment;
+    "addToBurnPool()": FunctionFragment;
+    "addToLuckPool()": FunctionFragment;
+    "annualNRT()": FunctionFragment;
+    "availableSupply()": FunctionFragment;
+    "burnPoolBalance()": FunctionFragment;
+    "currentNrtMonth()": FunctionFragment;
+    "dayswappers()": FunctionFragment;
+    "getBurnAmount()": FunctionFragment;
+    "getPerThousand(uint256)": FunctionFragment;
+    "getPerThousands()": FunctionFragment;
+    "getPlatform(uint256)": FunctionFragment;
+    "getPlatformDetails()": FunctionFragment;
+    "getPlatforms()": FunctionFragment;
+    "initialize()": FunctionFragment;
+    "isAdminMode()": FunctionFragment;
+    "kycDapp()": FunctionFragment;
+    "lastReleaseTimestamp()": FunctionFragment;
+    "luckPoolBalance()": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "randomnessManager()": FunctionFragment;
+    "releaseMonthlyNRT()": FunctionFragment;
+    "renounceAdminMode()": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveAddressStrict(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
+    "resolveUsernameStrict(address)": FunctionFragment;
+    "setKycDapp(address)": FunctionFragment;
+    "setPlatforms(bytes32[],uint256[])": FunctionFragment;
+    "timeallyClub()": FunctionFragment;
+    "timeallyManager()": FunctionFragment;
+    "timeallyPromotionalBucket()": FunctionFragment;
+    "totalNrtReleased()": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "validatorManager()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'BURN_ADDR', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'SECONDS_IN_MONTH', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'addToBurnPool', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'addToLuckPool', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'annualNRT', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'availableSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'burnPoolBalance', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'currentNrtMonth', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getBurnAmount', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getPerThousand', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getPerThousands', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getPlatform', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getPlatformDetails', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getPlatforms', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'isAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'lastReleaseTimestamp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'luckPoolBalance', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'releaseMonthlyNRT', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
-  encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
+  encodeFunctionData(functionFragment: "BURN_ADDR", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'setPlatforms',
+    functionFragment: "SECONDS_IN_MONTH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addToBurnPool",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addToLuckPool",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "annualNRT", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "availableSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burnPoolBalance",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentNrtMonth",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "dayswappers",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBurnAmount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPerThousand",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPerThousands",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPlatform",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPlatformDetails",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPlatforms",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isAdminMode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "kycDapp", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "lastReleaseTimestamp",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "luckPoolBalance",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "randomnessManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "releaseMonthlyNRT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceAdminMode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddressStrict",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsernameStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "setKycDapp", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "setPlatforms",
     values: [BytesLike[], BigNumberish[]]
   ): string;
-  encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalNrtReleased', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "timeallyClub",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyPromotionalBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalNrtReleased",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "validatorManager",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'BURN_ADDR', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'SECONDS_IN_MONTH', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'addToBurnPool', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'addToLuckPool', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'annualNRT', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'availableSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'burnPoolBalance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'currentNrtMonth', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getBurnAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPerThousand', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPerThousands', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPlatform', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPlatformDetails', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPlatforms', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'lastReleaseTimestamp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'luckPoolBalance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'releaseMonthlyNRT', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setPlatforms', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalNrtReleased', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "BURN_ADDR", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "SECONDS_IN_MONTH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addToBurnPool",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addToLuckPool",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "annualNRT", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "availableSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "burnPoolBalance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentNrtMonth",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "dayswappers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBurnAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPerThousand",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPerThousands",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPlatform",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPlatformDetails",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPlatforms",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isAdminMode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "kycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "lastReleaseTimestamp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "luckPoolBalance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "randomnessManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "releaseMonthlyNRT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceAdminMode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsernameStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setKycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setPlatforms",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyClub",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyPromotionalBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalNrtReleased",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "validatorManager",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Burn(uint32,uint256)': EventFragment;
-    'BurnPoolAccrue(uint32,uint256,address)': EventFragment;
-    'LuckPoolAccrue(uint32,uint256,address)': EventFragment;
-    'NRT(uint32,uint256,address)': EventFragment;
-    'NRTSend(uint32,bytes32,address,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
+    "Burn(uint32,uint256)": EventFragment;
+    "BurnPoolAccrue(uint32,uint256,address)": EventFragment;
+    "LuckPoolAccrue(uint32,uint256,address)": EventFragment;
+    "NRT(uint32,uint256,address)": EventFragment;
+    "NRTSend(uint32,bytes32,address,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Burn'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'BurnPoolAccrue'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'LuckPoolAccrue'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NRT'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NRTSend'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Burn"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BurnPoolAccrue"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LuckPoolAccrue"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NRT"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NRTSend"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
 export class NrtManager extends Contract {
@@ -183,7 +379,7 @@ export class NrtManager extends Contract {
     /**
      * A destination for tokens which are destined to be unspendable forever.
      */
-    'BURN_ADDR()'(
+    "BURN_ADDR()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -195,7 +391,7 @@ export class NrtManager extends Contract {
       0: number;
     }>;
 
-    'SECONDS_IN_MONTH()'(
+    "SECONDS_IN_MONTH()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -209,7 +405,9 @@ export class NrtManager extends Contract {
     /**
      * Adds tokens to burn pool.
      */
-    'addToBurnPool()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "addToBurnPool()"(
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Adds tokens to luck pool.
@@ -219,7 +417,9 @@ export class NrtManager extends Contract {
     /**
      * Adds tokens to luck pool.
      */
-    'addToLuckPool()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "addToLuckPool()"(
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
@@ -233,7 +433,7 @@ export class NrtManager extends Contract {
     /**
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
      */
-    'annualNRT()'(
+    "annualNRT()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -245,7 +445,7 @@ export class NrtManager extends Contract {
       0: BigNumber;
     }>;
 
-    'availableSupply()'(
+    "availableSupply()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -263,7 +463,7 @@ export class NrtManager extends Contract {
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
      */
-    'burnPoolBalance()'(
+    "burnPoolBalance()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -281,7 +481,7 @@ export class NrtManager extends Contract {
     /**
      * Number of NRT releases that have been happened.
      */
-    'currentNrtMonth()'(
+    "currentNrtMonth()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -293,7 +493,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'dayswappers()'(
+    "dayswappers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -311,7 +511,7 @@ export class NrtManager extends Contract {
     /**
      * Gets tokens allowed to be burned during upcoming NRT.
      */
-    'getBurnAmount()'(
+    "getBurnAmount()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -332,7 +532,7 @@ export class NrtManager extends Contract {
      * Gets NRT share of a platform.
      * @param _perThousandIndex : Index of platform.
      */
-    'getPerThousand(uint256)'(
+    "getPerThousand(uint256)"(
       _perThousandIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -351,7 +551,7 @@ export class NrtManager extends Contract {
     /**
      * Gets all nrt shares of platforms.
      */
-    'getPerThousands()'(
+    "getPerThousands()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber[];
@@ -372,7 +572,7 @@ export class NrtManager extends Contract {
      * Gets platform address by index.
      * @param _platformIndex : Index of platform.
      */
-    'getPlatform(uint256)'(
+    "getPlatform(uint256)"(
       _platformIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -392,7 +592,7 @@ export class NrtManager extends Contract {
     /**
      * Gets platforms and their NRT share.
      */
-    'getPlatformDetails()'(
+    "getPlatformDetails()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string[];
@@ -411,7 +611,7 @@ export class NrtManager extends Contract {
     /**
      * Gets all platform addresses.
      */
-    'getPlatforms()'(
+    "getPlatforms()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string[];
@@ -425,7 +625,7 @@ export class NrtManager extends Contract {
     /**
      * Sets deployer wallet and timestamp.
      */
-    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     isAdminMode(
       overrides?: CallOverrides
@@ -433,7 +633,7 @@ export class NrtManager extends Contract {
       0: boolean;
     }>;
 
-    'isAdminMode()'(
+    "isAdminMode()"(
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -445,7 +645,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'kycDapp()'(
+    "kycDapp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -463,7 +663,7 @@ export class NrtManager extends Contract {
     /**
      * Timestamp of the block in which last NRT transaction was sealed.
      */
-    'lastReleaseTimestamp()'(
+    "lastReleaseTimestamp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -481,7 +681,7 @@ export class NrtManager extends Contract {
     /**
      * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
      */
-    'luckPoolBalance()'(
+    "luckPoolBalance()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -493,7 +693,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -511,7 +711,7 @@ export class NrtManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -523,7 +723,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -535,7 +735,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'randomnessManager()'(
+    "randomnessManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -549,11 +749,11 @@ export class NrtManager extends Contract {
     /**
      * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
      */
-    'releaseMonthlyNRT()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "releaseMonthlyNRT()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     resolveAddress(
       _username: BytesLike,
@@ -562,7 +762,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -576,7 +776,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -590,7 +790,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -604,16 +804,22 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Sets initial enviornment values.
@@ -631,7 +837,7 @@ export class NrtManager extends Contract {
      * @param _perThousands : Corresponding perThousand NRT share.
      * @param _platformIdentifiers : Addresses of platform smart contracts or wallets.
      */
-    'setPlatforms(bytes32[],uint256[])'(
+    "setPlatforms(bytes32[],uint256[])"(
       _platformIdentifiers: BytesLike[],
       _perThousands: BigNumberish[],
       overrides?: PayableOverrides
@@ -643,7 +849,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'timeallyClub()'(
+    "timeallyClub()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -655,7 +861,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'timeallyManager()'(
+    "timeallyManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -667,7 +873,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'timeallyPromotionalBucket()'(
+    "timeallyPromotionalBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -685,7 +891,7 @@ export class NrtManager extends Contract {
     /**
      * Tracks total NRT released, to be able to calculate total supply.
      */
-    'totalNrtReleased()'(
+    "totalNrtReleased()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -697,7 +903,7 @@ export class NrtManager extends Contract {
       0: BigNumber;
     }>;
 
-    'totalSupply()'(
+    "totalSupply()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -706,12 +912,15 @@ export class NrtManager extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -722,7 +931,7 @@ export class NrtManager extends Contract {
       0: string;
     }>;
 
-    'validatorManager()'(
+    "validatorManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -737,11 +946,11 @@ export class NrtManager extends Contract {
   /**
    * A destination for tokens which are destined to be unspendable forever.
    */
-  'BURN_ADDR()'(overrides?: CallOverrides): Promise<string>;
+  "BURN_ADDR()"(overrides?: CallOverrides): Promise<string>;
 
   SECONDS_IN_MONTH(overrides?: CallOverrides): Promise<number>;
 
-  'SECONDS_IN_MONTH()'(overrides?: CallOverrides): Promise<number>;
+  "SECONDS_IN_MONTH()"(overrides?: CallOverrides): Promise<number>;
 
   /**
    * Adds tokens to burn pool.
@@ -751,7 +960,7 @@ export class NrtManager extends Contract {
   /**
    * Adds tokens to burn pool.
    */
-  'addToBurnPool()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "addToBurnPool()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   /**
    * Adds tokens to luck pool.
@@ -761,7 +970,7 @@ export class NrtManager extends Contract {
   /**
    * Adds tokens to luck pool.
    */
-  'addToLuckPool()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "addToLuckPool()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   /**
    * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
@@ -771,11 +980,11 @@ export class NrtManager extends Contract {
   /**
    * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
    */
-  'annualNRT()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "annualNRT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   availableSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'availableSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "availableSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Amount of tokens accrued for burning as per Era Swap Whitepaper.
@@ -785,7 +994,7 @@ export class NrtManager extends Contract {
   /**
    * Amount of tokens accrued for burning as per Era Swap Whitepaper.
    */
-  'burnPoolBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "burnPoolBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Number of NRT releases that have been happened.
@@ -795,11 +1004,11 @@ export class NrtManager extends Contract {
   /**
    * Number of NRT releases that have been happened.
    */
-  'currentNrtMonth()'(overrides?: CallOverrides): Promise<number>;
+  "currentNrtMonth()"(overrides?: CallOverrides): Promise<number>;
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
 
-  'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+  "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Gets tokens allowed to be burned during upcoming NRT.
@@ -809,19 +1018,22 @@ export class NrtManager extends Contract {
   /**
    * Gets tokens allowed to be burned during upcoming NRT.
    */
-  'getBurnAmount()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "getBurnAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Gets NRT share of a platform.
    * @param _perThousandIndex : Index of platform.
    */
-  getPerThousand(_perThousandIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getPerThousand(
+    _perThousandIndex: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Gets NRT share of a platform.
    * @param _perThousandIndex : Index of platform.
    */
-  'getPerThousand(uint256)'(
+  "getPerThousand(uint256)"(
     _perThousandIndex: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -834,19 +1046,25 @@ export class NrtManager extends Contract {
   /**
    * Gets all nrt shares of platforms.
    */
-  'getPerThousands()'(overrides?: CallOverrides): Promise<BigNumber[]>;
+  "getPerThousands()"(overrides?: CallOverrides): Promise<BigNumber[]>;
 
   /**
    * Gets platform address by index.
    * @param _platformIndex : Index of platform.
    */
-  getPlatform(_platformIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  getPlatform(
+    _platformIndex: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Gets platform address by index.
    * @param _platformIndex : Index of platform.
    */
-  'getPlatform(uint256)'(_platformIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "getPlatform(uint256)"(
+    _platformIndex: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Gets platforms and their NRT share.
@@ -861,7 +1079,7 @@ export class NrtManager extends Contract {
   /**
    * Gets platforms and their NRT share.
    */
-  'getPlatformDetails()'(
+  "getPlatformDetails()"(
     overrides?: CallOverrides
   ): Promise<{
     0: string[];
@@ -876,7 +1094,7 @@ export class NrtManager extends Contract {
   /**
    * Gets all platform addresses.
    */
-  'getPlatforms()'(overrides?: CallOverrides): Promise<string[]>;
+  "getPlatforms()"(overrides?: CallOverrides): Promise<string[]>;
 
   /**
    * Sets deployer wallet and timestamp.
@@ -886,15 +1104,15 @@ export class NrtManager extends Contract {
   /**
    * Sets deployer wallet and timestamp.
    */
-  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
-  'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
+  "isAdminMode()"(overrides?: CallOverrides): Promise<boolean>;
 
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
-  'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+  "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Timestamp of the block in which last NRT transaction was sealed.
@@ -904,7 +1122,7 @@ export class NrtManager extends Contract {
   /**
    * Timestamp of the block in which last NRT transaction was sealed.
    */
-  'lastReleaseTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "lastReleaseTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
@@ -914,11 +1132,11 @@ export class NrtManager extends Contract {
   /**
    * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
    */
-  'luckPoolBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "luckPoolBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -928,15 +1146,15 @@ export class NrtManager extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-  'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+  "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
@@ -946,31 +1164,58 @@ export class NrtManager extends Contract {
   /**
    * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
    */
-  'releaseMonthlyNRT()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "releaseMonthlyNRT()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "renounceAdminMode()"(overrides?: Overrides): Promise<ContractTransaction>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddressStrict(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddressStrict(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddressStrict(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  resolveUsernameStrict(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsernameStrict(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setKycDapp(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "setKycDapp(address)"(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Sets initial enviornment values.
@@ -988,7 +1233,7 @@ export class NrtManager extends Contract {
    * @param _perThousands : Corresponding perThousand NRT share.
    * @param _platformIdentifiers : Addresses of platform smart contracts or wallets.
    */
-  'setPlatforms(bytes32[],uint256[])'(
+  "setPlatforms(bytes32[],uint256[])"(
     _platformIdentifiers: BytesLike[],
     _perThousands: BigNumberish[],
     overrides?: PayableOverrides
@@ -996,15 +1241,15 @@ export class NrtManager extends Contract {
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Tracks total NRT released, to be able to calculate total supply.
@@ -1014,28 +1259,31 @@ export class NrtManager extends Contract {
   /**
    * Tracks total NRT released, to be able to calculate total supply.
    */
-  'totalNrtReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalNrtReleased()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   validatorManager(overrides?: CallOverrides): Promise<string>;
 
-  'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+  "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     /**
@@ -1046,11 +1294,11 @@ export class NrtManager extends Contract {
     /**
      * A destination for tokens which are destined to be unspendable forever.
      */
-    'BURN_ADDR()'(overrides?: CallOverrides): Promise<string>;
+    "BURN_ADDR()"(overrides?: CallOverrides): Promise<string>;
 
     SECONDS_IN_MONTH(overrides?: CallOverrides): Promise<number>;
 
-    'SECONDS_IN_MONTH()'(overrides?: CallOverrides): Promise<number>;
+    "SECONDS_IN_MONTH()"(overrides?: CallOverrides): Promise<number>;
 
     /**
      * Adds tokens to burn pool.
@@ -1060,7 +1308,7 @@ export class NrtManager extends Contract {
     /**
      * Adds tokens to burn pool.
      */
-    'addToBurnPool()'(overrides?: CallOverrides): Promise<void>;
+    "addToBurnPool()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Adds tokens to luck pool.
@@ -1070,7 +1318,7 @@ export class NrtManager extends Contract {
     /**
      * Adds tokens to luck pool.
      */
-    'addToLuckPool()'(overrides?: CallOverrides): Promise<void>;
+    "addToLuckPool()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
@@ -1080,11 +1328,11 @@ export class NrtManager extends Contract {
     /**
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
      */
-    'annualNRT()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "annualNRT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     availableSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'availableSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "availableSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
@@ -1094,7 +1342,7 @@ export class NrtManager extends Contract {
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
      */
-    'burnPoolBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "burnPoolBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Number of NRT releases that have been happened.
@@ -1104,11 +1352,11 @@ export class NrtManager extends Contract {
     /**
      * Number of NRT releases that have been happened.
      */
-    'currentNrtMonth()'(overrides?: CallOverrides): Promise<number>;
+    "currentNrtMonth()"(overrides?: CallOverrides): Promise<number>;
 
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Gets tokens allowed to be burned during upcoming NRT.
@@ -1118,19 +1366,22 @@ export class NrtManager extends Contract {
     /**
      * Gets tokens allowed to be burned during upcoming NRT.
      */
-    'getBurnAmount()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getBurnAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Gets NRT share of a platform.
      * @param _perThousandIndex : Index of platform.
      */
-    getPerThousand(_perThousandIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getPerThousand(
+      _perThousandIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets NRT share of a platform.
      * @param _perThousandIndex : Index of platform.
      */
-    'getPerThousand(uint256)'(
+    "getPerThousand(uint256)"(
       _perThousandIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1143,19 +1394,22 @@ export class NrtManager extends Contract {
     /**
      * Gets all nrt shares of platforms.
      */
-    'getPerThousands()'(overrides?: CallOverrides): Promise<BigNumber[]>;
+    "getPerThousands()"(overrides?: CallOverrides): Promise<BigNumber[]>;
 
     /**
      * Gets platform address by index.
      * @param _platformIndex : Index of platform.
      */
-    getPlatform(_platformIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getPlatform(
+      _platformIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Gets platform address by index.
      * @param _platformIndex : Index of platform.
      */
-    'getPlatform(uint256)'(
+    "getPlatform(uint256)"(
       _platformIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -1173,7 +1427,7 @@ export class NrtManager extends Contract {
     /**
      * Gets platforms and their NRT share.
      */
-    'getPlatformDetails()'(
+    "getPlatformDetails()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string[];
@@ -1188,7 +1442,7 @@ export class NrtManager extends Contract {
     /**
      * Gets all platform addresses.
      */
-    'getPlatforms()'(overrides?: CallOverrides): Promise<string[]>;
+    "getPlatforms()"(overrides?: CallOverrides): Promise<string[]>;
 
     /**
      * Sets deployer wallet and timestamp.
@@ -1198,15 +1452,15 @@ export class NrtManager extends Contract {
     /**
      * Sets deployer wallet and timestamp.
      */
-    'initialize()'(overrides?: CallOverrides): Promise<void>;
+    "initialize()"(overrides?: CallOverrides): Promise<void>;
 
     isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<boolean>;
 
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Timestamp of the block in which last NRT transaction was sealed.
@@ -1216,7 +1470,7 @@ export class NrtManager extends Contract {
     /**
      * Timestamp of the block in which last NRT transaction was sealed.
      */
-    'lastReleaseTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "lastReleaseTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
@@ -1226,11 +1480,11 @@ export class NrtManager extends Contract {
     /**
      * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
      */
-    'luckPoolBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "luckPoolBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -1240,15 +1494,15 @@ export class NrtManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
@@ -1258,34 +1512,58 @@ export class NrtManager extends Contract {
     /**
      * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
      */
-    'releaseMonthlyNRT()'(overrides?: CallOverrides): Promise<void>;
+    "releaseMonthlyNRT()"(overrides?: CallOverrides): Promise<void>;
 
     renounceAdminMode(overrides?: CallOverrides): Promise<void>;
 
-    'renounceAdminMode()'(overrides?: CallOverrides): Promise<void>;
+    "renounceAdminMode()"(overrides?: CallOverrides): Promise<void>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsernameStrict(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Sets initial enviornment values.
@@ -1303,7 +1581,7 @@ export class NrtManager extends Contract {
      * @param _perThousands : Corresponding perThousand NRT share.
      * @param _platformIdentifiers : Addresses of platform smart contracts or wallets.
      */
-    'setPlatforms(bytes32[],uint256[])'(
+    "setPlatforms(bytes32[],uint256[])"(
       _platformIdentifiers: BytesLike[],
       _perThousands: BigNumberish[],
       overrides?: CallOverrides
@@ -1311,15 +1589,15 @@ export class NrtManager extends Contract {
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Tracks total NRT released, to be able to calculate total supply.
@@ -1329,35 +1607,53 @@ export class NrtManager extends Contract {
     /**
      * Tracks total NRT released, to be able to calculate total supply.
      */
-    'totalNrtReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalNrtReleased()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     validatorManager(overrides?: CallOverrides): Promise<string>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
     Burn(nrtMonth: BigNumberish | null, value: null): EventFilter;
 
-    BurnPoolAccrue(nrtMonth: BigNumberish | null, value: null, sender: null): EventFilter;
+    BurnPoolAccrue(
+      nrtMonth: BigNumberish | null,
+      value: null,
+      sender: null
+    ): EventFilter;
 
-    LuckPoolAccrue(nrtMonth: BigNumberish | null, value: null, sender: null): EventFilter;
+    LuckPoolAccrue(
+      nrtMonth: BigNumberish | null,
+      value: null,
+      sender: null
+    ): EventFilter;
 
-    NRT(nrtMonth: BigNumberish | null, value: null, releaser: null): EventFilter;
+    NRT(
+      nrtMonth: BigNumberish | null,
+      value: null,
+      releaser: null
+    ): EventFilter;
 
     NRTSend(
       nrtMonth: BigNumberish | null,
@@ -1366,7 +1662,10 @@ export class NrtManager extends Contract {
       value: null
     ): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
@@ -1378,11 +1677,11 @@ export class NrtManager extends Contract {
     /**
      * A destination for tokens which are destined to be unspendable forever.
      */
-    'BURN_ADDR()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "BURN_ADDR()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     SECONDS_IN_MONTH(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'SECONDS_IN_MONTH()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "SECONDS_IN_MONTH()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Adds tokens to burn pool.
@@ -1392,7 +1691,7 @@ export class NrtManager extends Contract {
     /**
      * Adds tokens to burn pool.
      */
-    'addToBurnPool()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "addToBurnPool()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     /**
      * Adds tokens to luck pool.
@@ -1402,7 +1701,7 @@ export class NrtManager extends Contract {
     /**
      * Adds tokens to luck pool.
      */
-    'addToLuckPool()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "addToLuckPool()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     /**
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
@@ -1412,11 +1711,11 @@ export class NrtManager extends Contract {
     /**
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
      */
-    'annualNRT()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "annualNRT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     availableSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'availableSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "availableSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
@@ -1426,7 +1725,7 @@ export class NrtManager extends Contract {
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
      */
-    'burnPoolBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "burnPoolBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Number of NRT releases that have been happened.
@@ -1436,11 +1735,11 @@ export class NrtManager extends Contract {
     /**
      * Number of NRT releases that have been happened.
      */
-    'currentNrtMonth()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "currentNrtMonth()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Gets tokens allowed to be burned during upcoming NRT.
@@ -1450,19 +1749,22 @@ export class NrtManager extends Contract {
     /**
      * Gets tokens allowed to be burned during upcoming NRT.
      */
-    'getBurnAmount()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getBurnAmount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Gets NRT share of a platform.
      * @param _perThousandIndex : Index of platform.
      */
-    getPerThousand(_perThousandIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getPerThousand(
+      _perThousandIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets NRT share of a platform.
      * @param _perThousandIndex : Index of platform.
      */
-    'getPerThousand(uint256)'(
+    "getPerThousand(uint256)"(
       _perThousandIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1475,19 +1777,22 @@ export class NrtManager extends Contract {
     /**
      * Gets all nrt shares of platforms.
      */
-    'getPerThousands()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getPerThousands()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Gets platform address by index.
      * @param _platformIndex : Index of platform.
      */
-    getPlatform(_platformIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getPlatform(
+      _platformIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets platform address by index.
      * @param _platformIndex : Index of platform.
      */
-    'getPlatform(uint256)'(
+    "getPlatform(uint256)"(
       _platformIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1500,7 +1805,7 @@ export class NrtManager extends Contract {
     /**
      * Gets platforms and their NRT share.
      */
-    'getPlatformDetails()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getPlatformDetails()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Gets all platform addresses.
@@ -1510,7 +1815,7 @@ export class NrtManager extends Contract {
     /**
      * Gets all platform addresses.
      */
-    'getPlatforms()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getPlatforms()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Sets deployer wallet and timestamp.
@@ -1520,15 +1825,15 @@ export class NrtManager extends Contract {
     /**
      * Sets deployer wallet and timestamp.
      */
-    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "initialize()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     isAdminMode(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Timestamp of the block in which last NRT transaction was sealed.
@@ -1538,7 +1843,7 @@ export class NrtManager extends Contract {
     /**
      * Timestamp of the block in which last NRT transaction was sealed.
      */
-    'lastReleaseTimestamp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "lastReleaseTimestamp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
@@ -1548,11 +1853,11 @@ export class NrtManager extends Contract {
     /**
      * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
      */
-    'luckPoolBalance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "luckPoolBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -1562,15 +1867,15 @@ export class NrtManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
@@ -1580,37 +1885,58 @@ export class NrtManager extends Contract {
     /**
      * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
      */
-    'releaseMonthlyNRT()'(overrides?: Overrides): Promise<BigNumber>;
+    "releaseMonthlyNRT()"(overrides?: Overrides): Promise<BigNumber>;
 
     renounceAdminMode(overrides?: Overrides): Promise<BigNumber>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<BigNumber>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsernameStrict(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Sets initial enviornment values.
@@ -1628,7 +1954,7 @@ export class NrtManager extends Contract {
      * @param _perThousands : Corresponding perThousand NRT share.
      * @param _platformIdentifiers : Addresses of platform smart contracts or wallets.
      */
-    'setPlatforms(bytes32[],uint256[])'(
+    "setPlatforms(bytes32[],uint256[])"(
       _platformIdentifiers: BytesLike[],
       _perThousands: BigNumberish[],
       overrides?: PayableOverrides
@@ -1636,15 +1962,17 @@ export class NrtManager extends Contract {
 
     timeallyClub(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Tracks total NRT released, to be able to calculate total supply.
@@ -1654,25 +1982,31 @@ export class NrtManager extends Contract {
     /**
      * Tracks total NRT released, to be able to calculate total supply.
      */
-    'totalNrtReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalNrtReleased()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     validatorManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1684,11 +2018,13 @@ export class NrtManager extends Contract {
     /**
      * A destination for tokens which are destined to be unspendable forever.
      */
-    'BURN_ADDR()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "BURN_ADDR()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     SECONDS_IN_MONTH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'SECONDS_IN_MONTH()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "SECONDS_IN_MONTH()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Adds tokens to burn pool.
@@ -1698,7 +2034,9 @@ export class NrtManager extends Contract {
     /**
      * Adds tokens to burn pool.
      */
-    'addToBurnPool()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "addToBurnPool()"(
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Adds tokens to luck pool.
@@ -1708,7 +2046,9 @@ export class NrtManager extends Contract {
     /**
      * Adds tokens to luck pool.
      */
-    'addToLuckPool()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "addToLuckPool()"(
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
@@ -1718,11 +2058,13 @@ export class NrtManager extends Contract {
     /**
      * Annual amount which is released monthly during first year. On end         of a year, this amount decreases by 10%.
      */
-    'annualNRT()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "annualNRT()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     availableSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'availableSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "availableSupply()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
@@ -1732,7 +2074,9 @@ export class NrtManager extends Contract {
     /**
      * Amount of tokens accrued for burning as per Era Swap Whitepaper.
      */
-    'burnPoolBalance()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "burnPoolBalance()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Number of NRT releases that have been happened.
@@ -1742,11 +2086,13 @@ export class NrtManager extends Contract {
     /**
      * Number of NRT releases that have been happened.
      */
-    'currentNrtMonth()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "currentNrtMonth()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Gets tokens allowed to be burned during upcoming NRT.
@@ -1756,7 +2102,7 @@ export class NrtManager extends Contract {
     /**
      * Gets tokens allowed to be burned during upcoming NRT.
      */
-    'getBurnAmount()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getBurnAmount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Gets NRT share of a platform.
@@ -1771,7 +2117,7 @@ export class NrtManager extends Contract {
      * Gets NRT share of a platform.
      * @param _perThousandIndex : Index of platform.
      */
-    'getPerThousand(uint256)'(
+    "getPerThousand(uint256)"(
       _perThousandIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1784,7 +2130,9 @@ export class NrtManager extends Contract {
     /**
      * Gets all nrt shares of platforms.
      */
-    'getPerThousands()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getPerThousands()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets platform address by index.
@@ -1799,7 +2147,7 @@ export class NrtManager extends Contract {
      * Gets platform address by index.
      * @param _platformIndex : Index of platform.
      */
-    'getPlatform(uint256)'(
+    "getPlatform(uint256)"(
       _platformIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1807,12 +2155,16 @@ export class NrtManager extends Contract {
     /**
      * Gets platforms and their NRT share.
      */
-    getPlatformDetails(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getPlatformDetails(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets platforms and their NRT share.
      */
-    'getPlatformDetails()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getPlatformDetails()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets all platform addresses.
@@ -1822,7 +2174,7 @@ export class NrtManager extends Contract {
     /**
      * Gets all platform addresses.
      */
-    'getPlatforms()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getPlatforms()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Sets deployer wallet and timestamp.
@@ -1832,25 +2184,29 @@ export class NrtManager extends Contract {
     /**
      * Sets deployer wallet and timestamp.
      */
-    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     isAdminMode(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Timestamp of the block in which last NRT transaction was sealed.
      */
-    lastReleaseTimestamp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    lastReleaseTimestamp(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Timestamp of the block in which last NRT transaction was sealed.
      */
-    'lastReleaseTimestamp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "lastReleaseTimestamp()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
@@ -1860,11 +2216,13 @@ export class NrtManager extends Contract {
     /**
      * Amount of tokens accrued for the month by luck as per Era Swap Whitepaper.
      */
-    'luckPoolBalance()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "luckPoolBalance()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -1874,15 +2232,17 @@ export class NrtManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "randomnessManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
@@ -1892,15 +2252,18 @@ export class NrtManager extends Contract {
     /**
      * Sends NRT share to the platforms and burns tokens from burn pool as per Era Swap Whitepaper.
      */
-    'releaseMonthlyNRT()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "releaseMonthlyNRT()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     renounceAdminMode(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1910,14 +2273,17 @@ export class NrtManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1927,14 +2293,20 @@ export class NrtManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Sets initial enviornment values.
@@ -1952,7 +2324,7 @@ export class NrtManager extends Contract {
      * @param _perThousands : Corresponding perThousand NRT share.
      * @param _platformIdentifiers : Addresses of platform smart contracts or wallets.
      */
-    'setPlatforms(bytes32[],uint256[])'(
+    "setPlatforms(bytes32[],uint256[])"(
       _platformIdentifiers: BytesLike[],
       _perThousands: BigNumberish[],
       overrides?: PayableOverrides
@@ -1960,15 +2332,21 @@ export class NrtManager extends Contract {
 
     timeallyClub(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    timeallyPromotionalBucket(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Tracks total NRT released, to be able to calculate total supply.
@@ -1978,27 +2356,34 @@ export class NrtManager extends Contract {
     /**
      * Tracks total NRT released, to be able to calculate total supply.
      */
-    'totalNrtReleased()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalNrtReleased()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     validatorManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "validatorManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

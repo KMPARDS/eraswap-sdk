@@ -2,62 +2,107 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface ITimeAllyClubInterface extends ethers.utils.Interface {
   functions: {
-    'getCurrentIncentiveSlabForNetworker(address,address)': FunctionFragment;
-    'getIncentiveSlab(uint256,address)': FunctionFragment;
-    'getMembershipVolume(address,uint32)': FunctionFragment;
-    'getPlatformBusiness(address,uint32,address)': FunctionFragment;
-    'getReward(address,uint32,address)': FunctionFragment;
-    'getTotalBusinessVolume(uint32)': FunctionFragment;
-    'rewardToIntroducer(address,uint256)': FunctionFragment;
-    'rewardToNetworker(address,uint256)': FunctionFragment;
-    'withdrawPlatformIncentive(uint32,address,uint8,address)': FunctionFragment;
+    "getCurrentIncentiveSlabForNetworker(address,address)": FunctionFragment;
+    "getIncentiveSlab(uint256,address)": FunctionFragment;
+    "getMembershipVolume(address,uint32)": FunctionFragment;
+    "getPlatformBusiness(address,uint32,address)": FunctionFragment;
+    "getReward(address,uint32,address)": FunctionFragment;
+    "getTotalBusinessVolume(uint32)": FunctionFragment;
+    "rewardToIntroducer(address,uint256)": FunctionFragment;
+    "rewardToNetworker(address,uint256)": FunctionFragment;
+    "withdrawPlatformIncentive(uint32,address,uint8,address)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'getCurrentIncentiveSlabForNetworker',
+    functionFragment: "getCurrentIncentiveSlabForNetworker",
     values: [string, string]
   ): string;
-  encodeFunctionData(functionFragment: 'getIncentiveSlab', values: [BigNumberish, string]): string;
   encodeFunctionData(
-    functionFragment: 'getMembershipVolume',
+    functionFragment: "getIncentiveSlab",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMembershipVolume",
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getPlatformBusiness',
+    functionFragment: "getPlatformBusiness",
     values: [string, BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: 'getReward', values: [string, BigNumberish, string]): string;
-  encodeFunctionData(functionFragment: 'getTotalBusinessVolume', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'rewardToIntroducer',
+    functionFragment: "getReward",
+    values: [string, BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTotalBusinessVolume",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardToIntroducer",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'rewardToNetworker', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'withdrawPlatformIncentive',
+    functionFragment: "rewardToNetworker",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawPlatformIncentive",
     values: [BigNumberish, string, BigNumberish, string]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: 'getCurrentIncentiveSlabForNetworker',
+    functionFragment: "getCurrentIncentiveSlabForNetworker",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: 'getIncentiveSlab', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getMembershipVolume', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPlatformBusiness', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getReward', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalBusinessVolume', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'rewardToIntroducer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'rewardToNetworker', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawPlatformIncentive', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getIncentiveSlab",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMembershipVolume",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPlatformBusiness",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getReward", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalBusinessVolume",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToIntroducer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToNetworker",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawPlatformIncentive",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -93,7 +138,7 @@ export class ITimeAllyClub extends Contract {
       };
     }>;
 
-    'getCurrentIncentiveSlabForNetworker(address,address)'(
+    "getCurrentIncentiveSlabForNetworker(address,address)"(
       _networker: string,
       _platform: string,
       overrides?: CallOverrides
@@ -127,7 +172,7 @@ export class ITimeAllyClub extends Contract {
       };
     }>;
 
-    'getIncentiveSlab(uint256,address)'(
+    "getIncentiveSlab(uint256,address)"(
       _volume: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
@@ -155,7 +200,7 @@ export class ITimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    'getMembershipVolume(address,uint32)'(
+    "getMembershipVolume(address,uint32)"(
       _network: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -182,7 +227,7 @@ export class ITimeAllyClub extends Contract {
       };
     }>;
 
-    'getPlatformBusiness(address,uint32,address)'(
+    "getPlatformBusiness(address,uint32,address)"(
       _network: string,
       _month: BigNumberish,
       _platform: string,
@@ -210,7 +255,7 @@ export class ITimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    'getReward(address,uint32,address)'(
+    "getReward(address,uint32,address)"(
       _networker: string,
       _month: BigNumberish,
       _platform: string,
@@ -229,7 +274,7 @@ export class ITimeAllyClub extends Contract {
       0: BigNumber;
     }>;
 
-    'getTotalBusinessVolume(uint32)'(
+    "getTotalBusinessVolume(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -242,7 +287,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'rewardToIntroducer(address,uint256)'(
+    "rewardToIntroducer(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -254,7 +299,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'rewardToNetworker(address,uint256)'(
+    "rewardToNetworker(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -268,7 +313,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+    "withdrawPlatformIncentive(uint32,address,uint8,address)"(
       _month: BigNumberish,
       _platform: string,
       _rewardType: BigNumberish,
@@ -292,7 +337,7 @@ export class ITimeAllyClub extends Contract {
     3: number;
   }>;
 
-  'getCurrentIncentiveSlabForNetworker(address,address)'(
+  "getCurrentIncentiveSlabForNetworker(address,address)"(
     _networker: string,
     _platform: string,
     overrides?: CallOverrides
@@ -322,7 +367,7 @@ export class ITimeAllyClub extends Contract {
     3: number;
   }>;
 
-  'getIncentiveSlab(uint256,address)'(
+  "getIncentiveSlab(uint256,address)"(
     _volume: BigNumberish,
     _platform: string,
     overrides?: CallOverrides
@@ -348,7 +393,7 @@ export class ITimeAllyClub extends Contract {
     1: BigNumber;
   }>;
 
-  'getMembershipVolume(address,uint32)'(
+  "getMembershipVolume(address,uint32)"(
     _network: string,
     _month: BigNumberish,
     overrides?: CallOverrides
@@ -373,7 +418,7 @@ export class ITimeAllyClub extends Contract {
     2: boolean;
   }>;
 
-  'getPlatformBusiness(address,uint32,address)'(
+  "getPlatformBusiness(address,uint32,address)"(
     _network: string,
     _month: BigNumberish,
     _platform: string,
@@ -399,7 +444,7 @@ export class ITimeAllyClub extends Contract {
     1: BigNumber;
   }>;
 
-  'getReward(address,uint32,address)'(
+  "getReward(address,uint32,address)"(
     _networker: string,
     _month: BigNumberish,
     _platform: string,
@@ -411,9 +456,12 @@ export class ITimeAllyClub extends Contract {
     1: BigNumber;
   }>;
 
-  getTotalBusinessVolume(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getTotalBusinessVolume(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getTotalBusinessVolume(uint32)'(
+  "getTotalBusinessVolume(uint32)"(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -424,7 +472,7 @@ export class ITimeAllyClub extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'rewardToIntroducer(address,uint256)'(
+  "rewardToIntroducer(address,uint256)"(
     _networker: string,
     _value: BigNumberish,
     overrides?: Overrides
@@ -436,7 +484,7 @@ export class ITimeAllyClub extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'rewardToNetworker(address,uint256)'(
+  "rewardToNetworker(address,uint256)"(
     _networker: string,
     _value: BigNumberish,
     overrides?: Overrides
@@ -450,7 +498,7 @@ export class ITimeAllyClub extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+  "withdrawPlatformIncentive(uint32,address,uint8,address)"(
     _month: BigNumberish,
     _platform: string,
     _rewardType: BigNumberish,
@@ -474,7 +522,7 @@ export class ITimeAllyClub extends Contract {
       3: number;
     }>;
 
-    'getCurrentIncentiveSlabForNetworker(address,address)'(
+    "getCurrentIncentiveSlabForNetworker(address,address)"(
       _networker: string,
       _platform: string,
       overrides?: CallOverrides
@@ -504,7 +552,7 @@ export class ITimeAllyClub extends Contract {
       3: number;
     }>;
 
-    'getIncentiveSlab(uint256,address)'(
+    "getIncentiveSlab(uint256,address)"(
       _volume: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
@@ -530,7 +578,7 @@ export class ITimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    'getMembershipVolume(address,uint32)'(
+    "getMembershipVolume(address,uint32)"(
       _network: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -555,7 +603,7 @@ export class ITimeAllyClub extends Contract {
       2: boolean;
     }>;
 
-    'getPlatformBusiness(address,uint32,address)'(
+    "getPlatformBusiness(address,uint32,address)"(
       _network: string,
       _month: BigNumberish,
       _platform: string,
@@ -581,7 +629,7 @@ export class ITimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    'getReward(address,uint32,address)'(
+    "getReward(address,uint32,address)"(
       _networker: string,
       _month: BigNumberish,
       _platform: string,
@@ -593,9 +641,12 @@ export class ITimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    getTotalBusinessVolume(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalBusinessVolume(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTotalBusinessVolume(uint32)'(
+    "getTotalBusinessVolume(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -606,7 +657,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'rewardToIntroducer(address,uint256)'(
+    "rewardToIntroducer(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: CallOverrides
@@ -618,7 +669,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'rewardToNetworker(address,uint256)'(
+    "rewardToNetworker(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: CallOverrides
@@ -632,7 +683,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+    "withdrawPlatformIncentive(uint32,address,uint8,address)"(
       _month: BigNumberish,
       _platform: string,
       _rewardType: BigNumberish,
@@ -650,7 +701,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getCurrentIncentiveSlabForNetworker(address,address)'(
+    "getCurrentIncentiveSlabForNetworker(address,address)"(
       _networker: string,
       _platform: string,
       overrides?: CallOverrides
@@ -662,7 +713,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getIncentiveSlab(uint256,address)'(
+    "getIncentiveSlab(uint256,address)"(
       _volume: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
@@ -674,7 +725,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getMembershipVolume(address,uint32)'(
+    "getMembershipVolume(address,uint32)"(
       _network: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -687,7 +738,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getPlatformBusiness(address,uint32,address)'(
+    "getPlatformBusiness(address,uint32,address)"(
       _network: string,
       _month: BigNumberish,
       _platform: string,
@@ -701,16 +752,19 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getReward(address,uint32,address)'(
+    "getReward(address,uint32,address)"(
       _networker: string,
       _month: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getTotalBusinessVolume(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalBusinessVolume(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTotalBusinessVolume(uint32)'(
+    "getTotalBusinessVolume(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -721,7 +775,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'rewardToIntroducer(address,uint256)'(
+    "rewardToIntroducer(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -733,7 +787,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'rewardToNetworker(address,uint256)'(
+    "rewardToNetworker(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -747,7 +801,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+    "withdrawPlatformIncentive(uint32,address,uint8,address)"(
       _month: BigNumberish,
       _platform: string,
       _rewardType: BigNumberish,
@@ -763,7 +817,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getCurrentIncentiveSlabForNetworker(address,address)'(
+    "getCurrentIncentiveSlabForNetworker(address,address)"(
       _networker: string,
       _platform: string,
       overrides?: CallOverrides
@@ -775,7 +829,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getIncentiveSlab(uint256,address)'(
+    "getIncentiveSlab(uint256,address)"(
       _volume: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
@@ -787,7 +841,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getMembershipVolume(address,uint32)'(
+    "getMembershipVolume(address,uint32)"(
       _network: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -800,7 +854,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getPlatformBusiness(address,uint32,address)'(
+    "getPlatformBusiness(address,uint32,address)"(
       _network: string,
       _month: BigNumberish,
       _platform: string,
@@ -814,7 +868,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getReward(address,uint32,address)'(
+    "getReward(address,uint32,address)"(
       _networker: string,
       _month: BigNumberish,
       _platform: string,
@@ -826,7 +880,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getTotalBusinessVolume(uint32)'(
+    "getTotalBusinessVolume(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -837,7 +891,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'rewardToIntroducer(address,uint256)'(
+    "rewardToIntroducer(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -849,7 +903,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'rewardToNetworker(address,uint256)'(
+    "rewardToNetworker(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -863,7 +917,7 @@ export class ITimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+    "withdrawPlatformIncentive(uint32,address,uint8,address)"(
       _month: BigNumberish,
       _platform: string,
       _rewardType: BigNumberish,

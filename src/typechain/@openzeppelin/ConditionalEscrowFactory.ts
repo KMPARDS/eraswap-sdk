@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { ConditionalEscrow } from './ConditionalEscrow';
+import type { ConditionalEscrow } from "./ConditionalEscrow";
 
 export class ConditionalEscrowFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): ConditionalEscrow {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ConditionalEscrow {
     return new Contract(address, _abi, signerOrProvider) as ConditionalEscrow;
   }
 }
@@ -19,153 +22,153 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'payee',
-        type: 'address',
+        internalType: "address",
+        name: "payee",
+        type: "address",
       },
       {
         indexed: false,
-        internalType: 'uint256',
-        name: 'weiAmount',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "weiAmount",
+        type: "uint256",
       },
     ],
-    name: 'Deposited',
-    type: 'event',
+    name: "Deposited",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'previousOwner',
-        type: 'address',
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'OwnershipTransferred',
-    type: 'event',
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'payee',
-        type: 'address',
+        internalType: "address",
+        name: "payee",
+        type: "address",
       },
       {
         indexed: false,
-        internalType: 'uint256',
-        name: 'weiAmount',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "weiAmount",
+        type: "uint256",
       },
     ],
-    name: 'Withdrawn',
-    type: 'event',
+    name: "Withdrawn",
+    type: "event",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'payee',
-        type: 'address',
+        internalType: "address",
+        name: "payee",
+        type: "address",
       },
     ],
-    name: 'deposit',
+    name: "deposit",
     outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
+    stateMutability: "payable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'payee',
-        type: 'address',
+        internalType: "address",
+        name: "payee",
+        type: "address",
       },
     ],
-    name: 'depositsOf',
+    name: "depositsOf",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'owner',
+    name: "owner",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'renounceOwnership',
+    name: "renounceOwnership",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'transferOwnership',
+    name: "transferOwnership",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address payable',
-        name: 'payee',
-        type: 'address',
+        internalType: "address payable",
+        name: "payee",
+        type: "address",
       },
     ],
-    name: 'withdraw',
+    name: "withdraw",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'payee',
-        type: 'address',
+        internalType: "address",
+        name: "payee",
+        type: "address",
       },
     ],
-    name: 'withdrawalAllowed',
+    name: "withdrawalAllowed",
     outputs: [
       {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
 ];

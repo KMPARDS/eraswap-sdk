@@ -2,24 +2,37 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
-interface GsnRecipientErc20FeeGsnRecipientErc20FeeInterface extends ethers.utils.Interface {
+interface GsnRecipientErc20FeeGsnRecipientErc20FeeInterface
+  extends ethers.utils.Interface {
   functions: {
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)': FunctionFragment;
-    'getHubAddr()': FunctionFragment;
-    'postRelayedCall(bytes,bool,uint256,bytes32)': FunctionFragment;
-    'preRelayedCall(bytes)': FunctionFragment;
-    'relayHubVersion()': FunctionFragment;
-    'token()': FunctionFragment;
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)": FunctionFragment;
+    "getHubAddr()": FunctionFragment;
+    "postRelayedCall(bytes,bool,uint256,bytes32)": FunctionFragment;
+    "preRelayedCall(bytes)": FunctionFragment;
+    "relayHubVersion()": FunctionFragment;
+    "token()": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'acceptRelayedCall',
+    functionFragment: "acceptRelayedCall",
     values: [
       string,
       string,
@@ -32,27 +45,48 @@ interface GsnRecipientErc20FeeGsnRecipientErc20FeeInterface extends ethers.utils
       BigNumberish
     ]
   ): string;
-  encodeFunctionData(functionFragment: 'getHubAddr', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'postRelayedCall',
+    functionFragment: "getHubAddr",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "postRelayedCall",
     values: [BytesLike, boolean, BigNumberish, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'preRelayedCall', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'relayHubVersion', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'token', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "preRelayedCall",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "relayHubVersion",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "token", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: 'acceptRelayedCall', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getHubAddr', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'postRelayedCall', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'preRelayedCall', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'relayHubVersion', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'token', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "acceptRelayedCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getHubAddr", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "postRelayedCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "preRelayedCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "relayHubVersion",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
 
   events: {
-    'RelayHubChanged(address,address)': EventFragment;
+    "RelayHubChanged(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'RelayHubChanged'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RelayHubChanged"): EventFragment;
 }
 
 export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
@@ -91,7 +125,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Ensures that only users with enough gas payment token balance can have transactions relayed through the GSN.
      */
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
       arg0: string,
       from: string,
       arg2: BytesLike,
@@ -119,7 +153,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the address of the {IRelayHub} contract for this recipient.
      */
-    'getHubAddr()'(
+    "getHubAddr()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -139,7 +173,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'postRelayedCall(bytes,bool,uint256,bytes32)'(
+    "postRelayedCall(bytes,bool,uint256,bytes32)"(
       context: BytesLike,
       success: boolean,
       actualCharge: BigNumberish,
@@ -150,12 +184,15 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    preRelayedCall(context: BytesLike, overrides?: Overrides): Promise<ContractTransaction>;
+    preRelayedCall(
+      context: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'preRelayedCall(bytes)'(
+    "preRelayedCall(bytes)"(
       context: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -172,7 +209,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
      */
-    'relayHubVersion()'(
+    "relayHubVersion()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -190,7 +227,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the gas payment token.
      */
-    'token()'(
+    "token()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -219,7 +256,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
   /**
    * Ensures that only users with enough gas payment token balance can have transactions relayed through the GSN.
    */
-  'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+  "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
     arg0: string,
     from: string,
     arg2: BytesLike,
@@ -243,7 +280,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
   /**
    * Returns the address of the {IRelayHub} contract for this recipient.
    */
-  'getHubAddr()'(overrides?: CallOverrides): Promise<string>;
+  "getHubAddr()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
@@ -259,7 +296,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
   /**
    * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
    */
-  'postRelayedCall(bytes,bool,uint256,bytes32)'(
+  "postRelayedCall(bytes,bool,uint256,bytes32)"(
     context: BytesLike,
     success: boolean,
     actualCharge: BigNumberish,
@@ -270,12 +307,18 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
   /**
    * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
    */
-  preRelayedCall(context: BytesLike, overrides?: Overrides): Promise<ContractTransaction>;
+  preRelayedCall(
+    context: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
    */
-  'preRelayedCall(bytes)'(context: BytesLike, overrides?: Overrides): Promise<ContractTransaction>;
+  "preRelayedCall(bytes)"(
+    context: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
@@ -285,7 +328,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
   /**
    * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
    */
-  'relayHubVersion()'(overrides?: CallOverrides): Promise<string>;
+  "relayHubVersion()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the gas payment token.
@@ -295,7 +338,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
   /**
    * Returns the gas payment token.
    */
-  'token()'(overrides?: CallOverrides): Promise<string>;
+  "token()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     /**
@@ -320,7 +363,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Ensures that only users with enough gas payment token balance can have transactions relayed through the GSN.
      */
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
       arg0: string,
       from: string,
       arg2: BytesLike,
@@ -344,7 +387,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the address of the {IRelayHub} contract for this recipient.
      */
-    'getHubAddr()'(overrides?: CallOverrides): Promise<string>;
+    "getHubAddr()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
@@ -360,7 +403,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'postRelayedCall(bytes,bool,uint256,bytes32)'(
+    "postRelayedCall(bytes,bool,uint256,bytes32)"(
       context: BytesLike,
       success: boolean,
       actualCharge: BigNumberish,
@@ -371,12 +414,18 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    preRelayedCall(context: BytesLike, overrides?: CallOverrides): Promise<string>;
+    preRelayedCall(
+      context: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'preRelayedCall(bytes)'(context: BytesLike, overrides?: CallOverrides): Promise<string>;
+    "preRelayedCall(bytes)"(
+      context: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
@@ -386,7 +435,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
      */
-    'relayHubVersion()'(overrides?: CallOverrides): Promise<string>;
+    "relayHubVersion()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the gas payment token.
@@ -396,11 +445,14 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the gas payment token.
      */
-    'token()'(overrides?: CallOverrides): Promise<string>;
+    "token()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
-    RelayHubChanged(oldRelayHub: string | null, newRelayHub: string | null): EventFilter;
+    RelayHubChanged(
+      oldRelayHub: string | null,
+      newRelayHub: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
@@ -423,7 +475,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Ensures that only users with enough gas payment token balance can have transactions relayed through the GSN.
      */
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
       arg0: string,
       from: string,
       arg2: BytesLike,
@@ -444,7 +496,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the address of the {IRelayHub} contract for this recipient.
      */
-    'getHubAddr()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getHubAddr()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
@@ -460,7 +512,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'postRelayedCall(bytes,bool,uint256,bytes32)'(
+    "postRelayedCall(bytes,bool,uint256,bytes32)"(
       context: BytesLike,
       success: boolean,
       actualCharge: BigNumberish,
@@ -471,12 +523,18 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    preRelayedCall(context: BytesLike, overrides?: Overrides): Promise<BigNumber>;
+    preRelayedCall(
+      context: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'preRelayedCall(bytes)'(context: BytesLike, overrides?: Overrides): Promise<BigNumber>;
+    "preRelayedCall(bytes)"(
+      context: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
@@ -486,7 +544,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
      */
-    'relayHubVersion()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "relayHubVersion()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the gas payment token.
@@ -496,7 +554,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the gas payment token.
      */
-    'token()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "token()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -519,7 +577,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Ensures that only users with enough gas payment token balance can have transactions relayed through the GSN.
      */
-    'acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)'(
+    "acceptRelayedCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,uint256)"(
       arg0: string,
       from: string,
       arg2: BytesLike,
@@ -540,7 +598,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the address of the {IRelayHub} contract for this recipient.
      */
-    'getHubAddr()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getHubAddr()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
@@ -556,7 +614,7 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * See `IRelayRecipient.postRelayedCall`. This function should not be overridden directly, use `_postRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'postRelayedCall(bytes,bool,uint256,bytes32)'(
+    "postRelayedCall(bytes,bool,uint256,bytes32)"(
       context: BytesLike,
       success: boolean,
       actualCharge: BigNumberish,
@@ -567,12 +625,15 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    preRelayedCall(context: BytesLike, overrides?: Overrides): Promise<PopulatedTransaction>;
+    preRelayedCall(
+      context: BytesLike,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See `IRelayRecipient.preRelayedCall`. This function should not be overridden directly, use `_preRelayedCall` instead. * Requirements: - the caller must be the `RelayHub` contract.
      */
-    'preRelayedCall(bytes)'(
+    "preRelayedCall(bytes)"(
       context: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -585,7 +646,9 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the version string of the {IRelayHub} for which this recipient implementation was built. If {_upgradeRelayHub} is used, the new {IRelayHub} instance should be compatible with this version.
      */
-    'relayHubVersion()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "relayHubVersion()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the gas payment token.
@@ -595,6 +658,6 @@ export class GsnRecipientErc20FeeGsnRecipientErc20Fee extends Contract {
     /**
      * Returns the gas payment token.
      */
-    'token()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "token()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

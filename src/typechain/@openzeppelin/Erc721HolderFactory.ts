@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Signer } from 'ethers';
-import { Provider, TransactionRequest } from '@ethersproject/providers';
-import { Contract, ContractFactory, Overrides } from '@ethersproject/contracts';
+import { Signer } from "ethers";
+import { Provider, TransactionRequest } from "@ethersproject/providers";
+import { Contract, ContractFactory, Overrides } from "@ethersproject/contracts";
 
-import type { Erc721Holder } from './Erc721Holder';
+import type { Erc721Holder } from "./Erc721Holder";
 
 export class Erc721HolderFactory extends ContractFactory {
   constructor(signer?: Signer) {
@@ -25,7 +25,10 @@ export class Erc721HolderFactory extends ContractFactory {
   connect(signer: Signer): Erc721HolderFactory {
     return super.connect(signer) as Erc721HolderFactory;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): Erc721Holder {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): Erc721Holder {
     return new Contract(address, _abi, signerOrProvider) as Erc721Holder;
   }
 }
@@ -34,38 +37,38 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
       {
-        internalType: 'bytes',
-        name: '',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
       },
     ],
-    name: 'onERC721Received',
+    name: "onERC721Received",
     outputs: [
       {
-        internalType: 'bytes4',
-        name: '',
-        type: 'bytes4',
+        internalType: "bytes4",
+        name: "",
+        type: "bytes4",
       },
     ],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];
 
 const _bytecode =
-  '0x608060405234801561001057600080fd5b50610197806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063150b7a0214610030575b600080fd5b6101036004803603608081101561004657600080fd5b73ffffffffffffffffffffffffffffffffffffffff82358116926020810135909116916040820135919081019060808101606082013564010000000081111561008e57600080fd5b8201836020820111156100a057600080fd5b803590602001918460018302840111640100000000831117156100c257600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600092019190915250929550610138945050505050565b604080517fffffffff000000000000000000000000000000000000000000000000000000009092168252519081900360200190f35b7f150b7a020000000000000000000000000000000000000000000000000000000094935050505056fea2646970667358221220ad893cfb4e9c4f46b2c5cf7a73a378ef3e2ec75ecef7d3815cc6120c459fa97464736f6c63430007040033';
+  "0x608060405234801561001057600080fd5b50610157806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063150b7a0214610030575b600080fd5b6100f46004803603608081101561004657600080fd5b6001600160a01b03823581169260208101359091169160408201359190810190608081016060820135600160201b81111561008057600080fd5b82018360208201111561009257600080fd5b803590602001918460018302840111600160201b831117156100b357600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600092019190915250929550610111945050505050565b604080516001600160e01b03199092168252519081900360200190f35b630a85bd0160e11b94935050505056fea26469706673582212200ca1065ea40baef532c8d227745a37eb27f7027822a529a72c30d68fe9bd8ccf64736f6c63430007050033";

@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { Ierc1820Registry } from './Ierc1820Registry';
+import type { Ierc1820Registry } from "./Ierc1820Registry";
 
 export class Ierc1820RegistryFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): Ierc1820Registry {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): Ierc1820Registry {
     return new Contract(address, _abi, signerOrProvider) as Ierc1820Registry;
   }
 }
@@ -19,212 +22,212 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'bytes32',
-        name: 'interfaceHash',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "interfaceHash",
+        type: "bytes32",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'implementer',
-        type: 'address',
+        internalType: "address",
+        name: "implementer",
+        type: "address",
       },
     ],
-    name: 'InterfaceImplementerSet',
-    type: 'event',
+    name: "InterfaceImplementerSet",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'newManager',
-        type: 'address',
+        internalType: "address",
+        name: "newManager",
+        type: "address",
       },
     ],
-    name: 'ManagerChanged',
-    type: 'event',
+    name: "ManagerChanged",
+    type: "event",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
       {
-        internalType: 'bytes32',
-        name: '_interfaceHash',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "_interfaceHash",
+        type: "bytes32",
       },
     ],
-    name: 'getInterfaceImplementer',
+    name: "getInterfaceImplementer",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
     ],
-    name: 'getManager',
+    name: "getManager",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
       {
-        internalType: 'bytes4',
-        name: 'interfaceId',
-        type: 'bytes4',
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4",
       },
     ],
-    name: 'implementsERC165Interface',
+    name: "implementsERC165Interface",
     outputs: [
       {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
       {
-        internalType: 'bytes4',
-        name: 'interfaceId',
-        type: 'bytes4',
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4",
       },
     ],
-    name: 'implementsERC165InterfaceNoCache',
+    name: "implementsERC165InterfaceNoCache",
     outputs: [
       {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'string',
-        name: 'interfaceName',
-        type: 'string',
+        internalType: "string",
+        name: "interfaceName",
+        type: "string",
       },
     ],
-    name: 'interfaceHash',
+    name: "interfaceHash",
     outputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
       },
     ],
-    stateMutability: 'pure',
-    type: 'function',
+    stateMutability: "pure",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
       {
-        internalType: 'bytes32',
-        name: '_interfaceHash',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "_interfaceHash",
+        type: "bytes32",
       },
       {
-        internalType: 'address',
-        name: 'implementer',
-        type: 'address',
+        internalType: "address",
+        name: "implementer",
+        type: "address",
       },
     ],
-    name: 'setInterfaceImplementer',
+    name: "setInterfaceImplementer",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
       {
-        internalType: 'address',
-        name: 'newManager',
-        type: 'address',
+        internalType: "address",
+        name: "newManager",
+        type: "address",
       },
     ],
-    name: 'setManager',
+    name: "setManager",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
       {
-        internalType: 'bytes4',
-        name: 'interfaceId',
-        type: 'bytes4',
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4",
       },
     ],
-    name: 'updateERC165Cache',
+    name: "updateERC165Cache",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

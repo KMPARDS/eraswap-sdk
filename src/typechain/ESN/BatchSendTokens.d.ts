@@ -2,41 +2,57 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface BatchSendTokensInterface extends ethers.utils.Interface {
   functions: {
-    'sendErc20ByDifferentAmount(address,address[],uint256[],uint256)': FunctionFragment;
-    'sendErc20BySameAmount(address,address[],uint256,uint256)': FunctionFragment;
-    'sendNativeByDifferentAmount(address[],uint256[])': FunctionFragment;
+    "sendErc20ByDifferentAmount(address,address[],uint256[],uint256)": FunctionFragment;
+    "sendErc20BySameAmount(address,address[],uint256,uint256)": FunctionFragment;
+    "sendNativeByDifferentAmount(address[],uint256[])": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'sendErc20ByDifferentAmount',
+    functionFragment: "sendErc20ByDifferentAmount",
     values: [string, string[], BigNumberish[], BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'sendErc20BySameAmount',
+    functionFragment: "sendErc20BySameAmount",
     values: [string, string[], BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'sendNativeByDifferentAmount',
+    functionFragment: "sendNativeByDifferentAmount",
     values: [string[], BigNumberish[]]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'sendErc20ByDifferentAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'sendErc20BySameAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'sendNativeByDifferentAmount', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "sendErc20ByDifferentAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendErc20BySameAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendNativeByDifferentAmount",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -79,7 +95,7 @@ export class BatchSendTokens extends Contract {
      * @param token - address of ERC20 token contract on which transfer transactions need to be sent
      * @param totalAmount - amount of total tokens in one batch
      */
-    'sendErc20ByDifferentAmount(address,address[],uint256[],uint256)'(
+    "sendErc20ByDifferentAmount(address,address[],uint256[],uint256)"(
       token: string,
       addressArray: string[],
       amountArray: BigNumberish[],
@@ -111,7 +127,7 @@ export class BatchSendTokens extends Contract {
      * @param token - address of ERC20 token contract on which transfer transactions need to be sent
      * @param totalAmount - amount of total tokens in one batch
      */
-    'sendErc20BySameAmount(address,address[],uint256,uint256)'(
+    "sendErc20BySameAmount(address,address[],uint256,uint256)"(
       token: string,
       addressArray: string[],
       amountToEachAddress: BigNumberish,
@@ -125,7 +141,7 @@ export class BatchSendTokens extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'sendNativeByDifferentAmount(address[],uint256[])'(
+    "sendNativeByDifferentAmount(address[],uint256[])"(
       addressArray: string[],
       amountArray: BigNumberish[],
       overrides?: PayableOverrides
@@ -156,7 +172,7 @@ export class BatchSendTokens extends Contract {
    * @param token - address of ERC20 token contract on which transfer transactions need to be sent
    * @param totalAmount - amount of total tokens in one batch
    */
-  'sendErc20ByDifferentAmount(address,address[],uint256[],uint256)'(
+  "sendErc20ByDifferentAmount(address,address[],uint256[],uint256)"(
     token: string,
     addressArray: string[],
     amountArray: BigNumberish[],
@@ -188,7 +204,7 @@ export class BatchSendTokens extends Contract {
    * @param token - address of ERC20 token contract on which transfer transactions need to be sent
    * @param totalAmount - amount of total tokens in one batch
    */
-  'sendErc20BySameAmount(address,address[],uint256,uint256)'(
+  "sendErc20BySameAmount(address,address[],uint256,uint256)"(
     token: string,
     addressArray: string[],
     amountToEachAddress: BigNumberish,
@@ -202,7 +218,7 @@ export class BatchSendTokens extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'sendNativeByDifferentAmount(address[],uint256[])'(
+  "sendNativeByDifferentAmount(address[],uint256[])"(
     addressArray: string[],
     amountArray: BigNumberish[],
     overrides?: PayableOverrides
@@ -233,7 +249,7 @@ export class BatchSendTokens extends Contract {
      * @param token - address of ERC20 token contract on which transfer transactions need to be sent
      * @param totalAmount - amount of total tokens in one batch
      */
-    'sendErc20ByDifferentAmount(address,address[],uint256[],uint256)'(
+    "sendErc20ByDifferentAmount(address,address[],uint256[],uint256)"(
       token: string,
       addressArray: string[],
       amountArray: BigNumberish[],
@@ -265,7 +281,7 @@ export class BatchSendTokens extends Contract {
      * @param token - address of ERC20 token contract on which transfer transactions need to be sent
      * @param totalAmount - amount of total tokens in one batch
      */
-    'sendErc20BySameAmount(address,address[],uint256,uint256)'(
+    "sendErc20BySameAmount(address,address[],uint256,uint256)"(
       token: string,
       addressArray: string[],
       amountToEachAddress: BigNumberish,
@@ -279,7 +295,7 @@ export class BatchSendTokens extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'sendNativeByDifferentAmount(address[],uint256[])'(
+    "sendNativeByDifferentAmount(address[],uint256[])"(
       addressArray: string[],
       amountArray: BigNumberish[],
       overrides?: CallOverrides
@@ -313,7 +329,7 @@ export class BatchSendTokens extends Contract {
      * @param token - address of ERC20 token contract on which transfer transactions need to be sent
      * @param totalAmount - amount of total tokens in one batch
      */
-    'sendErc20ByDifferentAmount(address,address[],uint256[],uint256)'(
+    "sendErc20ByDifferentAmount(address,address[],uint256[],uint256)"(
       token: string,
       addressArray: string[],
       amountArray: BigNumberish[],
@@ -345,7 +361,7 @@ export class BatchSendTokens extends Contract {
      * @param token - address of ERC20 token contract on which transfer transactions need to be sent
      * @param totalAmount - amount of total tokens in one batch
      */
-    'sendErc20BySameAmount(address,address[],uint256,uint256)'(
+    "sendErc20BySameAmount(address,address[],uint256,uint256)"(
       token: string,
       addressArray: string[],
       amountToEachAddress: BigNumberish,
@@ -359,7 +375,7 @@ export class BatchSendTokens extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'sendNativeByDifferentAmount(address[],uint256[])'(
+    "sendNativeByDifferentAmount(address[],uint256[])"(
       addressArray: string[],
       amountArray: BigNumberish[],
       overrides?: PayableOverrides
@@ -391,7 +407,7 @@ export class BatchSendTokens extends Contract {
      * @param token - address of ERC20 token contract on which transfer transactions need to be sent
      * @param totalAmount - amount of total tokens in one batch
      */
-    'sendErc20ByDifferentAmount(address,address[],uint256[],uint256)'(
+    "sendErc20ByDifferentAmount(address,address[],uint256[],uint256)"(
       token: string,
       addressArray: string[],
       amountArray: BigNumberish[],
@@ -423,7 +439,7 @@ export class BatchSendTokens extends Contract {
      * @param token - address of ERC20 token contract on which transfer transactions need to be sent
      * @param totalAmount - amount of total tokens in one batch
      */
-    'sendErc20BySameAmount(address,address[],uint256,uint256)'(
+    "sendErc20BySameAmount(address,address[],uint256,uint256)"(
       token: string,
       addressArray: string[],
       amountToEachAddress: BigNumberish,
@@ -437,7 +453,7 @@ export class BatchSendTokens extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'sendNativeByDifferentAmount(address[],uint256[])'(
+    "sendNativeByDifferentAmount(address[],uint256[])"(
       addressArray: string[],
       amountArray: BigNumberish[],
       overrides?: PayableOverrides

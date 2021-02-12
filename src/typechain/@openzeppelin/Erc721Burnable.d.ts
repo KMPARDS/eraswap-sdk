@@ -2,87 +2,153 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Erc721BurnableInterface extends ethers.utils.Interface {
   functions: {
-    'approve(address,uint256)': FunctionFragment;
-    'balanceOf(address)': FunctionFragment;
-    'baseURI()': FunctionFragment;
-    'burn(uint256)': FunctionFragment;
-    'getApproved(uint256)': FunctionFragment;
-    'isApprovedForAll(address,address)': FunctionFragment;
-    'name()': FunctionFragment;
-    'ownerOf(uint256)': FunctionFragment;
-    'safeTransferFrom(address,address,uint256)': FunctionFragment;
-    'setApprovalForAll(address,bool)': FunctionFragment;
-    'supportsInterface(bytes4)': FunctionFragment;
-    'symbol()': FunctionFragment;
-    'tokenByIndex(uint256)': FunctionFragment;
-    'tokenOfOwnerByIndex(address,uint256)': FunctionFragment;
-    'tokenURI(uint256)': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'transferFrom(address,address,uint256)': FunctionFragment;
+    "approve(address,uint256)": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "baseURI()": FunctionFragment;
+    "burn(uint256)": FunctionFragment;
+    "getApproved(uint256)": FunctionFragment;
+    "isApprovedForAll(address,address)": FunctionFragment;
+    "name()": FunctionFragment;
+    "ownerOf(uint256)": FunctionFragment;
+    "safeTransferFrom(address,address,uint256)": FunctionFragment;
+    "setApprovalForAll(address,bool)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "tokenByIndex(uint256)": FunctionFragment;
+    "tokenOfOwnerByIndex(address,uint256)": FunctionFragment;
+    "tokenURI(uint256)": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "transferFrom(address,address,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'approve', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
-  encodeFunctionData(functionFragment: 'baseURI', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'burn', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getApproved', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'isApprovedForAll', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'name', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'ownerOf', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'safeTransferFrom',
-    values: [string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: 'setApprovalForAll', values: [string, boolean]): string;
-  encodeFunctionData(functionFragment: 'supportsInterface', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'tokenByIndex', values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: 'tokenOfOwnerByIndex',
+    functionFragment: "approve",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'tokenURI', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(functionFragment: "baseURI", values?: undefined): string;
+  encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'transferFrom',
+    functionFragment: "getApproved",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isApprovedForAll",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "ownerOf",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "safeTransferFrom",
+    values: [string, string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setApprovalForAll",
+    values: [string, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "tokenByIndex",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "tokenOfOwnerByIndex",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "tokenURI",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'baseURI', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'burn', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getApproved', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isApprovedForAll', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'ownerOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'safeTransferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setApprovalForAll', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'supportsInterface', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'tokenByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'tokenOfOwnerByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'tokenURI', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferFrom', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "baseURI", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getApproved",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "safeTransferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "tokenByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "tokenOfOwnerByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Approval(address,address,uint256)': EventFragment;
-    'ApprovalForAll(address,address,bool)': EventFragment;
-    'Transfer(address,address,uint256)': EventFragment;
+    "Approval(address,address,uint256)": EventFragment;
+    "ApprovalForAll(address,address,bool)": EventFragment;
+    "Transfer(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'ApprovalForAll'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
 export class Erc721Burnable extends Contract {
@@ -102,12 +168,16 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-approve}.
      */
-    approve(to: string, tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    approve(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See {IERC721-approve}.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides
@@ -126,7 +196,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-balanceOf}.
      */
-    'balanceOf(address)'(
+    "balanceOf(address)"(
       owner: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -145,7 +215,7 @@ export class Erc721Burnable extends Contract {
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
      */
-    'baseURI()'(
+    "baseURI()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -154,12 +224,18 @@ export class Erc721Burnable extends Contract {
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    burn(tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    burn(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    'burn(uint256)'(tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    "burn(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * See {IERC721-getApproved}.
@@ -174,7 +250,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-getApproved}.
      */
-    'getApproved(uint256)'(
+    "getApproved(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -195,7 +271,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       owner: string,
       operator: string,
       overrides?: CallOverrides
@@ -215,7 +291,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-name}.
      */
-    'name()'(
+    "name()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -234,7 +310,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-ownerOf}.
      */
-    'ownerOf(uint256)'(
+    "ownerOf(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -244,7 +320,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -254,7 +330,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -274,7 +350,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -293,7 +369,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -312,7 +388,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-symbol}.
      */
-    'symbol()'(
+    "symbol()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -331,7 +407,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    'tokenByIndex(uint256)'(
+    "tokenByIndex(uint256)"(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -352,7 +428,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
-    'tokenOfOwnerByIndex(address,uint256)'(
+    "tokenOfOwnerByIndex(address,uint256)"(
       owner: string,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -373,7 +449,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    'tokenURI(uint256)'(
+    "tokenURI(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -392,7 +468,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-totalSupply}.
      */
-    'totalSupply()'(
+    "totalSupply()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -411,7 +487,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-transferFrom}.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -422,12 +498,16 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721-approve}.
    */
-  approve(to: string, tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  approve(
+    to: string,
+    tokenId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC721-approve}.
    */
-  'approve(address,uint256)'(
+  "approve(address,uint256)"(
     to: string,
     tokenId: BigNumberish,
     overrides?: Overrides
@@ -441,7 +521,10 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721-balanceOf}.
    */
-  'balanceOf(address)'(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf(address)"(
+    owner: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
@@ -451,37 +534,53 @@ export class Erc721Burnable extends Contract {
   /**
    * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
    */
-  'baseURI()'(overrides?: CallOverrides): Promise<string>;
+  "baseURI()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
    */
-  burn(tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  burn(
+    tokenId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
    */
-  'burn(uint256)'(tokenId: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  "burn(uint256)"(
+    tokenId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * See {IERC721-getApproved}.
    */
-  getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  getApproved(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * See {IERC721-getApproved}.
    */
-  'getApproved(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "getApproved(uint256)"(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * See {IERC721-isApprovedForAll}.
    */
-  isApprovedForAll(owner: string, operator: string, overrides?: CallOverrides): Promise<boolean>;
+  isApprovedForAll(
+    owner: string,
+    operator: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC721-isApprovedForAll}.
    */
-  'isApprovedForAll(address,address)'(
+  "isApprovedForAll(address,address)"(
     owner: string,
     operator: string,
     overrides?: CallOverrides
@@ -495,7 +594,7 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721Metadata-name}.
    */
-  'name()'(overrides?: CallOverrides): Promise<string>;
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC721-ownerOf}.
@@ -505,12 +604,15 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721-ownerOf}.
    */
-  'ownerOf(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "ownerOf(uint256)"(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * See {IERC721-safeTransferFrom}.
    */
-  'safeTransferFrom(address,address,uint256)'(
+  "safeTransferFrom(address,address,uint256)"(
     from: string,
     to: string,
     tokenId: BigNumberish,
@@ -520,7 +622,7 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721-safeTransferFrom}.
    */
-  'safeTransferFrom(address,address,uint256,bytes)'(
+  "safeTransferFrom(address,address,uint256,bytes)"(
     from: string,
     to: string,
     tokenId: BigNumberish,
@@ -540,7 +642,7 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721-setApprovalForAll}.
    */
-  'setApprovalForAll(address,bool)'(
+  "setApprovalForAll(address,bool)"(
     operator: string,
     approved: boolean,
     overrides?: Overrides
@@ -549,12 +651,18 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  'supportsInterface(bytes4)'(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  "supportsInterface(bytes4)"(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC721Metadata-symbol}.
@@ -564,17 +672,23 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721Metadata-symbol}.
    */
-  'symbol()'(overrides?: CallOverrides): Promise<string>;
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC721Enumerable-tokenByIndex}.
    */
-  tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  tokenByIndex(
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * See {IERC721Enumerable-tokenByIndex}.
    */
-  'tokenByIndex(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  "tokenByIndex(uint256)"(
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * See {IERC721Enumerable-tokenOfOwnerByIndex}.
@@ -588,7 +702,7 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721Enumerable-tokenOfOwnerByIndex}.
    */
-  'tokenOfOwnerByIndex(address,uint256)'(
+  "tokenOfOwnerByIndex(address,uint256)"(
     owner: string,
     index: BigNumberish,
     overrides?: CallOverrides
@@ -602,7 +716,10 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721Metadata-tokenURI}.
    */
-  'tokenURI(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "tokenURI(uint256)"(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * See {IERC721Enumerable-totalSupply}.
@@ -612,7 +729,7 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721Enumerable-totalSupply}.
    */
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * See {IERC721-transferFrom}.
@@ -627,7 +744,7 @@ export class Erc721Burnable extends Contract {
   /**
    * See {IERC721-transferFrom}.
    */
-  'transferFrom(address,address,uint256)'(
+  "transferFrom(address,address,uint256)"(
     from: string,
     to: string,
     tokenId: BigNumberish,
@@ -638,12 +755,16 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-approve}.
      */
-    approve(to: string, tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    approve(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * See {IERC721-approve}.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       to: string,
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -657,7 +778,10 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-balanceOf}.
      */
-    'balanceOf(address)'(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
@@ -667,7 +791,7 @@ export class Erc721Burnable extends Contract {
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
      */
-    'baseURI()'(overrides?: CallOverrides): Promise<string>;
+    "baseURI()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
@@ -677,27 +801,40 @@ export class Erc721Burnable extends Contract {
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    'burn(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "burn(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getApproved(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    'getApproved(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    "getApproved(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    isApprovedForAll(owner: string, operator: string, overrides?: CallOverrides): Promise<boolean>;
+    isApprovedForAll(
+      owner: string,
+      operator: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       owner: string,
       operator: string,
       overrides?: CallOverrides
@@ -711,7 +848,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<string>;
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC721-ownerOf}.
@@ -721,12 +858,15 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-ownerOf}.
      */
-    'ownerOf(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    "ownerOf(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -736,7 +876,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -756,7 +896,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: CallOverrides
@@ -765,12 +905,15 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -783,17 +926,23 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<string>;
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    'tokenByIndex(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "tokenByIndex(uint256)"(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
@@ -807,7 +956,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
-    'tokenOfOwnerByIndex(address,uint256)'(
+    "tokenOfOwnerByIndex(address,uint256)"(
       owner: string,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -821,7 +970,10 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    'tokenURI(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    "tokenURI(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * See {IERC721Enumerable-totalSupply}.
@@ -831,7 +983,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721-transferFrom}.
@@ -846,7 +998,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-transferFrom}.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -861,21 +1013,33 @@ export class Erc721Burnable extends Contract {
       tokenId: BigNumberish | null
     ): EventFilter;
 
-    ApprovalForAll(owner: string | null, operator: string | null, approved: null): EventFilter;
+    ApprovalForAll(
+      owner: string | null,
+      operator: string | null,
+      approved: null
+    ): EventFilter;
 
-    Transfer(from: string | null, to: string | null, tokenId: BigNumberish | null): EventFilter;
+    Transfer(
+      from: string | null,
+      to: string | null,
+      tokenId: BigNumberish | null
+    ): EventFilter;
   };
 
   estimateGas: {
     /**
      * See {IERC721-approve}.
      */
-    approve(to: string, tokenId: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    approve(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-approve}.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides
@@ -889,7 +1053,10 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-balanceOf}.
      */
-    'balanceOf(address)'(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
@@ -899,7 +1066,7 @@ export class Erc721Burnable extends Contract {
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
      */
-    'baseURI()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "baseURI()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
@@ -909,17 +1076,26 @@ export class Erc721Burnable extends Contract {
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    'burn(uint256)'(tokenId: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    "burn(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getApproved(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    'getApproved(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getApproved(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-isApprovedForAll}.
@@ -933,7 +1109,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       owner: string,
       operator: string,
       overrides?: CallOverrides
@@ -947,22 +1123,28 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721-ownerOf}.
      */
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    ownerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-ownerOf}.
      */
-    'ownerOf(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "ownerOf(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -972,7 +1154,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -992,7 +1174,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -1001,12 +1183,15 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1019,17 +1204,23 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    'tokenByIndex(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "tokenByIndex(uint256)"(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
@@ -1043,7 +1234,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
-    'tokenOfOwnerByIndex(address,uint256)'(
+    "tokenOfOwnerByIndex(address,uint256)"(
       owner: string,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1052,12 +1243,18 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenURI(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    'tokenURI(uint256)'(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "tokenURI(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC721Enumerable-totalSupply}.
@@ -1067,7 +1264,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC721-transferFrom}.
@@ -1082,7 +1279,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-transferFrom}.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1103,7 +1300,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-approve}.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides
@@ -1112,12 +1309,18 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-balanceOf}.
      */
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    balanceOf(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-balanceOf}.
      */
-    'balanceOf(address)'(owner: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balanceOf(address)"(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
@@ -1127,27 +1330,36 @@ export class Erc721Burnable extends Contract {
     /**
      * Returns the base URI set via {_setBaseURI}. This will be automatically added as a prefix in {tokenURI} to each token's URI, or to the token ID if no specific URI is set for that token ID.
      */
-    'baseURI()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "baseURI()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    burn(tokenId: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    burn(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Burns `tokenId`. See {ERC721-_burn}. Requirements: - The caller must own `tokenId` or be an approved operator.
      */
-    'burn(uint256)'(tokenId: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "burn(uint256)"(
+      tokenId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getApproved(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-getApproved}.
      */
-    'getApproved(uint256)'(
+    "getApproved(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1164,7 +1376,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       owner: string,
       operator: string,
       overrides?: CallOverrides
@@ -1178,17 +1390,20 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-name}.
      */
-    'name()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-ownerOf}.
      */
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    ownerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-ownerOf}.
      */
-    'ownerOf(uint256)'(
+    "ownerOf(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1196,7 +1411,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1206,7 +1421,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
@@ -1226,7 +1441,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -1243,7 +1458,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1256,17 +1471,20 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-symbol}.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    tokenByIndex(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721Enumerable-tokenByIndex}.
      */
-    'tokenByIndex(uint256)'(
+    "tokenByIndex(uint256)"(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1283,7 +1501,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-tokenOfOwnerByIndex}.
      */
-    'tokenOfOwnerByIndex(address,uint256)'(
+    "tokenOfOwnerByIndex(address,uint256)"(
       owner: string,
       index: BigNumberish,
       overrides?: CallOverrides
@@ -1292,12 +1510,15 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    tokenURI(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721Metadata-tokenURI}.
      */
-    'tokenURI(uint256)'(
+    "tokenURI(uint256)"(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1310,7 +1531,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721Enumerable-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC721-transferFrom}.
@@ -1325,7 +1546,7 @@ export class Erc721Burnable extends Contract {
     /**
      * See {IERC721-transferFrom}.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,

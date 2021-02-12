@@ -2,32 +2,56 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Erc1155ReceiverInterface extends ethers.utils.Interface {
   functions: {
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)': FunctionFragment;
-    'onERC1155Received(address,address,uint256,uint256,bytes)': FunctionFragment;
-    'supportsInterface(bytes4)': FunctionFragment;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'onERC1155BatchReceived',
+    functionFragment: "onERC1155BatchReceived",
     values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'onERC1155Received',
+    functionFragment: "onERC1155Received",
     values: [string, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'supportsInterface', values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'onERC1155BatchReceived', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'onERC1155Received', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'supportsInterface', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155BatchReceived",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -71,7 +95,7 @@ export class Erc1155Receiver extends Contract {
      * @param operator The address which initiated the batch transfer (i.e. msg.sender)
      * @param values An array containing amounts of each token being transferred (order and length must match ids array)
      */
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
       operator: string,
       from: string,
       ids: BigNumberish[],
@@ -105,7 +129,7 @@ export class Erc1155Receiver extends Contract {
      * @param operator The address which initiated the transfer (i.e. msg.sender)
      * @param value The amount of tokens being transferred
      */
-    'onERC1155Received(address,address,uint256,uint256,bytes)'(
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
       operator: string,
       from: string,
       id: BigNumberish,
@@ -127,7 +151,7 @@ export class Erc1155Receiver extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -160,7 +184,7 @@ export class Erc1155Receiver extends Contract {
    * @param operator The address which initiated the batch transfer (i.e. msg.sender)
    * @param values An array containing amounts of each token being transferred (order and length must match ids array)
    */
-  'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+  "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
     operator: string,
     from: string,
     ids: BigNumberish[],
@@ -194,7 +218,7 @@ export class Erc1155Receiver extends Contract {
    * @param operator The address which initiated the transfer (i.e. msg.sender)
    * @param value The amount of tokens being transferred
    */
-  'onERC1155Received(address,address,uint256,uint256,bytes)'(
+  "onERC1155Received(address,address,uint256,uint256,bytes)"(
     operator: string,
     from: string,
     id: BigNumberish,
@@ -206,12 +230,18 @@ export class Erc1155Receiver extends Contract {
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  'supportsInterface(bytes4)'(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  "supportsInterface(bytes4)"(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     /**
@@ -239,7 +269,7 @@ export class Erc1155Receiver extends Contract {
      * @param operator The address which initiated the batch transfer (i.e. msg.sender)
      * @param values An array containing amounts of each token being transferred (order and length must match ids array)
      */
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
       operator: string,
       from: string,
       ids: BigNumberish[],
@@ -273,7 +303,7 @@ export class Erc1155Receiver extends Contract {
      * @param operator The address which initiated the transfer (i.e. msg.sender)
      * @param value The amount of tokens being transferred
      */
-    'onERC1155Received(address,address,uint256,uint256,bytes)'(
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
       operator: string,
       from: string,
       id: BigNumberish,
@@ -285,12 +315,15 @@ export class Erc1155Receiver extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -324,7 +357,7 @@ export class Erc1155Receiver extends Contract {
      * @param operator The address which initiated the batch transfer (i.e. msg.sender)
      * @param values An array containing amounts of each token being transferred (order and length must match ids array)
      */
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
       operator: string,
       from: string,
       ids: BigNumberish[],
@@ -358,7 +391,7 @@ export class Erc1155Receiver extends Contract {
      * @param operator The address which initiated the transfer (i.e. msg.sender)
      * @param value The amount of tokens being transferred
      */
-    'onERC1155Received(address,address,uint256,uint256,bytes)'(
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
       operator: string,
       from: string,
       id: BigNumberish,
@@ -370,12 +403,15 @@ export class Erc1155Receiver extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -407,7 +443,7 @@ export class Erc1155Receiver extends Contract {
      * @param operator The address which initiated the batch transfer (i.e. msg.sender)
      * @param values An array containing amounts of each token being transferred (order and length must match ids array)
      */
-    'onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'(
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"(
       operator: string,
       from: string,
       ids: BigNumberish[],
@@ -441,7 +477,7 @@ export class Erc1155Receiver extends Contract {
      * @param operator The address which initiated the transfer (i.e. msg.sender)
      * @param value The amount of tokens being transferred
      */
-    'onERC1155Received(address,address,uint256,uint256,bytes)'(
+    "onERC1155Received(address,address,uint256,uint256,bytes)"(
       operator: string,
       from: string,
       id: BigNumberish,
@@ -461,7 +497,7 @@ export class Erc1155Receiver extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
