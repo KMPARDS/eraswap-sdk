@@ -2,28 +2,44 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface InrtReceiverInterface extends ethers.utils.Interface {
   functions: {
-    'getMonthlyNRT(uint32)': FunctionFragment;
-    'receiveNrt(uint32)': FunctionFragment;
+    "getMonthlyNRT(uint32)": FunctionFragment;
+    "receiveNrt(uint32)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'getMonthlyNRT', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'receiveNrt', values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "getMonthlyNRT",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "receiveNrt",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'getMonthlyNRT', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getMonthlyNRT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "receiveNrt", data: BytesLike): Result;
 
   events: {};
 }
@@ -49,7 +65,7 @@ export class InrtReceiver extends Contract {
       0: BigNumber;
     }>;
 
-    'getMonthlyNRT(uint32)'(
+    "getMonthlyNRT(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -61,55 +77,85 @@ export class InrtReceiver extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
   };
 
-  getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getMonthlyNRT(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  "getMonthlyNRT(uint32)"(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   receiveNrt(
     _currentNrtMonth: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'receiveNrt(uint32)'(
+  "receiveNrt(uint32)"(
     _currentNrtMonth: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMonthlyNRT(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    receiveNrt(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    receiveNrt(
+      _currentNrtMonth: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'receiveNrt(uint32)'(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "receiveNrt(uint32)"(
+      _currentNrtMonth: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMonthlyNRT(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    receiveNrt(_currentNrtMonth: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
+    receiveNrt(
+      _currentNrtMonth: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getMonthlyNRT(uint32)'(
+    "getMonthlyNRT(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -119,7 +165,7 @@ export class InrtReceiver extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;

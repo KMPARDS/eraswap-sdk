@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { InrtManager } from './InrtManager';
+import type { InrtManager } from "./InrtManager";
 
 export class InrtManagerFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): InrtManager {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): InrtManager {
     return new Contract(address, _abi, signerOrProvider) as InrtManager;
   }
 }
@@ -16,29 +19,29 @@ export class InrtManagerFactory {
 const _abi = [
   {
     inputs: [],
-    name: 'addToBurnPool',
+    name: "addToBurnPool",
     outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
+    stateMutability: "payable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'addToLuckPool',
+    name: "addToLuckPool",
     outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
+    stateMutability: "payable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'currentNrtMonth',
+    name: "currentNrtMonth",
     outputs: [
       {
-        internalType: 'uint32',
-        name: '',
-        type: 'uint32',
+        internalType: "uint32",
+        name: "",
+        type: "uint32",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
 ];

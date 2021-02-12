@@ -2,29 +2,53 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface TokenTimelockInterface extends ethers.utils.Interface {
   functions: {
-    'beneficiary()': FunctionFragment;
-    'release()': FunctionFragment;
-    'releaseTime()': FunctionFragment;
-    'token()': FunctionFragment;
+    "beneficiary()": FunctionFragment;
+    "release()": FunctionFragment;
+    "releaseTime()": FunctionFragment;
+    "token()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'beneficiary', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'release', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'releaseTime', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'token', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "beneficiary",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "release", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "releaseTime",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "token", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: 'beneficiary', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'release', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'releaseTime', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'token', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "beneficiary",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "release", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "releaseTime",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
 
   events: {};
 }
@@ -53,7 +77,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'beneficiary()'(
+    "beneficiary()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -67,7 +91,7 @@ export class TokenTimelock extends Contract {
     /**
      * Transfers tokens held by timelock to beneficiary.
      */
-    'release()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "release()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      */
@@ -79,7 +103,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'releaseTime()'(
+    "releaseTime()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -95,7 +119,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'token()'(
+    "token()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -108,7 +132,7 @@ export class TokenTimelock extends Contract {
 
   /**
    */
-  'beneficiary()'(overrides?: CallOverrides): Promise<string>;
+  "beneficiary()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Transfers tokens held by timelock to beneficiary.
@@ -118,7 +142,7 @@ export class TokenTimelock extends Contract {
   /**
    * Transfers tokens held by timelock to beneficiary.
    */
-  'release()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "release()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    */
@@ -126,7 +150,7 @@ export class TokenTimelock extends Contract {
 
   /**
    */
-  'releaseTime()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "releaseTime()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    */
@@ -134,7 +158,7 @@ export class TokenTimelock extends Contract {
 
   /**
    */
-  'token()'(overrides?: CallOverrides): Promise<string>;
+  "token()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     /**
@@ -143,7 +167,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'beneficiary()'(overrides?: CallOverrides): Promise<string>;
+    "beneficiary()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Transfers tokens held by timelock to beneficiary.
@@ -153,7 +177,7 @@ export class TokenTimelock extends Contract {
     /**
      * Transfers tokens held by timelock to beneficiary.
      */
-    'release()'(overrides?: CallOverrides): Promise<void>;
+    "release()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      */
@@ -161,7 +185,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'releaseTime()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "releaseTime()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      */
@@ -169,7 +193,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'token()'(overrides?: CallOverrides): Promise<string>;
+    "token()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
@@ -181,7 +205,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'beneficiary()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "beneficiary()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers tokens held by timelock to beneficiary.
@@ -191,7 +215,7 @@ export class TokenTimelock extends Contract {
     /**
      * Transfers tokens held by timelock to beneficiary.
      */
-    'release()'(overrides?: Overrides): Promise<BigNumber>;
+    "release()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      */
@@ -199,7 +223,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'releaseTime()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "releaseTime()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      */
@@ -207,7 +231,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'token()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "token()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -217,7 +241,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'beneficiary()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "beneficiary()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers tokens held by timelock to beneficiary.
@@ -227,7 +251,7 @@ export class TokenTimelock extends Contract {
     /**
      * Transfers tokens held by timelock to beneficiary.
      */
-    'release()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "release()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      */
@@ -235,7 +259,7 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'releaseTime()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "releaseTime()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      */
@@ -243,6 +267,6 @@ export class TokenTimelock extends Contract {
 
     /**
      */
-    'token()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "token()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

@@ -2,14 +2,21 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { ITimeAllyPromotionalBucket } from './ITimeAllyPromotionalBucket';
+import type { ITimeAllyPromotionalBucket } from "./ITimeAllyPromotionalBucket";
 
 export class ITimeAllyPromotionalBucketFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): ITimeAllyPromotionalBucket {
-    return new Contract(address, _abi, signerOrProvider) as ITimeAllyPromotionalBucket;
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ITimeAllyPromotionalBucket {
+    return new Contract(
+      address,
+      _abi,
+      signerOrProvider
+    ) as ITimeAllyPromotionalBucket;
   }
 }
 
@@ -17,32 +24,32 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'stakingContract',
-        type: 'address',
+        internalType: "address",
+        name: "stakingContract",
+        type: "address",
       },
     ],
-    name: 'claimReward',
+    name: "claimReward",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_wallet',
-        type: 'address',
+        internalType: "address",
+        name: "_wallet",
+        type: "address",
       },
       {
-        internalType: 'uint256',
-        name: '_stakingReward',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "_stakingReward",
+        type: "uint256",
       },
     ],
-    name: 'rewardToStaker',
+    name: "rewardToStaker",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

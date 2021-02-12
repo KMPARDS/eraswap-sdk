@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { IDelegatable } from './IDelegatable';
+import type { IDelegatable } from "./IDelegatable";
 
 export class IDelegatableFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): IDelegatable {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IDelegatable {
     return new Contract(address, _abi, signerOrProvider) as IDelegatable;
   }
 }
@@ -17,19 +20,19 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint32',
-        name: '_month',
-        type: 'uint32',
+        internalType: "uint32",
+        name: "_month",
+        type: "uint32",
       },
       {
-        internalType: 'bytes',
-        name: '_extraData',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "_extraData",
+        type: "bytes",
       },
     ],
-    name: 'registerDelegation',
+    name: "registerDelegation",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

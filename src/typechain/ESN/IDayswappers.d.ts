@@ -2,151 +2,242 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface IDayswappersInterface extends ethers.utils.Interface {
   functions: {
-    'getBeltIdFromTreeReferrals(uint32)': FunctionFragment;
-    'getSeatByAddress(address)': FunctionFragment;
-    'getSeatByAddressStrict(address)': FunctionFragment;
-    'getSeatByIndex(uint32)': FunctionFragment;
-    'getSeatMonthlyDataByAddress(address,uint32)': FunctionFragment;
-    'getSeatMonthlyDataByAddressStrict(address,uint32)': FunctionFragment;
-    'getSeatMonthlyDataByIndex(uint32,uint32)': FunctionFragment;
-    'getTotalMonthlyActiveDayswappers(uint32)': FunctionFragment;
-    'isActiveAddress(address)': FunctionFragment;
-    'isActiveSeat(uint32)': FunctionFragment;
-    'join(address)': FunctionFragment;
-    'payToIntroducer(address,uint256[3])': FunctionFragment;
-    'payToNetworker(address,uint256[3])': FunctionFragment;
-    'payToTree(address,uint256[3])': FunctionFragment;
-    'promoteBelt(address,uint32)': FunctionFragment;
-    'reportVolume(address,uint256)': FunctionFragment;
-    'resolveIntroducer(address)': FunctionFragment;
-    'resolveKyc(address)': FunctionFragment;
-    'rewardToTree(address,uint256,uint256[3])': FunctionFragment;
-    'transferSeat(address)': FunctionFragment;
-    'volumeTarget()': FunctionFragment;
-    'withdrawDefiniteEarnings(address,uint32,uint8)': FunctionFragment;
-    'withdrawNrtEarnings(address,uint32,uint8)': FunctionFragment;
+    "getBeltIdFromTreeReferrals(uint32)": FunctionFragment;
+    "getSeatByAddress(address)": FunctionFragment;
+    "getSeatByAddressStrict(address)": FunctionFragment;
+    "getSeatByIndex(uint32)": FunctionFragment;
+    "getSeatMonthlyDataByAddress(address,uint32)": FunctionFragment;
+    "getSeatMonthlyDataByAddressStrict(address,uint32)": FunctionFragment;
+    "getSeatMonthlyDataByIndex(uint32,uint32)": FunctionFragment;
+    "getTotalMonthlyActiveDayswappers(uint32)": FunctionFragment;
+    "isActiveAddress(address)": FunctionFragment;
+    "isActiveSeat(uint32)": FunctionFragment;
+    "join(address)": FunctionFragment;
+    "payToIntroducer(address,uint256[3])": FunctionFragment;
+    "payToNetworker(address,uint256[3])": FunctionFragment;
+    "payToTree(address,uint256[3])": FunctionFragment;
+    "promoteBelt(address,uint32)": FunctionFragment;
+    "reportVolume(address,uint256)": FunctionFragment;
+    "resolveIntroducer(address)": FunctionFragment;
+    "resolveKyc(address)": FunctionFragment;
+    "rewardToTree(address,uint256,uint256[3])": FunctionFragment;
+    "transferSeat(address)": FunctionFragment;
+    "volumeTarget()": FunctionFragment;
+    "withdrawDefiniteEarnings(address,uint32,uint8)": FunctionFragment;
+    "withdrawNrtEarnings(address,uint32,uint8)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'getBeltIdFromTreeReferrals',
+    functionFragment: "getBeltIdFromTreeReferrals",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'getSeatByAddress', values: [string]): string;
-  encodeFunctionData(functionFragment: 'getSeatByAddressStrict', values: [string]): string;
-  encodeFunctionData(functionFragment: 'getSeatByIndex', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'getSeatMonthlyDataByAddress',
+    functionFragment: "getSeatByAddress",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getSeatByAddressStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getSeatByIndex",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getSeatMonthlyDataByAddress",
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getSeatMonthlyDataByAddressStrict',
+    functionFragment: "getSeatMonthlyDataByAddressStrict",
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getSeatMonthlyDataByIndex',
+    functionFragment: "getSeatMonthlyDataByIndex",
     values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getTotalMonthlyActiveDayswappers',
+    functionFragment: "getTotalMonthlyActiveDayswappers",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'isActiveAddress', values: [string]): string;
-  encodeFunctionData(functionFragment: 'isActiveSeat', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'join', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'payToIntroducer',
+    functionFragment: "isActiveAddress",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isActiveSeat",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "join", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "payToIntroducer",
     values: [string, [BigNumberish, BigNumberish, BigNumberish]]
   ): string;
   encodeFunctionData(
-    functionFragment: 'payToNetworker',
+    functionFragment: "payToNetworker",
     values: [string, [BigNumberish, BigNumberish, BigNumberish]]
   ): string;
   encodeFunctionData(
-    functionFragment: 'payToTree',
+    functionFragment: "payToTree",
     values: [string, [BigNumberish, BigNumberish, BigNumberish]]
   ): string;
-  encodeFunctionData(functionFragment: 'promoteBelt', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'reportVolume', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'resolveIntroducer', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveKyc', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'rewardToTree',
+    functionFragment: "promoteBelt",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "reportVolume",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveIntroducer",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "resolveKyc", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "rewardToTree",
     values: [string, BigNumberish, [BigNumberish, BigNumberish, BigNumberish]]
   ): string;
-  encodeFunctionData(functionFragment: 'transferSeat', values: [string]): string;
-  encodeFunctionData(functionFragment: 'volumeTarget', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'withdrawDefiniteEarnings',
+    functionFragment: "transferSeat",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "volumeTarget",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawDefiniteEarnings",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'withdrawNrtEarnings',
+    functionFragment: "withdrawNrtEarnings",
     values: [string, BigNumberish, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'getBeltIdFromTreeReferrals', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getSeatByAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getSeatByAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getSeatByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getSeatMonthlyDataByAddress', data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'getSeatMonthlyDataByAddressStrict',
+    functionFragment: "getBeltIdFromTreeReferrals",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: 'getSeatMonthlyDataByIndex', data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'getTotalMonthlyActiveDayswappers',
+    functionFragment: "getSeatByAddress",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: 'isActiveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isActiveSeat', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'join', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'payToIntroducer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'payToNetworker', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'payToTree', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'promoteBelt', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'reportVolume', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveIntroducer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveKyc', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'rewardToTree', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferSeat', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'volumeTarget', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawDefiniteEarnings', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawNrtEarnings', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getSeatByAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getSeatByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getSeatMonthlyDataByAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getSeatMonthlyDataByAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getSeatMonthlyDataByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalMonthlyActiveDayswappers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isActiveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isActiveSeat",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "join", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "payToIntroducer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "payToNetworker",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "payToTree", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "promoteBelt",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "reportVolume",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveIntroducer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "resolveKyc", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToTree",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferSeat",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "volumeTarget",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawDefiniteEarnings",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawNrtEarnings",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Active(uint32,uint32)': EventFragment;
-    'Introduce(uint32,uint32)': EventFragment;
-    'KycResolve(uint32)': EventFragment;
-    'Promotion(uint32,uint32)': EventFragment;
-    'Reward(address,uint32,uint32,bool,bool,uint256,uint256[3])': EventFragment;
-    'SeatTransfer(address,address,uint32)': EventFragment;
-    'Volume(address,uint32,uint32,uint256)': EventFragment;
-    'Withdraw(uint32,bool,uint8,uint32,uint256[3])': EventFragment;
+    "Active(uint32,uint32)": EventFragment;
+    "Introduce(uint32,uint32)": EventFragment;
+    "KycResolve(uint32)": EventFragment;
+    "Promotion(uint32,uint32)": EventFragment;
+    "Reward(address,uint32,uint32,bool,bool,uint256,uint256[3])": EventFragment;
+    "SeatTransfer(address,address,uint32)": EventFragment;
+    "Volume(address,uint32,uint32,uint256)": EventFragment;
+    "Withdraw(uint32,bool,uint8,uint32,uint256[3])": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Active'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Introduce'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'KycResolve'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Promotion'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Reward'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'SeatTransfer'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Volume'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Withdraw'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Active"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Introduce"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "KycResolve"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Promotion"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Reward"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "SeatTransfer"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Volume"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdraw"): EventFragment;
 }
 
 export class IDayswappers extends Contract {
@@ -171,7 +262,7 @@ export class IDayswappers extends Contract {
       0: number;
     }>;
 
-    'getBeltIdFromTreeReferrals(uint32)'(
+    "getBeltIdFromTreeReferrals(uint32)"(
       treeReferrals: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -199,7 +290,7 @@ export class IDayswappers extends Contract {
       6: number;
     }>;
 
-    'getSeatByAddress(address)'(
+    "getSeatByAddress(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -239,7 +330,7 @@ export class IDayswappers extends Contract {
       6: number;
     }>;
 
-    'getSeatByAddressStrict(address)'(
+    "getSeatByAddressStrict(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -279,7 +370,7 @@ export class IDayswappers extends Contract {
       6: number;
     }>;
 
-    'getSeatByIndex(uint32)'(
+    "getSeatByIndex(uint32)"(
       _seatIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -316,7 +407,7 @@ export class IDayswappers extends Contract {
       4: boolean;
     }>;
 
-    'getSeatMonthlyDataByAddress(address,uint32)'(
+    "getSeatMonthlyDataByAddress(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -350,7 +441,7 @@ export class IDayswappers extends Contract {
       4: boolean;
     }>;
 
-    'getSeatMonthlyDataByAddressStrict(address,uint32)'(
+    "getSeatMonthlyDataByAddressStrict(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -384,7 +475,7 @@ export class IDayswappers extends Contract {
       4: boolean;
     }>;
 
-    'getSeatMonthlyDataByIndex(uint32,uint32)'(
+    "getSeatMonthlyDataByIndex(uint32,uint32)"(
       _seatIndex: BigNumberish,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -408,7 +499,7 @@ export class IDayswappers extends Contract {
       0: BigNumber;
     }>;
 
-    'getTotalMonthlyActiveDayswappers(uint32)'(
+    "getTotalMonthlyActiveDayswappers(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -422,7 +513,7 @@ export class IDayswappers extends Contract {
       0: boolean;
     }>;
 
-    'isActiveAddress(address)'(
+    "isActiveAddress(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -436,16 +527,22 @@ export class IDayswappers extends Contract {
       0: boolean;
     }>;
 
-    'isActiveSeat(uint32)'(
+    "isActiveSeat(uint32)"(
       _seatIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
     }>;
 
-    join(_introducer: string, overrides?: Overrides): Promise<ContractTransaction>;
+    join(
+      _introducer: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'join(address)'(_introducer: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "join(address)"(
+      _introducer: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     payToIntroducer(
       _networker: string,
@@ -453,7 +550,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'payToIntroducer(address,uint256[3])'(
+    "payToIntroducer(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -465,7 +562,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'payToNetworker(address,uint256[3])'(
+    "payToNetworker(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -477,7 +574,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'payToTree(address,uint256[3])'(
+    "payToTree(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -489,7 +586,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'promoteBelt(address,uint32)'(
+    "promoteBelt(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: Overrides
@@ -501,7 +598,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'reportVolume(address,uint256)'(
+    "reportVolume(address,uint256)"(
       _networker: string,
       _amount: BigNumberish,
       overrides?: Overrides
@@ -514,16 +611,22 @@ export class IDayswappers extends Contract {
       0: string;
     }>;
 
-    'resolveIntroducer(address)'(
+    "resolveIntroducer(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
-    resolveKyc(_networker: string, overrides?: Overrides): Promise<ContractTransaction>;
+    resolveKyc(
+      _networker: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'resolveKyc(address)'(_networker: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "resolveKyc(address)"(
+      _networker: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     rewardToTree(
       _networker: string,
@@ -532,16 +635,22 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'rewardToTree(address,uint256,uint256[3])'(
+    "rewardToTree(address,uint256,uint256[3])"(
       _networker: string,
       _value: BigNumberish,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    transferSeat(_newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferSeat(
+      _newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'transferSeat(address)'(_newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "transferSeat(address)"(
+      _newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     volumeTarget(
       overrides?: CallOverrides
@@ -549,7 +658,7 @@ export class IDayswappers extends Contract {
       0: BigNumber;
     }>;
 
-    'volumeTarget()'(
+    "volumeTarget()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -562,7 +671,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'withdrawDefiniteEarnings(address,uint32,uint8)'(
+    "withdrawDefiniteEarnings(address,uint32,uint8)"(
       _stakingContract: string,
       _month: BigNumberish,
       _rewardType: BigNumberish,
@@ -576,7 +685,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'withdrawNrtEarnings(address,uint32,uint8)'(
+    "withdrawNrtEarnings(address,uint32,uint8)"(
       _stakingContract: string,
       _month: BigNumberish,
       _rewardType: BigNumberish,
@@ -589,7 +698,7 @@ export class IDayswappers extends Contract {
     overrides?: CallOverrides
   ): Promise<number>;
 
-  'getBeltIdFromTreeReferrals(uint32)'(
+  "getBeltIdFromTreeReferrals(uint32)"(
     treeReferrals: BigNumberish,
     overrides?: CallOverrides
   ): Promise<number>;
@@ -614,7 +723,7 @@ export class IDayswappers extends Contract {
     6: number;
   }>;
 
-  'getSeatByAddress(address)'(
+  "getSeatByAddress(address)"(
     _networker: string,
     overrides?: CallOverrides
   ): Promise<{
@@ -654,7 +763,7 @@ export class IDayswappers extends Contract {
     6: number;
   }>;
 
-  'getSeatByAddressStrict(address)'(
+  "getSeatByAddressStrict(address)"(
     _networker: string,
     overrides?: CallOverrides
   ): Promise<{
@@ -694,7 +803,7 @@ export class IDayswappers extends Contract {
     6: number;
   }>;
 
-  'getSeatByIndex(uint32)'(
+  "getSeatByIndex(uint32)"(
     _seatIndex: BigNumberish,
     overrides?: CallOverrides
   ): Promise<{
@@ -731,7 +840,7 @@ export class IDayswappers extends Contract {
     4: boolean;
   }>;
 
-  'getSeatMonthlyDataByAddress(address,uint32)'(
+  "getSeatMonthlyDataByAddress(address,uint32)"(
     _networker: string,
     _month: BigNumberish,
     overrides?: CallOverrides
@@ -765,7 +874,7 @@ export class IDayswappers extends Contract {
     4: boolean;
   }>;
 
-  'getSeatMonthlyDataByAddressStrict(address,uint32)'(
+  "getSeatMonthlyDataByAddressStrict(address,uint32)"(
     _networker: string,
     _month: BigNumberish,
     overrides?: CallOverrides
@@ -799,7 +908,7 @@ export class IDayswappers extends Contract {
     4: boolean;
   }>;
 
-  'getSeatMonthlyDataByIndex(uint32,uint32)'(
+  "getSeatMonthlyDataByIndex(uint32,uint32)"(
     _seatIndex: BigNumberish,
     _month: BigNumberish,
     overrides?: CallOverrides
@@ -821,22 +930,40 @@ export class IDayswappers extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'getTotalMonthlyActiveDayswappers(uint32)'(
+  "getTotalMonthlyActiveDayswappers(uint32)"(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<boolean>;
+  isActiveAddress(
+    _networker: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  'isActiveAddress(address)'(_networker: string, overrides?: CallOverrides): Promise<boolean>;
+  "isActiveAddress(address)"(
+    _networker: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  isActiveSeat(_seatIndex: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+  isActiveSeat(
+    _seatIndex: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  'isActiveSeat(uint32)'(_seatIndex: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+  "isActiveSeat(uint32)"(
+    _seatIndex: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  join(_introducer: string, overrides?: Overrides): Promise<ContractTransaction>;
+  join(
+    _introducer: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'join(address)'(_introducer: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "join(address)"(
+    _introducer: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   payToIntroducer(
     _networker: string,
@@ -844,7 +971,7 @@ export class IDayswappers extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'payToIntroducer(address,uint256[3])'(
+  "payToIntroducer(address,uint256[3])"(
     _networker: string,
     _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
     overrides?: PayableOverrides
@@ -856,7 +983,7 @@ export class IDayswappers extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'payToNetworker(address,uint256[3])'(
+  "payToNetworker(address,uint256[3])"(
     _networker: string,
     _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
     overrides?: PayableOverrides
@@ -868,7 +995,7 @@ export class IDayswappers extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'payToTree(address,uint256[3])'(
+  "payToTree(address,uint256[3])"(
     _networker: string,
     _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
     overrides?: PayableOverrides
@@ -880,7 +1007,7 @@ export class IDayswappers extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'promoteBelt(address,uint32)'(
+  "promoteBelt(address,uint32)"(
     _networker: string,
     _month: BigNumberish,
     overrides?: Overrides
@@ -892,19 +1019,31 @@ export class IDayswappers extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'reportVolume(address,uint256)'(
+  "reportVolume(address,uint256)"(
     _networker: string,
     _amount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  resolveIntroducer(_networker: string, overrides?: CallOverrides): Promise<string>;
+  resolveIntroducer(
+    _networker: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveIntroducer(address)'(_networker: string, overrides?: CallOverrides): Promise<string>;
+  "resolveIntroducer(address)"(
+    _networker: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveKyc(_networker: string, overrides?: Overrides): Promise<ContractTransaction>;
+  resolveKyc(
+    _networker: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'resolveKyc(address)'(_networker: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "resolveKyc(address)"(
+    _networker: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   rewardToTree(
     _networker: string,
@@ -913,20 +1052,26 @@ export class IDayswappers extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'rewardToTree(address,uint256,uint256[3])'(
+  "rewardToTree(address,uint256,uint256[3])"(
     _networker: string,
     _value: BigNumberish,
     _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  transferSeat(_newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferSeat(
+    _newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'transferSeat(address)'(_newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "transferSeat(address)"(
+    _newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   volumeTarget(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'volumeTarget()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "volumeTarget()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   withdrawDefiniteEarnings(
     _stakingContract: string,
@@ -935,7 +1080,7 @@ export class IDayswappers extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'withdrawDefiniteEarnings(address,uint32,uint8)'(
+  "withdrawDefiniteEarnings(address,uint32,uint8)"(
     _stakingContract: string,
     _month: BigNumberish,
     _rewardType: BigNumberish,
@@ -949,7 +1094,7 @@ export class IDayswappers extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'withdrawNrtEarnings(address,uint32,uint8)'(
+  "withdrawNrtEarnings(address,uint32,uint8)"(
     _stakingContract: string,
     _month: BigNumberish,
     _rewardType: BigNumberish,
@@ -962,7 +1107,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<number>;
 
-    'getBeltIdFromTreeReferrals(uint32)'(
+    "getBeltIdFromTreeReferrals(uint32)"(
       treeReferrals: BigNumberish,
       overrides?: CallOverrides
     ): Promise<number>;
@@ -987,7 +1132,7 @@ export class IDayswappers extends Contract {
       6: number;
     }>;
 
-    'getSeatByAddress(address)'(
+    "getSeatByAddress(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -1027,7 +1172,7 @@ export class IDayswappers extends Contract {
       6: number;
     }>;
 
-    'getSeatByAddressStrict(address)'(
+    "getSeatByAddressStrict(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -1067,7 +1212,7 @@ export class IDayswappers extends Contract {
       6: number;
     }>;
 
-    'getSeatByIndex(uint32)'(
+    "getSeatByIndex(uint32)"(
       _seatIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -1104,7 +1249,7 @@ export class IDayswappers extends Contract {
       4: boolean;
     }>;
 
-    'getSeatMonthlyDataByAddress(address,uint32)'(
+    "getSeatMonthlyDataByAddress(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1138,7 +1283,7 @@ export class IDayswappers extends Contract {
       4: boolean;
     }>;
 
-    'getSeatMonthlyDataByAddressStrict(address,uint32)'(
+    "getSeatMonthlyDataByAddressStrict(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1172,7 +1317,7 @@ export class IDayswappers extends Contract {
       4: boolean;
     }>;
 
-    'getSeatMonthlyDataByIndex(uint32,uint32)'(
+    "getSeatMonthlyDataByIndex(uint32,uint32)"(
       _seatIndex: BigNumberish,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1194,22 +1339,37 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getTotalMonthlyActiveDayswappers(uint32)'(
+    "getTotalMonthlyActiveDayswappers(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<boolean>;
+    isActiveAddress(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'isActiveAddress(address)'(_networker: string, overrides?: CallOverrides): Promise<boolean>;
+    "isActiveAddress(address)"(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    isActiveSeat(_seatIndex: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    isActiveSeat(
+      _seatIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'isActiveSeat(uint32)'(_seatIndex: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    "isActiveSeat(uint32)"(
+      _seatIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     join(_introducer: string, overrides?: CallOverrides): Promise<void>;
 
-    'join(address)'(_introducer: string, overrides?: CallOverrides): Promise<void>;
+    "join(address)"(
+      _introducer: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     payToIntroducer(
       _networker: string,
@@ -1217,7 +1377,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'payToIntroducer(address,uint256[3])'(
+    "payToIntroducer(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: CallOverrides
@@ -1229,7 +1389,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'payToNetworker(address,uint256[3])'(
+    "payToNetworker(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: CallOverrides
@@ -1241,15 +1401,19 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'payToTree(address,uint256[3])'(
+    "payToTree(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    promoteBelt(_networker: string, _month: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    promoteBelt(
+      _networker: string,
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'promoteBelt(address,uint32)'(
+    "promoteBelt(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1261,19 +1425,28 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'reportVolume(address,uint256)'(
+    "reportVolume(address,uint256)"(
       _networker: string,
       _amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    resolveIntroducer(_networker: string, overrides?: CallOverrides): Promise<string>;
+    resolveIntroducer(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveIntroducer(address)'(_networker: string, overrides?: CallOverrides): Promise<string>;
+    "resolveIntroducer(address)"(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     resolveKyc(_networker: string, overrides?: CallOverrides): Promise<void>;
 
-    'resolveKyc(address)'(_networker: string, overrides?: CallOverrides): Promise<void>;
+    "resolveKyc(address)"(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     rewardToTree(
       _networker: string,
@@ -1282,7 +1455,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'rewardToTree(address,uint256,uint256[3])'(
+    "rewardToTree(address,uint256,uint256[3])"(
       _networker: string,
       _value: BigNumberish,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
@@ -1291,11 +1464,14 @@ export class IDayswappers extends Contract {
 
     transferSeat(_newOwner: string, overrides?: CallOverrides): Promise<void>;
 
-    'transferSeat(address)'(_newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferSeat(address)"(
+      _newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     volumeTarget(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'volumeTarget()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "volumeTarget()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawDefiniteEarnings(
       _stakingContract: string,
@@ -1304,7 +1480,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'withdrawDefiniteEarnings(address,uint32,uint8)'(
+    "withdrawDefiniteEarnings(address,uint32,uint8)"(
       _stakingContract: string,
       _month: BigNumberish,
       _rewardType: BigNumberish,
@@ -1318,7 +1494,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'withdrawNrtEarnings(address,uint32,uint8)'(
+    "withdrawNrtEarnings(address,uint32,uint8)"(
       _stakingContract: string,
       _month: BigNumberish,
       _rewardType: BigNumberish,
@@ -1327,7 +1503,10 @@ export class IDayswappers extends Contract {
   };
 
   filters: {
-    Active(seatIndex: BigNumberish | null, month: BigNumberish | null): EventFilter;
+    Active(
+      seatIndex: BigNumberish | null,
+      month: BigNumberish | null
+    ): EventFilter;
 
     Introduce(
       introducerSeatIndex: BigNumberish | null,
@@ -1336,7 +1515,10 @@ export class IDayswappers extends Contract {
 
     KycResolve(seatIndex: BigNumberish | null): EventFilter;
 
-    Promotion(seatIndex: BigNumberish | null, beltIndex: BigNumberish | null): EventFilter;
+    Promotion(
+      seatIndex: BigNumberish | null,
+      beltIndex: BigNumberish | null
+    ): EventFilter;
 
     Reward(
       platform: string | null,
@@ -1376,25 +1558,37 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getBeltIdFromTreeReferrals(uint32)'(
+    "getBeltIdFromTreeReferrals(uint32)"(
       treeReferrals: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getSeatByAddress(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getSeatByAddress(address)'(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    getSeatByAddressStrict(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getSeatByAddressStrict(address)'(
+    getSeatByAddress(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getSeatByIndex(_seatIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getSeatByAddress(address)"(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getSeatByIndex(uint32)'(
+    getSeatByAddressStrict(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getSeatByAddressStrict(address)"(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getSeatByIndex(
+      _seatIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getSeatByIndex(uint32)"(
       _seatIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1405,7 +1599,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getSeatMonthlyDataByAddress(address,uint32)'(
+    "getSeatMonthlyDataByAddress(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1417,7 +1611,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getSeatMonthlyDataByAddressStrict(address,uint32)'(
+    "getSeatMonthlyDataByAddressStrict(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1429,7 +1623,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getSeatMonthlyDataByIndex(uint32,uint32)'(
+    "getSeatMonthlyDataByIndex(uint32,uint32)"(
       _seatIndex: BigNumberish,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1440,22 +1634,37 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getTotalMonthlyActiveDayswappers(uint32)'(
+    "getTotalMonthlyActiveDayswappers(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
+    isActiveAddress(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'isActiveAddress(address)'(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "isActiveAddress(address)"(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    isActiveSeat(_seatIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    isActiveSeat(
+      _seatIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'isActiveSeat(uint32)'(_seatIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "isActiveSeat(uint32)"(
+      _seatIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     join(_introducer: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'join(address)'(_introducer: string, overrides?: Overrides): Promise<BigNumber>;
+    "join(address)"(
+      _introducer: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     payToIntroducer(
       _networker: string,
@@ -1463,7 +1672,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'payToIntroducer(address,uint256[3])'(
+    "payToIntroducer(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -1475,7 +1684,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'payToNetworker(address,uint256[3])'(
+    "payToNetworker(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -1487,7 +1696,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'payToTree(address,uint256[3])'(
+    "payToTree(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -1499,7 +1708,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'promoteBelt(address,uint32)'(
+    "promoteBelt(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: Overrides
@@ -1511,19 +1720,28 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'reportVolume(address,uint256)'(
+    "reportVolume(address,uint256)"(
       _networker: string,
       _amount: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    resolveIntroducer(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveIntroducer(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveIntroducer(address)'(_networker: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveIntroducer(address)"(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     resolveKyc(_networker: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'resolveKyc(address)'(_networker: string, overrides?: Overrides): Promise<BigNumber>;
+    "resolveKyc(address)"(
+      _networker: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     rewardToTree(
       _networker: string,
@@ -1532,7 +1750,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'rewardToTree(address,uint256,uint256[3])'(
+    "rewardToTree(address,uint256,uint256[3])"(
       _networker: string,
       _value: BigNumberish,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
@@ -1541,11 +1759,14 @@ export class IDayswappers extends Contract {
 
     transferSeat(_newOwner: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'transferSeat(address)'(_newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferSeat(address)"(
+      _newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     volumeTarget(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'volumeTarget()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "volumeTarget()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawDefiniteEarnings(
       _stakingContract: string,
@@ -1554,7 +1775,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'withdrawDefiniteEarnings(address,uint32,uint8)'(
+    "withdrawDefiniteEarnings(address,uint32,uint8)"(
       _stakingContract: string,
       _month: BigNumberish,
       _rewardType: BigNumberish,
@@ -1568,7 +1789,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'withdrawNrtEarnings(address,uint32,uint8)'(
+    "withdrawNrtEarnings(address,uint32,uint8)"(
       _stakingContract: string,
       _month: BigNumberish,
       _rewardType: BigNumberish,
@@ -1582,14 +1803,17 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getBeltIdFromTreeReferrals(uint32)'(
+    "getBeltIdFromTreeReferrals(uint32)"(
       treeReferrals: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getSeatByAddress(_networker: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getSeatByAddress(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getSeatByAddress(address)'(
+    "getSeatByAddress(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1599,7 +1823,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getSeatByAddressStrict(address)'(
+    "getSeatByAddressStrict(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1609,7 +1833,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getSeatByIndex(uint32)'(
+    "getSeatByIndex(uint32)"(
       _seatIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1620,7 +1844,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getSeatMonthlyDataByAddress(address,uint32)'(
+    "getSeatMonthlyDataByAddress(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1632,7 +1856,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getSeatMonthlyDataByAddressStrict(address,uint32)'(
+    "getSeatMonthlyDataByAddressStrict(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1644,7 +1868,7 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getSeatMonthlyDataByIndex(uint32,uint32)'(
+    "getSeatMonthlyDataByIndex(uint32,uint32)"(
       _seatIndex: BigNumberish,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1655,14 +1879,17 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getTotalMonthlyActiveDayswappers(uint32)'(
+    "getTotalMonthlyActiveDayswappers(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    isActiveAddress(_networker: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isActiveAddress(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'isActiveAddress(address)'(
+    "isActiveAddress(address)"(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1672,14 +1899,20 @@ export class IDayswappers extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'isActiveSeat(uint32)'(
+    "isActiveSeat(uint32)"(
       _seatIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    join(_introducer: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    join(
+      _introducer: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'join(address)'(_introducer: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "join(address)"(
+      _introducer: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     payToIntroducer(
       _networker: string,
@@ -1687,7 +1920,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'payToIntroducer(address,uint256[3])'(
+    "payToIntroducer(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -1699,7 +1932,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'payToNetworker(address,uint256[3])'(
+    "payToNetworker(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -1711,7 +1944,7 @@ export class IDayswappers extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'payToTree(address,uint256[3])'(
+    "payToTree(address,uint256[3])"(
       _networker: string,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: PayableOverrides
@@ -1723,7 +1956,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'promoteBelt(address,uint32)'(
+    "promoteBelt(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: Overrides
@@ -1735,22 +1968,31 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'reportVolume(address,uint256)'(
+    "reportVolume(address,uint256)"(
       _networker: string,
       _amount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    resolveIntroducer(_networker: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'resolveIntroducer(address)'(
+    resolveIntroducer(
       _networker: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveKyc(_networker: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "resolveIntroducer(address)"(
+      _networker: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveKyc(address)'(_networker: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    resolveKyc(
+      _networker: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "resolveKyc(address)"(
+      _networker: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     rewardToTree(
       _networker: string,
@@ -1759,23 +2001,26 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'rewardToTree(address,uint256,uint256[3])'(
+    "rewardToTree(address,uint256,uint256[3])"(
       _networker: string,
       _value: BigNumberish,
       _rewardRatio: [BigNumberish, BigNumberish, BigNumberish],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    transferSeat(_newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferSeat(
+      _newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'transferSeat(address)'(
+    "transferSeat(address)"(
       _newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     volumeTarget(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'volumeTarget()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "volumeTarget()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdrawDefiniteEarnings(
       _stakingContract: string,
@@ -1784,7 +2029,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'withdrawDefiniteEarnings(address,uint32,uint8)'(
+    "withdrawDefiniteEarnings(address,uint32,uint8)"(
       _stakingContract: string,
       _month: BigNumberish,
       _rewardType: BigNumberish,
@@ -1798,7 +2043,7 @@ export class IDayswappers extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'withdrawNrtEarnings(address,uint32,uint8)'(
+    "withdrawNrtEarnings(address,uint32,uint8)"(
       _stakingContract: string,
       _month: BigNumberish,
       _rewardType: BigNumberish,

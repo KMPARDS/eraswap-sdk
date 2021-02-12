@@ -2,20 +2,38 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PrepaidEsReceiverInterface extends ethers.utils.Interface {
   functions: {
-    'prepaidFallback(address,uint256)': FunctionFragment;
+    "prepaidFallback(address,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'prepaidFallback', values: [string, BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "prepaidFallback",
+    values: [string, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'prepaidFallback', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "prepaidFallback",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -40,7 +58,7 @@ export class PrepaidEsReceiver extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'prepaidFallback(address,uint256)'(
+    "prepaidFallback(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides
@@ -53,16 +71,20 @@ export class PrepaidEsReceiver extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'prepaidFallback(address,uint256)'(
+  "prepaidFallback(address,uint256)"(
     arg0: string,
     arg1: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    prepaidFallback(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    prepaidFallback(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'prepaidFallback(address,uint256)'(
+    "prepaidFallback(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -72,9 +94,13 @@ export class PrepaidEsReceiver extends Contract {
   filters: {};
 
   estimateGas: {
-    prepaidFallback(arg0: string, arg1: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    prepaidFallback(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'prepaidFallback(address,uint256)'(
+    "prepaidFallback(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides
@@ -88,7 +114,7 @@ export class PrepaidEsReceiver extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'prepaidFallback(address,uint256)'(
+    "prepaidFallback(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides

@@ -2,53 +2,66 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface TsgapInterface extends ethers.utils.Interface {
   functions: {
-    'EARTH_SECONDS_IN_MONTH()': FunctionFragment;
-    'addFunds()': FunctionFragment;
-    'appointeeVote(address,uint32)': FunctionFragment;
-    'createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)': FunctionFragment;
-    'fundsDeposit()': FunctionFragment;
-    'getDepositDoneStatus(address,uint32,uint32)': FunctionFragment;
-    'getDepositStatus(address,uint32,uint32)': FunctionFragment;
-    'getPendingWithdrawlAmount(address,uint32,uint32,bool)': FunctionFragment;
-    'getSip(address,uint32)': FunctionFragment;
-    'migrateDeposit(address,uint32,uint32,uint8)': FunctionFragment;
-    'migrateSip(address,uint32,uint48,uint32,uint32)': FunctionFragment;
-    'monthlyDeposit(address,uint32,uint32)': FunctionFragment;
-    'newSIP(uint32)': FunctionFragment;
-    'owner()': FunctionFragment;
-    'pendingBenefitAmountOfAllStakers()': FunctionFragment;
-    'sipPlans(uint256)': FunctionFragment;
-    'sips(address,uint256)': FunctionFragment;
-    'toogleAppointee(uint32,address,bool)': FunctionFragment;
-    'toogleNominee(uint32,address,bool)': FunctionFragment;
-    'updatePlanStatus(uint256,bool)': FunctionFragment;
-    'viewAppointation(address,uint256,address)': FunctionFragment;
-    'viewMonthlyBenefitAmount(address,uint32,uint32)': FunctionFragment;
-    'viewNomination(address,uint256,address)': FunctionFragment;
-    'withdrawBenefit(address,uint32,uint32)': FunctionFragment;
-    'withdrawFunds(uint256)': FunctionFragment;
-    'withdrawPowerBooster(address,uint32)': FunctionFragment;
+    "EARTH_SECONDS_IN_MONTH()": FunctionFragment;
+    "addFunds()": FunctionFragment;
+    "appointeeVote(address,uint32)": FunctionFragment;
+    "createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)": FunctionFragment;
+    "fundsDeposit()": FunctionFragment;
+    "getDepositDoneStatus(address,uint32,uint32)": FunctionFragment;
+    "getDepositStatus(address,uint32,uint32)": FunctionFragment;
+    "getPendingWithdrawlAmount(address,uint32,uint32,bool)": FunctionFragment;
+    "getSip(address,uint32)": FunctionFragment;
+    "migrateDeposit(address,uint32,uint32,uint8)": FunctionFragment;
+    "migrateSip(address,uint32,uint48,uint32,uint32)": FunctionFragment;
+    "monthlyDeposit(address,uint32,uint32)": FunctionFragment;
+    "newSIP(uint32)": FunctionFragment;
+    "owner()": FunctionFragment;
+    "pendingBenefitAmountOfAllStakers()": FunctionFragment;
+    "sipPlans(uint256)": FunctionFragment;
+    "sips(address,uint256)": FunctionFragment;
+    "toogleAppointee(uint32,address,bool)": FunctionFragment;
+    "toogleNominee(uint32,address,bool)": FunctionFragment;
+    "updatePlanStatus(uint256,bool)": FunctionFragment;
+    "viewAppointation(address,uint256,address)": FunctionFragment;
+    "viewMonthlyBenefitAmount(address,uint32,uint32)": FunctionFragment;
+    "viewNomination(address,uint256,address)": FunctionFragment;
+    "withdrawBenefit(address,uint32,uint32)": FunctionFragment;
+    "withdrawFunds(uint256)": FunctionFragment;
+    "withdrawPowerBooster(address,uint32)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'EARTH_SECONDS_IN_MONTH', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'addFunds', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'appointeeVote', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'createSIPPlan',
+    functionFragment: "EARTH_SECONDS_IN_MONTH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "addFunds", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "appointeeVote",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "createSIPPlan",
     values: [
       BigNumberish,
       BigNumberish,
@@ -59,122 +72,197 @@ interface TsgapInterface extends ethers.utils.Interface {
       BigNumberish
     ]
   ): string;
-  encodeFunctionData(functionFragment: 'fundsDeposit', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'getDepositDoneStatus',
+    functionFragment: "fundsDeposit",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDepositDoneStatus",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getDepositStatus',
+    functionFragment: "getDepositStatus",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getPendingWithdrawlAmount',
+    functionFragment: "getPendingWithdrawlAmount",
     values: [string, BigNumberish, BigNumberish, boolean]
   ): string;
-  encodeFunctionData(functionFragment: 'getSip', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'migrateDeposit',
+    functionFragment: "getSip",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "migrateDeposit",
     values: [string, BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'migrateSip',
+    functionFragment: "migrateSip",
     values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'monthlyDeposit',
+    functionFragment: "monthlyDeposit",
     values: [string, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'newSIP', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'pendingBenefitAmountOfAllStakers',
+    functionFragment: "newSIP",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "pendingBenefitAmountOfAllStakers",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: 'sipPlans', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'sips', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'toogleAppointee',
+    functionFragment: "sipPlans",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sips",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "toogleAppointee",
     values: [BigNumberish, string, boolean]
   ): string;
   encodeFunctionData(
-    functionFragment: 'toogleNominee',
+    functionFragment: "toogleNominee",
     values: [BigNumberish, string, boolean]
   ): string;
-  encodeFunctionData(functionFragment: 'updatePlanStatus', values: [BigNumberish, boolean]): string;
   encodeFunctionData(
-    functionFragment: 'viewAppointation',
+    functionFragment: "updatePlanStatus",
+    values: [BigNumberish, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "viewAppointation",
     values: [string, BigNumberish, string]
   ): string;
   encodeFunctionData(
-    functionFragment: 'viewMonthlyBenefitAmount',
+    functionFragment: "viewMonthlyBenefitAmount",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'viewNomination',
+    functionFragment: "viewNomination",
     values: [string, BigNumberish, string]
   ): string;
   encodeFunctionData(
-    functionFragment: 'withdrawBenefit',
+    functionFragment: "withdrawBenefit",
     values: [string, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'withdrawFunds', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'withdrawPowerBooster',
+    functionFragment: "withdrawFunds",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawPowerBooster",
     values: [string, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'EARTH_SECONDS_IN_MONTH', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'addFunds', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'appointeeVote', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'createSIPPlan', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'fundsDeposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDepositDoneStatus', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDepositStatus', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPendingWithdrawlAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getSip', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'migrateDeposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'migrateSip', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'monthlyDeposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'newSIP', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'pendingBenefitAmountOfAllStakers',
+    functionFragment: "EARTH_SECONDS_IN_MONTH",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: 'sipPlans', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'sips', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'toogleAppointee', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'toogleNominee', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updatePlanStatus', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'viewAppointation', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'viewMonthlyBenefitAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'viewNomination', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawBenefit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawFunds', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawPowerBooster', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "addFunds", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "appointeeVote",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "createSIPPlan",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "fundsDeposit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDepositDoneStatus",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDepositStatus",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPendingWithdrawlAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getSip", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "migrateDeposit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "migrateSip", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "monthlyDeposit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "newSIP", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingBenefitAmountOfAllStakers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "sipPlans", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sips", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "toogleAppointee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "toogleNominee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updatePlanStatus",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "viewAppointation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "viewMonthlyBenefitAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "viewNomination",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawBenefit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawFunds",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawPowerBooster",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'AppointeeUpdated(address,uint32,address,bool)': EventFragment;
-    'AppointeeVoted(address,uint32,address)': EventFragment;
-    'BenefitWithdrawl(address,uint32,uint32,uint32,uint256,address)': EventFragment;
-    'FundsDeposited(uint256)': EventFragment;
-    'FundsWithdrawn(uint256)': EventFragment;
-    'NewDeposit(address,uint32,uint32,uint256,uint256,address)': EventFragment;
-    'NewSIP(address,uint32,uint256)': EventFragment;
-    'NomineeUpdated(address,uint32,address,bool)': EventFragment;
-    'PowerBoosterWithdrawl(address,uint32,uint32,uint256,address)': EventFragment;
+    "AppointeeUpdated(address,uint32,address,bool)": EventFragment;
+    "AppointeeVoted(address,uint32,address)": EventFragment;
+    "BenefitWithdrawl(address,uint32,uint32,uint32,uint256,address)": EventFragment;
+    "FundsDeposited(uint256)": EventFragment;
+    "FundsWithdrawn(uint256)": EventFragment;
+    "NewDeposit(address,uint32,uint32,uint256,uint256,address)": EventFragment;
+    "NewSIP(address,uint32,uint256)": EventFragment;
+    "NomineeUpdated(address,uint32,address,bool)": EventFragment;
+    "PowerBoosterWithdrawl(address,uint32,uint32,uint256,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'AppointeeUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'AppointeeVoted'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'BenefitWithdrawl'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'FundsDeposited'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'FundsWithdrawn'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NewDeposit'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NewSIP'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NomineeUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'PowerBoosterWithdrawl'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AppointeeUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AppointeeVoted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BenefitWithdrawl"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "FundsDeposited"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "FundsWithdrawn"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewDeposit"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewSIP"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NomineeUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PowerBoosterWithdrawl"): EventFragment;
 }
 
 export class Tsgap extends Contract {
@@ -197,7 +285,7 @@ export class Tsgap extends Contract {
       0: number;
     }>;
 
-    'EARTH_SECONDS_IN_MONTH()'(
+    "EARTH_SECONDS_IN_MONTH()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -211,7 +299,7 @@ export class Tsgap extends Contract {
     /**
      * this function is used by donors to add funds to fundsDeposit
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     /**
      * need to be appointee, set by staker themselves
@@ -231,7 +319,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'appointeeVote(address,uint32)'(
+    "appointeeVote(address,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       overrides?: Overrides
@@ -268,7 +356,7 @@ export class Tsgap extends Contract {
      * @param _minimumMonthlyCommitmentAmount : minimum SIP monthly amount in exaES
      * @param _monthlyBenefitFactor : this is per 1000; i.e 200 for 20%
      */
-    'createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)'(
+    "createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)"(
       _minimumMonthlyCommitmentAmount: BigNumberish,
       _accumulationPeriodMonths: BigNumberish,
       _benefitPeriodYears: BigNumberish,
@@ -291,7 +379,7 @@ export class Tsgap extends Contract {
     /**
      * deposited by Era Swap Donors. It is given as benefits to  ES stakers. on every withdrawl this deposit is reduced, and on some point of time if enough fundsDeposit is not available to assure staker benefit, contract will allow staker to deposit
      */
-    'fundsDeposit()'(
+    "fundsDeposit()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -318,7 +406,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'getDepositDoneStatus(address,uint32,uint32)'(
+    "getDepositDoneStatus(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -350,7 +438,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'getDepositStatus(address,uint32,uint32)'(
+    "getDepositStatus(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -383,7 +471,7 @@ export class Tsgap extends Contract {
      * @param _stakerAddress : address of initiater of this SIP.
      * @param _withdrawlMonthId : withdrawl month id upto which to calculate returns for
      */
-    'getPendingWithdrawlAmount(address,uint32,uint32,bool)'(
+    "getPendingWithdrawlAmount(address,uint32,uint32,bool)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _withdrawlMonthId: BigNumberish,
@@ -416,7 +504,7 @@ export class Tsgap extends Contract {
       7: number;
     }>;
 
-    'getSip(address,uint32)'(
+    "getSip(address,uint32)"(
       _staker: string,
       _sipId: BigNumberish,
       overrides?: CallOverrides
@@ -447,7 +535,7 @@ export class Tsgap extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'migrateDeposit(address,uint32,uint32,uint8)'(
+    "migrateDeposit(address,uint32,uint32,uint8)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -464,7 +552,7 @@ export class Tsgap extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    'migrateSip(address,uint32,uint48,uint32,uint32)'(
+    "migrateSip(address,uint32,uint48,uint32,uint32)"(
       _staker: string,
       _planId: BigNumberish,
       _stakingTimestamp: BigNumberish,
@@ -486,7 +574,7 @@ export class Tsgap extends Contract {
     /**
      * @param _monthId : specify the month to deposit
      */
-    'monthlyDeposit(address,uint32,uint32)'(
+    "monthlyDeposit(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -498,14 +586,17 @@ export class Tsgap extends Contract {
      * this function is used to initiate a new SIP along with first deposit
      * @param _planId : choose a SIP plan
      */
-    newSIP(_planId: BigNumberish, overrides?: PayableOverrides): Promise<ContractTransaction>;
+    newSIP(
+      _planId: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     /**
      * ERC20 approve is required to be done for this contract earlier, also  fundsDeposit should be enough otherwise contract will not accept
      * this function is used to initiate a new SIP along with first deposit
      * @param _planId : choose a SIP plan
      */
-    'newSIP(uint32)'(
+    "newSIP(uint32)"(
       _planId: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -516,7 +607,7 @@ export class Tsgap extends Contract {
       0: string;
     }>;
 
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -534,7 +625,7 @@ export class Tsgap extends Contract {
     /**
      * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
      */
-    'pendingBenefitAmountOfAllStakers()'(
+    "pendingBenefitAmountOfAllStakers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -568,7 +659,7 @@ export class Tsgap extends Contract {
     /**
      * allocating storage for multiple sip plans
      */
-    'sipPlans(uint256)'(
+    "sipPlans(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -619,7 +710,7 @@ export class Tsgap extends Contract {
     /**
      * allocating storage for multiple sips of multiple users
      */
-    'sips(address,uint256)'(
+    "sips(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -661,7 +752,7 @@ export class Tsgap extends Contract {
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
      * @param _sipId : id of SIP in staker portfolio.
      */
-    'toogleAppointee(uint32,address,bool)'(
+    "toogleAppointee(uint32,address,bool)"(
       _sipId: BigNumberish,
       _appointeeAddress: string,
       _newAppointeeStatus: boolean,
@@ -687,7 +778,7 @@ export class Tsgap extends Contract {
      * @param _nomineeAddress : eth wallet address of nominee.
      * @param _sipId : id of SIP in staker portfolio.
      */
-    'toogleNominee(uint32,address,bool)'(
+    "toogleNominee(uint32,address,bool)"(
       _sipId: BigNumberish,
       _nomineeAddress: string,
       _newNomineeStatus: boolean,
@@ -712,7 +803,7 @@ export class Tsgap extends Contract {
      * @param _newStatus : true or false.
      * @param _planId : select a plan to make it inactive
      */
-    'updatePlanStatus(uint256,bool)'(
+    "updatePlanStatus(uint256,bool)"(
       _planId: BigNumberish,
       _newStatus: boolean,
       overrides?: Overrides
@@ -739,7 +830,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'viewAppointation(address,uint256,address)'(
+    "viewAppointation(address,uint256,address)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _appointeeAddress: string,
@@ -757,7 +848,7 @@ export class Tsgap extends Contract {
       0: BigNumber;
     }>;
 
-    'viewMonthlyBenefitAmount(address,uint32,uint32)'(
+    "viewMonthlyBenefitAmount(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _depositMonthId: BigNumberish,
@@ -787,7 +878,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'viewNomination(address,uint256,address)'(
+    "viewNomination(address,uint256,address)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _nomineeAddress: string,
@@ -817,7 +908,7 @@ export class Tsgap extends Contract {
      * @param _stakerAddress : address of initiater of this SIP.
      * @param _withdrawlMonthId : withdraw month id starts from 1 upto as per plan.
      */
-    'withdrawBenefit(address,uint32,uint32)'(
+    "withdrawBenefit(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _withdrawlMonthId: BigNumberish,
@@ -837,7 +928,7 @@ export class Tsgap extends Contract {
      * this is used by owner to withdraw ES that are not allocated to any SIP
      * @param _withdrawlAmount : amount in exaES to withdraw
      */
-    'withdrawFunds(uint256)'(
+    "withdrawFunds(uint256)"(
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -860,7 +951,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker address portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'withdrawPowerBooster(address,uint32)'(
+    "withdrawPowerBooster(address,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       overrides?: Overrides
@@ -869,7 +960,7 @@ export class Tsgap extends Contract {
 
   EARTH_SECONDS_IN_MONTH(overrides?: CallOverrides): Promise<number>;
 
-  'EARTH_SECONDS_IN_MONTH()'(overrides?: CallOverrides): Promise<number>;
+  "EARTH_SECONDS_IN_MONTH()"(overrides?: CallOverrides): Promise<number>;
 
   /**
    * this function is used by donors to add funds to fundsDeposit
@@ -879,7 +970,7 @@ export class Tsgap extends Contract {
   /**
    * this function is used by donors to add funds to fundsDeposit
    */
-  'addFunds()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "addFunds()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   /**
    * need to be appointee, set by staker themselves
@@ -899,7 +990,7 @@ export class Tsgap extends Contract {
    * @param _sipId : id of SIP in staker portfolio.
    * @param _stakerAddress : address of initiater of this SIP.
    */
-  'appointeeVote(address,uint32)'(
+  "appointeeVote(address,uint32)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     overrides?: Overrides
@@ -936,7 +1027,7 @@ export class Tsgap extends Contract {
    * @param _minimumMonthlyCommitmentAmount : minimum SIP monthly amount in exaES
    * @param _monthlyBenefitFactor : this is per 1000; i.e 200 for 20%
    */
-  'createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)'(
+  "createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)"(
     _minimumMonthlyCommitmentAmount: BigNumberish,
     _accumulationPeriodMonths: BigNumberish,
     _benefitPeriodYears: BigNumberish,
@@ -955,7 +1046,7 @@ export class Tsgap extends Contract {
   /**
    * deposited by Era Swap Donors. It is given as benefits to  ES stakers. on every withdrawl this deposit is reduced, and on some point of time if enough fundsDeposit is not available to assure staker benefit, contract will allow staker to deposit
    */
-  'fundsDeposit()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "fundsDeposit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * this function is used to read all time deposit status of any staker SIP
@@ -976,7 +1067,7 @@ export class Tsgap extends Contract {
    * @param _sipId : id of SIP in staker portfolio.
    * @param _stakerAddress : address of initiater of this SIP.
    */
-  'getDepositDoneStatus(address,uint32,uint32)'(
+  "getDepositDoneStatus(address,uint32,uint32)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _monthId: BigNumberish,
@@ -1004,7 +1095,7 @@ export class Tsgap extends Contract {
    * @param _sipId : id of SIP in staker portfolio.
    * @param _stakerAddress : address of initiater of this SIP.
    */
-  'getDepositStatus(address,uint32,uint32)'(
+  "getDepositStatus(address,uint32,uint32)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _monthId: BigNumberish,
@@ -1033,7 +1124,7 @@ export class Tsgap extends Contract {
    * @param _stakerAddress : address of initiater of this SIP.
    * @param _withdrawlMonthId : withdrawl month id upto which to calculate returns for
    */
-  'getPendingWithdrawlAmount(address,uint32,uint32,bool)'(
+  "getPendingWithdrawlAmount(address,uint32,uint32,bool)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _withdrawlMonthId: BigNumberish,
@@ -1064,7 +1155,7 @@ export class Tsgap extends Contract {
     7: number;
   }>;
 
-  'getSip(address,uint32)'(
+  "getSip(address,uint32)"(
     _staker: string,
     _sipId: BigNumberish,
     overrides?: CallOverrides
@@ -1095,7 +1186,7 @@ export class Tsgap extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'migrateDeposit(address,uint32,uint32,uint8)'(
+  "migrateDeposit(address,uint32,uint32,uint8)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _monthId: BigNumberish,
@@ -1112,7 +1203,7 @@ export class Tsgap extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  'migrateSip(address,uint32,uint48,uint32,uint32)'(
+  "migrateSip(address,uint32,uint48,uint32,uint32)"(
     _staker: string,
     _planId: BigNumberish,
     _stakingTimestamp: BigNumberish,
@@ -1134,7 +1225,7 @@ export class Tsgap extends Contract {
   /**
    * @param _monthId : specify the month to deposit
    */
-  'monthlyDeposit(address,uint32,uint32)'(
+  "monthlyDeposit(address,uint32,uint32)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _monthId: BigNumberish,
@@ -1146,31 +1237,38 @@ export class Tsgap extends Contract {
    * this function is used to initiate a new SIP along with first deposit
    * @param _planId : choose a SIP plan
    */
-  newSIP(_planId: BigNumberish, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  newSIP(
+    _planId: BigNumberish,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   /**
    * ERC20 approve is required to be done for this contract earlier, also  fundsDeposit should be enough otherwise contract will not accept
    * this function is used to initiate a new SIP along with first deposit
    * @param _planId : choose a SIP plan
    */
-  'newSIP(uint32)'(
+  "newSIP(uint32)"(
     _planId: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
    */
-  pendingBenefitAmountOfAllStakers(overrides?: CallOverrides): Promise<BigNumber>;
+  pendingBenefitAmountOfAllStakers(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
    */
-  'pendingBenefitAmountOfAllStakers()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "pendingBenefitAmountOfAllStakers()"(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * allocating storage for multiple sip plans
@@ -1200,7 +1298,7 @@ export class Tsgap extends Contract {
   /**
    * allocating storage for multiple sip plans
    */
-  'sipPlans(uint256)'(
+  "sipPlans(uint256)"(
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<{
@@ -1251,7 +1349,7 @@ export class Tsgap extends Contract {
   /**
    * allocating storage for multiple sips of multiple users
    */
-  'sips(address,uint256)'(
+  "sips(address,uint256)"(
     arg0: string,
     arg1: BigNumberish,
     overrides?: CallOverrides
@@ -1293,7 +1391,7 @@ export class Tsgap extends Contract {
    * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
    * @param _sipId : id of SIP in staker portfolio.
    */
-  'toogleAppointee(uint32,address,bool)'(
+  "toogleAppointee(uint32,address,bool)"(
     _sipId: BigNumberish,
     _appointeeAddress: string,
     _newAppointeeStatus: boolean,
@@ -1319,7 +1417,7 @@ export class Tsgap extends Contract {
    * @param _nomineeAddress : eth wallet address of nominee.
    * @param _sipId : id of SIP in staker portfolio.
    */
-  'toogleNominee(uint32,address,bool)'(
+  "toogleNominee(uint32,address,bool)"(
     _sipId: BigNumberish,
     _nomineeAddress: string,
     _newNomineeStatus: boolean,
@@ -1344,7 +1442,7 @@ export class Tsgap extends Contract {
    * @param _newStatus : true or false.
    * @param _planId : select a plan to make it inactive
    */
-  'updatePlanStatus(uint256,bool)'(
+  "updatePlanStatus(uint256,bool)"(
     _planId: BigNumberish,
     _newStatus: boolean,
     overrides?: Overrides
@@ -1369,7 +1467,7 @@ export class Tsgap extends Contract {
    * @param _sipId : id of SIP in staker portfolio.
    * @param _stakerAddress : address of initiater of this SIP.
    */
-  'viewAppointation(address,uint256,address)'(
+  "viewAppointation(address,uint256,address)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _appointeeAddress: string,
@@ -1383,7 +1481,7 @@ export class Tsgap extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'viewMonthlyBenefitAmount(address,uint32,uint32)'(
+  "viewMonthlyBenefitAmount(address,uint32,uint32)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _depositMonthId: BigNumberish,
@@ -1409,7 +1507,7 @@ export class Tsgap extends Contract {
    * @param _sipId : id of SIP in staker portfolio.
    * @param _stakerAddress : address of initiater of this SIP.
    */
-  'viewNomination(address,uint256,address)'(
+  "viewNomination(address,uint256,address)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _nomineeAddress: string,
@@ -1437,7 +1535,7 @@ export class Tsgap extends Contract {
    * @param _stakerAddress : address of initiater of this SIP.
    * @param _withdrawlMonthId : withdraw month id starts from 1 upto as per plan.
    */
-  'withdrawBenefit(address,uint32,uint32)'(
+  "withdrawBenefit(address,uint32,uint32)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     _withdrawlMonthId: BigNumberish,
@@ -1457,7 +1555,7 @@ export class Tsgap extends Contract {
    * this is used by owner to withdraw ES that are not allocated to any SIP
    * @param _withdrawlAmount : amount in exaES to withdraw
    */
-  'withdrawFunds(uint256)'(
+  "withdrawFunds(uint256)"(
     _withdrawlAmount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -1480,7 +1578,7 @@ export class Tsgap extends Contract {
    * @param _sipId : id of SIP in staker address portfolio.
    * @param _stakerAddress : address of initiater of this SIP.
    */
-  'withdrawPowerBooster(address,uint32)'(
+  "withdrawPowerBooster(address,uint32)"(
     _stakerAddress: string,
     _sipId: BigNumberish,
     overrides?: Overrides
@@ -1489,7 +1587,7 @@ export class Tsgap extends Contract {
   callStatic: {
     EARTH_SECONDS_IN_MONTH(overrides?: CallOverrides): Promise<number>;
 
-    'EARTH_SECONDS_IN_MONTH()'(overrides?: CallOverrides): Promise<number>;
+    "EARTH_SECONDS_IN_MONTH()"(overrides?: CallOverrides): Promise<number>;
 
     /**
      * this function is used by donors to add funds to fundsDeposit
@@ -1499,7 +1597,7 @@ export class Tsgap extends Contract {
     /**
      * this function is used by donors to add funds to fundsDeposit
      */
-    'addFunds()'(overrides?: CallOverrides): Promise<void>;
+    "addFunds()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * need to be appointee, set by staker themselves
@@ -1519,7 +1617,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'appointeeVote(address,uint32)'(
+    "appointeeVote(address,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       overrides?: CallOverrides
@@ -1556,7 +1654,7 @@ export class Tsgap extends Contract {
      * @param _minimumMonthlyCommitmentAmount : minimum SIP monthly amount in exaES
      * @param _monthlyBenefitFactor : this is per 1000; i.e 200 for 20%
      */
-    'createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)'(
+    "createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)"(
       _minimumMonthlyCommitmentAmount: BigNumberish,
       _accumulationPeriodMonths: BigNumberish,
       _benefitPeriodYears: BigNumberish,
@@ -1575,7 +1673,7 @@ export class Tsgap extends Contract {
     /**
      * deposited by Era Swap Donors. It is given as benefits to  ES stakers. on every withdrawl this deposit is reduced, and on some point of time if enough fundsDeposit is not available to assure staker benefit, contract will allow staker to deposit
      */
-    'fundsDeposit()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "fundsDeposit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * this function is used to read all time deposit status of any staker SIP
@@ -1596,7 +1694,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'getDepositDoneStatus(address,uint32,uint32)'(
+    "getDepositDoneStatus(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -1624,7 +1722,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'getDepositStatus(address,uint32,uint32)'(
+    "getDepositStatus(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -1653,7 +1751,7 @@ export class Tsgap extends Contract {
      * @param _stakerAddress : address of initiater of this SIP.
      * @param _withdrawlMonthId : withdrawl month id upto which to calculate returns for
      */
-    'getPendingWithdrawlAmount(address,uint32,uint32,bool)'(
+    "getPendingWithdrawlAmount(address,uint32,uint32,bool)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _withdrawlMonthId: BigNumberish,
@@ -1684,7 +1782,7 @@ export class Tsgap extends Contract {
       7: number;
     }>;
 
-    'getSip(address,uint32)'(
+    "getSip(address,uint32)"(
       _staker: string,
       _sipId: BigNumberish,
       overrides?: CallOverrides
@@ -1715,7 +1813,7 @@ export class Tsgap extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'migrateDeposit(address,uint32,uint32,uint8)'(
+    "migrateDeposit(address,uint32,uint32,uint8)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -1732,7 +1830,7 @@ export class Tsgap extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'migrateSip(address,uint32,uint48,uint32,uint32)'(
+    "migrateSip(address,uint32,uint48,uint32,uint32)"(
       _staker: string,
       _planId: BigNumberish,
       _stakingTimestamp: BigNumberish,
@@ -1754,7 +1852,7 @@ export class Tsgap extends Contract {
     /**
      * @param _monthId : specify the month to deposit
      */
-    'monthlyDeposit(address,uint32,uint32)'(
+    "monthlyDeposit(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -1773,21 +1871,28 @@ export class Tsgap extends Contract {
      * this function is used to initiate a new SIP along with first deposit
      * @param _planId : choose a SIP plan
      */
-    'newSIP(uint32)'(_planId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "newSIP(uint32)"(
+      _planId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
      */
-    pendingBenefitAmountOfAllStakers(overrides?: CallOverrides): Promise<BigNumber>;
+    pendingBenefitAmountOfAllStakers(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
      */
-    'pendingBenefitAmountOfAllStakers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "pendingBenefitAmountOfAllStakers()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * allocating storage for multiple sip plans
@@ -1817,7 +1922,7 @@ export class Tsgap extends Contract {
     /**
      * allocating storage for multiple sip plans
      */
-    'sipPlans(uint256)'(
+    "sipPlans(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -1868,7 +1973,7 @@ export class Tsgap extends Contract {
     /**
      * allocating storage for multiple sips of multiple users
      */
-    'sips(address,uint256)'(
+    "sips(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -1910,7 +2015,7 @@ export class Tsgap extends Contract {
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
      * @param _sipId : id of SIP in staker portfolio.
      */
-    'toogleAppointee(uint32,address,bool)'(
+    "toogleAppointee(uint32,address,bool)"(
       _sipId: BigNumberish,
       _appointeeAddress: string,
       _newAppointeeStatus: boolean,
@@ -1936,7 +2041,7 @@ export class Tsgap extends Contract {
      * @param _nomineeAddress : eth wallet address of nominee.
      * @param _sipId : id of SIP in staker portfolio.
      */
-    'toogleNominee(uint32,address,bool)'(
+    "toogleNominee(uint32,address,bool)"(
       _sipId: BigNumberish,
       _nomineeAddress: string,
       _newNomineeStatus: boolean,
@@ -1961,7 +2066,7 @@ export class Tsgap extends Contract {
      * @param _newStatus : true or false.
      * @param _planId : select a plan to make it inactive
      */
-    'updatePlanStatus(uint256,bool)'(
+    "updatePlanStatus(uint256,bool)"(
       _planId: BigNumberish,
       _newStatus: boolean,
       overrides?: CallOverrides
@@ -1986,7 +2091,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'viewAppointation(address,uint256,address)'(
+    "viewAppointation(address,uint256,address)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _appointeeAddress: string,
@@ -2000,7 +2105,7 @@ export class Tsgap extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'viewMonthlyBenefitAmount(address,uint32,uint32)'(
+    "viewMonthlyBenefitAmount(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _depositMonthId: BigNumberish,
@@ -2026,7 +2131,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'viewNomination(address,uint256,address)'(
+    "viewNomination(address,uint256,address)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _nomineeAddress: string,
@@ -2054,7 +2159,7 @@ export class Tsgap extends Contract {
      * @param _stakerAddress : address of initiater of this SIP.
      * @param _withdrawlMonthId : withdraw month id starts from 1 upto as per plan.
      */
-    'withdrawBenefit(address,uint32,uint32)'(
+    "withdrawBenefit(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _withdrawlMonthId: BigNumberish,
@@ -2065,13 +2170,16 @@ export class Tsgap extends Contract {
      * this is used by owner to withdraw ES that are not allocated to any SIP
      * @param _withdrawlAmount : amount in exaES to withdraw
      */
-    withdrawFunds(_withdrawlAmount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    withdrawFunds(
+      _withdrawlAmount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * this is used by owner to withdraw ES that are not allocated to any SIP
      * @param _withdrawlAmount : amount in exaES to withdraw
      */
-    'withdrawFunds(uint256)'(
+    "withdrawFunds(uint256)"(
       _withdrawlAmount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -2094,7 +2202,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker address portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'withdrawPowerBooster(address,uint32)'(
+    "withdrawPowerBooster(address,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       overrides?: CallOverrides
@@ -2137,7 +2245,11 @@ export class Tsgap extends Contract {
       depositedBy: null
     ): EventFilter;
 
-    NewSIP(staker: string | null, sipId: null, monthlyCommitmentAmount: null): EventFilter;
+    NewSIP(
+      staker: string | null,
+      sipId: null,
+      monthlyCommitmentAmount: null
+    ): EventFilter;
 
     NomineeUpdated(
       staker: string | null,
@@ -2158,7 +2270,7 @@ export class Tsgap extends Contract {
   estimateGas: {
     EARTH_SECONDS_IN_MONTH(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'EARTH_SECONDS_IN_MONTH()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "EARTH_SECONDS_IN_MONTH()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * this function is used by donors to add funds to fundsDeposit
@@ -2168,7 +2280,7 @@ export class Tsgap extends Contract {
     /**
      * this function is used by donors to add funds to fundsDeposit
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     /**
      * need to be appointee, set by staker themselves
@@ -2188,7 +2300,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'appointeeVote(address,uint32)'(
+    "appointeeVote(address,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       overrides?: Overrides
@@ -2225,7 +2337,7 @@ export class Tsgap extends Contract {
      * @param _minimumMonthlyCommitmentAmount : minimum SIP monthly amount in exaES
      * @param _monthlyBenefitFactor : this is per 1000; i.e 200 for 20%
      */
-    'createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)'(
+    "createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)"(
       _minimumMonthlyCommitmentAmount: BigNumberish,
       _accumulationPeriodMonths: BigNumberish,
       _benefitPeriodYears: BigNumberish,
@@ -2244,7 +2356,7 @@ export class Tsgap extends Contract {
     /**
      * deposited by Era Swap Donors. It is given as benefits to  ES stakers. on every withdrawl this deposit is reduced, and on some point of time if enough fundsDeposit is not available to assure staker benefit, contract will allow staker to deposit
      */
-    'fundsDeposit()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "fundsDeposit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * this function is used to read all time deposit status of any staker SIP
@@ -2265,7 +2377,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'getDepositDoneStatus(address,uint32,uint32)'(
+    "getDepositDoneStatus(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -2293,7 +2405,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'getDepositStatus(address,uint32,uint32)'(
+    "getDepositStatus(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -2322,7 +2434,7 @@ export class Tsgap extends Contract {
      * @param _stakerAddress : address of initiater of this SIP.
      * @param _withdrawlMonthId : withdrawl month id upto which to calculate returns for
      */
-    'getPendingWithdrawlAmount(address,uint32,uint32,bool)'(
+    "getPendingWithdrawlAmount(address,uint32,uint32,bool)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _withdrawlMonthId: BigNumberish,
@@ -2330,9 +2442,13 @@ export class Tsgap extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getSip(_staker: string, _sipId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getSip(
+      _staker: string,
+      _sipId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getSip(address,uint32)'(
+    "getSip(address,uint32)"(
       _staker: string,
       _sipId: BigNumberish,
       overrides?: CallOverrides
@@ -2346,7 +2462,7 @@ export class Tsgap extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'migrateDeposit(address,uint32,uint32,uint8)'(
+    "migrateDeposit(address,uint32,uint32,uint8)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -2363,7 +2479,7 @@ export class Tsgap extends Contract {
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    'migrateSip(address,uint32,uint48,uint32,uint32)'(
+    "migrateSip(address,uint32,uint48,uint32,uint32)"(
       _staker: string,
       _planId: BigNumberish,
       _stakingTimestamp: BigNumberish,
@@ -2385,7 +2501,7 @@ export class Tsgap extends Contract {
     /**
      * @param _monthId : specify the month to deposit
      */
-    'monthlyDeposit(address,uint32,uint32)'(
+    "monthlyDeposit(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -2397,28 +2513,38 @@ export class Tsgap extends Contract {
      * this function is used to initiate a new SIP along with first deposit
      * @param _planId : choose a SIP plan
      */
-    newSIP(_planId: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
+    newSIP(
+      _planId: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * ERC20 approve is required to be done for this contract earlier, also  fundsDeposit should be enough otherwise contract will not accept
      * this function is used to initiate a new SIP along with first deposit
      * @param _planId : choose a SIP plan
      */
-    'newSIP(uint32)'(_planId: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
+    "newSIP(uint32)"(
+      _planId: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
      */
-    pendingBenefitAmountOfAllStakers(overrides?: CallOverrides): Promise<BigNumber>;
+    pendingBenefitAmountOfAllStakers(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
      */
-    'pendingBenefitAmountOfAllStakers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "pendingBenefitAmountOfAllStakers()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * allocating storage for multiple sip plans
@@ -2428,17 +2554,24 @@ export class Tsgap extends Contract {
     /**
      * allocating storage for multiple sip plans
      */
-    'sipPlans(uint256)'(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "sipPlans(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * allocating storage for multiple sips of multiple users
      */
-    sips(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    sips(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * allocating storage for multiple sips of multiple users
      */
-    'sips(address,uint256)'(
+    "sips(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -2463,7 +2596,7 @@ export class Tsgap extends Contract {
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
      * @param _sipId : id of SIP in staker portfolio.
      */
-    'toogleAppointee(uint32,address,bool)'(
+    "toogleAppointee(uint32,address,bool)"(
       _sipId: BigNumberish,
       _appointeeAddress: string,
       _newAppointeeStatus: boolean,
@@ -2489,7 +2622,7 @@ export class Tsgap extends Contract {
      * @param _nomineeAddress : eth wallet address of nominee.
      * @param _sipId : id of SIP in staker portfolio.
      */
-    'toogleNominee(uint32,address,bool)'(
+    "toogleNominee(uint32,address,bool)"(
       _sipId: BigNumberish,
       _nomineeAddress: string,
       _newNomineeStatus: boolean,
@@ -2514,7 +2647,7 @@ export class Tsgap extends Contract {
      * @param _newStatus : true or false.
      * @param _planId : select a plan to make it inactive
      */
-    'updatePlanStatus(uint256,bool)'(
+    "updatePlanStatus(uint256,bool)"(
       _planId: BigNumberish,
       _newStatus: boolean,
       overrides?: Overrides
@@ -2539,7 +2672,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'viewAppointation(address,uint256,address)'(
+    "viewAppointation(address,uint256,address)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _appointeeAddress: string,
@@ -2553,7 +2686,7 @@ export class Tsgap extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'viewMonthlyBenefitAmount(address,uint32,uint32)'(
+    "viewMonthlyBenefitAmount(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _depositMonthId: BigNumberish,
@@ -2579,7 +2712,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'viewNomination(address,uint256,address)'(
+    "viewNomination(address,uint256,address)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _nomineeAddress: string,
@@ -2607,7 +2740,7 @@ export class Tsgap extends Contract {
      * @param _stakerAddress : address of initiater of this SIP.
      * @param _withdrawlMonthId : withdraw month id starts from 1 upto as per plan.
      */
-    'withdrawBenefit(address,uint32,uint32)'(
+    "withdrawBenefit(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _withdrawlMonthId: BigNumberish,
@@ -2618,13 +2751,16 @@ export class Tsgap extends Contract {
      * this is used by owner to withdraw ES that are not allocated to any SIP
      * @param _withdrawlAmount : amount in exaES to withdraw
      */
-    withdrawFunds(_withdrawlAmount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    withdrawFunds(
+      _withdrawlAmount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * this is used by owner to withdraw ES that are not allocated to any SIP
      * @param _withdrawlAmount : amount in exaES to withdraw
      */
-    'withdrawFunds(uint256)'(
+    "withdrawFunds(uint256)"(
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
@@ -2647,7 +2783,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker address portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'withdrawPowerBooster(address,uint32)'(
+    "withdrawPowerBooster(address,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       overrides?: Overrides
@@ -2655,9 +2791,13 @@ export class Tsgap extends Contract {
   };
 
   populateTransaction: {
-    EARTH_SECONDS_IN_MONTH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    EARTH_SECONDS_IN_MONTH(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'EARTH_SECONDS_IN_MONTH()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "EARTH_SECONDS_IN_MONTH()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * this function is used by donors to add funds to fundsDeposit
@@ -2667,7 +2807,7 @@ export class Tsgap extends Contract {
     /**
      * this function is used by donors to add funds to fundsDeposit
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     /**
      * need to be appointee, set by staker themselves
@@ -2687,7 +2827,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'appointeeVote(address,uint32)'(
+    "appointeeVote(address,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       overrides?: Overrides
@@ -2724,7 +2864,7 @@ export class Tsgap extends Contract {
      * @param _minimumMonthlyCommitmentAmount : minimum SIP monthly amount in exaES
      * @param _monthlyBenefitFactor : this is per 1000; i.e 200 for 20%
      */
-    'createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)'(
+    "createSIPPlan(uint256,uint32,uint32,uint32,uint32,uint32,uint32)"(
       _minimumMonthlyCommitmentAmount: BigNumberish,
       _accumulationPeriodMonths: BigNumberish,
       _benefitPeriodYears: BigNumberish,
@@ -2743,7 +2883,7 @@ export class Tsgap extends Contract {
     /**
      * deposited by Era Swap Donors. It is given as benefits to  ES stakers. on every withdrawl this deposit is reduced, and on some point of time if enough fundsDeposit is not available to assure staker benefit, contract will allow staker to deposit
      */
-    'fundsDeposit()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "fundsDeposit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * this function is used to read all time deposit status of any staker SIP
@@ -2764,7 +2904,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'getDepositDoneStatus(address,uint32,uint32)'(
+    "getDepositDoneStatus(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -2792,7 +2932,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'getDepositStatus(address,uint32,uint32)'(
+    "getDepositStatus(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -2821,7 +2961,7 @@ export class Tsgap extends Contract {
      * @param _stakerAddress : address of initiater of this SIP.
      * @param _withdrawlMonthId : withdrawl month id upto which to calculate returns for
      */
-    'getPendingWithdrawlAmount(address,uint32,uint32,bool)'(
+    "getPendingWithdrawlAmount(address,uint32,uint32,bool)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _withdrawlMonthId: BigNumberish,
@@ -2835,7 +2975,7 @@ export class Tsgap extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getSip(address,uint32)'(
+    "getSip(address,uint32)"(
       _staker: string,
       _sipId: BigNumberish,
       overrides?: CallOverrides
@@ -2849,7 +2989,7 @@ export class Tsgap extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'migrateDeposit(address,uint32,uint32,uint8)'(
+    "migrateDeposit(address,uint32,uint32,uint8)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -2866,7 +3006,7 @@ export class Tsgap extends Contract {
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    'migrateSip(address,uint32,uint48,uint32,uint32)'(
+    "migrateSip(address,uint32,uint48,uint32,uint32)"(
       _staker: string,
       _planId: BigNumberish,
       _stakingTimestamp: BigNumberish,
@@ -2888,7 +3028,7 @@ export class Tsgap extends Contract {
     /**
      * @param _monthId : specify the month to deposit
      */
-    'monthlyDeposit(address,uint32,uint32)'(
+    "monthlyDeposit(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _monthId: BigNumberish,
@@ -2900,41 +3040,51 @@ export class Tsgap extends Contract {
      * this function is used to initiate a new SIP along with first deposit
      * @param _planId : choose a SIP plan
      */
-    newSIP(_planId: BigNumberish, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    newSIP(
+      _planId: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * ERC20 approve is required to be done for this contract earlier, also  fundsDeposit should be enough otherwise contract will not accept
      * this function is used to initiate a new SIP along with first deposit
      * @param _planId : choose a SIP plan
      */
-    'newSIP(uint32)'(
+    "newSIP(uint32)"(
       _planId: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
      */
-    pendingBenefitAmountOfAllStakers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    pendingBenefitAmountOfAllStakers(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * whenever a deposit is done by user, benefit amount (to be paid in due plan time) will be already added to this. and in case of withdrawl, it is subtracted from this.
      */
-    'pendingBenefitAmountOfAllStakers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "pendingBenefitAmountOfAllStakers()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * allocating storage for multiple sip plans
      */
-    sipPlans(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    sipPlans(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * allocating storage for multiple sip plans
      */
-    'sipPlans(uint256)'(
+    "sipPlans(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2951,7 +3101,7 @@ export class Tsgap extends Contract {
     /**
      * allocating storage for multiple sips of multiple users
      */
-    'sips(address,uint256)'(
+    "sips(address,uint256)"(
       arg0: string,
       arg1: BigNumberish,
       overrides?: CallOverrides
@@ -2976,7 +3126,7 @@ export class Tsgap extends Contract {
      * @param _newAppointeeStatus : true or false, should this have appointee rights or not.
      * @param _sipId : id of SIP in staker portfolio.
      */
-    'toogleAppointee(uint32,address,bool)'(
+    "toogleAppointee(uint32,address,bool)"(
       _sipId: BigNumberish,
       _appointeeAddress: string,
       _newAppointeeStatus: boolean,
@@ -3002,7 +3152,7 @@ export class Tsgap extends Contract {
      * @param _nomineeAddress : eth wallet address of nominee.
      * @param _sipId : id of SIP in staker portfolio.
      */
-    'toogleNominee(uint32,address,bool)'(
+    "toogleNominee(uint32,address,bool)"(
       _sipId: BigNumberish,
       _nomineeAddress: string,
       _newNomineeStatus: boolean,
@@ -3027,7 +3177,7 @@ export class Tsgap extends Contract {
      * @param _newStatus : true or false.
      * @param _planId : select a plan to make it inactive
      */
-    'updatePlanStatus(uint256,bool)'(
+    "updatePlanStatus(uint256,bool)"(
       _planId: BigNumberish,
       _newStatus: boolean,
       overrides?: Overrides
@@ -3052,7 +3202,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'viewAppointation(address,uint256,address)'(
+    "viewAppointation(address,uint256,address)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _appointeeAddress: string,
@@ -3066,7 +3216,7 @@ export class Tsgap extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'viewMonthlyBenefitAmount(address,uint32,uint32)'(
+    "viewMonthlyBenefitAmount(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _depositMonthId: BigNumberish,
@@ -3092,7 +3242,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'viewNomination(address,uint256,address)'(
+    "viewNomination(address,uint256,address)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _nomineeAddress: string,
@@ -3120,7 +3270,7 @@ export class Tsgap extends Contract {
      * @param _stakerAddress : address of initiater of this SIP.
      * @param _withdrawlMonthId : withdraw month id starts from 1 upto as per plan.
      */
-    'withdrawBenefit(address,uint32,uint32)'(
+    "withdrawBenefit(address,uint32,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       _withdrawlMonthId: BigNumberish,
@@ -3140,7 +3290,7 @@ export class Tsgap extends Contract {
      * this is used by owner to withdraw ES that are not allocated to any SIP
      * @param _withdrawlAmount : amount in exaES to withdraw
      */
-    'withdrawFunds(uint256)'(
+    "withdrawFunds(uint256)"(
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -3163,7 +3313,7 @@ export class Tsgap extends Contract {
      * @param _sipId : id of SIP in staker address portfolio.
      * @param _stakerAddress : address of initiater of this SIP.
      */
-    'withdrawPowerBooster(address,uint32)'(
+    "withdrawPowerBooster(address,uint32)"(
       _stakerAddress: string,
       _sipId: BigNumberish,
       overrides?: Overrides

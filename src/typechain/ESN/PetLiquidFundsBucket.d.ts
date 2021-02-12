@@ -2,54 +2,85 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PetLiquidFundsBucketInterface extends ethers.utils.Interface {
   functions: {
-    'addFunds()': FunctionFragment;
-    'allocateFunds(uint256)': FunctionFragment;
-    'owner()': FunctionFragment;
-    'petContract()': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'withdrawFunds(bool,uint256)': FunctionFragment;
+    "addFunds()": FunctionFragment;
+    "allocateFunds(uint256)": FunctionFragment;
+    "owner()": FunctionFragment;
+    "petContract()": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "withdrawFunds(bool,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'addFunds', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'allocateFunds', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'petContract', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'withdrawFunds', values: [boolean, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "addFunds", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "allocateFunds",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "petContract",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawFunds",
+    values: [boolean, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'addFunds', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'allocateFunds', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'petContract', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawFunds', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "addFunds", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "allocateFunds",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "petContract",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawFunds",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'FundsDeposited(address,uint256)': EventFragment;
-    'FundsWithdrawn(address,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
+    "FundsDeposited(address,uint256)": EventFragment;
+    "FundsWithdrawn(address,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'FundsDeposited'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'FundsWithdrawn'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "FundsDeposited"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "FundsWithdrawn"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
 export class PetLiquidFundsBucket extends Contract {
@@ -76,17 +107,20 @@ export class PetLiquidFundsBucket extends Contract {
      * ERC20 approve is required to be done for this contract earlier
      * this function is used by well wishers to add funds to the fund bucket of PET
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     /**
      * transfers funds to PET contract
      */
-    allocateFunds(_amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    allocateFunds(
+      _amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * transfers funds to PET contract
      */
-    'allocateFunds(uint256)'(
+    "allocateFunds(uint256)"(
       _amount: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -103,7 +137,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -121,7 +155,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * address of PET Smart Contract
      */
-    'petContract()'(
+    "petContract()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -139,7 +173,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * address of Era Swap ERC20 Smart Contract
      */
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -148,12 +182,15 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -170,7 +207,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
      */
-    'withdrawFunds(bool,uint256)'(
+    "withdrawFunds(bool,uint256)"(
       _withdrawEverything: boolean,
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides
@@ -187,17 +224,20 @@ export class PetLiquidFundsBucket extends Contract {
    * ERC20 approve is required to be done for this contract earlier
    * this function is used by well wishers to add funds to the fund bucket of PET
    */
-  'addFunds()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "addFunds()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   /**
    * transfers funds to PET contract
    */
-  allocateFunds(_amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  allocateFunds(
+    _amount: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * transfers funds to PET contract
    */
-  'allocateFunds(uint256)'(
+  "allocateFunds(uint256)"(
     _amount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -210,7 +250,7 @@ export class PetLiquidFundsBucket extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * address of PET Smart Contract
@@ -220,7 +260,7 @@ export class PetLiquidFundsBucket extends Contract {
   /**
    * address of PET Smart Contract
    */
-  'petContract()'(overrides?: CallOverrides): Promise<string>;
+  "petContract()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * address of Era Swap ERC20 Smart Contract
@@ -230,17 +270,20 @@ export class PetLiquidFundsBucket extends Contract {
   /**
    * address of Era Swap ERC20 Smart Contract
    */
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -257,7 +300,7 @@ export class PetLiquidFundsBucket extends Contract {
   /**
    * this function makes it possible for deployer to withdraw unallocated ES
    */
-  'withdrawFunds(bool,uint256)'(
+  "withdrawFunds(bool,uint256)"(
     _withdrawEverything: boolean,
     _withdrawlAmount: BigNumberish,
     overrides?: Overrides
@@ -274,17 +317,23 @@ export class PetLiquidFundsBucket extends Contract {
      * ERC20 approve is required to be done for this contract earlier
      * this function is used by well wishers to add funds to the fund bucket of PET
      */
-    'addFunds()'(overrides?: CallOverrides): Promise<void>;
+    "addFunds()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * transfers funds to PET contract
      */
-    allocateFunds(_amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    allocateFunds(
+      _amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * transfers funds to PET contract
      */
-    'allocateFunds(uint256)'(_amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "allocateFunds(uint256)"(
+      _amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Returns the address of the current owner.
@@ -294,7 +343,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * address of PET Smart Contract
@@ -304,7 +353,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * address of PET Smart Contract
      */
-    'petContract()'(overrides?: CallOverrides): Promise<string>;
+    "petContract()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * address of Era Swap ERC20 Smart Contract
@@ -314,17 +363,23 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * address of Era Swap ERC20 Smart Contract
      */
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
@@ -338,7 +393,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
      */
-    'withdrawFunds(bool,uint256)'(
+    "withdrawFunds(bool,uint256)"(
       _withdrawEverything: boolean,
       _withdrawlAmount: BigNumberish,
       overrides?: CallOverrides
@@ -350,7 +405,10 @@ export class PetLiquidFundsBucket extends Contract {
 
     FundsWithdrawn(_withdrawer: null, _withdrawAmount: null): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
@@ -364,17 +422,23 @@ export class PetLiquidFundsBucket extends Contract {
      * ERC20 approve is required to be done for this contract earlier
      * this function is used by well wishers to add funds to the fund bucket of PET
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     /**
      * transfers funds to PET contract
      */
-    allocateFunds(_amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    allocateFunds(
+      _amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * transfers funds to PET contract
      */
-    'allocateFunds(uint256)'(_amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    "allocateFunds(uint256)"(
+      _amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -384,7 +448,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * address of PET Smart Contract
@@ -394,7 +458,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * address of PET Smart Contract
      */
-    'petContract()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "petContract()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * address of Era Swap ERC20 Smart Contract
@@ -404,17 +468,23 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * address of Era Swap ERC20 Smart Contract
      */
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
@@ -428,7 +498,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
      */
-    'withdrawFunds(bool,uint256)'(
+    "withdrawFunds(bool,uint256)"(
       _withdrawEverything: boolean,
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides
@@ -446,17 +516,20 @@ export class PetLiquidFundsBucket extends Contract {
      * ERC20 approve is required to be done for this contract earlier
      * this function is used by well wishers to add funds to the fund bucket of PET
      */
-    'addFunds()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "addFunds()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     /**
      * transfers funds to PET contract
      */
-    allocateFunds(_amount: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    allocateFunds(
+      _amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * transfers funds to PET contract
      */
-    'allocateFunds(uint256)'(
+    "allocateFunds(uint256)"(
       _amount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -469,7 +542,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * address of PET Smart Contract
@@ -479,7 +552,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * address of PET Smart Contract
      */
-    'petContract()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "petContract()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * address of Era Swap ERC20 Smart Contract
@@ -489,17 +562,20 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * address of Era Swap ERC20 Smart Contract
      */
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -516,7 +592,7 @@ export class PetLiquidFundsBucket extends Contract {
     /**
      * this function makes it possible for deployer to withdraw unallocated ES
      */
-    'withdrawFunds(bool,uint256)'(
+    "withdrawFunds(bool,uint256)"(
       _withdrawEverything: boolean,
       _withdrawlAmount: BigNumberish,
       overrides?: Overrides

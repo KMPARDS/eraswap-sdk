@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { Ierc1820Implementer } from './Ierc1820Implementer';
+import type { Ierc1820Implementer } from "./Ierc1820Implementer";
 
 export class Ierc1820ImplementerFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): Ierc1820Implementer {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): Ierc1820Implementer {
     return new Contract(address, _abi, signerOrProvider) as Ierc1820Implementer;
   }
 }
@@ -17,25 +20,25 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'bytes32',
-        name: 'interfaceHash',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "interfaceHash",
+        type: "bytes32",
       },
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
     ],
-    name: 'canImplementInterfaceForAddress',
+    name: "canImplementInterfaceForAddress",
     outputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
 ];

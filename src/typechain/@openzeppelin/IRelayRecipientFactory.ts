@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { IRelayRecipient } from './IRelayRecipient';
+import type { IRelayRecipient } from "./IRelayRecipient";
 
 export class IRelayRecipientFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): IRelayRecipient {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IRelayRecipient {
     return new Contract(address, _abi, signerOrProvider) as IRelayRecipient;
   }
 }
@@ -17,125 +20,125 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'relay',
-        type: 'address',
+        internalType: "address",
+        name: "relay",
+        type: "address",
       },
       {
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
+        internalType: "address",
+        name: "from",
+        type: "address",
       },
       {
-        internalType: 'bytes',
-        name: 'encodedFunction',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "encodedFunction",
+        type: "bytes",
       },
       {
-        internalType: 'uint256',
-        name: 'transactionFee',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "transactionFee",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'gasPrice',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "gasPrice",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'gasLimit',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "gasLimit",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'nonce',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "nonce",
+        type: "uint256",
       },
       {
-        internalType: 'bytes',
-        name: 'approvalData',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "approvalData",
+        type: "bytes",
       },
       {
-        internalType: 'uint256',
-        name: 'maxPossibleCharge',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "maxPossibleCharge",
+        type: "uint256",
       },
     ],
-    name: 'acceptRelayedCall',
+    name: "acceptRelayedCall",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
       {
-        internalType: 'bytes',
-        name: '',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'getHubAddr',
+    name: "getHubAddr",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'bytes',
-        name: 'context',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "context",
+        type: "bytes",
       },
       {
-        internalType: 'bool',
-        name: 'success',
-        type: 'bool',
+        internalType: "bool",
+        name: "success",
+        type: "bool",
       },
       {
-        internalType: 'uint256',
-        name: 'actualCharge',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "actualCharge",
+        type: "uint256",
       },
       {
-        internalType: 'bytes32',
-        name: 'preRetVal',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "preRetVal",
+        type: "bytes32",
       },
     ],
-    name: 'postRelayedCall',
+    name: "postRelayedCall",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'bytes',
-        name: 'context',
-        type: 'bytes',
+        internalType: "bytes",
+        name: "context",
+        type: "bytes",
       },
     ],
-    name: 'preRelayedCall',
+    name: "preRelayedCall",
     outputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
       },
     ],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

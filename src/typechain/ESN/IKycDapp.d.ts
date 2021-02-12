@@ -2,66 +2,113 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface IKycDappInterface extends ethers.utils.Interface {
   functions: {
-    'getIdentityByAddress(address)': FunctionFragment;
-    'getIdentityByUsername(bytes32)': FunctionFragment;
-    'getKycStatusByAddress(address,uint8,bytes32,bytes32)': FunctionFragment;
-    'getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)': FunctionFragment;
-    'isKycApproved(address,uint8,bytes32,bytes32)': FunctionFragment;
-    'isKycLevel1(address)': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
+    "getIdentityByAddress(address)": FunctionFragment;
+    "getIdentityByUsername(bytes32)": FunctionFragment;
+    "getKycStatusByAddress(address,uint8,bytes32,bytes32)": FunctionFragment;
+    "getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)": FunctionFragment;
+    "isKycApproved(address,uint8,bytes32,bytes32)": FunctionFragment;
+    "isKycLevel1(address)": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'getIdentityByAddress', values: [string]): string;
-  encodeFunctionData(functionFragment: 'getIdentityByUsername', values: [BytesLike]): string;
   encodeFunctionData(
-    functionFragment: 'getKycStatusByAddress',
+    functionFragment: "getIdentityByAddress",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getIdentityByUsername",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getKycStatusByAddress",
     values: [string, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getKycStatusByUsername',
+    functionFragment: "getKycStatusByUsername",
     values: [BytesLike, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'isKycApproved',
+    functionFragment: "isKycApproved",
     values: [string, BigNumberish, BytesLike, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'isKycLevel1', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
+  encodeFunctionData(functionFragment: "isKycLevel1", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'getIdentityByAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getIdentityByUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getKycStatusByAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getKycStatusByUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isKycApproved', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isKycLevel1', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getIdentityByAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getIdentityByUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getKycStatusByAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getKycStatusByUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isKycApproved",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isKycLevel1",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'IdentityTransfer(address,address,bytes32)': EventFragment;
-    'KycApplied(bytes32,uint8,bytes32,bytes32)': EventFragment;
-    'KycDetailsUpdated(bytes32,bytes32)': EventFragment;
-    'KycFeeUpdated(uint8,bytes32,bytes32,uint256)': EventFragment;
-    'KycStatusUpdated(bytes32,uint8,bytes32,bytes32,uint8)': EventFragment;
-    'ProfileDetailsUpdated(bytes32,bytes32)': EventFragment;
+    "IdentityTransfer(address,address,bytes32)": EventFragment;
+    "KycApplied(bytes32,uint8,bytes32,bytes32)": EventFragment;
+    "KycDetailsUpdated(bytes32,bytes32)": EventFragment;
+    "KycFeeUpdated(uint8,bytes32,bytes32,uint256)": EventFragment;
+    "KycStatusUpdated(bytes32,uint8,bytes32,bytes32,uint8)": EventFragment;
+    "ProfileDetailsUpdated(bytes32,bytes32)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'IdentityTransfer'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'KycApplied'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'KycDetailsUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'KycFeeUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'KycStatusUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'ProfileDetailsUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "IdentityTransfer"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "KycApplied"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "KycDetailsUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "KycFeeUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "KycStatusUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ProfileDetailsUpdated"): EventFragment;
 }
 
 export class IKycDapp extends Contract {
@@ -96,7 +143,7 @@ export class IKycDapp extends Contract {
       5: boolean;
     }>;
 
-    'getIdentityByAddress(address)'(
+    "getIdentityByAddress(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -132,7 +179,7 @@ export class IKycDapp extends Contract {
       5: boolean;
     }>;
 
-    'getIdentityByUsername(bytes32)'(
+    "getIdentityByUsername(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -160,7 +207,7 @@ export class IKycDapp extends Contract {
       0: number;
     }>;
 
-    'getKycStatusByAddress(address,uint8,bytes32,bytes32)'(
+    "getKycStatusByAddress(address,uint8,bytes32,bytes32)"(
       _wallet: string,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -180,7 +227,7 @@ export class IKycDapp extends Contract {
       0: number;
     }>;
 
-    'getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)'(
+    "getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)"(
       _username: BytesLike,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -200,7 +247,7 @@ export class IKycDapp extends Contract {
       0: boolean;
     }>;
 
-    'isKycApproved(address,uint8,bytes32,bytes32)'(
+    "isKycApproved(address,uint8,bytes32,bytes32)"(
       _wallet: string,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -217,7 +264,7 @@ export class IKycDapp extends Contract {
       0: boolean;
     }>;
 
-    'isKycLevel1(address)'(
+    "isKycLevel1(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -231,7 +278,7 @@ export class IKycDapp extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -245,7 +292,7 @@ export class IKycDapp extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -271,7 +318,7 @@ export class IKycDapp extends Contract {
     5: boolean;
   }>;
 
-  'getIdentityByAddress(address)'(
+  "getIdentityByAddress(address)"(
     _wallet: string,
     overrides?: CallOverrides
   ): Promise<{
@@ -307,7 +354,7 @@ export class IKycDapp extends Contract {
     5: boolean;
   }>;
 
-  'getIdentityByUsername(bytes32)'(
+  "getIdentityByUsername(bytes32)"(
     _username: BytesLike,
     overrides?: CallOverrides
   ): Promise<{
@@ -333,7 +380,7 @@ export class IKycDapp extends Contract {
     overrides?: CallOverrides
   ): Promise<number>;
 
-  'getKycStatusByAddress(address,uint8,bytes32,bytes32)'(
+  "getKycStatusByAddress(address,uint8,bytes32,bytes32)"(
     _wallet: string,
     _level: BigNumberish,
     _platformIdentifier: BytesLike,
@@ -349,7 +396,7 @@ export class IKycDapp extends Contract {
     overrides?: CallOverrides
   ): Promise<number>;
 
-  'getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)'(
+  "getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)"(
     _username: BytesLike,
     _level: BigNumberish,
     _platformIdentifier: BytesLike,
@@ -365,7 +412,7 @@ export class IKycDapp extends Contract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  'isKycApproved(address,uint8,bytes32,bytes32)'(
+  "isKycApproved(address,uint8,bytes32,bytes32)"(
     _wallet: string,
     _level: BigNumberish,
     _platformIdentifier: BytesLike,
@@ -375,15 +422,27 @@ export class IKycDapp extends Contract {
 
   isKycLevel1(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
 
-  'isKycLevel1(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
+  "isKycLevel1(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
     getIdentityByAddress(
@@ -404,7 +463,7 @@ export class IKycDapp extends Contract {
       5: boolean;
     }>;
 
-    'getIdentityByAddress(address)'(
+    "getIdentityByAddress(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -440,7 +499,7 @@ export class IKycDapp extends Contract {
       5: boolean;
     }>;
 
-    'getIdentityByUsername(bytes32)'(
+    "getIdentityByUsername(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -466,7 +525,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<number>;
 
-    'getKycStatusByAddress(address,uint8,bytes32,bytes32)'(
+    "getKycStatusByAddress(address,uint8,bytes32,bytes32)"(
       _wallet: string,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -482,7 +541,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<number>;
 
-    'getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)'(
+    "getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)"(
       _username: BytesLike,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -498,7 +557,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    'isKycApproved(address,uint8,bytes32,bytes32)'(
+    "isKycApproved(address,uint8,bytes32,bytes32)"(
       _wallet: string,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -508,15 +567,30 @@ export class IKycDapp extends Contract {
 
     isKycLevel1(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
 
-    'isKycLevel1(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
+    "isKycLevel1(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -533,7 +607,10 @@ export class IKycDapp extends Contract {
       specialization: null
     ): EventFilter;
 
-    KycDetailsUpdated(username: BytesLike | null, newKycDetailsIPfS: null): EventFilter;
+    KycDetailsUpdated(
+      username: BytesLike | null,
+      newKycDetailsIPfS: null
+    ): EventFilter;
 
     KycFeeUpdated(
       level: BigNumberish | null,
@@ -550,17 +627,29 @@ export class IKycDapp extends Contract {
       newKycStatus: null
     ): EventFilter;
 
-    ProfileDetailsUpdated(username: BytesLike | null, newProfileDetailsIPfS: null): EventFilter;
+    ProfileDetailsUpdated(
+      username: BytesLike | null,
+      newProfileDetailsIPfS: null
+    ): EventFilter;
   };
 
   estimateGas: {
-    getIdentityByAddress(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getIdentityByAddress(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getIdentityByAddress(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getIdentityByAddress(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getIdentityByUsername(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    getIdentityByUsername(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getIdentityByUsername(bytes32)'(
+    "getIdentityByUsername(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -573,7 +662,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getKycStatusByAddress(address,uint8,bytes32,bytes32)'(
+    "getKycStatusByAddress(address,uint8,bytes32,bytes32)"(
       _wallet: string,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -589,7 +678,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)'(
+    "getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)"(
       _username: BytesLike,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -605,7 +694,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'isKycApproved(address,uint8,bytes32,bytes32)'(
+    "isKycApproved(address,uint8,bytes32,bytes32)"(
       _wallet: string,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -615,21 +704,39 @@ export class IKycDapp extends Contract {
 
     isKycLevel1(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'isKycLevel1(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "isKycLevel1(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    getIdentityByAddress(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getIdentityByAddress(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getIdentityByAddress(address)'(
+    "getIdentityByAddress(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -639,7 +746,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getIdentityByUsername(bytes32)'(
+    "getIdentityByUsername(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -652,7 +759,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getKycStatusByAddress(address,uint8,bytes32,bytes32)'(
+    "getKycStatusByAddress(address,uint8,bytes32,bytes32)"(
       _wallet: string,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -668,7 +775,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)'(
+    "getKycStatusByUsername(bytes32,uint8,bytes32,bytes32)"(
       _username: BytesLike,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -684,7 +791,7 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'isKycApproved(address,uint8,bytes32,bytes32)'(
+    "isKycApproved(address,uint8,bytes32,bytes32)"(
       _wallet: string,
       _level: BigNumberish,
       _platformIdentifier: BytesLike,
@@ -692,23 +799,32 @@ export class IKycDapp extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    isKycLevel1(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'isKycLevel1(address)'(
+    isKycLevel1(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "isKycLevel1(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

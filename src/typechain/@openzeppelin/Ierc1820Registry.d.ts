@@ -2,64 +2,100 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Ierc1820RegistryInterface extends ethers.utils.Interface {
   functions: {
-    'getInterfaceImplementer(address,bytes32)': FunctionFragment;
-    'getManager(address)': FunctionFragment;
-    'implementsERC165Interface(address,bytes4)': FunctionFragment;
-    'implementsERC165InterfaceNoCache(address,bytes4)': FunctionFragment;
-    'interfaceHash(string)': FunctionFragment;
-    'setInterfaceImplementer(address,bytes32,address)': FunctionFragment;
-    'setManager(address,address)': FunctionFragment;
-    'updateERC165Cache(address,bytes4)': FunctionFragment;
+    "getInterfaceImplementer(address,bytes32)": FunctionFragment;
+    "getManager(address)": FunctionFragment;
+    "implementsERC165Interface(address,bytes4)": FunctionFragment;
+    "implementsERC165InterfaceNoCache(address,bytes4)": FunctionFragment;
+    "interfaceHash(string)": FunctionFragment;
+    "setInterfaceImplementer(address,bytes32,address)": FunctionFragment;
+    "setManager(address,address)": FunctionFragment;
+    "updateERC165Cache(address,bytes4)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'getInterfaceImplementer',
+    functionFragment: "getInterfaceImplementer",
     values: [string, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'getManager', values: [string]): string;
+  encodeFunctionData(functionFragment: "getManager", values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'implementsERC165Interface',
+    functionFragment: "implementsERC165Interface",
     values: [string, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'implementsERC165InterfaceNoCache',
+    functionFragment: "implementsERC165InterfaceNoCache",
     values: [string, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'interfaceHash', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'setInterfaceImplementer',
+    functionFragment: "interfaceHash",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setInterfaceImplementer",
     values: [string, BytesLike, string]
   ): string;
-  encodeFunctionData(functionFragment: 'setManager', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'updateERC165Cache', values: [string, BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "setManager",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateERC165Cache",
+    values: [string, BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'getInterfaceImplementer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'implementsERC165Interface', data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'implementsERC165InterfaceNoCache',
+    functionFragment: "getInterfaceImplementer",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: 'interfaceHash', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setInterfaceImplementer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updateERC165Cache', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getManager", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "implementsERC165Interface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "implementsERC165InterfaceNoCache",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "interfaceHash",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setInterfaceImplementer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setManager", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "updateERC165Cache",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'InterfaceImplementerSet(address,bytes32,address)': EventFragment;
-    'ManagerChanged(address,address)': EventFragment;
+    "InterfaceImplementerSet(address,bytes32,address)": EventFragment;
+    "ManagerChanged(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'InterfaceImplementerSet'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'ManagerChanged'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "InterfaceImplementerSet"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ManagerChanged"): EventFragment;
 }
 
 export class Ierc1820Registry extends Contract {
@@ -90,7 +126,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the implementer of `interfaceHash` for `account`. If no such implementer is registered, returns the zero address. If `interfaceHash` is an {IERC165} interface id (i.e. it ends with 28 zeroes), `account` will be queried for support of it. `account` being the zero address is an alias for the caller's address.
      */
-    'getInterfaceImplementer(address,bytes32)'(
+    "getInterfaceImplementer(address,bytes32)"(
       account: string,
       _interfaceHash: BytesLike,
       overrides?: CallOverrides
@@ -111,7 +147,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the manager for `account`. See {setManager}.
      */
-    'getManager(address)'(
+    "getManager(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -136,7 +172,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract to check.
      * @param interfaceId ERC165 interface to check.
      */
-    'implementsERC165Interface(address,bytes4)'(
+    "implementsERC165Interface(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -162,7 +198,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract to check.
      * @param interfaceId ERC165 interface to check.
      */
-    'implementsERC165InterfaceNoCache(address,bytes4)'(
+    "implementsERC165InterfaceNoCache(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -183,7 +219,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
      */
-    'interfaceHash(string)'(
+    "interfaceHash(string)"(
       interfaceName: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -203,7 +239,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Sets the `implementer` contract as ``account``'s implementer for `interfaceHash`. `account` being the zero address is an alias for the caller's address. The zero address can also be used in `implementer` to remove an old one. See {interfaceHash} to learn how these are created. Emits an {InterfaceImplementerSet} event. Requirements: - the caller must be the current manager for `account`. - `interfaceHash` must not be an {IERC165} interface id (i.e. it must not end in 28 zeroes). - `implementer` must implement {IERC1820Implementer} and return true when queried for support, unless `implementer` is the caller. See {IERC1820Implementer-canImplementInterfaceForAddress}.
      */
-    'setInterfaceImplementer(address,bytes32,address)'(
+    "setInterfaceImplementer(address,bytes32,address)"(
       account: string,
       _interfaceHash: BytesLike,
       implementer: string,
@@ -222,7 +258,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Sets `newManager` as the manager for `account`. A manager of an account is able to set interface implementers for it. By default, each account is its own manager. Passing a value of `0x0` in `newManager` will reset the manager to this initial state. Emits a {ManagerChanged} event. Requirements: - the caller must be the current manager for `account`.
      */
-    'setManager(address,address)'(
+    "setManager(address,address)"(
       account: string,
       newManager: string,
       overrides?: Overrides
@@ -244,7 +280,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract for which to update the cache.
      * @param interfaceId ERC165 interface for which to update the cache.
      */
-    'updateERC165Cache(address,bytes4)'(
+    "updateERC165Cache(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: Overrides
@@ -263,7 +299,7 @@ export class Ierc1820Registry extends Contract {
   /**
    * Returns the implementer of `interfaceHash` for `account`. If no such implementer is registered, returns the zero address. If `interfaceHash` is an {IERC165} interface id (i.e. it ends with 28 zeroes), `account` will be queried for support of it. `account` being the zero address is an alias for the caller's address.
    */
-  'getInterfaceImplementer(address,bytes32)'(
+  "getInterfaceImplementer(address,bytes32)"(
     account: string,
     _interfaceHash: BytesLike,
     overrides?: CallOverrides
@@ -277,7 +313,10 @@ export class Ierc1820Registry extends Contract {
   /**
    * Returns the manager for `account`. See {setManager}.
    */
-  'getManager(address)'(account: string, overrides?: CallOverrides): Promise<string>;
+  "getManager(address)"(
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Checks whether a contract implements an ERC165 interface or not.  If the result is not cached a direct lookup on the contract address is performed.  If the result is not cached or the cached value is out-of-date, the cache MUST be updated manually by calling  {updateERC165Cache} with the contract address.
@@ -295,7 +334,7 @@ export class Ierc1820Registry extends Contract {
    * @param account Address of the contract to check.
    * @param interfaceId ERC165 interface to check.
    */
-  'implementsERC165Interface(address,bytes4)'(
+  "implementsERC165Interface(address,bytes4)"(
     account: string,
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -317,7 +356,7 @@ export class Ierc1820Registry extends Contract {
    * @param account Address of the contract to check.
    * @param interfaceId ERC165 interface to check.
    */
-  'implementsERC165InterfaceNoCache(address,bytes4)'(
+  "implementsERC165InterfaceNoCache(address,bytes4)"(
     account: string,
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -326,12 +365,18 @@ export class Ierc1820Registry extends Contract {
   /**
    * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
    */
-  interfaceHash(interfaceName: string, overrides?: CallOverrides): Promise<string>;
+  interfaceHash(
+    interfaceName: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
    */
-  'interfaceHash(string)'(interfaceName: string, overrides?: CallOverrides): Promise<string>;
+  "interfaceHash(string)"(
+    interfaceName: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Sets the `implementer` contract as ``account``'s implementer for `interfaceHash`. `account` being the zero address is an alias for the caller's address. The zero address can also be used in `implementer` to remove an old one. See {interfaceHash} to learn how these are created. Emits an {InterfaceImplementerSet} event. Requirements: - the caller must be the current manager for `account`. - `interfaceHash` must not be an {IERC165} interface id (i.e. it must not end in 28 zeroes). - `implementer` must implement {IERC1820Implementer} and return true when queried for support, unless `implementer` is the caller. See {IERC1820Implementer-canImplementInterfaceForAddress}.
@@ -346,7 +391,7 @@ export class Ierc1820Registry extends Contract {
   /**
    * Sets the `implementer` contract as ``account``'s implementer for `interfaceHash`. `account` being the zero address is an alias for the caller's address. The zero address can also be used in `implementer` to remove an old one. See {interfaceHash} to learn how these are created. Emits an {InterfaceImplementerSet} event. Requirements: - the caller must be the current manager for `account`. - `interfaceHash` must not be an {IERC165} interface id (i.e. it must not end in 28 zeroes). - `implementer` must implement {IERC1820Implementer} and return true when queried for support, unless `implementer` is the caller. See {IERC1820Implementer-canImplementInterfaceForAddress}.
    */
-  'setInterfaceImplementer(address,bytes32,address)'(
+  "setInterfaceImplementer(address,bytes32,address)"(
     account: string,
     _interfaceHash: BytesLike,
     implementer: string,
@@ -365,7 +410,7 @@ export class Ierc1820Registry extends Contract {
   /**
    * Sets `newManager` as the manager for `account`. A manager of an account is able to set interface implementers for it. By default, each account is its own manager. Passing a value of `0x0` in `newManager` will reset the manager to this initial state. Emits a {ManagerChanged} event. Requirements: - the caller must be the current manager for `account`.
    */
-  'setManager(address,address)'(
+  "setManager(address,address)"(
     account: string,
     newManager: string,
     overrides?: Overrides
@@ -387,7 +432,7 @@ export class Ierc1820Registry extends Contract {
    * @param account Address of the contract for which to update the cache.
    * @param interfaceId ERC165 interface for which to update the cache.
    */
-  'updateERC165Cache(address,bytes4)'(
+  "updateERC165Cache(address,bytes4)"(
     account: string,
     interfaceId: BytesLike,
     overrides?: Overrides
@@ -406,7 +451,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the implementer of `interfaceHash` for `account`. If no such implementer is registered, returns the zero address. If `interfaceHash` is an {IERC165} interface id (i.e. it ends with 28 zeroes), `account` will be queried for support of it. `account` being the zero address is an alias for the caller's address.
      */
-    'getInterfaceImplementer(address,bytes32)'(
+    "getInterfaceImplementer(address,bytes32)"(
       account: string,
       _interfaceHash: BytesLike,
       overrides?: CallOverrides
@@ -420,7 +465,10 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the manager for `account`. See {setManager}.
      */
-    'getManager(address)'(account: string, overrides?: CallOverrides): Promise<string>;
+    "getManager(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Checks whether a contract implements an ERC165 interface or not.  If the result is not cached a direct lookup on the contract address is performed.  If the result is not cached or the cached value is out-of-date, the cache MUST be updated manually by calling  {updateERC165Cache} with the contract address.
@@ -438,7 +486,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract to check.
      * @param interfaceId ERC165 interface to check.
      */
-    'implementsERC165Interface(address,bytes4)'(
+    "implementsERC165Interface(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -460,7 +508,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract to check.
      * @param interfaceId ERC165 interface to check.
      */
-    'implementsERC165InterfaceNoCache(address,bytes4)'(
+    "implementsERC165InterfaceNoCache(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -469,12 +517,18 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
      */
-    interfaceHash(interfaceName: string, overrides?: CallOverrides): Promise<string>;
+    interfaceHash(
+      interfaceName: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
      */
-    'interfaceHash(string)'(interfaceName: string, overrides?: CallOverrides): Promise<string>;
+    "interfaceHash(string)"(
+      interfaceName: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Sets the `implementer` contract as ``account``'s implementer for `interfaceHash`. `account` being the zero address is an alias for the caller's address. The zero address can also be used in `implementer` to remove an old one. See {interfaceHash} to learn how these are created. Emits an {InterfaceImplementerSet} event. Requirements: - the caller must be the current manager for `account`. - `interfaceHash` must not be an {IERC165} interface id (i.e. it must not end in 28 zeroes). - `implementer` must implement {IERC1820Implementer} and return true when queried for support, unless `implementer` is the caller. See {IERC1820Implementer-canImplementInterfaceForAddress}.
@@ -489,7 +543,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Sets the `implementer` contract as ``account``'s implementer for `interfaceHash`. `account` being the zero address is an alias for the caller's address. The zero address can also be used in `implementer` to remove an old one. See {interfaceHash} to learn how these are created. Emits an {InterfaceImplementerSet} event. Requirements: - the caller must be the current manager for `account`. - `interfaceHash` must not be an {IERC165} interface id (i.e. it must not end in 28 zeroes). - `implementer` must implement {IERC1820Implementer} and return true when queried for support, unless `implementer` is the caller. See {IERC1820Implementer-canImplementInterfaceForAddress}.
      */
-    'setInterfaceImplementer(address,bytes32,address)'(
+    "setInterfaceImplementer(address,bytes32,address)"(
       account: string,
       _interfaceHash: BytesLike,
       implementer: string,
@@ -499,12 +553,16 @@ export class Ierc1820Registry extends Contract {
     /**
      * Sets `newManager` as the manager for `account`. A manager of an account is able to set interface implementers for it. By default, each account is its own manager. Passing a value of `0x0` in `newManager` will reset the manager to this initial state. Emits a {ManagerChanged} event. Requirements: - the caller must be the current manager for `account`.
      */
-    setManager(account: string, newManager: string, overrides?: CallOverrides): Promise<void>;
+    setManager(
+      account: string,
+      newManager: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Sets `newManager` as the manager for `account`. A manager of an account is able to set interface implementers for it. By default, each account is its own manager. Passing a value of `0x0` in `newManager` will reset the manager to this initial state. Emits a {ManagerChanged} event. Requirements: - the caller must be the current manager for `account`.
      */
-    'setManager(address,address)'(
+    "setManager(address,address)"(
       account: string,
       newManager: string,
       overrides?: CallOverrides
@@ -526,7 +584,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract for which to update the cache.
      * @param interfaceId ERC165 interface for which to update the cache.
      */
-    'updateERC165Cache(address,bytes4)'(
+    "updateERC165Cache(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -540,7 +598,10 @@ export class Ierc1820Registry extends Contract {
       implementer: string | null
     ): EventFilter;
 
-    ManagerChanged(account: string | null, newManager: string | null): EventFilter;
+    ManagerChanged(
+      account: string | null,
+      newManager: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
@@ -556,7 +617,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the implementer of `interfaceHash` for `account`. If no such implementer is registered, returns the zero address. If `interfaceHash` is an {IERC165} interface id (i.e. it ends with 28 zeroes), `account` will be queried for support of it. `account` being the zero address is an alias for the caller's address.
      */
-    'getInterfaceImplementer(address,bytes32)'(
+    "getInterfaceImplementer(address,bytes32)"(
       account: string,
       _interfaceHash: BytesLike,
       overrides?: CallOverrides
@@ -570,7 +631,10 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the manager for `account`. See {setManager}.
      */
-    'getManager(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getManager(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Checks whether a contract implements an ERC165 interface or not.  If the result is not cached a direct lookup on the contract address is performed.  If the result is not cached or the cached value is out-of-date, the cache MUST be updated manually by calling  {updateERC165Cache} with the contract address.
@@ -588,7 +652,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract to check.
      * @param interfaceId ERC165 interface to check.
      */
-    'implementsERC165Interface(address,bytes4)'(
+    "implementsERC165Interface(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -610,7 +674,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract to check.
      * @param interfaceId ERC165 interface to check.
      */
-    'implementsERC165InterfaceNoCache(address,bytes4)'(
+    "implementsERC165InterfaceNoCache(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -619,12 +683,18 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
      */
-    interfaceHash(interfaceName: string, overrides?: CallOverrides): Promise<BigNumber>;
+    interfaceHash(
+      interfaceName: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
      */
-    'interfaceHash(string)'(interfaceName: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "interfaceHash(string)"(
+      interfaceName: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Sets the `implementer` contract as ``account``'s implementer for `interfaceHash`. `account` being the zero address is an alias for the caller's address. The zero address can also be used in `implementer` to remove an old one. See {interfaceHash} to learn how these are created. Emits an {InterfaceImplementerSet} event. Requirements: - the caller must be the current manager for `account`. - `interfaceHash` must not be an {IERC165} interface id (i.e. it must not end in 28 zeroes). - `implementer` must implement {IERC1820Implementer} and return true when queried for support, unless `implementer` is the caller. See {IERC1820Implementer-canImplementInterfaceForAddress}.
@@ -639,7 +709,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Sets the `implementer` contract as ``account``'s implementer for `interfaceHash`. `account` being the zero address is an alias for the caller's address. The zero address can also be used in `implementer` to remove an old one. See {interfaceHash} to learn how these are created. Emits an {InterfaceImplementerSet} event. Requirements: - the caller must be the current manager for `account`. - `interfaceHash` must not be an {IERC165} interface id (i.e. it must not end in 28 zeroes). - `implementer` must implement {IERC1820Implementer} and return true when queried for support, unless `implementer` is the caller. See {IERC1820Implementer-canImplementInterfaceForAddress}.
      */
-    'setInterfaceImplementer(address,bytes32,address)'(
+    "setInterfaceImplementer(address,bytes32,address)"(
       account: string,
       _interfaceHash: BytesLike,
       implementer: string,
@@ -649,12 +719,16 @@ export class Ierc1820Registry extends Contract {
     /**
      * Sets `newManager` as the manager for `account`. A manager of an account is able to set interface implementers for it. By default, each account is its own manager. Passing a value of `0x0` in `newManager` will reset the manager to this initial state. Emits a {ManagerChanged} event. Requirements: - the caller must be the current manager for `account`.
      */
-    setManager(account: string, newManager: string, overrides?: Overrides): Promise<BigNumber>;
+    setManager(
+      account: string,
+      newManager: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Sets `newManager` as the manager for `account`. A manager of an account is able to set interface implementers for it. By default, each account is its own manager. Passing a value of `0x0` in `newManager` will reset the manager to this initial state. Emits a {ManagerChanged} event. Requirements: - the caller must be the current manager for `account`.
      */
-    'setManager(address,address)'(
+    "setManager(address,address)"(
       account: string,
       newManager: string,
       overrides?: Overrides
@@ -676,7 +750,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract for which to update the cache.
      * @param interfaceId ERC165 interface for which to update the cache.
      */
-    'updateERC165Cache(address,bytes4)'(
+    "updateERC165Cache(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: Overrides
@@ -696,7 +770,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the implementer of `interfaceHash` for `account`. If no such implementer is registered, returns the zero address. If `interfaceHash` is an {IERC165} interface id (i.e. it ends with 28 zeroes), `account` will be queried for support of it. `account` being the zero address is an alias for the caller's address.
      */
-    'getInterfaceImplementer(address,bytes32)'(
+    "getInterfaceImplementer(address,bytes32)"(
       account: string,
       _interfaceHash: BytesLike,
       overrides?: CallOverrides
@@ -705,12 +779,15 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the manager for `account`. See {setManager}.
      */
-    getManager(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getManager(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the manager for `account`. See {setManager}.
      */
-    'getManager(address)'(
+    "getManager(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -731,7 +808,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract to check.
      * @param interfaceId ERC165 interface to check.
      */
-    'implementsERC165Interface(address,bytes4)'(
+    "implementsERC165Interface(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -753,7 +830,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract to check.
      * @param interfaceId ERC165 interface to check.
      */
-    'implementsERC165InterfaceNoCache(address,bytes4)'(
+    "implementsERC165InterfaceNoCache(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -762,12 +839,15 @@ export class Ierc1820Registry extends Contract {
     /**
      * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
      */
-    interfaceHash(interfaceName: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    interfaceHash(
+      interfaceName: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the interface hash for an `interfaceName`, as defined in the corresponding https://eips.ethereum.org/EIPS/eip-1820#interface-name[section of the EIP].
      */
-    'interfaceHash(string)'(
+    "interfaceHash(string)"(
       interfaceName: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -785,7 +865,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Sets the `implementer` contract as ``account``'s implementer for `interfaceHash`. `account` being the zero address is an alias for the caller's address. The zero address can also be used in `implementer` to remove an old one. See {interfaceHash} to learn how these are created. Emits an {InterfaceImplementerSet} event. Requirements: - the caller must be the current manager for `account`. - `interfaceHash` must not be an {IERC165} interface id (i.e. it must not end in 28 zeroes). - `implementer` must implement {IERC1820Implementer} and return true when queried for support, unless `implementer` is the caller. See {IERC1820Implementer-canImplementInterfaceForAddress}.
      */
-    'setInterfaceImplementer(address,bytes32,address)'(
+    "setInterfaceImplementer(address,bytes32,address)"(
       account: string,
       _interfaceHash: BytesLike,
       implementer: string,
@@ -804,7 +884,7 @@ export class Ierc1820Registry extends Contract {
     /**
      * Sets `newManager` as the manager for `account`. A manager of an account is able to set interface implementers for it. By default, each account is its own manager. Passing a value of `0x0` in `newManager` will reset the manager to this initial state. Emits a {ManagerChanged} event. Requirements: - the caller must be the current manager for `account`.
      */
-    'setManager(address,address)'(
+    "setManager(address,address)"(
       account: string,
       newManager: string,
       overrides?: Overrides
@@ -826,7 +906,7 @@ export class Ierc1820Registry extends Contract {
      * @param account Address of the contract for which to update the cache.
      * @param interfaceId ERC165 interface for which to update the cache.
      */
-    'updateERC165Cache(address,bytes4)'(
+    "updateERC165Cache(address,bytes4)"(
       account: string,
       interfaceId: BytesLike,
       overrides?: Overrides

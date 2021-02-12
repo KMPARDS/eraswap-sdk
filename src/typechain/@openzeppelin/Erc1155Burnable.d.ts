@@ -2,74 +2,116 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Erc1155BurnableInterface extends ethers.utils.Interface {
   functions: {
-    'balanceOf(address,uint256)': FunctionFragment;
-    'balanceOfBatch(address[],uint256[])': FunctionFragment;
-    'burn(address,uint256,uint256)': FunctionFragment;
-    'burnBatch(address,uint256[],uint256[])': FunctionFragment;
-    'isApprovedForAll(address,address)': FunctionFragment;
-    'safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)': FunctionFragment;
-    'safeTransferFrom(address,address,uint256,uint256,bytes)': FunctionFragment;
-    'setApprovalForAll(address,bool)': FunctionFragment;
-    'supportsInterface(bytes4)': FunctionFragment;
-    'uri(uint256)': FunctionFragment;
+    "balanceOf(address,uint256)": FunctionFragment;
+    "balanceOfBatch(address[],uint256[])": FunctionFragment;
+    "burn(address,uint256,uint256)": FunctionFragment;
+    "burnBatch(address,uint256[],uint256[])": FunctionFragment;
+    "isApprovedForAll(address,address)": FunctionFragment;
+    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
+    "setApprovalForAll(address,bool)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
+    "uri(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'balanceOfBatch',
+    functionFragment: "balanceOf",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfBatch",
     values: [string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
-    functionFragment: 'burn',
+    functionFragment: "burn",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'burnBatch',
+    functionFragment: "burnBatch",
     values: [string, BigNumberish[], BigNumberish[]]
   ): string;
-  encodeFunctionData(functionFragment: 'isApprovedForAll', values: [string, string]): string;
   encodeFunctionData(
-    functionFragment: 'safeBatchTransferFrom',
+    functionFragment: "isApprovedForAll",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "safeBatchTransferFrom",
     values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'safeTransferFrom',
+    functionFragment: "safeTransferFrom",
     values: [string, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'setApprovalForAll', values: [string, boolean]): string;
-  encodeFunctionData(functionFragment: 'supportsInterface', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'uri', values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "setApprovalForAll",
+    values: [string, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "uri", values: [BigNumberish]): string;
 
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balanceOfBatch', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'burn', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'burnBatch', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isApprovedForAll', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'safeBatchTransferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'safeTransferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setApprovalForAll', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'supportsInterface', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'uri', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfBatch",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "burnBatch", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "safeBatchTransferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "safeTransferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
 
   events: {
-    'ApprovalForAll(address,address,bool)': EventFragment;
-    'TransferBatch(address,address,address,uint256[],uint256[])': EventFragment;
-    'TransferSingle(address,address,address,uint256,uint256)': EventFragment;
-    'URI(string,uint256)': EventFragment;
+    "ApprovalForAll(address,address,bool)": EventFragment;
+    "TransferBatch(address,address,address,uint256[],uint256[])": EventFragment;
+    "TransferSingle(address,address,address,uint256,uint256)": EventFragment;
+    "URI(string,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'ApprovalForAll'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'TransferBatch'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'TransferSingle'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'URI'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TransferBatch"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TransferSingle"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "URI"): EventFragment;
 }
 
 export class Erc1155Burnable extends Contract {
@@ -100,7 +142,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.
      */
-    'balanceOf(address,uint256)'(
+    "balanceOf(address,uint256)"(
       account: string,
       id: BigNumberish,
       overrides?: CallOverrides
@@ -122,7 +164,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length.
      */
-    'balanceOfBatch(address[],uint256[])'(
+    "balanceOfBatch(address[],uint256[])"(
       accounts: string[],
       ids: BigNumberish[],
       overrides?: CallOverrides
@@ -137,7 +179,7 @@ export class Erc1155Burnable extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'burn(address,uint256,uint256)'(
+    "burn(address,uint256,uint256)"(
       account: string,
       id: BigNumberish,
       value: BigNumberish,
@@ -151,7 +193,7 @@ export class Erc1155Burnable extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'burnBatch(address,uint256[],uint256[])'(
+    "burnBatch(address,uint256[],uint256[])"(
       account: string,
       ids: BigNumberish[],
       values: BigNumberish[],
@@ -172,7 +214,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       account: string,
       operator: string,
       overrides?: CallOverrides
@@ -195,7 +237,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-safeBatchTransferFrom}.
      */
-    'safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)'(
+    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
       from: string,
       to: string,
       ids: BigNumberish[],
@@ -219,7 +261,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
       from: string,
       to: string,
       id: BigNumberish,
@@ -240,7 +282,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -259,7 +301,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -279,7 +321,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\{id\}` substring with the actual token type ID.
      */
-    'uri(uint256)'(
+    "uri(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -290,12 +332,16 @@ export class Erc1155Burnable extends Contract {
   /**
    * See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.
    */
-  balanceOf(account: string, id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  balanceOf(
+    account: string,
+    id: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.
    */
-  'balanceOf(address,uint256)'(
+  "balanceOf(address,uint256)"(
     account: string,
     id: BigNumberish,
     overrides?: CallOverrides
@@ -313,7 +359,7 @@ export class Erc1155Burnable extends Contract {
   /**
    * See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length.
    */
-  'balanceOfBatch(address[],uint256[])'(
+  "balanceOfBatch(address[],uint256[])"(
     accounts: string[],
     ids: BigNumberish[],
     overrides?: CallOverrides
@@ -326,7 +372,7 @@ export class Erc1155Burnable extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'burn(address,uint256,uint256)'(
+  "burn(address,uint256,uint256)"(
     account: string,
     id: BigNumberish,
     value: BigNumberish,
@@ -340,7 +386,7 @@ export class Erc1155Burnable extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'burnBatch(address,uint256[],uint256[])'(
+  "burnBatch(address,uint256[],uint256[])"(
     account: string,
     ids: BigNumberish[],
     values: BigNumberish[],
@@ -350,12 +396,16 @@ export class Erc1155Burnable extends Contract {
   /**
    * See {IERC1155-isApprovedForAll}.
    */
-  isApprovedForAll(account: string, operator: string, overrides?: CallOverrides): Promise<boolean>;
+  isApprovedForAll(
+    account: string,
+    operator: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC1155-isApprovedForAll}.
    */
-  'isApprovedForAll(address,address)'(
+  "isApprovedForAll(address,address)"(
     account: string,
     operator: string,
     overrides?: CallOverrides
@@ -376,7 +426,7 @@ export class Erc1155Burnable extends Contract {
   /**
    * See {IERC1155-safeBatchTransferFrom}.
    */
-  'safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)'(
+  "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
     from: string,
     to: string,
     ids: BigNumberish[],
@@ -400,7 +450,7 @@ export class Erc1155Burnable extends Contract {
   /**
    * See {IERC1155-safeTransferFrom}.
    */
-  'safeTransferFrom(address,address,uint256,uint256,bytes)'(
+  "safeTransferFrom(address,address,uint256,uint256,bytes)"(
     from: string,
     to: string,
     id: BigNumberish,
@@ -421,7 +471,7 @@ export class Erc1155Burnable extends Contract {
   /**
    * See {IERC1155-setApprovalForAll}.
    */
-  'setApprovalForAll(address,bool)'(
+  "setApprovalForAll(address,bool)"(
     operator: string,
     approved: boolean,
     overrides?: Overrides
@@ -430,12 +480,18 @@ export class Erc1155Burnable extends Contract {
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
    */
-  'supportsInterface(bytes4)'(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  "supportsInterface(bytes4)"(
+    interfaceId: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\{id\}` substring with the actual token type ID.
@@ -445,18 +501,25 @@ export class Erc1155Burnable extends Contract {
   /**
    * See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\{id\}` substring with the actual token type ID.
    */
-  'uri(uint256)'(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "uri(uint256)"(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
     /**
      * See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.
      */
-    balanceOf(account: string, id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(
+      account: string,
+      id: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.
      */
-    'balanceOf(address,uint256)'(
+    "balanceOf(address,uint256)"(
       account: string,
       id: BigNumberish,
       overrides?: CallOverrides
@@ -474,7 +537,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length.
      */
-    'balanceOfBatch(address[],uint256[])'(
+    "balanceOfBatch(address[],uint256[])"(
       accounts: string[],
       ids: BigNumberish[],
       overrides?: CallOverrides
@@ -487,7 +550,7 @@ export class Erc1155Burnable extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'burn(address,uint256,uint256)'(
+    "burn(address,uint256,uint256)"(
       account: string,
       id: BigNumberish,
       value: BigNumberish,
@@ -501,7 +564,7 @@ export class Erc1155Burnable extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'burnBatch(address,uint256[],uint256[])'(
+    "burnBatch(address,uint256[],uint256[])"(
       account: string,
       ids: BigNumberish[],
       values: BigNumberish[],
@@ -520,7 +583,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       account: string,
       operator: string,
       overrides?: CallOverrides
@@ -541,7 +604,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-safeBatchTransferFrom}.
      */
-    'safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)'(
+    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
       from: string,
       to: string,
       ids: BigNumberish[],
@@ -565,7 +628,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
       from: string,
       to: string,
       id: BigNumberish,
@@ -586,7 +649,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: CallOverrides
@@ -595,12 +658,15 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -613,11 +679,18 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\{id\}` substring with the actual token type ID.
      */
-    'uri(uint256)'(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    "uri(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
-    ApprovalForAll(account: string | null, operator: string | null, approved: null): EventFilter;
+    ApprovalForAll(
+      account: string | null,
+      operator: string | null,
+      approved: null
+    ): EventFilter;
 
     TransferBatch(
       operator: string | null,
@@ -642,12 +715,16 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.
      */
-    balanceOf(account: string, id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(
+      account: string,
+      id: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.
      */
-    'balanceOf(address,uint256)'(
+    "balanceOf(address,uint256)"(
       account: string,
       id: BigNumberish,
       overrides?: CallOverrides
@@ -665,7 +742,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length.
      */
-    'balanceOfBatch(address[],uint256[])'(
+    "balanceOfBatch(address[],uint256[])"(
       accounts: string[],
       ids: BigNumberish[],
       overrides?: CallOverrides
@@ -678,7 +755,7 @@ export class Erc1155Burnable extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'burn(address,uint256,uint256)'(
+    "burn(address,uint256,uint256)"(
       account: string,
       id: BigNumberish,
       value: BigNumberish,
@@ -692,7 +769,7 @@ export class Erc1155Burnable extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'burnBatch(address,uint256[],uint256[])'(
+    "burnBatch(address,uint256[],uint256[])"(
       account: string,
       ids: BigNumberish[],
       values: BigNumberish[],
@@ -711,7 +788,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       account: string,
       operator: string,
       overrides?: CallOverrides
@@ -732,7 +809,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-safeBatchTransferFrom}.
      */
-    'safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)'(
+    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
       from: string,
       to: string,
       ids: BigNumberish[],
@@ -756,7 +833,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
       from: string,
       to: string,
       id: BigNumberish,
@@ -777,7 +854,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -786,12 +863,15 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -804,7 +884,10 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\{id\}` substring with the actual token type ID.
      */
-    'uri(uint256)'(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "uri(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -820,7 +903,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.
      */
-    'balanceOf(address,uint256)'(
+    "balanceOf(address,uint256)"(
       account: string,
       id: BigNumberish,
       overrides?: CallOverrides
@@ -838,7 +921,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length.
      */
-    'balanceOfBatch(address[],uint256[])'(
+    "balanceOfBatch(address[],uint256[])"(
       accounts: string[],
       ids: BigNumberish[],
       overrides?: CallOverrides
@@ -851,7 +934,7 @@ export class Erc1155Burnable extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'burn(address,uint256,uint256)'(
+    "burn(address,uint256,uint256)"(
       account: string,
       id: BigNumberish,
       value: BigNumberish,
@@ -865,7 +948,7 @@ export class Erc1155Burnable extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'burnBatch(address,uint256[],uint256[])'(
+    "burnBatch(address,uint256[],uint256[])"(
       account: string,
       ids: BigNumberish[],
       values: BigNumberish[],
@@ -884,7 +967,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-isApprovedForAll}.
      */
-    'isApprovedForAll(address,address)'(
+    "isApprovedForAll(address,address)"(
       account: string,
       operator: string,
       overrides?: CallOverrides
@@ -905,7 +988,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-safeBatchTransferFrom}.
      */
-    'safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)'(
+    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
       from: string,
       to: string,
       ids: BigNumberish[],
@@ -929,7 +1012,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-safeTransferFrom}.
      */
-    'safeTransferFrom(address,address,uint256,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
       from: string,
       to: string,
       id: BigNumberish,
@@ -950,7 +1033,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155-setApprovalForAll}.
      */
-    'setApprovalForAll(address,bool)'(
+    "setApprovalForAll(address,bool)"(
       operator: string,
       approved: boolean,
       overrides?: Overrides
@@ -967,7 +1050,7 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC165-supportsInterface}. Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    'supportsInterface(bytes4)'(
+    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -975,11 +1058,17 @@ export class Erc1155Burnable extends Contract {
     /**
      * See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\{id\}` substring with the actual token type ID.
      */
-    uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    uri(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\{id\}` substring with the actual token type ID.
      */
-    'uri(uint256)'(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "uri(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

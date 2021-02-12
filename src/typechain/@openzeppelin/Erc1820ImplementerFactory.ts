@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Signer } from 'ethers';
-import { Provider, TransactionRequest } from '@ethersproject/providers';
-import { Contract, ContractFactory, Overrides } from '@ethersproject/contracts';
+import { Signer } from "ethers";
+import { Provider, TransactionRequest } from "@ethersproject/providers";
+import { Contract, ContractFactory, Overrides } from "@ethersproject/contracts";
 
-import type { Erc1820Implementer } from './Erc1820Implementer';
+import type { Erc1820Implementer } from "./Erc1820Implementer";
 
 export class Erc1820ImplementerFactory extends ContractFactory {
   constructor(signer?: Signer) {
@@ -25,7 +25,10 @@ export class Erc1820ImplementerFactory extends ContractFactory {
   connect(signer: Signer): Erc1820ImplementerFactory {
     return super.connect(signer) as Erc1820ImplementerFactory;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): Erc1820Implementer {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): Erc1820Implementer {
     return new Contract(address, _abi, signerOrProvider) as Erc1820Implementer;
   }
 }
@@ -34,28 +37,28 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'bytes32',
-        name: 'interfaceHash',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "interfaceHash",
+        type: "bytes32",
       },
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
     ],
-    name: 'canImplementInterfaceForAddress',
+    name: "canImplementInterfaceForAddress",
     outputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
 ];
 
 const _bytecode =
-  '0x608060405234801561001057600080fd5b50610134806100206000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063249cb3fa14602d575b600080fd5b606360048036036040811015604157600080fd5b508035906020013573ffffffffffffffffffffffffffffffffffffffff166075565b60408051918252519081900360200190f35b60008281526020818152604080832073ffffffffffffffffffffffffffffffffffffffff8516845290915281205460ff1660af57600060f7565b60405160200180807f455243313832305f4143434550545f4d414749430000000000000000000000008152506014019050604051602081830303815290604052805190602001205b939250505056fea264697066735822122066552970f8940e3c30a7a45f9b1646cb3958767e90855b1b47e24b06f8164ce664736f6c63430007040033';
+  "0x608060405234801561001057600080fd5b50610111806100206000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063249cb3fa14602d575b600080fd5b605660048036036040811015604157600080fd5b50803590602001356001600160a01b03166068565b60408051918252519081900360200190f35b6000828152602081815260408083206001600160a01b038516845290915281205460ff16609557600060d4565b604051602001808073455243313832305f4143434550545f4d4147494360601b8152506014019050604051602081830303815290604052805190602001205b939250505056fea2646970667358221220efbda2076b58228c84597bc13076f860b72a775f76071fb8c0b0894aa8d26b9f64736f6c63430007050033";

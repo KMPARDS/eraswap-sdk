@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { NrtReceiver } from './NrtReceiver';
+import type { NrtReceiver } from "./NrtReceiver";
 
 export class NrtReceiverFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): NrtReceiver {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): NrtReceiver {
     return new Contract(address, _abi, signerOrProvider) as NrtReceiver;
   }
 }
@@ -19,307 +22,307 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'uint32',
-        name: 'month',
-        type: 'uint32',
+        internalType: "uint32",
+        name: "month",
+        type: "uint32",
       },
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
       },
       {
         indexed: false,
-        internalType: 'address',
-        name: 'sender',
-        type: 'address',
+        internalType: "address",
+        name: "sender",
+        type: "address",
       },
     ],
-    name: 'NRTReceived',
-    type: 'event',
+    name: "NRTReceived",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'previousOwner',
-        type: 'address',
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'OwnershipTransferred',
-    type: 'event',
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
     inputs: [],
-    name: 'dayswappers',
+    name: "dayswappers",
     outputs: [
       {
-        internalType: 'contract IDayswappers',
-        name: '',
-        type: 'address',
+        internalType: "contract IDayswappers",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint32',
-        name: '_month',
-        type: 'uint32',
+        internalType: "uint32",
+        name: "_month",
+        type: "uint32",
       },
     ],
-    name: 'getMonthlyNRT',
+    name: "getMonthlyNRT",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'kycDapp',
+    name: "kycDapp",
     outputs: [
       {
-        internalType: 'contract IKycDapp',
-        name: '',
-        type: 'address',
+        internalType: "contract IKycDapp",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'nrtManager',
+    name: "nrtManager",
     outputs: [
       {
-        internalType: 'contract INRTManager',
-        name: '',
-        type: 'address',
+        internalType: "contract INRTManager",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'owner',
+    name: "owner",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'prepaidEs',
+    name: "prepaidEs",
     outputs: [
       {
-        internalType: 'contract IPrepaidEs',
-        name: '',
-        type: 'address',
+        internalType: "contract IPrepaidEs",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'randomnessManager',
+    name: "randomnessManager",
     outputs: [
       {
-        internalType: 'contract RandomnessManager',
-        name: '',
-        type: 'address',
+        internalType: "contract RandomnessManager",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint32',
-        name: '_currentNrtMonth',
-        type: 'uint32',
+        internalType: "uint32",
+        name: "_currentNrtMonth",
+        type: "uint32",
       },
     ],
-    name: 'receiveNrt',
+    name: "receiveNrt",
     outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
+    stateMutability: "payable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'bytes32',
-        name: '_username',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "_username",
+        type: "bytes32",
       },
     ],
-    name: 'resolveAddress',
+    name: "resolveAddress",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'bytes32',
-        name: '_username',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "_username",
+        type: "bytes32",
       },
     ],
-    name: 'resolveAddressStrict',
+    name: "resolveAddressStrict",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_wallet',
-        type: 'address',
+        internalType: "address",
+        name: "_wallet",
+        type: "address",
       },
     ],
-    name: 'resolveUsername',
+    name: "resolveUsername",
     outputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_wallet',
-        type: 'address',
+        internalType: "address",
+        name: "_wallet",
+        type: "address",
       },
     ],
-    name: 'resolveUsernameStrict',
+    name: "resolveUsernameStrict",
     outputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_kycDapp',
-        type: 'address',
+        internalType: "address",
+        name: "_kycDapp",
+        type: "address",
       },
     ],
-    name: 'setKycDapp',
+    name: "setKycDapp",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'timeallyClub',
+    name: "timeallyClub",
     outputs: [
       {
-        internalType: 'contract ITimeAllyClub',
-        name: '',
-        type: 'address',
+        internalType: "contract ITimeAllyClub",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'timeallyManager',
+    name: "timeallyManager",
     outputs: [
       {
-        internalType: 'contract ITimeAllyManager',
-        name: '',
-        type: 'address',
+        internalType: "contract ITimeAllyManager",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'timeallyPromotionalBucket',
+    name: "timeallyPromotionalBucket",
     outputs: [
       {
-        internalType: 'contract ITimeAllyPromotionalBucket',
-        name: '',
-        type: 'address',
+        internalType: "contract ITimeAllyPromotionalBucket",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'transferOwnership',
+    name: "transferOwnership",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'validatorManager',
+    name: "validatorManager",
     outputs: [
       {
-        internalType: 'contract IValidatorManager',
-        name: '',
-        type: 'address',
+        internalType: "contract IValidatorManager",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
 ];

@@ -2,28 +2,39 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PausableInterface extends ethers.utils.Interface {
   functions: {
-    'paused()': FunctionFragment;
+    "paused()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'paused', values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: 'paused', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
 
   events: {
-    'Paused(address)': EventFragment;
-    'Unpaused(address)': EventFragment;
+    "Paused(address)": EventFragment;
+    "Unpaused(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Paused'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Unpaused'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
 }
 
 export class Pausable extends Contract {
@@ -52,7 +63,7 @@ export class Pausable extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(
+    "paused()"(
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -67,7 +78,7 @@ export class Pausable extends Contract {
   /**
    * Returns true if the contract is paused, and false otherwise.
    */
-  'paused()'(overrides?: CallOverrides): Promise<boolean>;
+  "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
   callStatic: {
     /**
@@ -78,7 +89,7 @@ export class Pausable extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<boolean>;
+    "paused()"(overrides?: CallOverrides): Promise<boolean>;
   };
 
   filters: {
@@ -96,7 +107,7 @@ export class Pausable extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -108,6 +119,6 @@ export class Pausable extends Contract {
     /**
      * Returns true if the contract is paused, and false otherwise.
      */
-    'paused()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

@@ -2,91 +2,172 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface ReversePlasmaInterface extends ethers.utils.Interface {
   functions: {
-    'finalizeProposal(uint256,uint256)': FunctionFragment;
-    'findProposal(uint256,bytes32,bytes32)': FunctionFragment;
-    'getAllValidators()': FunctionFragment;
-    'getEthHeaderProposal(uint256,uint256)': FunctionFragment;
-    'getEthHeaderProposals(uint256)': FunctionFragment;
-    'getFinalizedEthHeader(uint256)': FunctionFragment;
-    'getProposalValidators(uint256,uint256)': FunctionFragment;
-    'getProposalsCount(uint256)': FunctionFragment;
-    'getValidator(uint256)': FunctionFragment;
-    'isValidator(address)': FunctionFragment;
-    'latestBlockNumber()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'proposeBlock(uint256,bytes32,bytes32)': FunctionFragment;
-    'setInitialValues(uint256,address[])': FunctionFragment;
-    'setValidators(address[])': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
+    "finalizeProposal(uint256,uint256)": FunctionFragment;
+    "findProposal(uint256,bytes32,bytes32)": FunctionFragment;
+    "getAllValidators()": FunctionFragment;
+    "getEthHeaderProposal(uint256,uint256)": FunctionFragment;
+    "getEthHeaderProposals(uint256)": FunctionFragment;
+    "getFinalizedEthHeader(uint256)": FunctionFragment;
+    "getProposalValidators(uint256,uint256)": FunctionFragment;
+    "getProposalsCount(uint256)": FunctionFragment;
+    "getValidator(uint256)": FunctionFragment;
+    "isValidator(address)": FunctionFragment;
+    "latestBlockNumber()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "proposeBlock(uint256,bytes32,bytes32)": FunctionFragment;
+    "setInitialValues(uint256,address[])": FunctionFragment;
+    "setValidators(address[])": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'finalizeProposal',
+    functionFragment: "finalizeProposal",
     values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'findProposal',
-    values: [BigNumberish, BytesLike, BytesLike]
-  ): string;
-  encodeFunctionData(functionFragment: 'getAllValidators', values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: 'getEthHeaderProposal',
-    values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: 'getEthHeaderProposals', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getFinalizedEthHeader', values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: 'getProposalValidators',
-    values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: 'getProposalsCount', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getValidator', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'isValidator', values: [string]): string;
-  encodeFunctionData(functionFragment: 'latestBlockNumber', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: 'proposeBlock',
+    functionFragment: "findProposal",
     values: [BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'setInitialValues',
+    functionFragment: "getAllValidators",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getEthHeaderProposal",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getEthHeaderProposals",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getFinalizedEthHeader",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getProposalValidators",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getProposalsCount",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getValidator",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "isValidator", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "latestBlockNumber",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "proposeBlock",
+    values: [BigNumberish, BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setInitialValues",
     values: [BigNumberish, string[]]
   ): string;
-  encodeFunctionData(functionFragment: 'setValidators', values: [string[]]): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "setValidators",
+    values: [string[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'finalizeProposal', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'findProposal', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getAllValidators', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getEthHeaderProposal', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getEthHeaderProposals', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getFinalizedEthHeader', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getProposalValidators', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getProposalsCount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidator', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isValidator', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'latestBlockNumber', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'proposeBlock', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setInitialValues', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setValidators', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "finalizeProposal",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "findProposal",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllValidators",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getEthHeaderProposal",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getEthHeaderProposals",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getFinalizedEthHeader",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getProposalValidators",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getProposalsCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isValidator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "latestBlockNumber",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "proposeBlock",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setInitialValues",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setValidators",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'NewBlockHeader(uint256,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
+    "NewBlockHeader(uint256,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'NewBlockHeader'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewBlockHeader"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
 export class ReversePlasma extends Contract {
@@ -119,7 +200,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber ETH block number of the proposal.
      * @param _proposalId Proposal Id of the proposal.
      */
-    'finalizeProposal(uint256,uint256)'(
+    "finalizeProposal(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: Overrides
@@ -147,7 +228,7 @@ export class ReversePlasma extends Contract {
      * @param _receiptsRoot : MPT receipts root
      * @param _transactionsRoot : MPT transactions root
      */
-    'findProposal(uint256,bytes32,bytes32)'(
+    "findProposal(uint256,bytes32,bytes32)"(
       _ethBlockNumber: BigNumberish,
       _transactionsRoot: BytesLike,
       _receiptsRoot: BytesLike,
@@ -163,7 +244,7 @@ export class ReversePlasma extends Contract {
       0: string[];
     }>;
 
-    'getAllValidators()'(
+    "getAllValidators()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string[];
@@ -194,7 +275,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber : ETH block number.
      * @param _proposalId : Id of the proposal.
      */
-    'getEthHeaderProposal(uint256,uint256)'(
+    "getEthHeaderProposal(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -231,7 +312,7 @@ export class ReversePlasma extends Contract {
      * Gets all proposals for an ETH block.
      * @param _ethBlockNumber : ETH block number.
      */
-    'getEthHeaderProposals(uint256)'(
+    "getEthHeaderProposals(uint256)"(
       _ethBlockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -254,7 +335,12 @@ export class ReversePlasma extends Contract {
       _blockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
-      0: { transactionsRoot: string; receiptsRoot: string; 0: string; 1: string };
+      0: {
+        transactionsRoot: string;
+        receiptsRoot: string;
+        0: string;
+        1: string;
+      };
     }>;
 
     /**
@@ -262,11 +348,16 @@ export class ReversePlasma extends Contract {
      * Gets a finalised header.
      * @param _blockNumber : ETH block number.
      */
-    'getFinalizedEthHeader(uint256)'(
+    "getFinalizedEthHeader(uint256)"(
       _blockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
-      0: { transactionsRoot: string; receiptsRoot: string; 0: string; 1: string };
+      0: {
+        transactionsRoot: string;
+        receiptsRoot: string;
+        0: string;
+        1: string;
+      };
     }>;
 
     /**
@@ -287,7 +378,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber : ETH block number of the proposal.
      * @param _proposalId : Id of the proposal.
      */
-    'getProposalValidators(uint256,uint256)'(
+    "getProposalValidators(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -310,7 +401,7 @@ export class ReversePlasma extends Contract {
      * Gets number of proposals for the ETH block roots.
      * @param _ethBlockNumber : ETH block number.
      */
-    'getProposalsCount(uint256)'(
+    "getProposalsCount(uint256)"(
       _ethBlockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -330,7 +421,7 @@ export class ReversePlasma extends Contract {
     /**
      * TODO beta: to be connected with Validator manager
      */
-    'getValidator(uint256)'(
+    "getValidator(uint256)"(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -344,7 +435,7 @@ export class ReversePlasma extends Contract {
       0: boolean;
     }>;
 
-    'isValidator(address)'(
+    "isValidator(address)"(
       _validator: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -363,7 +454,7 @@ export class ReversePlasma extends Contract {
     /**
      * The highest ETH finalised block number.
      */
-    'latestBlockNumber()'(
+    "latestBlockNumber()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -381,7 +472,7 @@ export class ReversePlasma extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -406,7 +497,7 @@ export class ReversePlasma extends Contract {
      * @param _receiptsRoot : ETH block receipts root.
      * @param _transactionsRoot : ETH block transactions root.
      */
-    'proposeBlock(uint256,bytes32,bytes32)'(
+    "proposeBlock(uint256,bytes32,bytes32)"(
       _ethBlockNumber: BigNumberish,
       _transactionsRoot: BytesLike,
       _receiptsRoot: BytesLike,
@@ -419,15 +510,18 @@ export class ReversePlasma extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'setInitialValues(uint256,address[])'(
+    "setInitialValues(uint256,address[])"(
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    setValidators(_validators: string[], overrides?: Overrides): Promise<ContractTransaction>;
+    setValidators(
+      _validators: string[],
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setValidators(address[])'(
+    "setValidators(address[])"(
       _validators: string[],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -435,12 +529,15 @@ export class ReversePlasma extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -462,7 +559,7 @@ export class ReversePlasma extends Contract {
    * @param _ethBlockNumber ETH block number of the proposal.
    * @param _proposalId Proposal Id of the proposal.
    */
-  'finalizeProposal(uint256,uint256)'(
+  "finalizeProposal(uint256,uint256)"(
     _ethBlockNumber: BigNumberish,
     _proposalId: BigNumberish,
     overrides?: Overrides
@@ -490,7 +587,7 @@ export class ReversePlasma extends Contract {
    * @param _receiptsRoot : MPT receipts root
    * @param _transactionsRoot : MPT transactions root
    */
-  'findProposal(uint256,bytes32,bytes32)'(
+  "findProposal(uint256,bytes32,bytes32)"(
     _ethBlockNumber: BigNumberish,
     _transactionsRoot: BytesLike,
     _receiptsRoot: BytesLike,
@@ -502,7 +599,7 @@ export class ReversePlasma extends Contract {
 
   getAllValidators(overrides?: CallOverrides): Promise<string[]>;
 
-  'getAllValidators()'(overrides?: CallOverrides): Promise<string[]>;
+  "getAllValidators()"(overrides?: CallOverrides): Promise<string[]>;
 
   /**
    * Gets a block proposal.
@@ -527,7 +624,7 @@ export class ReversePlasma extends Contract {
    * @param _ethBlockNumber : ETH block number.
    * @param _proposalId : Id of the proposal.
    */
-  'getEthHeaderProposal(uint256,uint256)'(
+  "getEthHeaderProposal(uint256,uint256)"(
     _ethBlockNumber: BigNumberish,
     _proposalId: BigNumberish,
     overrides?: CallOverrides
@@ -562,7 +659,7 @@ export class ReversePlasma extends Contract {
    * Gets all proposals for an ETH block.
    * @param _ethBlockNumber : ETH block number.
    */
-  'getEthHeaderProposals(uint256)'(
+  "getEthHeaderProposals(uint256)"(
     _ethBlockNumber: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
@@ -596,7 +693,7 @@ export class ReversePlasma extends Contract {
    * Gets a finalised header.
    * @param _blockNumber : ETH block number.
    */
-  'getFinalizedEthHeader(uint256)'(
+  "getFinalizedEthHeader(uint256)"(
     _blockNumber: BigNumberish,
     overrides?: CallOverrides
   ): Promise<{
@@ -622,7 +719,7 @@ export class ReversePlasma extends Contract {
    * @param _ethBlockNumber : ETH block number of the proposal.
    * @param _proposalId : Id of the proposal.
    */
-  'getProposalValidators(uint256,uint256)'(
+  "getProposalValidators(uint256,uint256)"(
     _ethBlockNumber: BigNumberish,
     _proposalId: BigNumberish,
     overrides?: CallOverrides
@@ -632,13 +729,16 @@ export class ReversePlasma extends Contract {
    * Gets number of proposals for the ETH block roots.
    * @param _ethBlockNumber : ETH block number.
    */
-  getProposalsCount(_ethBlockNumber: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getProposalsCount(
+    _ethBlockNumber: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Gets number of proposals for the ETH block roots.
    * @param _ethBlockNumber : ETH block number.
    */
-  'getProposalsCount(uint256)'(
+  "getProposalsCount(uint256)"(
     _ethBlockNumber: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -646,19 +746,25 @@ export class ReversePlasma extends Contract {
   /**
    * TODO beta: to be connected with Validator manager
    */
-  getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  getValidator(
+    _validatorIndex: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * TODO beta: to be connected with Validator manager
    */
-  'getValidator(uint256)'(
+  "getValidator(uint256)"(
     _validatorIndex: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
   isValidator(_validator: string, overrides?: CallOverrides): Promise<boolean>;
 
-  'isValidator(address)'(_validator: string, overrides?: CallOverrides): Promise<boolean>;
+  "isValidator(address)"(
+    _validator: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * The highest ETH finalised block number.
@@ -668,7 +774,7 @@ export class ReversePlasma extends Contract {
   /**
    * The highest ETH finalised block number.
    */
-  'latestBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "latestBlockNumber()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Returns the address of the current owner.
@@ -678,7 +784,7 @@ export class ReversePlasma extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Used by Kami to propose a block.
@@ -699,7 +805,7 @@ export class ReversePlasma extends Contract {
    * @param _receiptsRoot : ETH block receipts root.
    * @param _transactionsRoot : ETH block transactions root.
    */
-  'proposeBlock(uint256,bytes32,bytes32)'(
+  "proposeBlock(uint256,bytes32,bytes32)"(
     _ethBlockNumber: BigNumberish,
     _transactionsRoot: BytesLike,
     _receiptsRoot: BytesLike,
@@ -712,15 +818,18 @@ export class ReversePlasma extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'setInitialValues(uint256,address[])'(
+  "setInitialValues(uint256,address[])"(
     _startBlockNumber: BigNumberish,
     _validators: string[],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  setValidators(_validators: string[], overrides?: Overrides): Promise<ContractTransaction>;
+  setValidators(
+    _validators: string[],
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setValidators(address[])'(
+  "setValidators(address[])"(
     _validators: string[],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -728,12 +837,15 @@ export class ReversePlasma extends Contract {
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -755,7 +867,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber ETH block number of the proposal.
      * @param _proposalId Proposal Id of the proposal.
      */
-    'finalizeProposal(uint256,uint256)'(
+    "finalizeProposal(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -783,7 +895,7 @@ export class ReversePlasma extends Contract {
      * @param _receiptsRoot : MPT receipts root
      * @param _transactionsRoot : MPT transactions root
      */
-    'findProposal(uint256,bytes32,bytes32)'(
+    "findProposal(uint256,bytes32,bytes32)"(
       _ethBlockNumber: BigNumberish,
       _transactionsRoot: BytesLike,
       _receiptsRoot: BytesLike,
@@ -795,7 +907,7 @@ export class ReversePlasma extends Contract {
 
     getAllValidators(overrides?: CallOverrides): Promise<string[]>;
 
-    'getAllValidators()'(overrides?: CallOverrides): Promise<string[]>;
+    "getAllValidators()"(overrides?: CallOverrides): Promise<string[]>;
 
     /**
      * Gets a block proposal.
@@ -820,7 +932,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber : ETH block number.
      * @param _proposalId : Id of the proposal.
      */
-    'getEthHeaderProposal(uint256,uint256)'(
+    "getEthHeaderProposal(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -855,7 +967,7 @@ export class ReversePlasma extends Contract {
      * Gets all proposals for an ETH block.
      * @param _ethBlockNumber : ETH block number.
      */
-    'getEthHeaderProposals(uint256)'(
+    "getEthHeaderProposals(uint256)"(
       _ethBlockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
@@ -889,7 +1001,7 @@ export class ReversePlasma extends Contract {
      * Gets a finalised header.
      * @param _blockNumber : ETH block number.
      */
-    'getFinalizedEthHeader(uint256)'(
+    "getFinalizedEthHeader(uint256)"(
       _blockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -915,7 +1027,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber : ETH block number of the proposal.
      * @param _proposalId : Id of the proposal.
      */
-    'getProposalValidators(uint256,uint256)'(
+    "getProposalValidators(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -925,13 +1037,16 @@ export class ReversePlasma extends Contract {
      * Gets number of proposals for the ETH block roots.
      * @param _ethBlockNumber : ETH block number.
      */
-    getProposalsCount(_ethBlockNumber: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getProposalsCount(
+      _ethBlockNumber: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets number of proposals for the ETH block roots.
      * @param _ethBlockNumber : ETH block number.
      */
-    'getProposalsCount(uint256)'(
+    "getProposalsCount(uint256)"(
       _ethBlockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -939,19 +1054,28 @@ export class ReversePlasma extends Contract {
     /**
      * TODO beta: to be connected with Validator manager
      */
-    getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    /**
-     * TODO beta: to be connected with Validator manager
-     */
-    'getValidator(uint256)'(
+    getValidator(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    isValidator(_validator: string, overrides?: CallOverrides): Promise<boolean>;
+    /**
+     * TODO beta: to be connected with Validator manager
+     */
+    "getValidator(uint256)"(
+      _validatorIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'isValidator(address)'(_validator: string, overrides?: CallOverrides): Promise<boolean>;
+    isValidator(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isValidator(address)"(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * The highest ETH finalised block number.
@@ -961,7 +1085,7 @@ export class ReversePlasma extends Contract {
     /**
      * The highest ETH finalised block number.
      */
-    'latestBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "latestBlockNumber()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -971,7 +1095,7 @@ export class ReversePlasma extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Used by Kami to propose a block.
@@ -992,7 +1116,7 @@ export class ReversePlasma extends Contract {
      * @param _receiptsRoot : ETH block receipts root.
      * @param _transactionsRoot : ETH block transactions root.
      */
-    'proposeBlock(uint256,bytes32,bytes32)'(
+    "proposeBlock(uint256,bytes32,bytes32)"(
       _ethBlockNumber: BigNumberish,
       _transactionsRoot: BytesLike,
       _receiptsRoot: BytesLike,
@@ -1005,31 +1129,46 @@ export class ReversePlasma extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'setInitialValues(uint256,address[])'(
+    "setInitialValues(uint256,address[])"(
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setValidators(_validators: string[], overrides?: CallOverrides): Promise<void>;
+    setValidators(
+      _validators: string[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setValidators(address[])'(_validators: string[], overrides?: CallOverrides): Promise<void>;
+    "setValidators(address[])"(
+      _validators: string[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
     NewBlockHeader(blockNumber: null, proposalId: null): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
@@ -1049,7 +1188,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber ETH block number of the proposal.
      * @param _proposalId Proposal Id of the proposal.
      */
-    'finalizeProposal(uint256,uint256)'(
+    "finalizeProposal(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: Overrides
@@ -1074,7 +1213,7 @@ export class ReversePlasma extends Contract {
      * @param _receiptsRoot : MPT receipts root
      * @param _transactionsRoot : MPT transactions root
      */
-    'findProposal(uint256,bytes32,bytes32)'(
+    "findProposal(uint256,bytes32,bytes32)"(
       _ethBlockNumber: BigNumberish,
       _transactionsRoot: BytesLike,
       _receiptsRoot: BytesLike,
@@ -1083,7 +1222,7 @@ export class ReversePlasma extends Contract {
 
     getAllValidators(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getAllValidators()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getAllValidators()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Gets a block proposal.
@@ -1101,7 +1240,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber : ETH block number.
      * @param _proposalId : Id of the proposal.
      */
-    'getEthHeaderProposal(uint256,uint256)'(
+    "getEthHeaderProposal(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -1120,7 +1259,7 @@ export class ReversePlasma extends Contract {
      * Gets all proposals for an ETH block.
      * @param _ethBlockNumber : ETH block number.
      */
-    'getEthHeaderProposals(uint256)'(
+    "getEthHeaderProposals(uint256)"(
       _ethBlockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1140,7 +1279,7 @@ export class ReversePlasma extends Contract {
      * Gets a finalised header.
      * @param _blockNumber : ETH block number.
      */
-    'getFinalizedEthHeader(uint256)'(
+    "getFinalizedEthHeader(uint256)"(
       _blockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1161,7 +1300,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber : ETH block number of the proposal.
      * @param _proposalId : Id of the proposal.
      */
-    'getProposalValidators(uint256,uint256)'(
+    "getProposalValidators(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -1171,13 +1310,16 @@ export class ReversePlasma extends Contract {
      * Gets number of proposals for the ETH block roots.
      * @param _ethBlockNumber : ETH block number.
      */
-    getProposalsCount(_ethBlockNumber: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getProposalsCount(
+      _ethBlockNumber: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets number of proposals for the ETH block roots.
      * @param _ethBlockNumber : ETH block number.
      */
-    'getProposalsCount(uint256)'(
+    "getProposalsCount(uint256)"(
       _ethBlockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1185,19 +1327,28 @@ export class ReversePlasma extends Contract {
     /**
      * TODO beta: to be connected with Validator manager
      */
-    getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    /**
-     * TODO beta: to be connected with Validator manager
-     */
-    'getValidator(uint256)'(
+    getValidator(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    isValidator(_validator: string, overrides?: CallOverrides): Promise<BigNumber>;
+    /**
+     * TODO beta: to be connected with Validator manager
+     */
+    "getValidator(uint256)"(
+      _validatorIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'isValidator(address)'(_validator: string, overrides?: CallOverrides): Promise<BigNumber>;
+    isValidator(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isValidator(address)"(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * The highest ETH finalised block number.
@@ -1207,7 +1358,7 @@ export class ReversePlasma extends Contract {
     /**
      * The highest ETH finalised block number.
      */
-    'latestBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "latestBlockNumber()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -1217,7 +1368,7 @@ export class ReversePlasma extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Used by Kami to propose a block.
@@ -1238,7 +1389,7 @@ export class ReversePlasma extends Contract {
      * @param _receiptsRoot : ETH block receipts root.
      * @param _transactionsRoot : ETH block transactions root.
      */
-    'proposeBlock(uint256,bytes32,bytes32)'(
+    "proposeBlock(uint256,bytes32,bytes32)"(
       _ethBlockNumber: BigNumberish,
       _transactionsRoot: BytesLike,
       _receiptsRoot: BytesLike,
@@ -1251,25 +1402,37 @@ export class ReversePlasma extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'setInitialValues(uint256,address[])'(
+    "setInitialValues(uint256,address[])"(
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    setValidators(_validators: string[], overrides?: Overrides): Promise<BigNumber>;
+    setValidators(
+      _validators: string[],
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'setValidators(address[])'(_validators: string[], overrides?: Overrides): Promise<BigNumber>;
+    "setValidators(address[])"(
+      _validators: string[],
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1289,7 +1452,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber ETH block number of the proposal.
      * @param _proposalId Proposal Id of the proposal.
      */
-    'finalizeProposal(uint256,uint256)'(
+    "finalizeProposal(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: Overrides
@@ -1314,7 +1477,7 @@ export class ReversePlasma extends Contract {
      * @param _receiptsRoot : MPT receipts root
      * @param _transactionsRoot : MPT transactions root
      */
-    'findProposal(uint256,bytes32,bytes32)'(
+    "findProposal(uint256,bytes32,bytes32)"(
       _ethBlockNumber: BigNumberish,
       _transactionsRoot: BytesLike,
       _receiptsRoot: BytesLike,
@@ -1323,7 +1486,9 @@ export class ReversePlasma extends Contract {
 
     getAllValidators(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'getAllValidators()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getAllValidators()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets a block proposal.
@@ -1341,7 +1506,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber : ETH block number.
      * @param _proposalId : Id of the proposal.
      */
-    'getEthHeaderProposal(uint256,uint256)'(
+    "getEthHeaderProposal(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -1360,7 +1525,7 @@ export class ReversePlasma extends Contract {
      * Gets all proposals for an ETH block.
      * @param _ethBlockNumber : ETH block number.
      */
-    'getEthHeaderProposals(uint256)'(
+    "getEthHeaderProposals(uint256)"(
       _ethBlockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1380,7 +1545,7 @@ export class ReversePlasma extends Contract {
      * Gets a finalised header.
      * @param _blockNumber : ETH block number.
      */
-    'getFinalizedEthHeader(uint256)'(
+    "getFinalizedEthHeader(uint256)"(
       _blockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1401,7 +1566,7 @@ export class ReversePlasma extends Contract {
      * @param _ethBlockNumber : ETH block number of the proposal.
      * @param _proposalId : Id of the proposal.
      */
-    'getProposalValidators(uint256,uint256)'(
+    "getProposalValidators(uint256,uint256)"(
       _ethBlockNumber: BigNumberish,
       _proposalId: BigNumberish,
       overrides?: CallOverrides
@@ -1420,7 +1585,7 @@ export class ReversePlasma extends Contract {
      * Gets number of proposals for the ETH block roots.
      * @param _ethBlockNumber : ETH block number.
      */
-    'getProposalsCount(uint256)'(
+    "getProposalsCount(uint256)"(
       _ethBlockNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1436,14 +1601,17 @@ export class ReversePlasma extends Contract {
     /**
      * TODO beta: to be connected with Validator manager
      */
-    'getValidator(uint256)'(
+    "getValidator(uint256)"(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    isValidator(_validator: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isValidator(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'isValidator(address)'(
+    "isValidator(address)"(
       _validator: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1456,7 +1624,9 @@ export class ReversePlasma extends Contract {
     /**
      * The highest ETH finalised block number.
      */
-    'latestBlockNumber()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "latestBlockNumber()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -1466,7 +1636,7 @@ export class ReversePlasma extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Used by Kami to propose a block.
@@ -1487,7 +1657,7 @@ export class ReversePlasma extends Contract {
      * @param _receiptsRoot : ETH block receipts root.
      * @param _transactionsRoot : ETH block transactions root.
      */
-    'proposeBlock(uint256,bytes32,bytes32)'(
+    "proposeBlock(uint256,bytes32,bytes32)"(
       _ethBlockNumber: BigNumberish,
       _transactionsRoot: BytesLike,
       _receiptsRoot: BytesLike,
@@ -1500,15 +1670,18 @@ export class ReversePlasma extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'setInitialValues(uint256,address[])'(
+    "setInitialValues(uint256,address[])"(
       _startBlockNumber: BigNumberish,
       _validators: string[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    setValidators(_validators: string[], overrides?: Overrides): Promise<PopulatedTransaction>;
+    setValidators(
+      _validators: string[],
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setValidators(address[])'(
+    "setValidators(address[])"(
       _validators: string[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -1516,12 +1689,15 @@ export class ReversePlasma extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;

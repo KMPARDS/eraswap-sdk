@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { RegistryDependent } from './RegistryDependent';
+import type { RegistryDependent } from "./RegistryDependent";
 
 export class RegistryDependentFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): RegistryDependent {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): RegistryDependent {
     return new Contract(address, _abi, signerOrProvider) as RegistryDependent;
   }
 }
@@ -19,250 +22,250 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'previousOwner',
-        type: 'address',
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'OwnershipTransferred',
-    type: 'event',
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
     inputs: [],
-    name: 'dayswappers',
+    name: "dayswappers",
     outputs: [
       {
-        internalType: 'contract IDayswappers',
-        name: '',
-        type: 'address',
+        internalType: "contract IDayswappers",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'kycDapp',
+    name: "kycDapp",
     outputs: [
       {
-        internalType: 'contract IKycDapp',
-        name: '',
-        type: 'address',
+        internalType: "contract IKycDapp",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'nrtManager',
+    name: "nrtManager",
     outputs: [
       {
-        internalType: 'contract INRTManager',
-        name: '',
-        type: 'address',
+        internalType: "contract INRTManager",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'owner',
+    name: "owner",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'prepaidEs',
+    name: "prepaidEs",
     outputs: [
       {
-        internalType: 'contract IPrepaidEs',
-        name: '',
-        type: 'address',
+        internalType: "contract IPrepaidEs",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'randomnessManager',
+    name: "randomnessManager",
     outputs: [
       {
-        internalType: 'contract RandomnessManager',
-        name: '',
-        type: 'address',
+        internalType: "contract RandomnessManager",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'bytes32',
-        name: '_username',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "_username",
+        type: "bytes32",
       },
     ],
-    name: 'resolveAddress',
+    name: "resolveAddress",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'bytes32',
-        name: '_username',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "_username",
+        type: "bytes32",
       },
     ],
-    name: 'resolveAddressStrict',
+    name: "resolveAddressStrict",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_wallet',
-        type: 'address',
+        internalType: "address",
+        name: "_wallet",
+        type: "address",
       },
     ],
-    name: 'resolveUsername',
+    name: "resolveUsername",
     outputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_wallet',
-        type: 'address',
+        internalType: "address",
+        name: "_wallet",
+        type: "address",
       },
     ],
-    name: 'resolveUsernameStrict',
+    name: "resolveUsernameStrict",
     outputs: [
       {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_kycDapp',
-        type: 'address',
+        internalType: "address",
+        name: "_kycDapp",
+        type: "address",
       },
     ],
-    name: 'setKycDapp',
+    name: "setKycDapp",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'timeallyClub',
+    name: "timeallyClub",
     outputs: [
       {
-        internalType: 'contract ITimeAllyClub',
-        name: '',
-        type: 'address',
+        internalType: "contract ITimeAllyClub",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'timeallyManager',
+    name: "timeallyManager",
     outputs: [
       {
-        internalType: 'contract ITimeAllyManager',
-        name: '',
-        type: 'address',
+        internalType: "contract ITimeAllyManager",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'timeallyPromotionalBucket',
+    name: "timeallyPromotionalBucket",
     outputs: [
       {
-        internalType: 'contract ITimeAllyPromotionalBucket',
-        name: '',
-        type: 'address',
+        internalType: "contract ITimeAllyPromotionalBucket",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'transferOwnership',
+    name: "transferOwnership",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'validatorManager',
+    name: "validatorManager",
     outputs: [
       {
-        internalType: 'contract IValidatorManager',
-        name: '',
-        type: 'address',
+        internalType: "contract IValidatorManager",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
 ];

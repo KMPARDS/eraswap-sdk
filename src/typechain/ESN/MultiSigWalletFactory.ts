@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { MultiSigWallet } from './MultiSigWallet';
+import type { MultiSigWallet } from "./MultiSigWallet";
 
 export class MultiSigWalletFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): MultiSigWallet {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): MultiSigWallet {
     return new Contract(address, _abi, signerOrProvider) as MultiSigWallet;
   }
 }
@@ -19,170 +22,170 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'sender',
-        type: 'address',
+        internalType: "address",
+        name: "sender",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'transactionId',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "transactionId",
+        type: "uint256",
       },
     ],
-    name: 'Confirmation',
-    type: 'event',
+    name: "Confirmation",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'sender',
-        type: 'address',
+        internalType: "address",
+        name: "sender",
+        type: "address",
       },
       {
         indexed: false,
-        internalType: 'uint256',
-        name: 'value',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
       },
     ],
-    name: 'Deposit',
-    type: 'event',
+    name: "Deposit",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'transactionId',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "transactionId",
+        type: "uint256",
       },
     ],
-    name: 'Execution',
-    type: 'event',
+    name: "Execution",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'transactionId',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "transactionId",
+        type: "uint256",
       },
     ],
-    name: 'ExecutionFailure',
-    type: 'event',
+    name: "ExecutionFailure",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'sender',
-        type: 'address',
+        internalType: "address",
+        name: "sender",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'transactionId',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "transactionId",
+        type: "uint256",
       },
     ],
-    name: 'Revocation',
-    type: 'event',
+    name: "Revocation",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'transactionId',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "transactionId",
+        type: "uint256",
       },
     ],
-    name: 'Submission',
-    type: 'event',
+    name: "Submission",
+    type: "event",
   },
   {
     inputs: [
       {
-        internalType: 'bool',
-        name: 'pending',
-        type: 'bool',
+        internalType: "bool",
+        name: "pending",
+        type: "bool",
       },
       {
-        internalType: 'bool',
-        name: 'executed',
-        type: 'bool',
+        internalType: "bool",
+        name: "executed",
+        type: "bool",
       },
     ],
-    name: 'getTransactionCount',
+    name: "getTransactionCount",
     outputs: [
       {
-        internalType: 'uint256',
-        name: 'count',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'from',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "from",
+        type: "uint256",
       },
       {
-        internalType: 'uint256',
-        name: 'to',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "to",
+        type: "uint256",
       },
       {
-        internalType: 'bool',
-        name: 'pending',
-        type: 'bool',
+        internalType: "bool",
+        name: "pending",
+        type: "bool",
       },
       {
-        internalType: 'bool',
-        name: 'executed',
-        type: 'bool',
+        internalType: "bool",
+        name: "executed",
+        type: "bool",
       },
     ],
-    name: 'getTransactionIds',
+    name: "getTransactionIds",
     outputs: [
       {
-        internalType: 'uint256[]',
-        name: '_transactionIds',
-        type: 'uint256[]',
+        internalType: "uint256[]",
+        name: "_transactionIds",
+        type: "uint256[]",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'transactionCount',
+    name: "transactionCount",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
-    stateMutability: 'payable',
-    type: 'receive',
+    stateMutability: "payable",
+    type: "receive",
   },
 ];

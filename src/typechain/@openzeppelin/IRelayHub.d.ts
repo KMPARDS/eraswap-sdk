@@ -2,40 +2,47 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface IRelayHubInterface extends ethers.utils.Interface {
   functions: {
-    'balanceOf(address)': FunctionFragment;
-    'canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)': FunctionFragment;
-    'depositFor(address)': FunctionFragment;
-    'getNonce(address)': FunctionFragment;
-    'getRelay(address)': FunctionFragment;
-    'maxPossibleCharge(uint256,uint256,uint256)': FunctionFragment;
-    'penalizeIllegalTransaction(bytes,bytes)': FunctionFragment;
-    'penalizeRepeatedNonce(bytes,bytes,bytes,bytes)': FunctionFragment;
-    'registerRelay(uint256,string)': FunctionFragment;
-    'relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)': FunctionFragment;
-    'removeRelayByOwner(address)': FunctionFragment;
-    'requiredGas(uint256)': FunctionFragment;
-    'stake(address,uint256)': FunctionFragment;
-    'unstake(address)': FunctionFragment;
-    'withdraw(uint256,address)': FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)": FunctionFragment;
+    "depositFor(address)": FunctionFragment;
+    "getNonce(address)": FunctionFragment;
+    "getRelay(address)": FunctionFragment;
+    "maxPossibleCharge(uint256,uint256,uint256)": FunctionFragment;
+    "penalizeIllegalTransaction(bytes,bytes)": FunctionFragment;
+    "penalizeRepeatedNonce(bytes,bytes,bytes,bytes)": FunctionFragment;
+    "registerRelay(uint256,string)": FunctionFragment;
+    "relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)": FunctionFragment;
+    "removeRelayByOwner(address)": FunctionFragment;
+    "requiredGas(uint256)": FunctionFragment;
+    "stake(address,uint256)": FunctionFragment;
+    "unstake(address)": FunctionFragment;
+    "withdraw(uint256,address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'canRelay',
+    functionFragment: "canRelay",
     values: [
       string,
       string,
@@ -49,24 +56,27 @@ interface IRelayHubInterface extends ethers.utils.Interface {
       BytesLike
     ]
   ): string;
-  encodeFunctionData(functionFragment: 'depositFor', values: [string]): string;
-  encodeFunctionData(functionFragment: 'getNonce', values: [string]): string;
-  encodeFunctionData(functionFragment: 'getRelay', values: [string]): string;
+  encodeFunctionData(functionFragment: "depositFor", values: [string]): string;
+  encodeFunctionData(functionFragment: "getNonce", values: [string]): string;
+  encodeFunctionData(functionFragment: "getRelay", values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'maxPossibleCharge',
+    functionFragment: "maxPossibleCharge",
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'penalizeIllegalTransaction',
+    functionFragment: "penalizeIllegalTransaction",
     values: [BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: 'penalizeRepeatedNonce',
+    functionFragment: "penalizeRepeatedNonce",
     values: [BytesLike, BytesLike, BytesLike, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'registerRelay', values: [BigNumberish, string]): string;
   encodeFunctionData(
-    functionFragment: 'relayCall',
+    functionFragment: "registerRelay",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "relayCall",
     values: [
       string,
       string,
@@ -79,49 +89,79 @@ interface IRelayHubInterface extends ethers.utils.Interface {
       BytesLike
     ]
   ): string;
-  encodeFunctionData(functionFragment: 'removeRelayByOwner', values: [string]): string;
-  encodeFunctionData(functionFragment: 'requiredGas', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'stake', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'unstake', values: [string]): string;
-  encodeFunctionData(functionFragment: 'withdraw', values: [BigNumberish, string]): string;
+  encodeFunctionData(
+    functionFragment: "removeRelayByOwner",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "requiredGas",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "stake",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "unstake", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "withdraw",
+    values: [BigNumberish, string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'canRelay', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'depositFor', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getNonce', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRelay', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'maxPossibleCharge', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'penalizeIllegalTransaction', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'penalizeRepeatedNonce', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'registerRelay', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'relayCall', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'removeRelayByOwner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'requiredGas', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'stake', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'unstake', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "canRelay", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "depositFor", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getNonce", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getRelay", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "maxPossibleCharge",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "penalizeIllegalTransaction",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "penalizeRepeatedNonce",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerRelay",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "relayCall", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "removeRelayByOwner",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "requiredGas",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "stake", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "unstake", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
 
   events: {
-    'CanRelayFailed(address,address,address,bytes4,uint256)': EventFragment;
-    'Deposited(address,address,uint256)': EventFragment;
-    'Penalized(address,address,uint256)': EventFragment;
-    'RelayAdded(address,address,uint256,uint256,uint256,string)': EventFragment;
-    'RelayRemoved(address,uint256)': EventFragment;
-    'Staked(address,uint256,uint256)': EventFragment;
-    'TransactionRelayed(address,address,address,bytes4,uint8,uint256)': EventFragment;
-    'Unstaked(address,uint256)': EventFragment;
-    'Withdrawn(address,address,uint256)': EventFragment;
+    "CanRelayFailed(address,address,address,bytes4,uint256)": EventFragment;
+    "Deposited(address,address,uint256)": EventFragment;
+    "Penalized(address,address,uint256)": EventFragment;
+    "RelayAdded(address,address,uint256,uint256,uint256,string)": EventFragment;
+    "RelayRemoved(address,uint256)": EventFragment;
+    "Staked(address,uint256,uint256)": EventFragment;
+    "TransactionRelayed(address,address,address,bytes4,uint8,uint256)": EventFragment;
+    "Unstaked(address,uint256)": EventFragment;
+    "Withdrawn(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'CanRelayFailed'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Deposited'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Penalized'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RelayAdded'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'RelayRemoved'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Staked'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'TransactionRelayed'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Unstaked'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Withdrawn'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CanRelayFailed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Deposited"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Penalized"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RelayAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RelayRemoved"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Staked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TransactionRelayed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unstaked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdrawn"): EventFragment;
 }
 
 export class IRelayHub extends Contract {
@@ -151,7 +191,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns an account's deposits. These can be either a contract's funds, or a relay owner's revenue.
      */
-    'balanceOf(address)'(
+    "balanceOf(address)"(
       target: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -183,7 +223,7 @@ export class IRelayHub extends Contract {
     /**
      * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
      */
-    'canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+    "canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
       relay: string,
       from: string,
       to: string,
@@ -205,12 +245,15 @@ export class IRelayHub extends Contract {
     /**
      * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
      */
-    depositFor(target: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+    depositFor(
+      target: string,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
      */
-    'depositFor(address)'(
+    "depositFor(address)"(
       target: string,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -228,7 +271,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns an account's nonce in `RelayHub`.
      */
-    'getNonce(address)'(
+    "getNonce(address)"(
       from: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -257,7 +300,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
      */
-    'getRelay(address)'(
+    "getRelay(address)"(
       relay: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -288,7 +331,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns the maximum recipient charge, given the amount of gas forwarded, gas price and relay fee.
      */
-    'maxPossibleCharge(uint256,uint256,uint256)'(
+    "maxPossibleCharge(uint256,uint256,uint256)"(
       relayedCallStipend: BigNumberish,
       gasPrice: BigNumberish,
       transactionFee: BigNumberish,
@@ -309,7 +352,7 @@ export class IRelayHub extends Contract {
     /**
      * Penalize a relay that sent a transaction that didn't target ``RelayHub``'s {registerRelay} or {relayCall}.
      */
-    'penalizeIllegalTransaction(bytes,bytes)'(
+    "penalizeIllegalTransaction(bytes,bytes)"(
       unsignedTx: BytesLike,
       signature: BytesLike,
       overrides?: Overrides
@@ -329,7 +372,7 @@ export class IRelayHub extends Contract {
     /**
      * Penalize a relay that signed two transactions using the same nonce (making only the first one valid) and different data (gas price, gas limit, etc. may be different). The (unsigned) transaction data and signature for both transactions must be provided.
      */
-    'penalizeRepeatedNonce(bytes,bytes,bytes,bytes)'(
+    "penalizeRepeatedNonce(bytes,bytes,bytes,bytes)"(
       unsignedTx1: BytesLike,
       signature1: BytesLike,
       unsignedTx2: BytesLike,
@@ -349,7 +392,7 @@ export class IRelayHub extends Contract {
     /**
      * Registers the caller as a relay. The relay must be staked for, and not be a contract (i.e. this function must be called directly from an EOA). This function can be called multiple times, emitting new {RelayAdded} events. Note that the received `transactionFee` is not enforced by {relayCall}. Emits a {RelayAdded} event.
      */
-    'registerRelay(uint256,string)'(
+    "registerRelay(uint256,string)"(
       transactionFee: BigNumberish,
       url: string,
       overrides?: Overrides
@@ -374,7 +417,7 @@ export class IRelayHub extends Contract {
     /**
      * Relays a transaction. For this to succeed, multiple conditions must be met:  - {canRelay} must `return PreconditionCheck.OK`  - the sender must be a registered relay  - the transaction's gas price must be larger or equal to the one that was requested by the sender  - the transaction must have enough gas to not run out of gas if all internal transactions (calls to the recipient) use all gas available to them  - the recipient must have enough balance to pay the relay for the worst-case scenario (i.e. when all gas is spent) If all conditions are met, the call will be relayed and the recipient charged. {preRelayedCall}, the encoded function and {postRelayedCall} will be called in that order. Parameters:  - `from`: the client originating the request  - `to`: the target {IRelayRecipient} contract  - `encodedFunction`: the function call to relay, including data  - `transactionFee`: fee (%) the relay takes over actual gas cost  - `gasPrice`: gas price the client is willing to pay  - `gasLimit`: gas to forward when calling the encoded function  - `nonce`: client's nonce  - `signature`: client's signature over all previous params, plus the relay and RelayHub addresses  - `approvalData`: dapp-specific data forwarded to {acceptRelayedCall}. This value is *not* verified by the `RelayHub`, but it still can be used for e.g. a signature. Emits a {TransactionRelayed} event.
      */
-    'relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+    "relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
       from: string,
       to: string,
       encodedFunction: BytesLike,
@@ -390,12 +433,15 @@ export class IRelayHub extends Contract {
     /**
      * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
      */
-    removeRelayByOwner(relay: string, overrides?: Overrides): Promise<ContractTransaction>;
+    removeRelayByOwner(
+      relay: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
      */
-    'removeRelayByOwner(address)'(
+    "removeRelayByOwner(address)"(
       relay: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -413,7 +459,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns how much gas should be forwarded to a call to {relayCall}, in order to relay a transaction that will spend up to `relayedCallStipend` gas.
      */
-    'requiredGas(uint256)'(
+    "requiredGas(uint256)"(
       relayedCallStipend: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -432,7 +478,7 @@ export class IRelayHub extends Contract {
     /**
      * Adds stake to a relay and sets its `unstakeDelay`. If the relay does not exist, it is created, and the caller of this function becomes its owner. If the relay already exists, only the owner can call this function. A relay cannot be its own owner. All Ether in this function call will be added to the relay's stake. Its unstake delay will be assigned to `unstakeDelay`, but the new value must be greater or equal to the current one. Emits a {Staked} event.
      */
-    'stake(address,uint256)'(
+    "stake(address,uint256)"(
       relayaddr: string,
       unstakeDelay: BigNumberish,
       overrides?: PayableOverrides
@@ -446,7 +492,10 @@ export class IRelayHub extends Contract {
     /**
      * Deletes the relay from the system, and gives back its stake to the owner. Can only be called by the relay owner, after `unstakeDelay` has elapsed since {removeRelayByOwner} was called. Emits an {Unstaked} event.
      */
-    'unstake(address)'(relay: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "unstake(address)"(
+      relay: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
@@ -460,7 +509,7 @@ export class IRelayHub extends Contract {
     /**
      * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
      */
-    'withdraw(uint256,address)'(
+    "withdraw(uint256,address)"(
       amount: BigNumberish,
       dest: string,
       overrides?: Overrides
@@ -475,7 +524,10 @@ export class IRelayHub extends Contract {
   /**
    * Returns an account's deposits. These can be either a contract's funds, or a relay owner's revenue.
    */
-  'balanceOf(address)'(target: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf(address)"(
+    target: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
@@ -502,7 +554,7 @@ export class IRelayHub extends Contract {
   /**
    * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
    */
-  'canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+  "canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
     relay: string,
     from: string,
     to: string,
@@ -524,12 +576,18 @@ export class IRelayHub extends Contract {
   /**
    * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
    */
-  depositFor(target: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  depositFor(
+    target: string,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
    */
-  'depositFor(address)'(target: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "depositFor(address)"(
+    target: string,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Returns an account's nonce in `RelayHub`.
@@ -539,7 +597,10 @@ export class IRelayHub extends Contract {
   /**
    * Returns an account's nonce in `RelayHub`.
    */
-  'getNonce(address)'(from: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "getNonce(address)"(
+    from: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
@@ -563,7 +624,7 @@ export class IRelayHub extends Contract {
   /**
    * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
    */
-  'getRelay(address)'(
+  "getRelay(address)"(
     relay: string,
     overrides?: CallOverrides
   ): Promise<{
@@ -592,7 +653,7 @@ export class IRelayHub extends Contract {
   /**
    * Returns the maximum recipient charge, given the amount of gas forwarded, gas price and relay fee.
    */
-  'maxPossibleCharge(uint256,uint256,uint256)'(
+  "maxPossibleCharge(uint256,uint256,uint256)"(
     relayedCallStipend: BigNumberish,
     gasPrice: BigNumberish,
     transactionFee: BigNumberish,
@@ -611,7 +672,7 @@ export class IRelayHub extends Contract {
   /**
    * Penalize a relay that sent a transaction that didn't target ``RelayHub``'s {registerRelay} or {relayCall}.
    */
-  'penalizeIllegalTransaction(bytes,bytes)'(
+  "penalizeIllegalTransaction(bytes,bytes)"(
     unsignedTx: BytesLike,
     signature: BytesLike,
     overrides?: Overrides
@@ -631,7 +692,7 @@ export class IRelayHub extends Contract {
   /**
    * Penalize a relay that signed two transactions using the same nonce (making only the first one valid) and different data (gas price, gas limit, etc. may be different). The (unsigned) transaction data and signature for both transactions must be provided.
    */
-  'penalizeRepeatedNonce(bytes,bytes,bytes,bytes)'(
+  "penalizeRepeatedNonce(bytes,bytes,bytes,bytes)"(
     unsignedTx1: BytesLike,
     signature1: BytesLike,
     unsignedTx2: BytesLike,
@@ -651,7 +712,7 @@ export class IRelayHub extends Contract {
   /**
    * Registers the caller as a relay. The relay must be staked for, and not be a contract (i.e. this function must be called directly from an EOA). This function can be called multiple times, emitting new {RelayAdded} events. Note that the received `transactionFee` is not enforced by {relayCall}. Emits a {RelayAdded} event.
    */
-  'registerRelay(uint256,string)'(
+  "registerRelay(uint256,string)"(
     transactionFee: BigNumberish,
     url: string,
     overrides?: Overrides
@@ -676,7 +737,7 @@ export class IRelayHub extends Contract {
   /**
    * Relays a transaction. For this to succeed, multiple conditions must be met:  - {canRelay} must `return PreconditionCheck.OK`  - the sender must be a registered relay  - the transaction's gas price must be larger or equal to the one that was requested by the sender  - the transaction must have enough gas to not run out of gas if all internal transactions (calls to the recipient) use all gas available to them  - the recipient must have enough balance to pay the relay for the worst-case scenario (i.e. when all gas is spent) If all conditions are met, the call will be relayed and the recipient charged. {preRelayedCall}, the encoded function and {postRelayedCall} will be called in that order. Parameters:  - `from`: the client originating the request  - `to`: the target {IRelayRecipient} contract  - `encodedFunction`: the function call to relay, including data  - `transactionFee`: fee (%) the relay takes over actual gas cost  - `gasPrice`: gas price the client is willing to pay  - `gasLimit`: gas to forward when calling the encoded function  - `nonce`: client's nonce  - `signature`: client's signature over all previous params, plus the relay and RelayHub addresses  - `approvalData`: dapp-specific data forwarded to {acceptRelayedCall}. This value is *not* verified by the `RelayHub`, but it still can be used for e.g. a signature. Emits a {TransactionRelayed} event.
    */
-  'relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+  "relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
     from: string,
     to: string,
     encodedFunction: BytesLike,
@@ -692,22 +753,31 @@ export class IRelayHub extends Contract {
   /**
    * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
    */
-  removeRelayByOwner(relay: string, overrides?: Overrides): Promise<ContractTransaction>;
+  removeRelayByOwner(
+    relay: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
    */
-  'removeRelayByOwner(address)'(relay: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "removeRelayByOwner(address)"(
+    relay: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Returns how much gas should be forwarded to a call to {relayCall}, in order to relay a transaction that will spend up to `relayedCallStipend` gas.
    */
-  requiredGas(relayedCallStipend: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  requiredGas(
+    relayedCallStipend: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Returns how much gas should be forwarded to a call to {relayCall}, in order to relay a transaction that will spend up to `relayedCallStipend` gas.
    */
-  'requiredGas(uint256)'(
+  "requiredGas(uint256)"(
     relayedCallStipend: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -724,7 +794,7 @@ export class IRelayHub extends Contract {
   /**
    * Adds stake to a relay and sets its `unstakeDelay`. If the relay does not exist, it is created, and the caller of this function becomes its owner. If the relay already exists, only the owner can call this function. A relay cannot be its own owner. All Ether in this function call will be added to the relay's stake. Its unstake delay will be assigned to `unstakeDelay`, but the new value must be greater or equal to the current one. Emits a {Staked} event.
    */
-  'stake(address,uint256)'(
+  "stake(address,uint256)"(
     relayaddr: string,
     unstakeDelay: BigNumberish,
     overrides?: PayableOverrides
@@ -738,17 +808,24 @@ export class IRelayHub extends Contract {
   /**
    * Deletes the relay from the system, and gives back its stake to the owner. Can only be called by the relay owner, after `unstakeDelay` has elapsed since {removeRelayByOwner} was called. Emits an {Unstaked} event.
    */
-  'unstake(address)'(relay: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "unstake(address)"(
+    relay: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
    */
-  withdraw(amount: BigNumberish, dest: string, overrides?: Overrides): Promise<ContractTransaction>;
+  withdraw(
+    amount: BigNumberish,
+    dest: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
    */
-  'withdraw(uint256,address)'(
+  "withdraw(uint256,address)"(
     amount: BigNumberish,
     dest: string,
     overrides?: Overrides
@@ -763,7 +840,10 @@ export class IRelayHub extends Contract {
     /**
      * Returns an account's deposits. These can be either a contract's funds, or a relay owner's revenue.
      */
-    'balanceOf(address)'(target: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      target: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
@@ -790,7 +870,7 @@ export class IRelayHub extends Contract {
     /**
      * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
      */
-    'canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+    "canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
       relay: string,
       from: string,
       to: string,
@@ -817,7 +897,10 @@ export class IRelayHub extends Contract {
     /**
      * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
      */
-    'depositFor(address)'(target: string, overrides?: CallOverrides): Promise<void>;
+    "depositFor(address)"(
+      target: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Returns an account's nonce in `RelayHub`.
@@ -827,7 +910,10 @@ export class IRelayHub extends Contract {
     /**
      * Returns an account's nonce in `RelayHub`.
      */
-    'getNonce(address)'(from: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getNonce(address)"(
+      from: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
@@ -851,7 +937,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
      */
-    'getRelay(address)'(
+    "getRelay(address)"(
       relay: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -880,7 +966,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns the maximum recipient charge, given the amount of gas forwarded, gas price and relay fee.
      */
-    'maxPossibleCharge(uint256,uint256,uint256)'(
+    "maxPossibleCharge(uint256,uint256,uint256)"(
       relayedCallStipend: BigNumberish,
       gasPrice: BigNumberish,
       transactionFee: BigNumberish,
@@ -899,7 +985,7 @@ export class IRelayHub extends Contract {
     /**
      * Penalize a relay that sent a transaction that didn't target ``RelayHub``'s {registerRelay} or {relayCall}.
      */
-    'penalizeIllegalTransaction(bytes,bytes)'(
+    "penalizeIllegalTransaction(bytes,bytes)"(
       unsignedTx: BytesLike,
       signature: BytesLike,
       overrides?: CallOverrides
@@ -919,7 +1005,7 @@ export class IRelayHub extends Contract {
     /**
      * Penalize a relay that signed two transactions using the same nonce (making only the first one valid) and different data (gas price, gas limit, etc. may be different). The (unsigned) transaction data and signature for both transactions must be provided.
      */
-    'penalizeRepeatedNonce(bytes,bytes,bytes,bytes)'(
+    "penalizeRepeatedNonce(bytes,bytes,bytes,bytes)"(
       unsignedTx1: BytesLike,
       signature1: BytesLike,
       unsignedTx2: BytesLike,
@@ -939,7 +1025,7 @@ export class IRelayHub extends Contract {
     /**
      * Registers the caller as a relay. The relay must be staked for, and not be a contract (i.e. this function must be called directly from an EOA). This function can be called multiple times, emitting new {RelayAdded} events. Note that the received `transactionFee` is not enforced by {relayCall}. Emits a {RelayAdded} event.
      */
-    'registerRelay(uint256,string)'(
+    "registerRelay(uint256,string)"(
       transactionFee: BigNumberish,
       url: string,
       overrides?: CallOverrides
@@ -964,7 +1050,7 @@ export class IRelayHub extends Contract {
     /**
      * Relays a transaction. For this to succeed, multiple conditions must be met:  - {canRelay} must `return PreconditionCheck.OK`  - the sender must be a registered relay  - the transaction's gas price must be larger or equal to the one that was requested by the sender  - the transaction must have enough gas to not run out of gas if all internal transactions (calls to the recipient) use all gas available to them  - the recipient must have enough balance to pay the relay for the worst-case scenario (i.e. when all gas is spent) If all conditions are met, the call will be relayed and the recipient charged. {preRelayedCall}, the encoded function and {postRelayedCall} will be called in that order. Parameters:  - `from`: the client originating the request  - `to`: the target {IRelayRecipient} contract  - `encodedFunction`: the function call to relay, including data  - `transactionFee`: fee (%) the relay takes over actual gas cost  - `gasPrice`: gas price the client is willing to pay  - `gasLimit`: gas to forward when calling the encoded function  - `nonce`: client's nonce  - `signature`: client's signature over all previous params, plus the relay and RelayHub addresses  - `approvalData`: dapp-specific data forwarded to {acceptRelayedCall}. This value is *not* verified by the `RelayHub`, but it still can be used for e.g. a signature. Emits a {TransactionRelayed} event.
      */
-    'relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+    "relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
       from: string,
       to: string,
       encodedFunction: BytesLike,
@@ -985,17 +1071,23 @@ export class IRelayHub extends Contract {
     /**
      * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
      */
-    'removeRelayByOwner(address)'(relay: string, overrides?: CallOverrides): Promise<void>;
+    "removeRelayByOwner(address)"(
+      relay: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Returns how much gas should be forwarded to a call to {relayCall}, in order to relay a transaction that will spend up to `relayedCallStipend` gas.
      */
-    requiredGas(relayedCallStipend: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    requiredGas(
+      relayedCallStipend: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns how much gas should be forwarded to a call to {relayCall}, in order to relay a transaction that will spend up to `relayedCallStipend` gas.
      */
-    'requiredGas(uint256)'(
+    "requiredGas(uint256)"(
       relayedCallStipend: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1003,12 +1095,16 @@ export class IRelayHub extends Contract {
     /**
      * Adds stake to a relay and sets its `unstakeDelay`. If the relay does not exist, it is created, and the caller of this function becomes its owner. If the relay already exists, only the owner can call this function. A relay cannot be its own owner. All Ether in this function call will be added to the relay's stake. Its unstake delay will be assigned to `unstakeDelay`, but the new value must be greater or equal to the current one. Emits a {Staked} event.
      */
-    stake(relayaddr: string, unstakeDelay: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    stake(
+      relayaddr: string,
+      unstakeDelay: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Adds stake to a relay and sets its `unstakeDelay`. If the relay does not exist, it is created, and the caller of this function becomes its owner. If the relay already exists, only the owner can call this function. A relay cannot be its own owner. All Ether in this function call will be added to the relay's stake. Its unstake delay will be assigned to `unstakeDelay`, but the new value must be greater or equal to the current one. Emits a {Staked} event.
      */
-    'stake(address,uint256)'(
+    "stake(address,uint256)"(
       relayaddr: string,
       unstakeDelay: BigNumberish,
       overrides?: CallOverrides
@@ -1022,17 +1118,21 @@ export class IRelayHub extends Contract {
     /**
      * Deletes the relay from the system, and gives back its stake to the owner. Can only be called by the relay owner, after `unstakeDelay` has elapsed since {removeRelayByOwner} was called. Emits an {Unstaked} event.
      */
-    'unstake(address)'(relay: string, overrides?: CallOverrides): Promise<void>;
+    "unstake(address)"(relay: string, overrides?: CallOverrides): Promise<void>;
 
     /**
      * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
      */
-    withdraw(amount: BigNumberish, dest: string, overrides?: CallOverrides): Promise<void>;
+    withdraw(
+      amount: BigNumberish,
+      dest: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
      */
-    'withdraw(uint256,address)'(
+    "withdraw(uint256,address)"(
       amount: BigNumberish,
       dest: string,
       overrides?: CallOverrides
@@ -1048,7 +1148,11 @@ export class IRelayHub extends Contract {
       reason: null
     ): EventFilter;
 
-    Deposited(recipient: string | null, from: string | null, amount: null): EventFilter;
+    Deposited(
+      recipient: string | null,
+      from: string | null,
+      amount: null
+    ): EventFilter;
 
     Penalized(relay: string | null, sender: null, amount: null): EventFilter;
 
@@ -1076,7 +1180,11 @@ export class IRelayHub extends Contract {
 
     Unstaked(relay: string | null, stake: null): EventFilter;
 
-    Withdrawn(account: string | null, dest: string | null, amount: null): EventFilter;
+    Withdrawn(
+      account: string | null,
+      dest: string | null,
+      amount: null
+    ): EventFilter;
   };
 
   estimateGas: {
@@ -1088,7 +1196,10 @@ export class IRelayHub extends Contract {
     /**
      * Returns an account's deposits. These can be either a contract's funds, or a relay owner's revenue.
      */
-    'balanceOf(address)'(target: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      target: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
@@ -1110,7 +1221,7 @@ export class IRelayHub extends Contract {
     /**
      * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
      */
-    'canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+    "canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
       relay: string,
       from: string,
       to: string,
@@ -1127,12 +1238,18 @@ export class IRelayHub extends Contract {
     /**
      * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
      */
-    depositFor(target: string, overrides?: PayableOverrides): Promise<BigNumber>;
+    depositFor(
+      target: string,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
      */
-    'depositFor(address)'(target: string, overrides?: PayableOverrides): Promise<BigNumber>;
+    "depositFor(address)"(
+      target: string,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns an account's nonce in `RelayHub`.
@@ -1142,7 +1259,10 @@ export class IRelayHub extends Contract {
     /**
      * Returns an account's nonce in `RelayHub`.
      */
-    'getNonce(address)'(from: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getNonce(address)"(
+      from: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
@@ -1152,7 +1272,10 @@ export class IRelayHub extends Contract {
     /**
      * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
      */
-    'getRelay(address)'(relay: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getRelay(address)"(
+      relay: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the maximum recipient charge, given the amount of gas forwarded, gas price and relay fee.
@@ -1167,7 +1290,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns the maximum recipient charge, given the amount of gas forwarded, gas price and relay fee.
      */
-    'maxPossibleCharge(uint256,uint256,uint256)'(
+    "maxPossibleCharge(uint256,uint256,uint256)"(
       relayedCallStipend: BigNumberish,
       gasPrice: BigNumberish,
       transactionFee: BigNumberish,
@@ -1186,7 +1309,7 @@ export class IRelayHub extends Contract {
     /**
      * Penalize a relay that sent a transaction that didn't target ``RelayHub``'s {registerRelay} or {relayCall}.
      */
-    'penalizeIllegalTransaction(bytes,bytes)'(
+    "penalizeIllegalTransaction(bytes,bytes)"(
       unsignedTx: BytesLike,
       signature: BytesLike,
       overrides?: Overrides
@@ -1206,7 +1329,7 @@ export class IRelayHub extends Contract {
     /**
      * Penalize a relay that signed two transactions using the same nonce (making only the first one valid) and different data (gas price, gas limit, etc. may be different). The (unsigned) transaction data and signature for both transactions must be provided.
      */
-    'penalizeRepeatedNonce(bytes,bytes,bytes,bytes)'(
+    "penalizeRepeatedNonce(bytes,bytes,bytes,bytes)"(
       unsignedTx1: BytesLike,
       signature1: BytesLike,
       unsignedTx2: BytesLike,
@@ -1226,7 +1349,7 @@ export class IRelayHub extends Contract {
     /**
      * Registers the caller as a relay. The relay must be staked for, and not be a contract (i.e. this function must be called directly from an EOA). This function can be called multiple times, emitting new {RelayAdded} events. Note that the received `transactionFee` is not enforced by {relayCall}. Emits a {RelayAdded} event.
      */
-    'registerRelay(uint256,string)'(
+    "registerRelay(uint256,string)"(
       transactionFee: BigNumberish,
       url: string,
       overrides?: Overrides
@@ -1251,7 +1374,7 @@ export class IRelayHub extends Contract {
     /**
      * Relays a transaction. For this to succeed, multiple conditions must be met:  - {canRelay} must `return PreconditionCheck.OK`  - the sender must be a registered relay  - the transaction's gas price must be larger or equal to the one that was requested by the sender  - the transaction must have enough gas to not run out of gas if all internal transactions (calls to the recipient) use all gas available to them  - the recipient must have enough balance to pay the relay for the worst-case scenario (i.e. when all gas is spent) If all conditions are met, the call will be relayed and the recipient charged. {preRelayedCall}, the encoded function and {postRelayedCall} will be called in that order. Parameters:  - `from`: the client originating the request  - `to`: the target {IRelayRecipient} contract  - `encodedFunction`: the function call to relay, including data  - `transactionFee`: fee (%) the relay takes over actual gas cost  - `gasPrice`: gas price the client is willing to pay  - `gasLimit`: gas to forward when calling the encoded function  - `nonce`: client's nonce  - `signature`: client's signature over all previous params, plus the relay and RelayHub addresses  - `approvalData`: dapp-specific data forwarded to {acceptRelayedCall}. This value is *not* verified by the `RelayHub`, but it still can be used for e.g. a signature. Emits a {TransactionRelayed} event.
      */
-    'relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+    "relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
       from: string,
       to: string,
       encodedFunction: BytesLike,
@@ -1267,22 +1390,31 @@ export class IRelayHub extends Contract {
     /**
      * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
      */
-    removeRelayByOwner(relay: string, overrides?: Overrides): Promise<BigNumber>;
+    removeRelayByOwner(
+      relay: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
      */
-    'removeRelayByOwner(address)'(relay: string, overrides?: Overrides): Promise<BigNumber>;
+    "removeRelayByOwner(address)"(
+      relay: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns how much gas should be forwarded to a call to {relayCall}, in order to relay a transaction that will spend up to `relayedCallStipend` gas.
      */
-    requiredGas(relayedCallStipend: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    requiredGas(
+      relayedCallStipend: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns how much gas should be forwarded to a call to {relayCall}, in order to relay a transaction that will spend up to `relayedCallStipend` gas.
      */
-    'requiredGas(uint256)'(
+    "requiredGas(uint256)"(
       relayedCallStipend: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1299,7 +1431,7 @@ export class IRelayHub extends Contract {
     /**
      * Adds stake to a relay and sets its `unstakeDelay`. If the relay does not exist, it is created, and the caller of this function becomes its owner. If the relay already exists, only the owner can call this function. A relay cannot be its own owner. All Ether in this function call will be added to the relay's stake. Its unstake delay will be assigned to `unstakeDelay`, but the new value must be greater or equal to the current one. Emits a {Staked} event.
      */
-    'stake(address,uint256)'(
+    "stake(address,uint256)"(
       relayaddr: string,
       unstakeDelay: BigNumberish,
       overrides?: PayableOverrides
@@ -1313,17 +1445,24 @@ export class IRelayHub extends Contract {
     /**
      * Deletes the relay from the system, and gives back its stake to the owner. Can only be called by the relay owner, after `unstakeDelay` has elapsed since {removeRelayByOwner} was called. Emits an {Unstaked} event.
      */
-    'unstake(address)'(relay: string, overrides?: Overrides): Promise<BigNumber>;
+    "unstake(address)"(
+      relay: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
      */
-    withdraw(amount: BigNumberish, dest: string, overrides?: Overrides): Promise<BigNumber>;
+    withdraw(
+      amount: BigNumberish,
+      dest: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
      */
-    'withdraw(uint256,address)'(
+    "withdraw(uint256,address)"(
       amount: BigNumberish,
       dest: string,
       overrides?: Overrides
@@ -1334,12 +1473,18 @@ export class IRelayHub extends Contract {
     /**
      * Returns an account's deposits. These can be either a contract's funds, or a relay owner's revenue.
      */
-    balanceOf(target: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    balanceOf(
+      target: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns an account's deposits. These can be either a contract's funds, or a relay owner's revenue.
      */
-    'balanceOf(address)'(target: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balanceOf(address)"(
+      target: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
@@ -1361,7 +1506,7 @@ export class IRelayHub extends Contract {
     /**
      * Checks if the `RelayHub` will accept a relayed operation. Multiple things must be true for this to happen:  - all arguments must be signed for by the sender (`from`)  - the sender's nonce must be the current one  - the recipient must accept this transaction (via {acceptRelayedCall}) Returns a `PreconditionCheck` value (`OK` when the transaction can be relayed), or a recipient-specific error code if it returns one in {acceptRelayedCall}.
      */
-    'canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+    "canRelay(address,address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
       relay: string,
       from: string,
       to: string,
@@ -1378,12 +1523,15 @@ export class IRelayHub extends Contract {
     /**
      * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
      */
-    depositFor(target: string, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    depositFor(
+      target: string,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Deposits Ether for a contract, so that it can receive (and pay for) relayed transactions. Unused balance can only be withdrawn by the contract itself, by calling {withdraw}. Emits a {Deposited} event.
      */
-    'depositFor(address)'(
+    "depositFor(address)"(
       target: string,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
@@ -1391,22 +1539,34 @@ export class IRelayHub extends Contract {
     /**
      * Returns an account's nonce in `RelayHub`.
      */
-    getNonce(from: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getNonce(
+      from: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns an account's nonce in `RelayHub`.
      */
-    'getNonce(address)'(from: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getNonce(address)"(
+      from: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
      */
-    getRelay(relay: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getRelay(
+      relay: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns a relay's status. Note that relays can be deleted when unstaked or penalized, causing this function to return an empty entry.
      */
-    'getRelay(address)'(relay: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getRelay(address)"(
+      relay: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the maximum recipient charge, given the amount of gas forwarded, gas price and relay fee.
@@ -1421,7 +1581,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns the maximum recipient charge, given the amount of gas forwarded, gas price and relay fee.
      */
-    'maxPossibleCharge(uint256,uint256,uint256)'(
+    "maxPossibleCharge(uint256,uint256,uint256)"(
       relayedCallStipend: BigNumberish,
       gasPrice: BigNumberish,
       transactionFee: BigNumberish,
@@ -1440,7 +1600,7 @@ export class IRelayHub extends Contract {
     /**
      * Penalize a relay that sent a transaction that didn't target ``RelayHub``'s {registerRelay} or {relayCall}.
      */
-    'penalizeIllegalTransaction(bytes,bytes)'(
+    "penalizeIllegalTransaction(bytes,bytes)"(
       unsignedTx: BytesLike,
       signature: BytesLike,
       overrides?: Overrides
@@ -1460,7 +1620,7 @@ export class IRelayHub extends Contract {
     /**
      * Penalize a relay that signed two transactions using the same nonce (making only the first one valid) and different data (gas price, gas limit, etc. may be different). The (unsigned) transaction data and signature for both transactions must be provided.
      */
-    'penalizeRepeatedNonce(bytes,bytes,bytes,bytes)'(
+    "penalizeRepeatedNonce(bytes,bytes,bytes,bytes)"(
       unsignedTx1: BytesLike,
       signature1: BytesLike,
       unsignedTx2: BytesLike,
@@ -1480,7 +1640,7 @@ export class IRelayHub extends Contract {
     /**
      * Registers the caller as a relay. The relay must be staked for, and not be a contract (i.e. this function must be called directly from an EOA). This function can be called multiple times, emitting new {RelayAdded} events. Note that the received `transactionFee` is not enforced by {relayCall}. Emits a {RelayAdded} event.
      */
-    'registerRelay(uint256,string)'(
+    "registerRelay(uint256,string)"(
       transactionFee: BigNumberish,
       url: string,
       overrides?: Overrides
@@ -1505,7 +1665,7 @@ export class IRelayHub extends Contract {
     /**
      * Relays a transaction. For this to succeed, multiple conditions must be met:  - {canRelay} must `return PreconditionCheck.OK`  - the sender must be a registered relay  - the transaction's gas price must be larger or equal to the one that was requested by the sender  - the transaction must have enough gas to not run out of gas if all internal transactions (calls to the recipient) use all gas available to them  - the recipient must have enough balance to pay the relay for the worst-case scenario (i.e. when all gas is spent) If all conditions are met, the call will be relayed and the recipient charged. {preRelayedCall}, the encoded function and {postRelayedCall} will be called in that order. Parameters:  - `from`: the client originating the request  - `to`: the target {IRelayRecipient} contract  - `encodedFunction`: the function call to relay, including data  - `transactionFee`: fee (%) the relay takes over actual gas cost  - `gasPrice`: gas price the client is willing to pay  - `gasLimit`: gas to forward when calling the encoded function  - `nonce`: client's nonce  - `signature`: client's signature over all previous params, plus the relay and RelayHub addresses  - `approvalData`: dapp-specific data forwarded to {acceptRelayedCall}. This value is *not* verified by the `RelayHub`, but it still can be used for e.g. a signature. Emits a {TransactionRelayed} event.
      */
-    'relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)'(
+    "relayCall(address,address,bytes,uint256,uint256,uint256,uint256,bytes,bytes)"(
       from: string,
       to: string,
       encodedFunction: BytesLike,
@@ -1521,12 +1681,15 @@ export class IRelayHub extends Contract {
     /**
      * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
      */
-    removeRelayByOwner(relay: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    removeRelayByOwner(
+      relay: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Removes (deregisters) a relay. Unregistered (but staked for) relays can also be removed. Can only be called by the owner of the relay. After the relay's `unstakeDelay` has elapsed, {unstake} will be callable. Emits a {RelayRemoved} event.
      */
-    'removeRelayByOwner(address)'(
+    "removeRelayByOwner(address)"(
       relay: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -1542,7 +1705,7 @@ export class IRelayHub extends Contract {
     /**
      * Returns how much gas should be forwarded to a call to {relayCall}, in order to relay a transaction that will spend up to `relayedCallStipend` gas.
      */
-    'requiredGas(uint256)'(
+    "requiredGas(uint256)"(
       relayedCallStipend: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1559,7 +1722,7 @@ export class IRelayHub extends Contract {
     /**
      * Adds stake to a relay and sets its `unstakeDelay`. If the relay does not exist, it is created, and the caller of this function becomes its owner. If the relay already exists, only the owner can call this function. A relay cannot be its own owner. All Ether in this function call will be added to the relay's stake. Its unstake delay will be assigned to `unstakeDelay`, but the new value must be greater or equal to the current one. Emits a {Staked} event.
      */
-    'stake(address,uint256)'(
+    "stake(address,uint256)"(
       relayaddr: string,
       unstakeDelay: BigNumberish,
       overrides?: PayableOverrides
@@ -1568,12 +1731,18 @@ export class IRelayHub extends Contract {
     /**
      * Deletes the relay from the system, and gives back its stake to the owner. Can only be called by the relay owner, after `unstakeDelay` has elapsed since {removeRelayByOwner} was called. Emits an {Unstaked} event.
      */
-    unstake(relay: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    unstake(
+      relay: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Deletes the relay from the system, and gives back its stake to the owner. Can only be called by the relay owner, after `unstakeDelay` has elapsed since {removeRelayByOwner} was called. Emits an {Unstaked} event.
      */
-    'unstake(address)'(relay: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "unstake(address)"(
+      relay: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
@@ -1587,7 +1756,7 @@ export class IRelayHub extends Contract {
     /**
      * Withdraws from an account's balance, sending it back to it. Relay owners call this to retrieve their revenue, and contracts can use it to reduce their funding. Emits a {Withdrawn} event.
      */
-    'withdraw(uint256,address)'(
+    "withdraw(uint256,address)"(
       amount: BigNumberish,
       dest: string,
       overrides?: Overrides

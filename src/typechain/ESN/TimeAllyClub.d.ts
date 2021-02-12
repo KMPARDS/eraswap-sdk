@@ -2,92 +2,147 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface TimeAllyClubInterface extends ethers.utils.Interface {
   functions: {
-    'dayswappers()': FunctionFragment;
-    'getCurrentIncentiveSlabForNetworker(address,address)': FunctionFragment;
-    'getIncentiveSlab(uint256,address)': FunctionFragment;
-    'getMembershipVolume(address,uint32)': FunctionFragment;
-    'getMonthlyNRT(uint32)': FunctionFragment;
-    'getPlatformBusiness(address,uint32,address)': FunctionFragment;
-    'getReward(address,uint32,address)': FunctionFragment;
-    'getTotalBusinessVolume(uint32)': FunctionFragment;
-    'getTotalRewards(uint32)': FunctionFragment;
-    'initialize()': FunctionFragment;
-    'isAuthorized(bytes32)': FunctionFragment;
-    'kycDapp()': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'randomnessManager()': FunctionFragment;
-    'receiveNrt(uint32)': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveAddressStrict(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
-    'resolveUsernameStrict(address)': FunctionFragment;
-    'rewardToIntroducer(address,uint256)': FunctionFragment;
-    'rewardToNetworker(address,uint256)': FunctionFragment;
-    'setKycDapp(address)': FunctionFragment;
-    'setPlatformIncentives(address,tuple[])': FunctionFragment;
-    'timeallyClub()': FunctionFragment;
-    'timeallyManager()': FunctionFragment;
-    'timeallyPromotionalBucket()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'updateAuthorization(bytes32,bool)': FunctionFragment;
-    'validatorManager()': FunctionFragment;
-    'withdrawPlatformIncentive(uint32,address,uint8,address)': FunctionFragment;
+    "dayswappers()": FunctionFragment;
+    "getCurrentIncentiveSlabForNetworker(address,address)": FunctionFragment;
+    "getIncentiveSlab(uint256,address)": FunctionFragment;
+    "getMembershipVolume(address,uint32)": FunctionFragment;
+    "getMonthlyNRT(uint32)": FunctionFragment;
+    "getPlatformBusiness(address,uint32,address)": FunctionFragment;
+    "getReward(address,uint32,address)": FunctionFragment;
+    "getTotalBusinessVolume(uint32)": FunctionFragment;
+    "getTotalRewards(uint32)": FunctionFragment;
+    "initialize()": FunctionFragment;
+    "isAuthorized(bytes32)": FunctionFragment;
+    "kycDapp()": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "randomnessManager()": FunctionFragment;
+    "receiveNrt(uint32)": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveAddressStrict(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
+    "resolveUsernameStrict(address)": FunctionFragment;
+    "rewardToIntroducer(address,uint256)": FunctionFragment;
+    "rewardToNetworker(address,uint256)": FunctionFragment;
+    "setKycDapp(address)": FunctionFragment;
+    "setPlatformIncentives(address,tuple[])": FunctionFragment;
+    "timeallyClub()": FunctionFragment;
+    "timeallyManager()": FunctionFragment;
+    "timeallyPromotionalBucket()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "updateAuthorization(bytes32,bool)": FunctionFragment;
+    "validatorManager()": FunctionFragment;
+    "withdrawPlatformIncentive(uint32,address,uint8,address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'getCurrentIncentiveSlabForNetworker',
+    functionFragment: "dayswappers",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCurrentIncentiveSlabForNetworker",
     values: [string, string]
   ): string;
-  encodeFunctionData(functionFragment: 'getIncentiveSlab', values: [BigNumberish, string]): string;
   encodeFunctionData(
-    functionFragment: 'getMembershipVolume',
+    functionFragment: "getIncentiveSlab",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMembershipVolume",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'getMonthlyNRT', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'getPlatformBusiness',
+    functionFragment: "getMonthlyNRT",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPlatformBusiness",
     values: [string, BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: 'getReward', values: [string, BigNumberish, string]): string;
-  encodeFunctionData(functionFragment: 'getTotalBusinessVolume', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getTotalRewards', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'isAuthorized', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'receiveNrt', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'rewardToIntroducer',
+    functionFragment: "getReward",
+    values: [string, BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTotalBusinessVolume",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTotalRewards",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isAuthorized",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "kycDapp", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "randomnessManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "receiveNrt",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddressStrict",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsernameStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardToIntroducer",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'rewardToNetworker', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'setPlatformIncentives',
+    functionFragment: "rewardToNetworker",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "setKycDapp", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "setPlatformIncentives",
     values: [
       string,
       {
@@ -98,66 +153,153 @@ interface TimeAllyClubInterface extends ethers.utils.Interface {
       }[]
     ]
   ): string;
-  encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'updateAuthorization', values: [BytesLike, boolean]): string;
-  encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'withdrawPlatformIncentive',
+    functionFragment: "timeallyClub",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyPromotionalBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateAuthorization",
+    values: [BytesLike, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "validatorManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawPlatformIncentive",
     values: [BigNumberish, string, BigNumberish, string]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'getCurrentIncentiveSlabForNetworker',
+    functionFragment: "dayswappers",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: 'getIncentiveSlab', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getMembershipVolume', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getMonthlyNRT', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPlatformBusiness', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getReward', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalBusinessVolume', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalRewards', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isAuthorized', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'rewardToIntroducer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'rewardToNetworker', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setPlatformIncentives', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updateAuthorization', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawPlatformIncentive', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentIncentiveSlabForNetworker",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getIncentiveSlab",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMembershipVolume",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMonthlyNRT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPlatformBusiness",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getReward", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalBusinessVolume",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isAuthorized",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "kycDapp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "randomnessManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "receiveNrt", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsernameStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToIntroducer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToNetworker",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setKycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setPlatformIncentives",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyClub",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyPromotionalBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateAuthorization",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "validatorManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawPlatformIncentive",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Authorised(bytes32,bool)': EventFragment;
-    'Business(address,address,uint32,uint256)': EventFragment;
-    'NRTReceived(uint32,uint256,address)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'Withdraw(address,address,uint32,uint256,uint256,uint256,address)': EventFragment;
+    "Authorised(bytes32,bool)": EventFragment;
+    "Business(address,address,uint32,uint256)": EventFragment;
+    "NRTReceived(uint32,uint256,address)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "Withdraw(address,address,uint32,uint256,uint256,uint256,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Authorised'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Business'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NRTReceived'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Withdraw'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Authorised"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Business"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NRTReceived"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdraw"): EventFragment;
 }
 
 export class TimeAllyClub extends Contract {
@@ -180,7 +322,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'dayswappers()'(
+    "dayswappers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -203,7 +345,7 @@ export class TimeAllyClub extends Contract {
       };
     }>;
 
-    'getCurrentIncentiveSlabForNetworker(address,address)'(
+    "getCurrentIncentiveSlabForNetworker(address,address)"(
       _networker: string,
       _platform: string,
       overrides?: CallOverrides
@@ -237,7 +379,7 @@ export class TimeAllyClub extends Contract {
       };
     }>;
 
-    'getIncentiveSlab(uint256,address)'(
+    "getIncentiveSlab(uint256,address)"(
       _volume: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
@@ -265,7 +407,7 @@ export class TimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    'getMembershipVolume(address,uint32)'(
+    "getMembershipVolume(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -283,7 +425,7 @@ export class TimeAllyClub extends Contract {
       0: BigNumber;
     }>;
 
-    'getMonthlyNRT(uint32)'(
+    "getMonthlyNRT(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -306,7 +448,7 @@ export class TimeAllyClub extends Contract {
       };
     }>;
 
-    'getPlatformBusiness(address,uint32,address)'(
+    "getPlatformBusiness(address,uint32,address)"(
       _network: string,
       _month: BigNumberish,
       _platform: string,
@@ -334,7 +476,7 @@ export class TimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    'getReward(address,uint32,address)'(
+    "getReward(address,uint32,address)"(
       _networker: string,
       _month: BigNumberish,
       _platform: string,
@@ -353,7 +495,7 @@ export class TimeAllyClub extends Contract {
       0: BigNumber;
     }>;
 
-    'getTotalBusinessVolume(uint32)'(
+    "getTotalBusinessVolume(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -367,7 +509,7 @@ export class TimeAllyClub extends Contract {
       0: BigNumber;
     }>;
 
-    'getTotalRewards(uint32)'(
+    "getTotalRewards(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -376,16 +518,16 @@ export class TimeAllyClub extends Contract {
 
     initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-    'isAuthorized(bytes32)'(
+    "isAuthorized(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
     }>;
 
-    'isAuthorized(address)'(
+    "isAuthorized(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -398,7 +540,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'kycDapp()'(
+    "kycDapp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -410,7 +552,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -428,7 +570,7 @@ export class TimeAllyClub extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -440,7 +582,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -452,7 +594,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'randomnessManager()'(
+    "randomnessManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -469,7 +611,7 @@ export class TimeAllyClub extends Contract {
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -481,7 +623,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -495,7 +637,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -509,7 +651,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -523,7 +665,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -536,7 +678,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'rewardToIntroducer(address,uint256)'(
+    "rewardToIntroducer(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -548,15 +690,21 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'rewardToNetworker(address,uint256)'(
+    "rewardToNetworker(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     setPlatformIncentives(
       _platform: string,
@@ -569,7 +717,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'setPlatformIncentives(address,tuple[])'(
+    "setPlatformIncentives(address,tuple[])"(
       _platform: string,
       _incentiveStructure: {
         label: string;
@@ -586,7 +734,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'timeallyClub()'(
+    "timeallyClub()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -598,7 +746,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'timeallyManager()'(
+    "timeallyManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -610,7 +758,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'timeallyPromotionalBucket()'(
+    "timeallyPromotionalBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -619,12 +767,15 @@ export class TimeAllyClub extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -635,7 +786,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -647,7 +798,7 @@ export class TimeAllyClub extends Contract {
       0: string;
     }>;
 
-    'validatorManager()'(
+    "validatorManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -661,7 +812,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+    "withdrawPlatformIncentive(uint32,address,uint8,address)"(
       _month: BigNumberish,
       _platform: string,
       _rewardType: BigNumberish,
@@ -672,7 +823,7 @@ export class TimeAllyClub extends Contract {
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
 
-  'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+  "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
   getCurrentIncentiveSlabForNetworker(
     _networker: string,
@@ -689,7 +840,7 @@ export class TimeAllyClub extends Contract {
     3: number;
   }>;
 
-  'getCurrentIncentiveSlabForNetworker(address,address)'(
+  "getCurrentIncentiveSlabForNetworker(address,address)"(
     _networker: string,
     _platform: string,
     overrides?: CallOverrides
@@ -719,7 +870,7 @@ export class TimeAllyClub extends Contract {
     3: number;
   }>;
 
-  'getIncentiveSlab(uint256,address)'(
+  "getIncentiveSlab(uint256,address)"(
     _volume: BigNumberish,
     _platform: string,
     overrides?: CallOverrides
@@ -745,7 +896,7 @@ export class TimeAllyClub extends Contract {
     1: BigNumber;
   }>;
 
-  'getMembershipVolume(address,uint32)'(
+  "getMembershipVolume(address,uint32)"(
     _networker: string,
     _month: BigNumberish,
     overrides?: CallOverrides
@@ -756,9 +907,15 @@ export class TimeAllyClub extends Contract {
     1: BigNumber;
   }>;
 
-  getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getMonthlyNRT(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  "getMonthlyNRT(uint32)"(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   getPlatformBusiness(
     _network: string,
@@ -774,7 +931,7 @@ export class TimeAllyClub extends Contract {
     2: boolean;
   }>;
 
-  'getPlatformBusiness(address,uint32,address)'(
+  "getPlatformBusiness(address,uint32,address)"(
     _network: string,
     _month: BigNumberish,
     _platform: string,
@@ -800,7 +957,7 @@ export class TimeAllyClub extends Contract {
     1: BigNumber;
   }>;
 
-  'getReward(address,uint32,address)'(
+  "getReward(address,uint32,address)"(
     _networker: string,
     _month: BigNumberish,
     _platform: string,
@@ -812,32 +969,47 @@ export class TimeAllyClub extends Contract {
     1: BigNumber;
   }>;
 
-  getTotalBusinessVolume(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-  'getTotalBusinessVolume(uint32)'(
+  getTotalBusinessVolume(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  getTotalRewards(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  "getTotalBusinessVolume(uint32)"(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getTotalRewards(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getTotalRewards(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "getTotalRewards(uint32)"(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-  'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  "isAuthorized(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
+  "isAuthorized(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
-  'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+  "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -847,15 +1019,15 @@ export class TimeAllyClub extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-  'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+  "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Allows NRT Manager contract to send NRT share for TimeAlly.
@@ -868,26 +1040,47 @@ export class TimeAllyClub extends Contract {
   /**
    * Allows NRT Manager contract to send NRT share for TimeAlly.
    */
-  'receiveNrt(uint32)'(
+  "receiveNrt(uint32)"(
     _currentNrtMonth: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddressStrict(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddressStrict(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddressStrict(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  resolveUsernameStrict(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsernameStrict(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   rewardToIntroducer(
     _networker: string,
@@ -895,7 +1088,7 @@ export class TimeAllyClub extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'rewardToIntroducer(address,uint256)'(
+  "rewardToIntroducer(address,uint256)"(
     _networker: string,
     _value: BigNumberish,
     overrides?: Overrides
@@ -907,15 +1100,21 @@ export class TimeAllyClub extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'rewardToNetworker(address,uint256)'(
+  "rewardToNetworker(address,uint256)"(
     _networker: string,
     _value: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setKycDapp(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "setKycDapp(address)"(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   setPlatformIncentives(
     _platform: string,
@@ -928,7 +1127,7 @@ export class TimeAllyClub extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'setPlatformIncentives(address,tuple[])'(
+  "setPlatformIncentives(address,tuple[])"(
     _platform: string,
     _incentiveStructure: {
       label: string;
@@ -941,25 +1140,28 @@ export class TimeAllyClub extends Contract {
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -970,7 +1172,7 @@ export class TimeAllyClub extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'updateAuthorization(bytes32,bool)'(
+  "updateAuthorization(bytes32,bool)"(
     _username: BytesLike,
     _newStatus: boolean,
     overrides?: Overrides
@@ -978,7 +1180,7 @@ export class TimeAllyClub extends Contract {
 
   validatorManager(overrides?: CallOverrides): Promise<string>;
 
-  'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+  "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
   withdrawPlatformIncentive(
     _month: BigNumberish,
@@ -988,7 +1190,7 @@ export class TimeAllyClub extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+  "withdrawPlatformIncentive(uint32,address,uint8,address)"(
     _month: BigNumberish,
     _platform: string,
     _rewardType: BigNumberish,
@@ -999,7 +1201,7 @@ export class TimeAllyClub extends Contract {
   callStatic: {
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
     getCurrentIncentiveSlabForNetworker(
       _networker: string,
@@ -1016,7 +1218,7 @@ export class TimeAllyClub extends Contract {
       3: number;
     }>;
 
-    'getCurrentIncentiveSlabForNetworker(address,address)'(
+    "getCurrentIncentiveSlabForNetworker(address,address)"(
       _networker: string,
       _platform: string,
       overrides?: CallOverrides
@@ -1046,7 +1248,7 @@ export class TimeAllyClub extends Contract {
       3: number;
     }>;
 
-    'getIncentiveSlab(uint256,address)'(
+    "getIncentiveSlab(uint256,address)"(
       _volume: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
@@ -1072,7 +1274,7 @@ export class TimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    'getMembershipVolume(address,uint32)'(
+    "getMembershipVolume(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
@@ -1083,9 +1285,15 @@ export class TimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMonthlyNRT(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getPlatformBusiness(
       _network: string,
@@ -1101,7 +1309,7 @@ export class TimeAllyClub extends Contract {
       2: boolean;
     }>;
 
-    'getPlatformBusiness(address,uint32,address)'(
+    "getPlatformBusiness(address,uint32,address)"(
       _network: string,
       _month: BigNumberish,
       _platform: string,
@@ -1127,7 +1335,7 @@ export class TimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    'getReward(address,uint32,address)'(
+    "getReward(address,uint32,address)"(
       _networker: string,
       _month: BigNumberish,
       _platform: string,
@@ -1139,32 +1347,47 @@ export class TimeAllyClub extends Contract {
       1: BigNumber;
     }>;
 
-    getTotalBusinessVolume(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getTotalBusinessVolume(uint32)'(
+    getTotalBusinessVolume(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getTotalRewards(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getTotalBusinessVolume(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTotalRewards(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalRewards(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getTotalRewards(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     initialize(overrides?: CallOverrides): Promise<void>;
 
-    'initialize()'(overrides?: CallOverrides): Promise<void>;
+    "initialize()"(overrides?: CallOverrides): Promise<void>;
 
-    'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    "isAuthorized(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
+    "isAuthorized(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -1174,44 +1397,71 @@ export class TimeAllyClub extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    receiveNrt(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    receiveNrt(
+      _currentNrtMonth: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'receiveNrt(uint32)'(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "receiveNrt(uint32)"(
+      _currentNrtMonth: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsernameStrict(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     rewardToIntroducer(
       _networker: string,
@@ -1219,7 +1469,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'rewardToIntroducer(address,uint256)'(
+    "rewardToIntroducer(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: CallOverrides
@@ -1231,7 +1481,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'rewardToNetworker(address,uint256)'(
+    "rewardToNetworker(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: CallOverrides
@@ -1239,7 +1489,10 @@ export class TimeAllyClub extends Contract {
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setPlatformIncentives(
       _platform: string,
@@ -1252,7 +1505,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'setPlatformIncentives(address,tuple[])'(
+    "setPlatformIncentives(address,tuple[])"(
       _platform: string,
       _incentiveStructure: {
         label: string;
@@ -1265,25 +1518,31 @@ export class TimeAllyClub extends Contract {
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     updateAuthorization(
       _username: BytesLike,
@@ -1291,7 +1550,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: CallOverrides
@@ -1299,7 +1558,7 @@ export class TimeAllyClub extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<string>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
     withdrawPlatformIncentive(
       _month: BigNumberish,
@@ -1309,7 +1568,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+    "withdrawPlatformIncentive(uint32,address,uint8,address)"(
       _month: BigNumberish,
       _platform: string,
       _rewardType: BigNumberish,
@@ -1328,9 +1587,16 @@ export class TimeAllyClub extends Contract {
       value: null
     ): EventFilter;
 
-    NRTReceived(month: BigNumberish | null, amount: BigNumberish | null, sender: null): EventFilter;
+    NRTReceived(
+      month: BigNumberish | null,
+      amount: BigNumberish | null,
+      sender: null
+    ): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
 
     Withdraw(
       networker: string | null,
@@ -1346,7 +1612,7 @@ export class TimeAllyClub extends Contract {
   estimateGas: {
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getCurrentIncentiveSlabForNetworker(
       _networker: string,
@@ -1354,7 +1620,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getCurrentIncentiveSlabForNetworker(address,address)'(
+    "getCurrentIncentiveSlabForNetworker(address,address)"(
       _networker: string,
       _platform: string,
       overrides?: CallOverrides
@@ -1366,7 +1632,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getIncentiveSlab(uint256,address)'(
+    "getIncentiveSlab(uint256,address)"(
       _volume: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
@@ -1378,15 +1644,21 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getMembershipVolume(address,uint32)'(
+    "getMembershipVolume(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMonthlyNRT(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getPlatformBusiness(
       _network: string,
@@ -1395,7 +1667,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getPlatformBusiness(address,uint32,address)'(
+    "getPlatformBusiness(address,uint32,address)"(
       _network: string,
       _month: BigNumberish,
       _platform: string,
@@ -1409,39 +1681,54 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getReward(address,uint32,address)'(
+    "getReward(address,uint32,address)"(
       _networker: string,
       _month: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getTotalBusinessVolume(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getTotalBusinessVolume(uint32)'(
+    getTotalBusinessVolume(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getTotalRewards(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getTotalBusinessVolume(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTotalRewards(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalRewards(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getTotalRewards(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     initialize(overrides?: PayableOverrides): Promise<BigNumber>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "initialize()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
-    'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "isAuthorized(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "isAuthorized(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -1451,47 +1738,68 @@ export class TimeAllyClub extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    receiveNrt(_currentNrtMonth: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
-
-    /**
-     * Allows NRT Manager contract to send NRT share for TimeAlly.
-     */
-    'receiveNrt(uint32)'(
+    receiveNrt(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    /**
+     * Allows NRT Manager contract to send NRT share for TimeAlly.
+     */
+    "receiveNrt(uint32)"(
+      _currentNrtMonth: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsernameStrict(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1502,7 +1810,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'rewardToIntroducer(address,uint256)'(
+    "rewardToIntroducer(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1514,7 +1822,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'rewardToNetworker(address,uint256)'(
+    "rewardToNetworker(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1522,7 +1830,10 @@ export class TimeAllyClub extends Contract {
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     setPlatformIncentives(
       _platform: string,
@@ -1535,7 +1846,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'setPlatformIncentives(address,tuple[])'(
+    "setPlatformIncentives(address,tuple[])"(
       _platform: string,
       _incentiveStructure: {
         label: string;
@@ -1548,25 +1859,33 @@ export class TimeAllyClub extends Contract {
 
     timeallyClub(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     updateAuthorization(
       _username: BytesLike,
@@ -1574,7 +1893,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -1582,7 +1901,7 @@ export class TimeAllyClub extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawPlatformIncentive(
       _month: BigNumberish,
@@ -1592,7 +1911,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+    "withdrawPlatformIncentive(uint32,address,uint8,address)"(
       _month: BigNumberish,
       _platform: string,
       _rewardType: BigNumberish,
@@ -1604,7 +1923,7 @@ export class TimeAllyClub extends Contract {
   populateTransaction: {
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getCurrentIncentiveSlabForNetworker(
       _networker: string,
@@ -1612,7 +1931,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getCurrentIncentiveSlabForNetworker(address,address)'(
+    "getCurrentIncentiveSlabForNetworker(address,address)"(
       _networker: string,
       _platform: string,
       overrides?: CallOverrides
@@ -1624,7 +1943,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getIncentiveSlab(uint256,address)'(
+    "getIncentiveSlab(uint256,address)"(
       _volume: BigNumberish,
       _platform: string,
       overrides?: CallOverrides
@@ -1636,15 +1955,18 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getMembershipVolume(address,uint32)'(
+    "getMembershipVolume(address,uint32)"(
       _networker: string,
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getMonthlyNRT(uint32)'(
+    "getMonthlyNRT(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1656,7 +1978,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getPlatformBusiness(address,uint32,address)'(
+    "getPlatformBusiness(address,uint32,address)"(
       _network: string,
       _month: BigNumberish,
       _platform: string,
@@ -1670,7 +1992,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getReward(address,uint32,address)'(
+    "getReward(address,uint32,address)"(
       _networker: string,
       _month: BigNumberish,
       _platform: string,
@@ -1682,39 +2004,42 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getTotalBusinessVolume(uint32)'(
+    "getTotalBusinessVolume(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getTotalRewards(_month: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getTotalRewards(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getTotalRewards(uint32)'(
+    "getTotalRewards(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
-    'isAuthorized(bytes32)'(
+    "isAuthorized(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'isAuthorized(address)'(
+    "isAuthorized(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -1724,15 +2049,17 @@ export class TimeAllyClub extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "randomnessManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
@@ -1745,14 +2072,17 @@ export class TimeAllyClub extends Contract {
     /**
      * Allows NRT Manager contract to send NRT share for TimeAlly.
      */
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1762,14 +2092,17 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1779,7 +2112,7 @@ export class TimeAllyClub extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1790,7 +2123,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'rewardToIntroducer(address,uint256)'(
+    "rewardToIntroducer(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1802,15 +2135,21 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'rewardToNetworker(address,uint256)'(
+    "rewardToNetworker(address,uint256)"(
       _networker: string,
       _value: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     setPlatformIncentives(
       _platform: string,
@@ -1823,7 +2162,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'setPlatformIncentives(address,tuple[])'(
+    "setPlatformIncentives(address,tuple[])"(
       _platform: string,
       _incentiveStructure: {
         label: string;
@@ -1836,25 +2175,34 @@ export class TimeAllyClub extends Contract {
 
     timeallyClub(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    timeallyPromotionalBucket(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -1865,7 +2213,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -1873,7 +2221,9 @@ export class TimeAllyClub extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "validatorManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     withdrawPlatformIncentive(
       _month: BigNumberish,
@@ -1883,7 +2233,7 @@ export class TimeAllyClub extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'withdrawPlatformIncentive(uint32,address,uint8,address)'(
+    "withdrawPlatformIncentive(uint32,address,uint8,address)"(
       _month: BigNumberish,
       _platform: string,
       _rewardType: BigNumberish,

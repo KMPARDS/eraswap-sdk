@@ -2,75 +2,133 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
-interface GsnRecipientErc20FeeUnstableErc20OwnedInterface extends ethers.utils.Interface {
+interface GsnRecipientErc20FeeUnstableErc20OwnedInterface
+  extends ethers.utils.Interface {
   functions: {
-    'allowance(address,address)': FunctionFragment;
-    'approve(address,uint256)': FunctionFragment;
-    'balanceOf(address)': FunctionFragment;
-    'decimals()': FunctionFragment;
-    'decreaseAllowance(address,uint256)': FunctionFragment;
-    'increaseAllowance(address,uint256)': FunctionFragment;
-    'mint(address,uint256)': FunctionFragment;
-    'name()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
-    'symbol()': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'transfer(address,uint256)': FunctionFragment;
-    'transferFrom(address,address,uint256)': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
+    "allowance(address,address)": FunctionFragment;
+    "approve(address,uint256)": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "decimals()": FunctionFragment;
+    "decreaseAllowance(address,uint256)": FunctionFragment;
+    "increaseAllowance(address,uint256)": FunctionFragment;
+    "mint(address,uint256)": FunctionFragment;
+    "name()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "transfer(address,uint256)": FunctionFragment;
+    "transferFrom(address,address,uint256)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'allowance', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'approve', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
-  encodeFunctionData(functionFragment: 'decimals', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'decreaseAllowance', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'increaseAllowance', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'mint', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'name', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transfer', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'transferFrom',
+    functionFragment: "allowance",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approve",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mint",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'allowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decimals', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decreaseAllowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'increaseAllowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transfer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Approval(address,address,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'Transfer(address,address,uint256)': EventFragment;
+    "Approval(address,address,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "Transfer(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
 export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
@@ -95,7 +153,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
       0: BigNumber;
     }>;
 
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       tokenOwner: string,
       spender: string,
       overrides?: CallOverrides
@@ -115,7 +173,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -134,7 +192,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-balanceOf}.
      */
-    'balanceOf(address)'(
+    "balanceOf(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -153,7 +211,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    'decimals()'(
+    "decimals()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -171,7 +229,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
      */
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides
@@ -189,7 +247,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
      */
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides
@@ -201,7 +259,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'mint(address,uint256)'(
+    "mint(address,uint256)"(
       account: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -219,7 +277,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the name of the token.
      */
-    'name()'(
+    "name()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -237,7 +295,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -251,7 +309,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
      */
-    'renounceOwnership()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
@@ -265,7 +323,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
      */
-    'symbol()'(
+    "symbol()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -283,7 +341,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-totalSupply}.
      */
-    'totalSupply()'(
+    "totalSupply()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -301,7 +359,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -320,7 +378,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -330,20 +388,27 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
   };
 
-  allowance(tokenOwner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+  allowance(
+    tokenOwner: string,
+    spender: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'allowance(address,address)'(
+  "allowance(address,address)"(
     tokenOwner: string,
     spender: string,
     overrides?: CallOverrides
@@ -361,7 +426,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
    */
-  'approve(address,uint256)'(
+  "approve(address,uint256)"(
     spender: string,
     amount: BigNumberish,
     overrides?: Overrides
@@ -375,7 +440,10 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * See {IERC20-balanceOf}.
    */
-  'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf(address)"(
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
@@ -385,7 +453,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
    */
-  'decimals()'(overrides?: CallOverrides): Promise<number>;
+  "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   /**
    * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
@@ -399,7 +467,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
    */
-  'decreaseAllowance(address,uint256)'(
+  "decreaseAllowance(address,uint256)"(
     spender: string,
     subtractedValue: BigNumberish,
     overrides?: Overrides
@@ -417,15 +485,19 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
    */
-  'increaseAllowance(address,uint256)'(
+  "increaseAllowance(address,uint256)"(
     spender: string,
     addedValue: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  mint(account: string, amount: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  mint(
+    account: string,
+    amount: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'mint(address,uint256)'(
+  "mint(address,uint256)"(
     account: string,
     amount: BigNumberish,
     overrides?: Overrides
@@ -439,7 +511,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * Returns the name of the token.
    */
-  'name()'(overrides?: CallOverrides): Promise<string>;
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -449,7 +521,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
@@ -459,7 +531,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
    */
-  'renounceOwnership()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * Returns the symbol of the token, usually a shorter version of the name.
@@ -469,7 +541,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * Returns the symbol of the token, usually a shorter version of the name.
    */
-  'symbol()'(overrides?: CallOverrides): Promise<string>;
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * See {IERC20-totalSupply}.
@@ -479,7 +551,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * See {IERC20-totalSupply}.
    */
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
@@ -493,7 +565,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
    */
-  'transfer(address,uint256)'(
+  "transfer(address,uint256)"(
     recipient: string,
     amount: BigNumberish,
     overrides?: Overrides
@@ -512,7 +584,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
    */
-  'transferFrom(address,address,uint256)'(
+  "transferFrom(address,address,uint256)"(
     sender: string,
     recipient: string,
     amount: BigNumberish,
@@ -522,20 +594,27 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    allowance(tokenOwner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      tokenOwner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       tokenOwner: string,
       spender: string,
       overrides?: CallOverrides
@@ -544,12 +623,16 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    approve(spender: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    approve(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -563,7 +646,10 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-balanceOf}.
      */
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
@@ -573,7 +659,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    'decimals()'(overrides?: CallOverrides): Promise<number>;
+    "decimals()"(overrides?: CallOverrides): Promise<number>;
 
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
@@ -587,7 +673,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
      */
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: CallOverrides
@@ -605,15 +691,19 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
      */
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    mint(account: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    mint(
+      account: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'mint(address,uint256)'(
+    "mint(address,uint256)"(
       account: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -627,7 +717,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the name of the token.
      */
-    'name()'(overrides?: CallOverrides): Promise<string>;
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -637,7 +727,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
@@ -647,7 +737,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
      */
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
@@ -657,7 +747,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<string>;
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * See {IERC20-totalSupply}.
@@ -667,17 +757,21 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    transfer(recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    transfer(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -696,7 +790,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -706,26 +800,43 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
-    Approval(owner: string | null, spender: string | null, value: null): EventFilter;
+    Approval(
+      owner: string | null,
+      spender: string | null,
+      value: null
+    ): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
 
     Transfer(from: string | null, to: string | null, value: null): EventFilter;
   };
 
   estimateGas: {
-    allowance(tokenOwner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      tokenOwner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       tokenOwner: string,
       spender: string,
       overrides?: CallOverrides
@@ -734,12 +845,16 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    approve(spender: string, amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    approve(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -753,7 +868,10 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-balanceOf}.
      */
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
@@ -763,7 +881,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    'decimals()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
@@ -777,7 +895,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
      */
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides
@@ -795,15 +913,19 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
      */
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    mint(account: string, amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    mint(
+      account: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'mint(address,uint256)'(
+    "mint(address,uint256)"(
       account: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -817,7 +939,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the name of the token.
      */
-    'name()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -827,7 +949,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
@@ -837,7 +959,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
      */
-    'renounceOwnership()'(overrides?: Overrides): Promise<BigNumber>;
+    "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
@@ -847,7 +969,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-totalSupply}.
@@ -857,17 +979,21 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    transfer(recipient: string, amount: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    transfer(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -886,7 +1012,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -896,12 +1022,18 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -911,7 +1043,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       tokenOwner: string,
       spender: string,
       overrides?: CallOverrides
@@ -929,7 +1061,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-approve}. Requirements: - `spender` cannot be the zero address.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -938,12 +1070,18 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-balanceOf}.
      */
-    balanceOf(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    balanceOf(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC20-balanceOf}.
      */
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
@@ -953,7 +1091,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.
      */
-    'decimals()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
@@ -967,7 +1105,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.
      */
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides
@@ -985,7 +1123,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.
      */
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides
@@ -997,7 +1135,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'mint(address,uint256)'(
+    "mint(address,uint256)"(
       account: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1011,7 +1149,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the name of the token.
      */
-    'name()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -1021,7 +1159,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
@@ -1031,7 +1169,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.
      */
-    'renounceOwnership()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
@@ -1041,7 +1179,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Returns the symbol of the token, usually a shorter version of the name.
      */
-    'symbol()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC20-totalSupply}.
@@ -1051,7 +1189,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-totalSupply}.
      */
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
@@ -1065,7 +1203,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides
@@ -1084,7 +1222,7 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -1094,12 +1232,15 @@ export class GsnRecipientErc20FeeUnstableErc20Owned extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;

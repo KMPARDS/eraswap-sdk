@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Signer } from 'ethers';
-import { Provider, TransactionRequest } from '@ethersproject/providers';
-import { Contract, ContractFactory, Overrides } from '@ethersproject/contracts';
+import { Signer } from "ethers";
+import { Provider, TransactionRequest } from "@ethersproject/providers";
+import { Contract, ContractFactory, Overrides } from "@ethersproject/contracts";
 
-import type { AdminMode } from './AdminMode';
+import type { AdminMode } from "./AdminMode";
 
 export class AdminModeFactory extends ContractFactory {
   constructor(signer?: Signer) {
@@ -25,7 +25,10 @@ export class AdminModeFactory extends ContractFactory {
   connect(signer: Signer): AdminModeFactory {
     return super.connect(signer) as AdminModeFactory;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): AdminMode {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): AdminMode {
     return new Contract(address, _abi, signerOrProvider) as AdminMode;
   }
 }
@@ -36,67 +39,67 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'previousOwner',
-        type: 'address',
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'OwnershipTransferred',
-    type: 'event',
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
     inputs: [],
-    name: 'isAdminMode',
+    name: "isAdminMode",
     outputs: [
       {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'owner',
+    name: "owner",
     outputs: [
       {
-        internalType: 'address',
-        name: '',
-        type: 'address',
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'renounceAdminMode',
+    name: "renounceAdminMode",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: 'transferOwnership',
+    name: "transferOwnership",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];
 
 const _bytecode =
-  '0x60806040526000805460ff60a01b1916600160a01b17905534801561002357600080fd5b50600061002e61007d565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a350610081565b3390565b6103da806100906000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806351b199fb146100515780638da5cb5b1461005b578063b5955eed1461008c578063f2fde38b146100a8575b600080fd5b6100596100db565b005b6100636101eb565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b610094610207565b604080519115158252519081900360200190f35b610059600480360360208110156100be57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff16610228565b60005474010000000000000000000000000000000000000000900460ff1661014a576040805162461bcd60e51b815260206004820152601e60248201527f41646d696e4d6f64653a2041444d494e5f4d4f44455f494e4143544956450000604482015290519081900360640190fd5b6101526102ab565b60005473ffffffffffffffffffffffffffffffffffffffff9081169116146101c1576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2043414c4c45525f49535f4e4f545f5448455f4f574e4552604482015290519081900360640190fd5b600080547fffffffffffffffffffffff00ffffffffffffffffffffffffffffffffffffffff169055565b60005473ffffffffffffffffffffffffffffffffffffffff1690565b60005474010000000000000000000000000000000000000000900460ff1690565b6102306102ab565b60005473ffffffffffffffffffffffffffffffffffffffff90811691161461029f576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2043414c4c45525f49535f4e4f545f5448455f4f574e4552604482015290519081900360640190fd5b6102a8816102af565b50565b3390565b73ffffffffffffffffffffffffffffffffffffffff8116610317576040805162461bcd60e51b815260206004820152601f60248201527f4f776e61626c653a204e45575f4f574e45525f49535f5a45524f5f4144445200604482015290519081900360640190fd5b6000805460405173ffffffffffffffffffffffffffffffffffffffff808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff9290921691909117905556fea2646970667358221220b43db5c194989adfc9c4f716f197570b1b0693a8f1af111adc195c8547c3635e64736f6c63430007040033';
+  "0x60806040526000805460ff60a01b1916600160a01b17905534801561002357600080fd5b50600061002e61007d565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a350610081565b3390565b610319806100906000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806351b199fb146100515780638da5cb5b1461005b578063b5955eed1461007f578063f2fde38b1461009b575b600080fd5b6100596100c1565b005b610063610186565b604080516001600160a01b039092168252519081900360200190f35b610087610195565b604080519115158252519081900360200190f35b610059600480360360208110156100b157600080fd5b50356001600160a01b03166101a5565b600054600160a01b900460ff1661011f576040805162461bcd60e51b815260206004820152601e60248201527f41646d696e4d6f64653a2041444d494e5f4d4f44455f494e4143544956450000604482015290519081900360640190fd5b610127610209565b6000546001600160a01b03908116911614610177576040805162461bcd60e51b815260206004820181905260248201526000805160206102c4833981519152604482015290519081900360640190fd5b6000805460ff60a01b19169055565b6000546001600160a01b031690565b600054600160a01b900460ff1690565b6101ad610209565b6000546001600160a01b039081169116146101fd576040805162461bcd60e51b815260206004820181905260248201526000805160206102c4833981519152604482015290519081900360640190fd5b6102068161020d565b50565b3390565b6001600160a01b038116610268576040805162461bcd60e51b815260206004820152601f60248201527f4f776e61626c653a204e45575f4f574e45525f49535f5a45524f5f4144445200604482015290519081900360640190fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b039290921691909117905556fe4f776e61626c653a2043414c4c45525f49535f4e4f545f5448455f4f574e4552a2646970667358221220240e7dc2d60b5e3801d87ed0ee4c06651ae0b6318941e742298c7972561c96e964736f6c63430007050033";

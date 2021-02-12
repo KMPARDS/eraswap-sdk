@@ -2,186 +2,358 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface ValidatorManagerInterface extends ethers.utils.Interface {
   functions: {
-    'dayswappers()': FunctionFragment;
-    'getAdjustedAmount(uint256,uint256,uint256)': FunctionFragment;
-    'getCommission(uint32,address)': FunctionFragment;
-    'getDelegationShare(uint32,address,address)': FunctionFragment;
-    'getDelegatorByAddress(uint32,address,address)': FunctionFragment;
-    'getDelegatorByIndex(uint32,uint256,uint256)': FunctionFragment;
-    'getDelegatorIndex(uint32,uint256,address)': FunctionFragment;
-    'getLuckyValidatorAddress()': FunctionFragment;
-    'getMonthlyNRT(uint32)': FunctionFragment;
-    'getTotalAdjustedStakings(uint32)': FunctionFragment;
-    'getTotalBlocksSealed(uint32)': FunctionFragment;
-    'getValidatorByAddress(uint32,address)': FunctionFragment;
-    'getValidatorByIndex(uint32,uint256)': FunctionFragment;
-    'getValidatorEarning(uint32,address)': FunctionFragment;
-    'getValidatorIndex(uint32,address)': FunctionFragment;
-    'getValidators(uint32)': FunctionFragment;
-    'initialize()': FunctionFragment;
-    'kycDapp()': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'pickValidator(uint32,uint256)': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'randomnessManager()': FunctionFragment;
-    'receiveNrt(uint32)': FunctionFragment;
-    'registerBlock(address)': FunctionFragment;
-    'registerDelegation(uint32,bytes)': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveAddressStrict(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
-    'resolveUsernameStrict(address)': FunctionFragment;
-    'setCommission(uint32,uint256)': FunctionFragment;
-    'setKycDapp(address)': FunctionFragment;
-    'timeallyClub()': FunctionFragment;
-    'timeallyManager()': FunctionFragment;
-    'timeallyPromotionalBucket()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'validatorManager()': FunctionFragment;
-    'withdrawCommission(uint32)': FunctionFragment;
-    'withdrawDelegationShare(uint32,address,address)': FunctionFragment;
+    "dayswappers()": FunctionFragment;
+    "getAdjustedAmount(uint256,uint256,uint256)": FunctionFragment;
+    "getCommission(uint32,address)": FunctionFragment;
+    "getDelegationShare(uint32,address,address)": FunctionFragment;
+    "getDelegatorByAddress(uint32,address,address)": FunctionFragment;
+    "getDelegatorByIndex(uint32,uint256,uint256)": FunctionFragment;
+    "getDelegatorIndex(uint32,uint256,address)": FunctionFragment;
+    "getLuckyValidatorAddress()": FunctionFragment;
+    "getMonthlyNRT(uint32)": FunctionFragment;
+    "getTotalAdjustedStakings(uint32)": FunctionFragment;
+    "getTotalBlocksSealed(uint32)": FunctionFragment;
+    "getValidatorByAddress(uint32,address)": FunctionFragment;
+    "getValidatorByIndex(uint32,uint256)": FunctionFragment;
+    "getValidatorEarning(uint32,address)": FunctionFragment;
+    "getValidatorIndex(uint32,address)": FunctionFragment;
+    "getValidators(uint32)": FunctionFragment;
+    "initialize()": FunctionFragment;
+    "kycDapp()": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "pickValidator(uint32,uint256)": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "randomnessManager()": FunctionFragment;
+    "receiveNrt(uint32)": FunctionFragment;
+    "registerBlock(address)": FunctionFragment;
+    "registerDelegation(uint32,bytes)": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveAddressStrict(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
+    "resolveUsernameStrict(address)": FunctionFragment;
+    "setCommission(uint32,uint256)": FunctionFragment;
+    "setKycDapp(address)": FunctionFragment;
+    "timeallyClub()": FunctionFragment;
+    "timeallyManager()": FunctionFragment;
+    "timeallyPromotionalBucket()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "validatorManager()": FunctionFragment;
+    "withdrawCommission(uint32)": FunctionFragment;
+    "withdrawDelegationShare(uint32,address,address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'getAdjustedAmount',
-    values: [BigNumberish, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: 'getCommission', values: [BigNumberish, string]): string;
-  encodeFunctionData(
-    functionFragment: 'getDelegationShare',
-    values: [BigNumberish, string, string]
+    functionFragment: "dayswappers",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: 'getDelegatorByAddress',
-    values: [BigNumberish, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: 'getDelegatorByIndex',
+    functionFragment: "getAdjustedAmount",
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getDelegatorIndex',
+    functionFragment: "getCommission",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDelegationShare",
+    values: [BigNumberish, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDelegatorByAddress",
+    values: [BigNumberish, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDelegatorByIndex",
+    values: [BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDelegatorIndex",
     values: [BigNumberish, BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: 'getLuckyValidatorAddress', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getMonthlyNRT', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getTotalAdjustedStakings', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getTotalBlocksSealed', values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'getValidatorByAddress',
+    functionFragment: "getLuckyValidatorAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMonthlyNRT",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTotalAdjustedStakings",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTotalBlocksSealed",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getValidatorByAddress",
     values: [BigNumberish, string]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getValidatorByIndex',
+    functionFragment: "getValidatorByIndex",
     values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: 'getValidatorEarning',
+    functionFragment: "getValidatorEarning",
     values: [BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: 'getValidatorIndex', values: [BigNumberish, string]): string;
-  encodeFunctionData(functionFragment: 'getValidators', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'pickValidator',
+    functionFragment: "getValidatorIndex",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getValidators",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "kycDapp", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "pickValidator",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'receiveNrt', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'registerBlock', values: [string]): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'registerDelegation',
+    functionFragment: "randomnessManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "receiveNrt",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerBlock",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerDelegation",
     values: [BigNumberish, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'setCommission',
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddressStrict",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsernameStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCommission",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
-  encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdrawCommission', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setKycDapp", values: [string]): string;
   encodeFunctionData(
-    functionFragment: 'withdrawDelegationShare',
+    functionFragment: "timeallyClub",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyPromotionalBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "validatorManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawCommission",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawDelegationShare",
     values: [BigNumberish, string, string]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getAdjustedAmount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getCommission', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDelegationShare', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDelegatorByAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDelegatorByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getDelegatorIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getLuckyValidatorAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getMonthlyNRT', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalAdjustedStakings', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalBlocksSealed', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidatorByAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidatorByIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidatorEarning', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidatorIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidators', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'pickValidator', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'receiveNrt', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'registerBlock', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'registerDelegation', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setCommission', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawCommission', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawDelegationShare', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "dayswappers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAdjustedAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCommission",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDelegationShare",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDelegatorByAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDelegatorByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDelegatorIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getLuckyValidatorAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMonthlyNRT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalAdjustedStakings",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTotalBlocksSealed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidatorByAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidatorByIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidatorEarning",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidatorIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidators",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "kycDapp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "pickValidator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "randomnessManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "receiveNrt", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "registerBlock",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerDelegation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsernameStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCommission",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setKycDapp", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyClub",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyPromotionalBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "validatorManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawCommission",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawDelegationShare",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Delegation(address,uint32,address)': EventFragment;
-    'NRTReceived(uint32,uint256,address)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
+    "Delegation(address,uint32,address)": EventFragment;
+    "NRTReceived(uint32,uint256,address)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Delegation'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'NRTReceived'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Delegation"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NRTReceived"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
 export class ValidatorManager extends Contract {
@@ -204,7 +376,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'dayswappers()'(
+    "dayswappers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -231,7 +403,7 @@ export class ValidatorManager extends Contract {
      * @param _base : Amount intervals in which adjustment rate should increase.
      * @param _premiumFactor : Factor in which premium increases.
      */
-    'getAdjustedAmount(uint256,uint256,uint256)'(
+    "getAdjustedAmount(uint256,uint256,uint256)"(
       _amount: BigNumberish,
       _base: BigNumberish,
       _premiumFactor: BigNumberish,
@@ -248,7 +420,7 @@ export class ValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getCommission(uint32,address)'(
+    "getCommission(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -265,7 +437,7 @@ export class ValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getDelegationShare(uint32,address,address)'(
+    "getDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -302,7 +474,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of the delegating contract.
      * @param _validator : Address of the validator.
      */
-    'getDelegatorByAddress(uint32,address,address)'(
+    "getDelegatorByAddress(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -346,7 +518,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validatorIndex : Index of validator in array.
      */
-    'getDelegatorByIndex(uint32,uint256,uint256)'(
+    "getDelegatorByIndex(uint32,uint256,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _delegatorIndex: BigNumberish,
@@ -383,7 +555,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of delegatinng staking contract.
      * @param _validatorIndex : Index of the validator.
      */
-    'getDelegatorIndex(uint32,uint256,address)'(
+    "getDelegatorIndex(uint32,uint256,address)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _stakingContract: string,
@@ -395,12 +567,16 @@ export class ValidatorManager extends Contract {
     /**
      * Gets address of a lucky vaidator based on PoS.
      */
-    getLuckyValidatorAddress(overrides?: Overrides): Promise<ContractTransaction>;
+    getLuckyValidatorAddress(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Gets address of a lucky vaidator based on PoS.
      */
-    'getLuckyValidatorAddress()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "getLuckyValidatorAddress()"(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     getMonthlyNRT(
       _month: BigNumberish,
@@ -409,7 +585,7 @@ export class ValidatorManager extends Contract {
       0: BigNumber;
     }>;
 
-    'getMonthlyNRT(uint32)'(
+    "getMonthlyNRT(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -431,7 +607,7 @@ export class ValidatorManager extends Contract {
      * Gets total adjusted stakings for the month.
      * @param _month : NRT Month.
      */
-    'getTotalAdjustedStakings(uint32)'(
+    "getTotalAdjustedStakings(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -453,7 +629,7 @@ export class ValidatorManager extends Contract {
      * Gets total blocks sealed in the month.
      * @param _month : NRT Month.
      */
-    'getTotalBlocksSealed(uint32)'(
+    "getTotalBlocksSealed(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -507,7 +683,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of validator.
      */
-    'getValidatorByAddress(uint32,address)'(
+    "getValidatorByAddress(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -591,7 +767,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validatorIndex : Index of the validator in array.
      */
-    'getValidatorByIndex(uint32,uint256)'(
+    "getValidatorByIndex(uint32,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
@@ -648,7 +824,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of validator.
      */
-    'getValidatorEarning(uint32,address)'(
+    "getValidatorEarning(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -674,7 +850,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of the validator.
      */
-    'getValidatorIndex(uint32,address)'(
+    "getValidatorIndex(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -726,7 +902,7 @@ export class ValidatorManager extends Contract {
      * Gets all validators for the month.
      * @param _month : NRT Month.
      */
-    'getValidators(uint32)'(
+    "getValidators(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -764,7 +940,7 @@ export class ValidatorManager extends Contract {
 
     initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
     kycDapp(
       overrides?: CallOverrides
@@ -772,7 +948,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'kycDapp()'(
+    "kycDapp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -784,7 +960,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -802,7 +978,7 @@ export class ValidatorManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -826,7 +1002,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _seed : Pseudo random seed.
      */
-    'pickValidator(uint32,uint256)'(
+    "pickValidator(uint32,uint256)"(
       _month: BigNumberish,
       _seed: BigNumberish,
       overrides?: CallOverrides
@@ -840,7 +1016,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -852,7 +1028,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'randomnessManager()'(
+    "randomnessManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -871,7 +1047,7 @@ export class ValidatorManager extends Contract {
      * Burns NRT if no one has delegated anything.
      * Allows NRT Manager contract to send NRT share for Validator Manager.
      */
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -880,13 +1056,19 @@ export class ValidatorManager extends Contract {
      * Allows block reward contract to register a sealed block by validator.
      * @param _sealer : Address of validator who sealed the block.
      */
-    registerBlock(_sealer: string, overrides?: Overrides): Promise<ContractTransaction>;
+    registerBlock(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Allows block reward contract to register a sealed block by validator.
      * @param _sealer : Address of validator who sealed the block.
      */
-    'registerBlock(address)'(_sealer: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "registerBlock(address)"(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Allows a TimeAlly staking to register a delegation.
@@ -904,7 +1086,7 @@ export class ValidatorManager extends Contract {
      * @param _extraData : Address of validator to delegate.
      * @param _month : NRT Month.
      */
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides
@@ -917,7 +1099,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -931,7 +1113,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -945,7 +1127,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -959,7 +1141,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -982,15 +1164,21 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT month.
      * @param _perThousandCommission : Per thousand commission of validator.
      */
-    'setCommission(uint32,uint256)'(
+    "setCommission(uint32,uint256)"(
       _month: BigNumberish,
       _perThousandCommission: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     timeallyClub(
       overrides?: CallOverrides
@@ -998,7 +1186,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'timeallyClub()'(
+    "timeallyClub()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -1010,7 +1198,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'timeallyManager()'(
+    "timeallyManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -1022,7 +1210,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'timeallyPromotionalBucket()'(
+    "timeallyPromotionalBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -1031,12 +1219,15 @@ export class ValidatorManager extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -1047,7 +1238,7 @@ export class ValidatorManager extends Contract {
       0: string;
     }>;
 
-    'validatorManager()'(
+    "validatorManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -1057,13 +1248,16 @@ export class ValidatorManager extends Contract {
      * Allows a validator to withdraw their commission.
      * @param _month : NRT Month.
      */
-    withdrawCommission(_month: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+    withdrawCommission(
+      _month: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Allows a validator to withdraw their commission.
      * @param _month : NRT Month.
      */
-    'withdrawCommission(uint32)'(
+    "withdrawCommission(uint32)"(
       _month: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -1087,7 +1281,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of staking contract which has delegated.
      * @param _validator : Address of validator.
      */
-    'withdrawDelegationShare(uint32,address,address)'(
+    "withdrawDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -1097,7 +1291,7 @@ export class ValidatorManager extends Contract {
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
 
-  'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+  "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Gets quadratic adjustment amount for a given amount.
@@ -1118,7 +1312,7 @@ export class ValidatorManager extends Contract {
    * @param _base : Amount intervals in which adjustment rate should increase.
    * @param _premiumFactor : Factor in which premium increases.
    */
-  'getAdjustedAmount(uint256,uint256,uint256)'(
+  "getAdjustedAmount(uint256,uint256,uint256)"(
     _amount: BigNumberish,
     _base: BigNumberish,
     _premiumFactor: BigNumberish,
@@ -1131,7 +1325,7 @@ export class ValidatorManager extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'getCommission(uint32,address)'(
+  "getCommission(uint32,address)"(
     _month: BigNumberish,
     _validator: string,
     overrides?: CallOverrides
@@ -1144,7 +1338,7 @@ export class ValidatorManager extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  'getDelegationShare(uint32,address,address)'(
+  "getDelegationShare(uint32,address,address)"(
     _month: BigNumberish,
     _validator: string,
     _stakingContract: string,
@@ -1177,7 +1371,7 @@ export class ValidatorManager extends Contract {
    * @param _stakingContract : Address of the delegating contract.
    * @param _validator : Address of the validator.
    */
-  'getDelegatorByAddress(uint32,address,address)'(
+  "getDelegatorByAddress(uint32,address,address)"(
     _month: BigNumberish,
     _validator: string,
     _stakingContract: string,
@@ -1217,7 +1411,7 @@ export class ValidatorManager extends Contract {
    * @param _month : NRT Month.
    * @param _validatorIndex : Index of validator in array.
    */
-  'getDelegatorByIndex(uint32,uint256,uint256)'(
+  "getDelegatorByIndex(uint32,uint256,uint256)"(
     _month: BigNumberish,
     _validatorIndex: BigNumberish,
     _delegatorIndex: BigNumberish,
@@ -1250,7 +1444,7 @@ export class ValidatorManager extends Contract {
    * @param _stakingContract : Address of delegatinng staking contract.
    * @param _validatorIndex : Index of the validator.
    */
-  'getDelegatorIndex(uint32,uint256,address)'(
+  "getDelegatorIndex(uint32,uint256,address)"(
     _month: BigNumberish,
     _validatorIndex: BigNumberish,
     _stakingContract: string,
@@ -1265,23 +1459,34 @@ export class ValidatorManager extends Contract {
   /**
    * Gets address of a lucky vaidator based on PoS.
    */
-  'getLuckyValidatorAddress()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "getLuckyValidatorAddress()"(
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getMonthlyNRT(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  "getMonthlyNRT(uint32)"(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Gets total adjusted stakings for the month.
    * @param _month : NRT Month.
    */
-  getTotalAdjustedStakings(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getTotalAdjustedStakings(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Gets total adjusted stakings for the month.
    * @param _month : NRT Month.
    */
-  'getTotalAdjustedStakings(uint32)'(
+  "getTotalAdjustedStakings(uint32)"(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -1290,13 +1495,16 @@ export class ValidatorManager extends Contract {
    * Gets total blocks sealed in the month.
    * @param _month : NRT Month.
    */
-  getTotalBlocksSealed(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getTotalBlocksSealed(
+    _month: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Gets total blocks sealed in the month.
    * @param _month : NRT Month.
    */
-  'getTotalBlocksSealed(uint32)'(
+  "getTotalBlocksSealed(uint32)"(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -1346,7 +1554,7 @@ export class ValidatorManager extends Contract {
    * @param _month : NRT Month.
    * @param _validator : Address of validator.
    */
-  'getValidatorByAddress(uint32,address)'(
+  "getValidatorByAddress(uint32,address)"(
     _month: BigNumberish,
     _validator: string,
     overrides?: CallOverrides
@@ -1426,7 +1634,7 @@ export class ValidatorManager extends Contract {
    * @param _month : NRT Month.
    * @param _validatorIndex : Index of the validator in array.
    */
-  'getValidatorByIndex(uint32,uint256)'(
+  "getValidatorByIndex(uint32,uint256)"(
     _month: BigNumberish,
     _validatorIndex: BigNumberish,
     overrides?: CallOverrides
@@ -1479,7 +1687,7 @@ export class ValidatorManager extends Contract {
    * @param _month : NRT Month.
    * @param _validator : Address of validator.
    */
-  'getValidatorEarning(uint32,address)'(
+  "getValidatorEarning(uint32,address)"(
     _month: BigNumberish,
     _validator: string,
     overrides?: CallOverrides
@@ -1501,7 +1709,7 @@ export class ValidatorManager extends Contract {
    * @param _month : NRT Month.
    * @param _validator : Address of the validator.
    */
-  'getValidatorIndex(uint32,address)'(
+  "getValidatorIndex(uint32,address)"(
     _month: BigNumberish,
     _validator: string,
     overrides?: CallOverrides
@@ -1551,7 +1759,7 @@ export class ValidatorManager extends Contract {
    * Gets all validators for the month.
    * @param _month : NRT Month.
    */
-  'getValidators(uint32)'(
+  "getValidators(uint32)"(
     _month: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
@@ -1589,15 +1797,15 @@ export class ValidatorManager extends Contract {
 
   initialize(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
-  'initialize()'(overrides?: PayableOverrides): Promise<ContractTransaction>;
+  "initialize()"(overrides?: PayableOverrides): Promise<ContractTransaction>;
 
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
-  'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+  "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -1607,7 +1815,7 @@ export class ValidatorManager extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Picks a validator index based on PoS.
@@ -1625,7 +1833,7 @@ export class ValidatorManager extends Contract {
    * @param _month : NRT Month.
    * @param _seed : Pseudo random seed.
    */
-  'pickValidator(uint32,uint256)'(
+  "pickValidator(uint32,uint256)"(
     _month: BigNumberish,
     _seed: BigNumberish,
     overrides?: CallOverrides
@@ -1633,11 +1841,11 @@ export class ValidatorManager extends Contract {
 
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-  'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+  "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Burns NRT if no one has delegated anything.
@@ -1652,7 +1860,7 @@ export class ValidatorManager extends Contract {
    * Burns NRT if no one has delegated anything.
    * Allows NRT Manager contract to send NRT share for Validator Manager.
    */
-  'receiveNrt(uint32)'(
+  "receiveNrt(uint32)"(
     _currentNrtMonth: BigNumberish,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
@@ -1661,13 +1869,19 @@ export class ValidatorManager extends Contract {
    * Allows block reward contract to register a sealed block by validator.
    * @param _sealer : Address of validator who sealed the block.
    */
-  registerBlock(_sealer: string, overrides?: Overrides): Promise<ContractTransaction>;
+  registerBlock(
+    _sealer: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Allows block reward contract to register a sealed block by validator.
    * @param _sealer : Address of validator who sealed the block.
    */
-  'registerBlock(address)'(_sealer: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "registerBlock(address)"(
+    _sealer: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Allows a TimeAlly staking to register a delegation.
@@ -1685,27 +1899,48 @@ export class ValidatorManager extends Contract {
    * @param _extraData : Address of validator to delegate.
    * @param _month : NRT Month.
    */
-  'registerDelegation(uint32,bytes)'(
+  "registerDelegation(uint32,bytes)"(
     _month: BigNumberish,
     _extraData: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddressStrict(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddressStrict(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddressStrict(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  resolveUsernameStrict(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsernameStrict(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Allows a validator to set commission.
@@ -1723,56 +1958,68 @@ export class ValidatorManager extends Contract {
    * @param _month : NRT month.
    * @param _perThousandCommission : Per thousand commission of validator.
    */
-  'setCommission(uint32,uint256)'(
+  "setCommission(uint32,uint256)"(
     _month: BigNumberish,
     _perThousandCommission: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setKycDapp(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "setKycDapp(address)"(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   validatorManager(overrides?: CallOverrides): Promise<string>;
 
-  'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+  "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Allows a validator to withdraw their commission.
    * @param _month : NRT Month.
    */
-  withdrawCommission(_month: BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+  withdrawCommission(
+    _month: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Allows a validator to withdraw their commission.
    * @param _month : NRT Month.
    */
-  'withdrawCommission(uint32)'(
+  "withdrawCommission(uint32)"(
     _month: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -1796,7 +2043,7 @@ export class ValidatorManager extends Contract {
    * @param _stakingContract : Address of staking contract which has delegated.
    * @param _validator : Address of validator.
    */
-  'withdrawDelegationShare(uint32,address,address)'(
+  "withdrawDelegationShare(uint32,address,address)"(
     _month: BigNumberish,
     _validator: string,
     _stakingContract: string,
@@ -1806,7 +2053,7 @@ export class ValidatorManager extends Contract {
   callStatic: {
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Gets quadratic adjustment amount for a given amount.
@@ -1827,7 +2074,7 @@ export class ValidatorManager extends Contract {
      * @param _base : Amount intervals in which adjustment rate should increase.
      * @param _premiumFactor : Factor in which premium increases.
      */
-    'getAdjustedAmount(uint256,uint256,uint256)'(
+    "getAdjustedAmount(uint256,uint256,uint256)"(
       _amount: BigNumberish,
       _base: BigNumberish,
       _premiumFactor: BigNumberish,
@@ -1840,7 +2087,7 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getCommission(uint32,address)'(
+    "getCommission(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -1853,7 +2100,7 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getDelegationShare(uint32,address,address)'(
+    "getDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -1886,7 +2133,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of the delegating contract.
      * @param _validator : Address of the validator.
      */
-    'getDelegatorByAddress(uint32,address,address)'(
+    "getDelegatorByAddress(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -1926,7 +2173,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validatorIndex : Index of validator in array.
      */
-    'getDelegatorByIndex(uint32,uint256,uint256)'(
+    "getDelegatorByIndex(uint32,uint256,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _delegatorIndex: BigNumberish,
@@ -1959,7 +2206,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of delegatinng staking contract.
      * @param _validatorIndex : Index of the validator.
      */
-    'getDelegatorIndex(uint32,uint256,address)'(
+    "getDelegatorIndex(uint32,uint256,address)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _stakingContract: string,
@@ -1974,23 +2221,32 @@ export class ValidatorManager extends Contract {
     /**
      * Gets address of a lucky vaidator based on PoS.
      */
-    'getLuckyValidatorAddress()'(overrides?: CallOverrides): Promise<string>;
+    "getLuckyValidatorAddress()"(overrides?: CallOverrides): Promise<string>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMonthlyNRT(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets total adjusted stakings for the month.
      * @param _month : NRT Month.
      */
-    getTotalAdjustedStakings(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalAdjustedStakings(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets total adjusted stakings for the month.
      * @param _month : NRT Month.
      */
-    'getTotalAdjustedStakings(uint32)'(
+    "getTotalAdjustedStakings(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1999,13 +2255,16 @@ export class ValidatorManager extends Contract {
      * Gets total blocks sealed in the month.
      * @param _month : NRT Month.
      */
-    getTotalBlocksSealed(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalBlocksSealed(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets total blocks sealed in the month.
      * @param _month : NRT Month.
      */
-    'getTotalBlocksSealed(uint32)'(
+    "getTotalBlocksSealed(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2055,7 +2314,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of validator.
      */
-    'getValidatorByAddress(uint32,address)'(
+    "getValidatorByAddress(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -2135,7 +2394,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validatorIndex : Index of the validator in array.
      */
-    'getValidatorByIndex(uint32,uint256)'(
+    "getValidatorByIndex(uint32,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
@@ -2188,7 +2447,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of validator.
      */
-    'getValidatorEarning(uint32,address)'(
+    "getValidatorEarning(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -2210,7 +2469,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of the validator.
      */
-    'getValidatorIndex(uint32,address)'(
+    "getValidatorIndex(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -2260,7 +2519,7 @@ export class ValidatorManager extends Contract {
      * Gets all validators for the month.
      * @param _month : NRT Month.
      */
-    'getValidators(uint32)'(
+    "getValidators(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
@@ -2298,15 +2557,15 @@ export class ValidatorManager extends Contract {
 
     initialize(overrides?: CallOverrides): Promise<void>;
 
-    'initialize()'(overrides?: CallOverrides): Promise<void>;
+    "initialize()"(overrides?: CallOverrides): Promise<void>;
 
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -2316,7 +2575,7 @@ export class ValidatorManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Picks a validator index based on PoS.
@@ -2334,7 +2593,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _seed : Pseudo random seed.
      */
-    'pickValidator(uint32,uint256)'(
+    "pickValidator(uint32,uint256)"(
       _month: BigNumberish,
       _seed: BigNumberish,
       overrides?: CallOverrides
@@ -2342,23 +2601,29 @@ export class ValidatorManager extends Contract {
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Burns NRT if no one has delegated anything.
      * Allows NRT Manager contract to send NRT share for Validator Manager.
      */
-    receiveNrt(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    receiveNrt(
+      _currentNrtMonth: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Burns NRT if no one has delegated anything.
      * Allows NRT Manager contract to send NRT share for Validator Manager.
      */
-    'receiveNrt(uint32)'(_currentNrtMonth: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "receiveNrt(uint32)"(
+      _currentNrtMonth: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Allows block reward contract to register a sealed block by validator.
@@ -2370,7 +2635,10 @@ export class ValidatorManager extends Contract {
      * Allows block reward contract to register a sealed block by validator.
      * @param _sealer : Address of validator who sealed the block.
      */
-    'registerBlock(address)'(_sealer: string, overrides?: CallOverrides): Promise<void>;
+    "registerBlock(address)"(
+      _sealer: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Allows a TimeAlly staking to register a delegation.
@@ -2388,30 +2656,51 @@ export class ValidatorManager extends Contract {
      * @param _extraData : Address of validator to delegate.
      * @param _month : NRT Month.
      */
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsernameStrict(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Allows a validator to set commission.
@@ -2429,7 +2718,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT month.
      * @param _perThousandCommission : Per thousand commission of validator.
      */
-    'setCommission(uint32,uint256)'(
+    "setCommission(uint32,uint256)"(
       _month: BigNumberish,
       _perThousandCommission: BigNumberish,
       overrides?: CallOverrides
@@ -2437,45 +2726,60 @@ export class ValidatorManager extends Contract {
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     validatorManager(overrides?: CallOverrides): Promise<string>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Allows a validator to withdraw their commission.
      * @param _month : NRT Month.
      */
-    withdrawCommission(_month: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    withdrawCommission(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Allows a validator to withdraw their commission.
      * @param _month : NRT Month.
      */
-    'withdrawCommission(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "withdrawCommission(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Allows staking owners to withdraw share from validators earnings.
@@ -2496,7 +2800,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of staking contract which has delegated.
      * @param _validator : Address of validator.
      */
-    'withdrawDelegationShare(uint32,address,address)'(
+    "withdrawDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -2511,15 +2815,22 @@ export class ValidatorManager extends Contract {
       validator: string | null
     ): EventFilter;
 
-    NRTReceived(month: BigNumberish | null, amount: BigNumberish | null, sender: null): EventFilter;
+    NRTReceived(
+      month: BigNumberish | null,
+      amount: BigNumberish | null,
+      sender: null
+    ): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Gets quadratic adjustment amount for a given amount.
@@ -2540,7 +2851,7 @@ export class ValidatorManager extends Contract {
      * @param _base : Amount intervals in which adjustment rate should increase.
      * @param _premiumFactor : Factor in which premium increases.
      */
-    'getAdjustedAmount(uint256,uint256,uint256)'(
+    "getAdjustedAmount(uint256,uint256,uint256)"(
       _amount: BigNumberish,
       _base: BigNumberish,
       _premiumFactor: BigNumberish,
@@ -2553,7 +2864,7 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getCommission(uint32,address)'(
+    "getCommission(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -2566,7 +2877,7 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    'getDelegationShare(uint32,address,address)'(
+    "getDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -2592,7 +2903,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of the delegating contract.
      * @param _validator : Address of the validator.
      */
-    'getDelegatorByAddress(uint32,address,address)'(
+    "getDelegatorByAddress(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -2618,7 +2929,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validatorIndex : Index of validator in array.
      */
-    'getDelegatorByIndex(uint32,uint256,uint256)'(
+    "getDelegatorByIndex(uint32,uint256,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _delegatorIndex: BigNumberish,
@@ -2644,7 +2955,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of delegatinng staking contract.
      * @param _validatorIndex : Index of the validator.
      */
-    'getDelegatorIndex(uint32,uint256,address)'(
+    "getDelegatorIndex(uint32,uint256,address)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _stakingContract: string,
@@ -2659,23 +2970,32 @@ export class ValidatorManager extends Contract {
     /**
      * Gets address of a lucky vaidator based on PoS.
      */
-    'getLuckyValidatorAddress()'(overrides?: Overrides): Promise<BigNumber>;
+    "getLuckyValidatorAddress()"(overrides?: Overrides): Promise<BigNumber>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMonthlyNRT(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMonthlyNRT(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets total adjusted stakings for the month.
      * @param _month : NRT Month.
      */
-    getTotalAdjustedStakings(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalAdjustedStakings(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets total adjusted stakings for the month.
      * @param _month : NRT Month.
      */
-    'getTotalAdjustedStakings(uint32)'(
+    "getTotalAdjustedStakings(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2684,13 +3004,16 @@ export class ValidatorManager extends Contract {
      * Gets total blocks sealed in the month.
      * @param _month : NRT Month.
      */
-    getTotalBlocksSealed(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTotalBlocksSealed(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets total blocks sealed in the month.
      * @param _month : NRT Month.
      */
-    'getTotalBlocksSealed(uint32)'(
+    "getTotalBlocksSealed(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2711,7 +3034,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of validator.
      */
-    'getValidatorByAddress(uint32,address)'(
+    "getValidatorByAddress(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -2733,7 +3056,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validatorIndex : Index of the validator in array.
      */
-    'getValidatorByIndex(uint32,uint256)'(
+    "getValidatorByIndex(uint32,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
@@ -2757,7 +3080,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of validator.
      */
-    'getValidatorEarning(uint32,address)'(
+    "getValidatorEarning(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -2779,7 +3102,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of the validator.
      */
-    'getValidatorIndex(uint32,address)'(
+    "getValidatorIndex(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -2789,25 +3112,31 @@ export class ValidatorManager extends Contract {
      * Gets all validators for the month.
      * @param _month : NRT Month.
      */
-    getValidators(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getValidators(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets all validators for the month.
      * @param _month : NRT Month.
      */
-    'getValidators(uint32)'(_month: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getValidators(uint32)"(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     initialize(overrides?: PayableOverrides): Promise<BigNumber>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<BigNumber>;
+    "initialize()"(overrides?: PayableOverrides): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -2817,7 +3146,7 @@ export class ValidatorManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Picks a validator index based on PoS.
@@ -2835,7 +3164,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _seed : Pseudo random seed.
      */
-    'pickValidator(uint32,uint256)'(
+    "pickValidator(uint32,uint256)"(
       _month: BigNumberish,
       _seed: BigNumberish,
       overrides?: CallOverrides
@@ -2843,23 +3172,26 @@ export class ValidatorManager extends Contract {
 
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Burns NRT if no one has delegated anything.
      * Allows NRT Manager contract to send NRT share for Validator Manager.
      */
-    receiveNrt(_currentNrtMonth: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
+    receiveNrt(
+      _currentNrtMonth: BigNumberish,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Burns NRT if no one has delegated anything.
      * Allows NRT Manager contract to send NRT share for Validator Manager.
      */
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<BigNumber>;
@@ -2874,7 +3206,10 @@ export class ValidatorManager extends Contract {
      * Allows block reward contract to register a sealed block by validator.
      * @param _sealer : Address of validator who sealed the block.
      */
-    'registerBlock(address)'(_sealer: string, overrides?: Overrides): Promise<BigNumber>;
+    "registerBlock(address)"(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Allows a TimeAlly staking to register a delegation.
@@ -2892,30 +3227,48 @@ export class ValidatorManager extends Contract {
      * @param _extraData : Address of validator to delegate.
      * @param _month : NRT Month.
      */
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsernameStrict(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2936,7 +3289,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT month.
      * @param _perThousandCommission : Per thousand commission of validator.
      */
-    'setCommission(uint32,uint256)'(
+    "setCommission(uint32,uint256)"(
       _month: BigNumberish,
       _perThousandCommission: BigNumberish,
       overrides?: Overrides
@@ -2944,45 +3297,62 @@ export class ValidatorManager extends Contract {
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     timeallyClub(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     validatorManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Allows a validator to withdraw their commission.
      * @param _month : NRT Month.
      */
-    withdrawCommission(_month: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    withdrawCommission(
+      _month: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Allows a validator to withdraw their commission.
      * @param _month : NRT Month.
      */
-    'withdrawCommission(uint32)'(_month: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    "withdrawCommission(uint32)"(
+      _month: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Allows staking owners to withdraw share from validators earnings.
@@ -3003,7 +3373,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of staking contract which has delegated.
      * @param _validator : Address of validator.
      */
-    'withdrawDelegationShare(uint32,address,address)'(
+    "withdrawDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -3014,7 +3384,7 @@ export class ValidatorManager extends Contract {
   populateTransaction: {
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Gets quadratic adjustment amount for a given amount.
@@ -3035,7 +3405,7 @@ export class ValidatorManager extends Contract {
      * @param _base : Amount intervals in which adjustment rate should increase.
      * @param _premiumFactor : Factor in which premium increases.
      */
-    'getAdjustedAmount(uint256,uint256,uint256)'(
+    "getAdjustedAmount(uint256,uint256,uint256)"(
       _amount: BigNumberish,
       _base: BigNumberish,
       _premiumFactor: BigNumberish,
@@ -3048,7 +3418,7 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getCommission(uint32,address)'(
+    "getCommission(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -3061,7 +3431,7 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getDelegationShare(uint32,address,address)'(
+    "getDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -3087,7 +3457,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of the delegating contract.
      * @param _validator : Address of the validator.
      */
-    'getDelegatorByAddress(uint32,address,address)'(
+    "getDelegatorByAddress(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,
@@ -3113,7 +3483,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validatorIndex : Index of validator in array.
      */
-    'getDelegatorByIndex(uint32,uint256,uint256)'(
+    "getDelegatorByIndex(uint32,uint256,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _delegatorIndex: BigNumberish,
@@ -3139,7 +3509,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of delegatinng staking contract.
      * @param _validatorIndex : Index of the validator.
      */
-    'getDelegatorIndex(uint32,uint256,address)'(
+    "getDelegatorIndex(uint32,uint256,address)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       _stakingContract: string,
@@ -3149,16 +3519,23 @@ export class ValidatorManager extends Contract {
     /**
      * Gets address of a lucky vaidator based on PoS.
      */
-    getLuckyValidatorAddress(overrides?: Overrides): Promise<PopulatedTransaction>;
+    getLuckyValidatorAddress(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets address of a lucky vaidator based on PoS.
      */
-    'getLuckyValidatorAddress()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "getLuckyValidatorAddress()"(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    getMonthlyNRT(_month: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getMonthlyNRT(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getMonthlyNRT(uint32)'(
+    "getMonthlyNRT(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3176,7 +3553,7 @@ export class ValidatorManager extends Contract {
      * Gets total adjusted stakings for the month.
      * @param _month : NRT Month.
      */
-    'getTotalAdjustedStakings(uint32)'(
+    "getTotalAdjustedStakings(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3194,7 +3571,7 @@ export class ValidatorManager extends Contract {
      * Gets total blocks sealed in the month.
      * @param _month : NRT Month.
      */
-    'getTotalBlocksSealed(uint32)'(
+    "getTotalBlocksSealed(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3215,7 +3592,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of validator.
      */
-    'getValidatorByAddress(uint32,address)'(
+    "getValidatorByAddress(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -3237,7 +3614,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validatorIndex : Index of the validator in array.
      */
-    'getValidatorByIndex(uint32,uint256)'(
+    "getValidatorByIndex(uint32,uint256)"(
       _month: BigNumberish,
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
@@ -3261,7 +3638,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of validator.
      */
-    'getValidatorEarning(uint32,address)'(
+    "getValidatorEarning(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -3283,7 +3660,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _validator : Address of the validator.
      */
-    'getValidatorIndex(uint32,address)'(
+    "getValidatorIndex(uint32,address)"(
       _month: BigNumberish,
       _validator: string,
       overrides?: CallOverrides
@@ -3293,28 +3670,31 @@ export class ValidatorManager extends Contract {
      * Gets all validators for the month.
      * @param _month : NRT Month.
      */
-    getValidators(_month: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getValidators(
+      _month: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets all validators for the month.
      * @param _month : NRT Month.
      */
-    'getValidators(uint32)'(
+    "getValidators(uint32)"(
       _month: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     initialize(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
-    'initialize()'(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    "initialize()"(overrides?: PayableOverrides): Promise<PopulatedTransaction>;
 
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -3324,7 +3704,7 @@ export class ValidatorManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Picks a validator index based on PoS.
@@ -3342,7 +3722,7 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT Month.
      * @param _seed : Pseudo random seed.
      */
-    'pickValidator(uint32,uint256)'(
+    "pickValidator(uint32,uint256)"(
       _month: BigNumberish,
       _seed: BigNumberish,
       overrides?: CallOverrides
@@ -3350,11 +3730,13 @@ export class ValidatorManager extends Contract {
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "randomnessManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Burns NRT if no one has delegated anything.
@@ -3369,7 +3751,7 @@ export class ValidatorManager extends Contract {
      * Burns NRT if no one has delegated anything.
      * Allows NRT Manager contract to send NRT share for Validator Manager.
      */
-    'receiveNrt(uint32)'(
+    "receiveNrt(uint32)"(
       _currentNrtMonth: BigNumberish,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
@@ -3378,13 +3760,19 @@ export class ValidatorManager extends Contract {
      * Allows block reward contract to register a sealed block by validator.
      * @param _sealer : Address of validator who sealed the block.
      */
-    registerBlock(_sealer: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    registerBlock(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Allows block reward contract to register a sealed block by validator.
      * @param _sealer : Address of validator who sealed the block.
      */
-    'registerBlock(address)'(_sealer: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "registerBlock(address)"(
+      _sealer: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Allows a TimeAlly staking to register a delegation.
@@ -3402,15 +3790,18 @@ export class ValidatorManager extends Contract {
      * @param _extraData : Address of validator to delegate.
      * @param _month : NRT Month.
      */
-    'registerDelegation(uint32,bytes)'(
+    "registerDelegation(uint32,bytes)"(
       _month: BigNumberish,
       _extraData: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3420,14 +3811,17 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3437,7 +3831,7 @@ export class ValidatorManager extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3458,56 +3852,76 @@ export class ValidatorManager extends Contract {
      * @param _month : NRT month.
      * @param _perThousandCommission : Per thousand commission of validator.
      */
-    'setCommission(uint32,uint256)'(
+    "setCommission(uint32,uint256)"(
       _month: BigNumberish,
       _perThousandCommission: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     timeallyClub(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    timeallyPromotionalBucket(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     validatorManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "validatorManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Allows a validator to withdraw their commission.
      * @param _month : NRT Month.
      */
-    withdrawCommission(_month: BigNumberish, overrides?: Overrides): Promise<PopulatedTransaction>;
+    withdrawCommission(
+      _month: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Allows a validator to withdraw their commission.
      * @param _month : NRT Month.
      */
-    'withdrawCommission(uint32)'(
+    "withdrawCommission(uint32)"(
       _month: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -3531,7 +3945,7 @@ export class ValidatorManager extends Contract {
      * @param _stakingContract : Address of staking contract which has delegated.
      * @param _validator : Address of validator.
      */
-    'withdrawDelegationShare(uint32,address,address)'(
+    "withdrawDelegationShare(uint32,address,address)"(
       _month: BigNumberish,
       _validator: string,
       _stakingContract: string,

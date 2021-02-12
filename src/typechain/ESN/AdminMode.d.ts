@@ -2,35 +2,65 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface AdminModeInterface extends ethers.utils.Interface {
   functions: {
-    'isAdminMode()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'renounceAdminMode()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
+    "isAdminMode()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "renounceAdminMode()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'isAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceAdminMode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "isAdminMode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceAdminMode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'isAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceAdminMode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isAdminMode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceAdminMode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'OwnershipTransferred(address,address)': EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
 export class AdminMode extends Contract {
@@ -53,7 +83,7 @@ export class AdminMode extends Contract {
       0: boolean;
     }>;
 
-    'isAdminMode()'(
+    "isAdminMode()"(
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -71,7 +101,7 @@ export class AdminMode extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -79,17 +109,20 @@ export class AdminMode extends Contract {
 
     renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -97,7 +130,7 @@ export class AdminMode extends Contract {
 
   isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
-  'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
+  "isAdminMode()"(overrides?: CallOverrides): Promise<boolean>;
 
   /**
    * Returns the address of the current owner.
@@ -107,21 +140,24 @@ export class AdminMode extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   renounceAdminMode(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'renounceAdminMode()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "renounceAdminMode()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -129,7 +165,7 @@ export class AdminMode extends Contract {
   callStatic: {
     isAdminMode(overrides?: CallOverrides): Promise<boolean>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<boolean>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<boolean>;
 
     /**
      * Returns the address of the current owner.
@@ -139,31 +175,40 @@ export class AdminMode extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     renounceAdminMode(overrides?: CallOverrides): Promise<void>;
 
-    'renounceAdminMode()'(overrides?: CallOverrides): Promise<void>;
+    "renounceAdminMode()"(overrides?: CallOverrides): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
     isAdminMode(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -173,27 +218,33 @@ export class AdminMode extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceAdminMode(overrides?: Overrides): Promise<BigNumber>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<BigNumber>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     isAdminMode(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'isAdminMode()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "isAdminMode()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -203,21 +254,24 @@ export class AdminMode extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceAdminMode(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'renounceAdminMode()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "renounceAdminMode()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;

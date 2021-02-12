@@ -2,23 +2,41 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PullPaymentInterface extends ethers.utils.Interface {
   functions: {
-    'payments(address)': FunctionFragment;
-    'withdrawPayments(address)': FunctionFragment;
+    "payments(address)": FunctionFragment;
+    "withdrawPayments(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'payments', values: [string]): string;
-  encodeFunctionData(functionFragment: 'withdrawPayments', values: [string]): string;
+  encodeFunctionData(functionFragment: "payments", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "withdrawPayments",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'payments', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawPayments', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "payments", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawPayments",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -52,7 +70,7 @@ export class PullPayment extends Contract {
      * Returns the payments owed to an address.
      * @param dest The creditor's address.
      */
-    'payments(address)'(
+    "payments(address)"(
       dest: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -63,13 +81,19 @@ export class PullPayment extends Contract {
      * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee Whose payments will be withdrawn.
      */
-    withdrawPayments(payee: string, overrides?: Overrides): Promise<ContractTransaction>;
+    withdrawPayments(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee Whose payments will be withdrawn.
      */
-    'withdrawPayments(address)'(payee: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "withdrawPayments(address)"(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
   };
 
   /**
@@ -82,19 +106,28 @@ export class PullPayment extends Contract {
    * Returns the payments owed to an address.
    * @param dest The creditor's address.
    */
-  'payments(address)'(dest: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "payments(address)"(
+    dest: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
    * @param payee Whose payments will be withdrawn.
    */
-  withdrawPayments(payee: string, overrides?: Overrides): Promise<ContractTransaction>;
+  withdrawPayments(
+    payee: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
    * @param payee Whose payments will be withdrawn.
    */
-  'withdrawPayments(address)'(payee: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "withdrawPayments(address)"(
+    payee: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     /**
@@ -107,7 +140,10 @@ export class PullPayment extends Contract {
      * Returns the payments owed to an address.
      * @param dest The creditor's address.
      */
-    'payments(address)'(dest: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "payments(address)"(
+      dest: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
@@ -119,7 +155,10 @@ export class PullPayment extends Contract {
      * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee Whose payments will be withdrawn.
      */
-    'withdrawPayments(address)'(payee: string, overrides?: CallOverrides): Promise<void>;
+    "withdrawPayments(address)"(
+      payee: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
@@ -135,7 +174,10 @@ export class PullPayment extends Contract {
      * Returns the payments owed to an address.
      * @param dest The creditor's address.
      */
-    'payments(address)'(dest: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "payments(address)"(
+      dest: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
@@ -147,7 +189,10 @@ export class PullPayment extends Contract {
      * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee Whose payments will be withdrawn.
      */
-    'withdrawPayments(address)'(payee: string, overrides?: Overrides): Promise<BigNumber>;
+    "withdrawPayments(address)"(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -155,25 +200,34 @@ export class PullPayment extends Contract {
      * Returns the payments owed to an address.
      * @param dest The creditor's address.
      */
-    payments(dest: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    payments(
+      dest: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the payments owed to an address.
      * @param dest The creditor's address.
      */
-    'payments(address)'(dest: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "payments(address)"(
+      dest: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee Whose payments will be withdrawn.
      */
-    withdrawPayments(payee: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    withdrawPayments(
+      payee: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Withdraw accumulated payments, forwarding all gas to the recipient. Note that _any_ account can call this function, not just the `payee`. This means that contracts unaware of the `PullPayment` protocol can still receive funds this way, by having a separate account call {withdrawPayments}. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.
      * @param payee Whose payments will be withdrawn.
      */
-    'withdrawPayments(address)'(
+    "withdrawPayments(address)"(
       payee: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;

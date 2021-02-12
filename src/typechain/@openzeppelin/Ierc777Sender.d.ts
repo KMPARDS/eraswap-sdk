@@ -2,23 +2,38 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Ierc777SenderInterface extends ethers.utils.Interface {
   functions: {
-    'tokensToSend(address,address,address,uint256,bytes,bytes)': FunctionFragment;
+    "tokensToSend(address,address,address,uint256,bytes,bytes)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'tokensToSend',
+    functionFragment: "tokensToSend",
     values: [string, string, string, BigNumberish, BytesLike, BytesLike]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'tokensToSend', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "tokensToSend",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -53,7 +68,7 @@ export class Ierc777Sender extends Contract {
     /**
      * Called by an {IERC777} token contract whenever a registered holder's (`from`) tokens are about to be moved or destroyed. The type of operation is conveyed by `to` being the zero address or not. This call occurs _before_ the token contract's state is updated, so {IERC777-balanceOf}, etc., can be used to query the pre-operation state. This function may revert to prevent the operation from being executed.
      */
-    'tokensToSend(address,address,address,uint256,bytes,bytes)'(
+    "tokensToSend(address,address,address,uint256,bytes,bytes)"(
       operator: string,
       from: string,
       to: string,
@@ -80,7 +95,7 @@ export class Ierc777Sender extends Contract {
   /**
    * Called by an {IERC777} token contract whenever a registered holder's (`from`) tokens are about to be moved or destroyed. The type of operation is conveyed by `to` being the zero address or not. This call occurs _before_ the token contract's state is updated, so {IERC777-balanceOf}, etc., can be used to query the pre-operation state. This function may revert to prevent the operation from being executed.
    */
-  'tokensToSend(address,address,address,uint256,bytes,bytes)'(
+  "tokensToSend(address,address,address,uint256,bytes,bytes)"(
     operator: string,
     from: string,
     to: string,
@@ -107,7 +122,7 @@ export class Ierc777Sender extends Contract {
     /**
      * Called by an {IERC777} token contract whenever a registered holder's (`from`) tokens are about to be moved or destroyed. The type of operation is conveyed by `to` being the zero address or not. This call occurs _before_ the token contract's state is updated, so {IERC777-balanceOf}, etc., can be used to query the pre-operation state. This function may revert to prevent the operation from being executed.
      */
-    'tokensToSend(address,address,address,uint256,bytes,bytes)'(
+    "tokensToSend(address,address,address,uint256,bytes,bytes)"(
       operator: string,
       from: string,
       to: string,
@@ -137,7 +152,7 @@ export class Ierc777Sender extends Contract {
     /**
      * Called by an {IERC777} token contract whenever a registered holder's (`from`) tokens are about to be moved or destroyed. The type of operation is conveyed by `to` being the zero address or not. This call occurs _before_ the token contract's state is updated, so {IERC777-balanceOf}, etc., can be used to query the pre-operation state. This function may revert to prevent the operation from being executed.
      */
-    'tokensToSend(address,address,address,uint256,bytes,bytes)'(
+    "tokensToSend(address,address,address,uint256,bytes,bytes)"(
       operator: string,
       from: string,
       to: string,
@@ -165,7 +180,7 @@ export class Ierc777Sender extends Contract {
     /**
      * Called by an {IERC777} token contract whenever a registered holder's (`from`) tokens are about to be moved or destroyed. The type of operation is conveyed by `to` being the zero address or not. This call occurs _before_ the token contract's state is updated, so {IERC777-balanceOf}, etc., can be used to query the pre-operation state. This function may revert to prevent the operation from being executed.
      */
-    'tokensToSend(address,address,address,uint256,bytes,bytes)'(
+    "tokensToSend(address,address,address,uint256,bytes,bytes)"(
       operator: string,
       from: string,
       to: string,

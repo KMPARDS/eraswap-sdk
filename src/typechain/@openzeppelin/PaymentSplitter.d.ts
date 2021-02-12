@@ -2,45 +2,69 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PaymentSplitterInterface extends ethers.utils.Interface {
   functions: {
-    'payee(uint256)': FunctionFragment;
-    'release(address)': FunctionFragment;
-    'released(address)': FunctionFragment;
-    'shares(address)': FunctionFragment;
-    'totalReleased()': FunctionFragment;
-    'totalShares()': FunctionFragment;
+    "payee(uint256)": FunctionFragment;
+    "release(address)": FunctionFragment;
+    "released(address)": FunctionFragment;
+    "shares(address)": FunctionFragment;
+    "totalReleased()": FunctionFragment;
+    "totalShares()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'payee', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'release', values: [string]): string;
-  encodeFunctionData(functionFragment: 'released', values: [string]): string;
-  encodeFunctionData(functionFragment: 'shares', values: [string]): string;
-  encodeFunctionData(functionFragment: 'totalReleased', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalShares', values?: undefined): string;
+  encodeFunctionData(functionFragment: "payee", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "release", values: [string]): string;
+  encodeFunctionData(functionFragment: "released", values: [string]): string;
+  encodeFunctionData(functionFragment: "shares", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "totalReleased",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalShares",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'payee', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'release', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'released', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'shares', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalReleased', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalShares', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "payee", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "release", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "released", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "shares", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalReleased",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalShares",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'PayeeAdded(address,uint256)': EventFragment;
-    'PaymentReceived(address,uint256)': EventFragment;
-    'PaymentReleased(address,uint256)': EventFragment;
+    "PayeeAdded(address,uint256)": EventFragment;
+    "PaymentReceived(address,uint256)": EventFragment;
+    "PaymentReleased(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'PayeeAdded'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'PaymentReceived'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'PaymentReleased'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PayeeAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PaymentReceived"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PaymentReleased"): EventFragment;
 }
 
 export class PaymentSplitter extends Contract {
@@ -70,7 +94,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the address of the payee number `index`.
      */
-    'payee(uint256)'(
+    "payee(uint256)"(
       index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -80,12 +104,18 @@ export class PaymentSplitter extends Contract {
     /**
      * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
      */
-    release(account: string, overrides?: Overrides): Promise<ContractTransaction>;
+    release(
+      account: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
      */
-    'release(address)'(account: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "release(address)"(
+      account: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Getter for the amount of Ether already released to a payee.
@@ -100,7 +130,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the amount of Ether already released to a payee.
      */
-    'released(address)'(
+    "released(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -120,7 +150,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the amount of shares held by an account.
      */
-    'shares(address)'(
+    "shares(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -139,7 +169,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the total amount of Ether already released.
      */
-    'totalReleased()'(
+    "totalReleased()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -157,7 +187,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the total shares held by payees.
      */
-    'totalShares()'(
+    "totalShares()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -172,7 +202,10 @@ export class PaymentSplitter extends Contract {
   /**
    * Getter for the address of the payee number `index`.
    */
-  'payee(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  "payee(uint256)"(
+    index: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   /**
    * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
@@ -182,7 +215,10 @@ export class PaymentSplitter extends Contract {
   /**
    * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
    */
-  'release(address)'(account: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "release(address)"(
+    account: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Getter for the amount of Ether already released to a payee.
@@ -192,7 +228,10 @@ export class PaymentSplitter extends Contract {
   /**
    * Getter for the amount of Ether already released to a payee.
    */
-  'released(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "released(address)"(
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Getter for the amount of shares held by an account.
@@ -202,7 +241,10 @@ export class PaymentSplitter extends Contract {
   /**
    * Getter for the amount of shares held by an account.
    */
-  'shares(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "shares(address)"(
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Getter for the total amount of Ether already released.
@@ -212,7 +254,7 @@ export class PaymentSplitter extends Contract {
   /**
    * Getter for the total amount of Ether already released.
    */
-  'totalReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalReleased()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Getter for the total shares held by payees.
@@ -222,7 +264,7 @@ export class PaymentSplitter extends Contract {
   /**
    * Getter for the total shares held by payees.
    */
-  'totalShares()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalShares()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
     /**
@@ -233,7 +275,10 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the address of the payee number `index`.
      */
-    'payee(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    "payee(uint256)"(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     /**
      * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
@@ -243,7 +288,10 @@ export class PaymentSplitter extends Contract {
     /**
      * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
      */
-    'release(address)'(account: string, overrides?: CallOverrides): Promise<void>;
+    "release(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Getter for the amount of Ether already released to a payee.
@@ -253,7 +301,10 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the amount of Ether already released to a payee.
      */
-    'released(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "released(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Getter for the amount of shares held by an account.
@@ -263,7 +314,10 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the amount of shares held by an account.
      */
-    'shares(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "shares(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Getter for the total amount of Ether already released.
@@ -273,7 +327,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the total amount of Ether already released.
      */
-    'totalReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalReleased()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Getter for the total shares held by payees.
@@ -283,7 +337,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the total shares held by payees.
      */
-    'totalShares()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalShares()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {
@@ -303,7 +357,10 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the address of the payee number `index`.
      */
-    'payee(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "payee(uint256)"(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
@@ -313,7 +370,10 @@ export class PaymentSplitter extends Contract {
     /**
      * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
      */
-    'release(address)'(account: string, overrides?: Overrides): Promise<BigNumber>;
+    "release(address)"(
+      account: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Getter for the amount of Ether already released to a payee.
@@ -323,7 +383,10 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the amount of Ether already released to a payee.
      */
-    'released(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "released(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Getter for the amount of shares held by an account.
@@ -333,7 +396,10 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the amount of shares held by an account.
      */
-    'shares(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "shares(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Getter for the total amount of Ether already released.
@@ -343,7 +409,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the total amount of Ether already released.
      */
-    'totalReleased()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalReleased()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Getter for the total shares held by payees.
@@ -353,49 +419,73 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the total shares held by payees.
      */
-    'totalShares()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalShares()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     /**
      * Getter for the address of the payee number `index`.
      */
-    payee(index: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    payee(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Getter for the address of the payee number `index`.
      */
-    'payee(uint256)'(index: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "payee(uint256)"(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
      */
-    release(account: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    release(
+      account: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the total shares and their previous withdrawals.
      */
-    'release(address)'(account: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "release(address)"(
+      account: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Getter for the amount of Ether already released to a payee.
      */
-    released(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    released(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Getter for the amount of Ether already released to a payee.
      */
-    'released(address)'(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "released(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Getter for the amount of shares held by an account.
      */
-    shares(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    shares(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Getter for the amount of shares held by an account.
      */
-    'shares(address)'(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "shares(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Getter for the total amount of Ether already released.
@@ -405,7 +495,7 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the total amount of Ether already released.
      */
-    'totalReleased()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalReleased()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Getter for the total shares held by payees.
@@ -415,6 +505,6 @@ export class PaymentSplitter extends Contract {
     /**
      * Getter for the total shares held by payees.
      */
-    'totalShares()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalShares()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

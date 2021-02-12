@@ -2,58 +2,125 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PlasmaManagerInterface extends ethers.utils.Interface {
   functions: {
-    'getAllValidators()': FunctionFragment;
-    'getBunchHeader(uint256)': FunctionFragment;
-    'getNextStartBlockNumber()': FunctionFragment;
-    'getValidator(uint256)': FunctionFragment;
-    'isValidator(address)': FunctionFragment;
-    'lastBunchIndex()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'setInitialValidators(address[])': FunctionFragment;
-    'submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
+    "getAllValidators()": FunctionFragment;
+    "getBunchHeader(uint256)": FunctionFragment;
+    "getNextStartBlockNumber()": FunctionFragment;
+    "getValidator(uint256)": FunctionFragment;
+    "isValidator(address)": FunctionFragment;
+    "lastBunchIndex()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "setInitialValidators(address[])": FunctionFragment;
+    "submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'getAllValidators', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getBunchHeader', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getNextStartBlockNumber', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getValidator', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'isValidator', values: [string]): string;
-  encodeFunctionData(functionFragment: 'lastBunchIndex', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'setInitialValidators', values: [string[]]): string;
   encodeFunctionData(
-    functionFragment: 'submitBunchHeader',
-    values: [BigNumberish, BigNumberish, BytesLike, BytesLike, BytesLike, BytesLike[]]
+    functionFragment: "getAllValidators",
+    values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "getBunchHeader",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getNextStartBlockNumber",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getValidator",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "isValidator", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "lastBunchIndex",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "setInitialValidators",
+    values: [string[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "submitBunchHeader",
+    values: [
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BytesLike,
+      BytesLike[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'getAllValidators', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getBunchHeader', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getNextStartBlockNumber', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getValidator', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isValidator', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'lastBunchIndex', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setInitialValidators', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'submitBunchHeader', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllValidators",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBunchHeader",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getNextStartBlockNumber",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getValidator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isValidator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lastBunchIndex",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setInitialValidators",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "submitBunchHeader",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'NewBunchHeader(uint256,uint256,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
+    "NewBunchHeader(uint256,uint256,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'NewBunchHeader'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewBunchHeader"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 
 export class PlasmaManager extends Contract {
@@ -76,7 +143,7 @@ export class PlasmaManager extends Contract {
       0: string[];
     }>;
 
-    'getAllValidators()'(
+    "getAllValidators()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string[];
@@ -108,7 +175,7 @@ export class PlasmaManager extends Contract {
      * Gets finalized bunch headers by index.
      * @param _bunchIndex : Index of the bunch.
      */
-    'getBunchHeader(uint256)'(
+    "getBunchHeader(uint256)"(
       _bunchIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -138,7 +205,7 @@ export class PlasmaManager extends Contract {
     /**
      * Gets the start block number after last bunch.
      */
-    'getNextStartBlockNumber()'(
+    "getNextStartBlockNumber()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -151,7 +218,7 @@ export class PlasmaManager extends Contract {
       0: string;
     }>;
 
-    'getValidator(uint256)'(
+    "getValidator(uint256)"(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -165,7 +232,7 @@ export class PlasmaManager extends Contract {
       0: boolean;
     }>;
 
-    'isValidator(address)'(
+    "isValidator(address)"(
       _validator: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -184,7 +251,7 @@ export class PlasmaManager extends Contract {
     /**
      * Gets index of last bunch header from bunch header list.
      */
-    'lastBunchIndex()'(
+    "lastBunchIndex()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -202,7 +269,7 @@ export class PlasmaManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -213,7 +280,7 @@ export class PlasmaManager extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'setInitialValidators(address[])'(
+    "setInitialValidators(address[])"(
       _validators: string[],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -246,7 +313,7 @@ export class PlasmaManager extends Contract {
      * @param _startBlockNumber : Start block number in the bunch
      * @param _txMRoot : Tx mega root of the blocks in the bunch
      */
-    'submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])'(
+    "submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])"(
       _startBlockNumber: BigNumberish,
       _bunchDepth: BigNumberish,
       _txMRoot: BytesLike,
@@ -259,12 +326,15 @@ export class PlasmaManager extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -272,7 +342,7 @@ export class PlasmaManager extends Contract {
 
   getAllValidators(overrides?: CallOverrides): Promise<string[]>;
 
-  'getAllValidators()'(overrides?: CallOverrides): Promise<string[]>;
+  "getAllValidators()"(overrides?: CallOverrides): Promise<string[]>;
 
   /**
    * Gets finalized bunch headers by index.
@@ -298,7 +368,7 @@ export class PlasmaManager extends Contract {
    * Gets finalized bunch headers by index.
    * @param _bunchIndex : Index of the bunch.
    */
-  'getBunchHeader(uint256)'(
+  "getBunchHeader(uint256)"(
     _bunchIndex: BigNumberish,
     overrides?: CallOverrides
   ): Promise<{
@@ -322,18 +392,24 @@ export class PlasmaManager extends Contract {
   /**
    * Gets the start block number after last bunch.
    */
-  'getNextStartBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "getNextStartBlockNumber()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  getValidator(
+    _validatorIndex: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'getValidator(uint256)'(
+  "getValidator(uint256)"(
     _validatorIndex: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
   isValidator(_validator: string, overrides?: CallOverrides): Promise<boolean>;
 
-  'isValidator(address)'(_validator: string, overrides?: CallOverrides): Promise<boolean>;
+  "isValidator(address)"(
+    _validator: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   /**
    * Gets index of last bunch header from bunch header list.
@@ -343,7 +419,7 @@ export class PlasmaManager extends Contract {
   /**
    * Gets index of last bunch header from bunch header list.
    */
-  'lastBunchIndex()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "lastBunchIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Returns the address of the current owner.
@@ -353,11 +429,14 @@ export class PlasmaManager extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  setInitialValidators(_validators: string[], overrides?: Overrides): Promise<ContractTransaction>;
+  setInitialValidators(
+    _validators: string[],
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setInitialValidators(address[])'(
+  "setInitialValidators(address[])"(
     _validators: string[],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -390,7 +469,7 @@ export class PlasmaManager extends Contract {
    * @param _startBlockNumber : Start block number in the bunch
    * @param _txMRoot : Tx mega root of the blocks in the bunch
    */
-  'submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])'(
+  "submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])"(
     _startBlockNumber: BigNumberish,
     _bunchDepth: BigNumberish,
     _txMRoot: BytesLike,
@@ -403,12 +482,15 @@ export class PlasmaManager extends Contract {
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -416,7 +498,7 @@ export class PlasmaManager extends Contract {
   callStatic: {
     getAllValidators(overrides?: CallOverrides): Promise<string[]>;
 
-    'getAllValidators()'(overrides?: CallOverrides): Promise<string[]>;
+    "getAllValidators()"(overrides?: CallOverrides): Promise<string[]>;
 
     /**
      * Gets finalized bunch headers by index.
@@ -442,7 +524,7 @@ export class PlasmaManager extends Contract {
      * Gets finalized bunch headers by index.
      * @param _bunchIndex : Index of the bunch.
      */
-    'getBunchHeader(uint256)'(
+    "getBunchHeader(uint256)"(
       _bunchIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
@@ -466,18 +548,27 @@ export class PlasmaManager extends Contract {
     /**
      * Gets the start block number after last bunch.
      */
-    'getNextStartBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getNextStartBlockNumber()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    'getValidator(uint256)'(
+    getValidator(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    isValidator(_validator: string, overrides?: CallOverrides): Promise<boolean>;
+    "getValidator(uint256)"(
+      _validatorIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'isValidator(address)'(_validator: string, overrides?: CallOverrides): Promise<boolean>;
+    isValidator(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "isValidator(address)"(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * Gets index of last bunch header from bunch header list.
@@ -487,7 +578,7 @@ export class PlasmaManager extends Contract {
     /**
      * Gets index of last bunch header from bunch header list.
      */
-    'lastBunchIndex()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "lastBunchIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -497,11 +588,14 @@ export class PlasmaManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    setInitialValidators(_validators: string[], overrides?: CallOverrides): Promise<void>;
+    setInitialValidators(
+      _validators: string[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setInitialValidators(address[])'(
+    "setInitialValidators(address[])"(
       _validators: string[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -534,7 +628,7 @@ export class PlasmaManager extends Contract {
      * @param _startBlockNumber : Start block number in the bunch
      * @param _txMRoot : Tx mega root of the blocks in the bunch
      */
-    'submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])'(
+    "submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])"(
       _startBlockNumber: BigNumberish,
       _bunchDepth: BigNumberish,
       _txMRoot: BytesLike,
@@ -547,36 +641,52 @@ export class PlasmaManager extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
-    NewBunchHeader(_startBlockNumber: null, _bunchDepth: null, _bunchIndex: null): EventFilter;
+    NewBunchHeader(
+      _startBlockNumber: null,
+      _bunchDepth: null,
+      _bunchIndex: null
+    ): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
   };
 
   estimateGas: {
     getAllValidators(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getAllValidators()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getAllValidators()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Gets finalized bunch headers by index.
      * @param _bunchIndex : Index of the bunch.
      */
-    getBunchHeader(_bunchIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getBunchHeader(
+      _bunchIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets finalized bunch headers by index.
      * @param _bunchIndex : Index of the bunch.
      */
-    'getBunchHeader(uint256)'(
+    "getBunchHeader(uint256)"(
       _bunchIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -589,18 +699,27 @@ export class PlasmaManager extends Contract {
     /**
      * Gets the start block number after last bunch.
      */
-    'getNextStartBlockNumber()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getNextStartBlockNumber()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getValidator(_validatorIndex: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getValidator(uint256)'(
+    getValidator(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    isValidator(_validator: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getValidator(uint256)"(
+      _validatorIndex: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'isValidator(address)'(_validator: string, overrides?: CallOverrides): Promise<BigNumber>;
+    isValidator(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "isValidator(address)"(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Gets index of last bunch header from bunch header list.
@@ -610,7 +729,7 @@ export class PlasmaManager extends Contract {
     /**
      * Gets index of last bunch header from bunch header list.
      */
-    'lastBunchIndex()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "lastBunchIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -620,11 +739,14 @@ export class PlasmaManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setInitialValidators(_validators: string[], overrides?: Overrides): Promise<BigNumber>;
+    setInitialValidators(
+      _validators: string[],
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
-    'setInitialValidators(address[])'(
+    "setInitialValidators(address[])"(
       _validators: string[],
       overrides?: Overrides
     ): Promise<BigNumber>;
@@ -657,7 +779,7 @@ export class PlasmaManager extends Contract {
      * @param _startBlockNumber : Start block number in the bunch
      * @param _txMRoot : Tx mega root of the blocks in the bunch
      */
-    'submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])'(
+    "submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])"(
       _startBlockNumber: BigNumberish,
       _bunchDepth: BigNumberish,
       _txMRoot: BytesLike,
@@ -670,18 +792,26 @@ export class PlasmaManager extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     getAllValidators(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'getAllValidators()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getAllValidators()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets finalized bunch headers by index.
@@ -696,7 +826,7 @@ export class PlasmaManager extends Contract {
      * Gets finalized bunch headers by index.
      * @param _bunchIndex : Index of the bunch.
      */
-    'getBunchHeader(uint256)'(
+    "getBunchHeader(uint256)"(
       _bunchIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -704,26 +834,33 @@ export class PlasmaManager extends Contract {
     /**
      * Gets the start block number after last bunch.
      */
-    getNextStartBlockNumber(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getNextStartBlockNumber(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets the start block number after last bunch.
      */
-    'getNextStartBlockNumber()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getNextStartBlockNumber()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getValidator(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'getValidator(uint256)'(
+    "getValidator(uint256)"(
       _validatorIndex: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    isValidator(_validator: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isValidator(
+      _validator: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'isValidator(address)'(
+    "isValidator(address)"(
       _validator: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -736,7 +873,9 @@ export class PlasmaManager extends Contract {
     /**
      * Gets index of last bunch header from bunch header list.
      */
-    'lastBunchIndex()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "lastBunchIndex()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -746,14 +885,14 @@ export class PlasmaManager extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setInitialValidators(
       _validators: string[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'setInitialValidators(address[])'(
+    "setInitialValidators(address[])"(
       _validators: string[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -786,7 +925,7 @@ export class PlasmaManager extends Contract {
      * @param _startBlockNumber : Start block number in the bunch
      * @param _txMRoot : Tx mega root of the blocks in the bunch
      */
-    'submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])'(
+    "submitBunchHeader(uint256,uint256,bytes32,bytes32,bytes32,bytes[])"(
       _startBlockNumber: BigNumberish,
       _bunchDepth: BigNumberish,
       _txMRoot: BytesLike,
@@ -799,12 +938,15 @@ export class PlasmaManager extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;

@@ -2,128 +2,249 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
 import {
   Contract,
   ContractTransaction,
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface PrepaidEsInterface extends ethers.utils.Interface {
   functions: {
-    'allowance(address,address)': FunctionFragment;
-    'approve(address,uint256)': FunctionFragment;
-    'balanceOf(address)': FunctionFragment;
-    'convertToESP(address)': FunctionFragment;
-    'dayswappers()': FunctionFragment;
-    'decimals()': FunctionFragment;
-    'initialize()': FunctionFragment;
-    'isAuthorized(bytes32)': FunctionFragment;
-    'kycDapp()': FunctionFragment;
-    'name()': FunctionFragment;
-    'nrtManager()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'prepaidEs()': FunctionFragment;
-    'randomnessManager()': FunctionFragment;
-    'resolveAddress(bytes32)': FunctionFragment;
-    'resolveAddressStrict(bytes32)': FunctionFragment;
-    'resolveUsername(address)': FunctionFragment;
-    'resolveUsernameStrict(address)': FunctionFragment;
-    'setKycDapp(address)': FunctionFragment;
-    'symbol()': FunctionFragment;
-    'timeallyClub()': FunctionFragment;
-    'timeallyManager()': FunctionFragment;
-    'timeallyPromotionalBucket()': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'transfer(address,uint256)': FunctionFragment;
-    'transferFrom(address,address,uint256)': FunctionFragment;
-    'transferLiquid(address,uint256)': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'updateAuthorization(bytes32,bool)': FunctionFragment;
-    'validatorManager()': FunctionFragment;
+    "allowance(address,address)": FunctionFragment;
+    "approve(address,uint256)": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "convertToESP(address)": FunctionFragment;
+    "dayswappers()": FunctionFragment;
+    "decimals()": FunctionFragment;
+    "initialize()": FunctionFragment;
+    "isAuthorized(bytes32)": FunctionFragment;
+    "kycDapp()": FunctionFragment;
+    "name()": FunctionFragment;
+    "nrtManager()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "prepaidEs()": FunctionFragment;
+    "randomnessManager()": FunctionFragment;
+    "resolveAddress(bytes32)": FunctionFragment;
+    "resolveAddressStrict(bytes32)": FunctionFragment;
+    "resolveUsername(address)": FunctionFragment;
+    "resolveUsernameStrict(address)": FunctionFragment;
+    "setKycDapp(address)": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "timeallyClub()": FunctionFragment;
+    "timeallyManager()": FunctionFragment;
+    "timeallyPromotionalBucket()": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "transfer(address,uint256)": FunctionFragment;
+    "transferFrom(address,address,uint256)": FunctionFragment;
+    "transferLiquid(address,uint256)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "updateAuthorization(bytes32,bool)": FunctionFragment;
+    "validatorManager()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'allowance', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'approve', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
-  encodeFunctionData(functionFragment: 'convertToESP', values: [string]): string;
-  encodeFunctionData(functionFragment: 'dayswappers', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'decimals', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'initialize', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'isAuthorized', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'kycDapp', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'name', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'nrtManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'prepaidEs', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'randomnessManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'resolveAddress', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveAddressStrict', values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: 'resolveUsername', values: [string]): string;
-  encodeFunctionData(functionFragment: 'resolveUsernameStrict', values: [string]): string;
-  encodeFunctionData(functionFragment: 'setKycDapp', values: [string]): string;
-  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyClub', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyManager', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'timeallyPromotionalBucket', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transfer', values: [string, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'transferFrom',
+    functionFragment: "allowance",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approve",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "convertToESP",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "dayswappers",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isAuthorized",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "kycDapp", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nrtManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "prepaidEs", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "randomnessManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddress",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveAddressStrict",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsername",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resolveUsernameStrict",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "setKycDapp", values: [string]): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "timeallyClub",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "timeallyPromotionalBucket",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: 'transferLiquid', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'updateAuthorization', values: [BytesLike, boolean]): string;
-  encodeFunctionData(functionFragment: 'validatorManager', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "transferLiquid",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateAuthorization",
+    values: [BytesLike, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "validatorManager",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'allowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'convertToESP', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'dayswappers', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decimals', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'isAuthorized', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'kycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'nrtManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'prepaidEs', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'randomnessManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveAddressStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsername', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'resolveUsernameStrict', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setKycDapp', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyClub', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyManager', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'timeallyPromotionalBucket', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transfer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferLiquid', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updateAuthorization', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'validatorManager', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "convertToESP",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "dayswappers",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isAuthorized",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "kycDapp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nrtManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "prepaidEs", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "randomnessManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveAddressStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsername",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resolveUsernameStrict",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setKycDapp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyClub",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "timeallyPromotionalBucket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferLiquid",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateAuthorization",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "validatorManager",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Approval(address,address,uint256)': EventFragment;
-    'Authorised(bytes32,bool)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'Transfer(address,address,uint256)': EventFragment;
+    "Approval(address,address,uint256)": EventFragment;
+    "Authorised(bytes32,bool)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "Transfer(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Authorised'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Authorised"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
 export class PrepaidEs extends Contract {
@@ -158,7 +279,7 @@ export class PrepaidEs extends Contract {
      * @param _delegate : address The address which will spend the funds.
      * @param _owner : address The address which owns the funds.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       _owner: string,
       _delegate: string,
       overrides?: CallOverrides
@@ -182,7 +303,7 @@ export class PrepaidEs extends Contract {
      * @param _delegate : The address which will spend the funds.
      * @param _value : The amount of tokens to be spent.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       _delegate: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -203,7 +324,7 @@ export class PrepaidEs extends Contract {
      * Gets the prepaid balance of a holder.
      * @param _owner : Address of tokens owner.
      */
-    'balanceOf(address)'(
+    "balanceOf(address)"(
       _owner: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -214,13 +335,16 @@ export class PrepaidEs extends Contract {
      * Converts native tokens to wrapped format.
      * @param _destination : Address on which prepaid to be credited.
      */
-    convertToESP(_destination: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+    convertToESP(
+      _destination: string,
+      overrides?: PayableOverrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Converts native tokens to wrapped format.
      * @param _destination : Address on which prepaid to be credited.
      */
-    'convertToESP(address)'(
+    "convertToESP(address)"(
       _destination: string,
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
@@ -231,7 +355,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'dayswappers()'(
+    "dayswappers()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -243,7 +367,7 @@ export class PrepaidEs extends Contract {
       0: number;
     }>;
 
-    'decimals()'(
+    "decimals()"(
       overrides?: CallOverrides
     ): Promise<{
       0: number;
@@ -251,16 +375,16 @@ export class PrepaidEs extends Contract {
 
     initialize(overrides?: Overrides): Promise<ContractTransaction>;
 
-    'initialize()'(overrides?: Overrides): Promise<ContractTransaction>;
+    "initialize()"(overrides?: Overrides): Promise<ContractTransaction>;
 
-    'isAuthorized(bytes32)'(
+    "isAuthorized(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
     }>;
 
-    'isAuthorized(address)'(
+    "isAuthorized(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -273,7 +397,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'kycDapp()'(
+    "kycDapp()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -285,7 +409,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'name()'(
+    "name()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -297,7 +421,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'nrtManager()'(
+    "nrtManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -315,7 +439,7 @@ export class PrepaidEs extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(
+    "owner()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -327,7 +451,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'prepaidEs()'(
+    "prepaidEs()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -339,7 +463,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'randomnessManager()'(
+    "randomnessManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -352,7 +476,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -366,7 +490,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<{
@@ -380,7 +504,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
@@ -394,16 +518,22 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     symbol(
       overrides?: CallOverrides
@@ -411,7 +541,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'symbol()'(
+    "symbol()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -423,7 +553,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'timeallyClub()'(
+    "timeallyClub()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -435,7 +565,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'timeallyManager()'(
+    "timeallyManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -447,7 +577,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'timeallyPromotionalBucket()'(
+    "timeallyPromotionalBucket()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -459,7 +589,7 @@ export class PrepaidEs extends Contract {
       0: BigNumber;
     }>;
 
-    'totalSupply()'(
+    "totalSupply()"(
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -481,7 +611,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : Address of receiver.
      * @param _value : Number of tokens to transfer.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       _receiver: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -506,7 +636,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : address The address which you want to transfer to.
      * @param _value : uint256 the amount of tokens to be transferred.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       _owner: string,
       _receiver: string,
       _value: BigNumberish,
@@ -531,7 +661,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : Address of native tokens receiver.
      * @param _value : Amount of prepaid es tokens to convert.
      */
-    'transferLiquid(address,uint256)'(
+    "transferLiquid(address,uint256)"(
       _receiver: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -540,12 +670,15 @@ export class PrepaidEs extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -556,7 +689,7 @@ export class PrepaidEs extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -568,7 +701,7 @@ export class PrepaidEs extends Contract {
       0: string;
     }>;
 
-    'validatorManager()'(
+    "validatorManager()"(
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -580,14 +713,18 @@ export class PrepaidEs extends Contract {
    * @param _delegate : address The address which will spend the funds.
    * @param _owner : address The address which owns the funds.
    */
-  allowance(_owner: string, _delegate: string, overrides?: CallOverrides): Promise<BigNumber>;
+  allowance(
+    _owner: string,
+    _delegate: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Function to check the amount of tokens that an owner allowed to a spender.
    * @param _delegate : address The address which will spend the funds.
    * @param _owner : address The address which owns the funds.
    */
-  'allowance(address,address)'(
+  "allowance(address,address)"(
     _owner: string,
     _delegate: string,
     overrides?: CallOverrides
@@ -609,7 +746,7 @@ export class PrepaidEs extends Contract {
    * @param _delegate : The address which will spend the funds.
    * @param _value : The amount of tokens to be spent.
    */
-  'approve(address,uint256)'(
+  "approve(address,uint256)"(
     _delegate: string,
     _value: BigNumberish,
     overrides?: Overrides
@@ -625,50 +762,62 @@ export class PrepaidEs extends Contract {
    * Gets the prepaid balance of a holder.
    * @param _owner : Address of tokens owner.
    */
-  'balanceOf(address)'(_owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf(address)"(
+    _owner: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   /**
    * Converts native tokens to wrapped format.
    * @param _destination : Address on which prepaid to be credited.
    */
-  convertToESP(_destination: string, overrides?: PayableOverrides): Promise<ContractTransaction>;
+  convertToESP(
+    _destination: string,
+    overrides?: PayableOverrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Converts native tokens to wrapped format.
    * @param _destination : Address on which prepaid to be credited.
    */
-  'convertToESP(address)'(
+  "convertToESP(address)"(
     _destination: string,
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
   dayswappers(overrides?: CallOverrides): Promise<string>;
 
-  'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+  "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
   decimals(overrides?: CallOverrides): Promise<number>;
 
-  'decimals()'(overrides?: CallOverrides): Promise<number>;
+  "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   initialize(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'initialize()'(overrides?: Overrides): Promise<ContractTransaction>;
+  "initialize()"(overrides?: Overrides): Promise<ContractTransaction>;
 
-  'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  "isAuthorized(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
+  "isAuthorized(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   kycDapp(overrides?: CallOverrides): Promise<string>;
 
-  'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+  "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
-  'name()'(overrides?: CallOverrides): Promise<string>;
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
   nrtManager(overrides?: CallOverrides): Promise<string>;
 
-  'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+  "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
   /**
    * Returns the address of the current owner.
@@ -678,55 +827,82 @@ export class PrepaidEs extends Contract {
   /**
    * Returns the address of the current owner.
    */
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-  'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+  "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
   randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-  'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+  "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
-  resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddress(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddress(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  resolveAddressStrict(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveAddressStrict(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
+  "resolveAddressStrict(bytes32)"(
+    _username: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
 
-  'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsername(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  resolveUsernameStrict(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+  "resolveUsernameStrict(address)"(
+    _wallet: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  setKycDapp(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<ContractTransaction>;
+  "setKycDapp(address)"(
+    _kycDapp: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   symbol(overrides?: CallOverrides): Promise<string>;
 
-  'symbol()'(overrides?: CallOverrides): Promise<string>;
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
   timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-  'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+  "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   /**
    * Private method that transfers tokens to receiver.
@@ -744,7 +920,7 @@ export class PrepaidEs extends Contract {
    * @param _receiver : Address of receiver.
    * @param _value : Number of tokens to transfer.
    */
-  'transfer(address,uint256)'(
+  "transfer(address,uint256)"(
     _receiver: string,
     _value: BigNumberish,
     overrides?: Overrides
@@ -769,7 +945,7 @@ export class PrepaidEs extends Contract {
    * @param _receiver : address The address which you want to transfer to.
    * @param _value : uint256 the amount of tokens to be transferred.
    */
-  'transferFrom(address,address,uint256)'(
+  "transferFrom(address,address,uint256)"(
     _owner: string,
     _receiver: string,
     _value: BigNumberish,
@@ -794,7 +970,7 @@ export class PrepaidEs extends Contract {
    * @param _receiver : Address of native tokens receiver.
    * @param _value : Amount of prepaid es tokens to convert.
    */
-  'transferLiquid(address,uint256)'(
+  "transferLiquid(address,uint256)"(
     _receiver: string,
     _value: BigNumberish,
     overrides?: Overrides
@@ -803,12 +979,15 @@ export class PrepaidEs extends Contract {
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  transferOwnership(newOwner: string, overrides?: Overrides): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   /**
    * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
    */
-  'transferOwnership(address)'(
+  "transferOwnership(address)"(
     newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -819,7 +998,7 @@ export class PrepaidEs extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  'updateAuthorization(bytes32,bool)'(
+  "updateAuthorization(bytes32,bool)"(
     _username: BytesLike,
     _newStatus: boolean,
     overrides?: Overrides
@@ -827,7 +1006,7 @@ export class PrepaidEs extends Contract {
 
   validatorManager(overrides?: CallOverrides): Promise<string>;
 
-  'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+  "validatorManager()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     /**
@@ -835,14 +1014,18 @@ export class PrepaidEs extends Contract {
      * @param _delegate : address The address which will spend the funds.
      * @param _owner : address The address which owns the funds.
      */
-    allowance(_owner: string, _delegate: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      _owner: string,
+      _delegate: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Function to check the amount of tokens that an owner allowed to a spender.
      * @param _delegate : address The address which will spend the funds.
      * @param _owner : address The address which owns the funds.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       _owner: string,
       _delegate: string,
       overrides?: CallOverrides
@@ -853,14 +1036,18 @@ export class PrepaidEs extends Contract {
      * @param _delegate : The address which will spend the funds.
      * @param _value : The amount of tokens to be spent.
      */
-    approve(_delegate: string, _value: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    approve(
+      _delegate: string,
+      _value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
      * @param _delegate : The address which will spend the funds.
      * @param _value : The amount of tokens to be spent.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       _delegate: string,
       _value: BigNumberish,
       overrides?: CallOverrides
@@ -876,47 +1063,62 @@ export class PrepaidEs extends Contract {
      * Gets the prepaid balance of a holder.
      * @param _owner : Address of tokens owner.
      */
-    'balanceOf(address)'(_owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      _owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Converts native tokens to wrapped format.
      * @param _destination : Address on which prepaid to be credited.
      */
-    convertToESP(_destination: string, overrides?: CallOverrides): Promise<void>;
+    convertToESP(
+      _destination: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Converts native tokens to wrapped format.
      * @param _destination : Address on which prepaid to be credited.
      */
-    'convertToESP(address)'(_destination: string, overrides?: CallOverrides): Promise<void>;
+    "convertToESP(address)"(
+      _destination: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     dayswappers(overrides?: CallOverrides): Promise<string>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<string>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<string>;
 
     decimals(overrides?: CallOverrides): Promise<number>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<number>;
+    "decimals()"(overrides?: CallOverrides): Promise<number>;
 
     initialize(overrides?: CallOverrides): Promise<void>;
 
-    'initialize()'(overrides?: CallOverrides): Promise<void>;
+    "initialize()"(overrides?: CallOverrides): Promise<void>;
 
-    'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    "isAuthorized(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<boolean>;
+    "isAuthorized(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     kycDapp(overrides?: CallOverrides): Promise<string>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<string>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<string>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
-    'name()'(overrides?: CallOverrides): Promise<string>;
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
     nrtManager(overrides?: CallOverrides): Promise<string>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<string>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<string>;
 
     /**
      * Returns the address of the current owner.
@@ -926,72 +1128,100 @@ export class PrepaidEs extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     prepaidEs(overrides?: CallOverrides): Promise<string>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<string>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<string>;
 
     randomnessManager(overrides?: CallOverrides): Promise<string>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<string>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<string>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<string>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    'resolveUsernameStrict(address)'(_wallet: string, overrides?: CallOverrides): Promise<string>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "resolveUsernameStrict(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     setKycDapp(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: CallOverrides): Promise<void>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     symbol(overrides?: CallOverrides): Promise<string>;
 
-    'symbol()'(overrides?: CallOverrides): Promise<string>;
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyClub(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyManager(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<string>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<string>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<string>;
+    "timeallyPromotionalBucket()"(overrides?: CallOverrides): Promise<string>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Private method that transfers tokens to receiver.
      * @param _receiver : Address of receiver.
      * @param _value : Number of tokens to transfer.
      */
-    transfer(_receiver: string, _value: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    transfer(
+      _receiver: string,
+      _value: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     /**
      * Private method that transfers tokens to receiver.
      * @param _receiver : Address of receiver.
      * @param _value : Number of tokens to transfer.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       _receiver: string,
       _value: BigNumberish,
       overrides?: CallOverrides
@@ -1016,7 +1246,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : address The address which you want to transfer to.
      * @param _value : uint256 the amount of tokens to be transferred.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       _owner: string,
       _receiver: string,
       _value: BigNumberish,
@@ -1041,7 +1271,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : Address of native tokens receiver.
      * @param _value : Amount of prepaid es tokens to convert.
      */
-    'transferLiquid(address,uint256)'(
+    "transferLiquid(address,uint256)"(
       _receiver: string,
       _value: BigNumberish,
       overrides?: CallOverrides
@@ -1050,12 +1280,18 @@ export class PrepaidEs extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     updateAuthorization(
       _username: BytesLike,
@@ -1063,7 +1299,7 @@ export class PrepaidEs extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: CallOverrides
@@ -1071,15 +1307,22 @@ export class PrepaidEs extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<string>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<string>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
-    Approval(tokenOwner: string | null, spender: string | null, tokens: null): EventFilter;
+    Approval(
+      tokenOwner: string | null,
+      spender: string | null,
+      tokens: null
+    ): EventFilter;
 
     Authorised(wallet: BytesLike | null, newStatus: null): EventFilter;
 
-    OwnershipTransferred(previousOwner: string | null, newOwner: string | null): EventFilter;
+    OwnershipTransferred(
+      previousOwner: string | null,
+      newOwner: string | null
+    ): EventFilter;
 
     Transfer(from: string | null, to: string | null, tokens: null): EventFilter;
   };
@@ -1090,14 +1333,18 @@ export class PrepaidEs extends Contract {
      * @param _delegate : address The address which will spend the funds.
      * @param _owner : address The address which owns the funds.
      */
-    allowance(_owner: string, _delegate: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      _owner: string,
+      _delegate: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Function to check the amount of tokens that an owner allowed to a spender.
      * @param _delegate : address The address which will spend the funds.
      * @param _owner : address The address which owns the funds.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       _owner: string,
       _delegate: string,
       overrides?: CallOverrides
@@ -1108,14 +1355,18 @@ export class PrepaidEs extends Contract {
      * @param _delegate : The address which will spend the funds.
      * @param _value : The amount of tokens to be spent.
      */
-    approve(_delegate: string, _value: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    approve(
+      _delegate: string,
+      _value: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
      * @param _delegate : The address which will spend the funds.
      * @param _value : The amount of tokens to be spent.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       _delegate: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1131,47 +1382,62 @@ export class PrepaidEs extends Contract {
      * Gets the prepaid balance of a holder.
      * @param _owner : Address of tokens owner.
      */
-    'balanceOf(address)'(_owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      _owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Converts native tokens to wrapped format.
      * @param _destination : Address on which prepaid to be credited.
      */
-    convertToESP(_destination: string, overrides?: PayableOverrides): Promise<BigNumber>;
+    convertToESP(
+      _destination: string,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     /**
      * Converts native tokens to wrapped format.
      * @param _destination : Address on which prepaid to be credited.
      */
-    'convertToESP(address)'(_destination: string, overrides?: PayableOverrides): Promise<BigNumber>;
+    "convertToESP(address)"(
+      _destination: string,
+      overrides?: PayableOverrides
+    ): Promise<BigNumber>;
 
     dayswappers(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     initialize(overrides?: Overrides): Promise<BigNumber>;
 
-    'initialize()'(overrides?: Overrides): Promise<BigNumber>;
+    "initialize()"(overrides?: Overrides): Promise<BigNumber>;
 
-    'isAuthorized(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    "isAuthorized(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'isAuthorized(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "isAuthorized(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     kycDapp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'name()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nrtManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Returns the address of the current owner.
@@ -1181,75 +1447,102 @@ export class PrepaidEs extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     prepaidEs(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     randomnessManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "randomnessManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddress(bytes32)'(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    resolveAddressStrict(_username: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'resolveAddressStrict(bytes32)'(
+    resolveAddress(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddress(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsername(address)'(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAddressStrict(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    resolveUsernameStrict(_wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "resolveAddressStrict(bytes32)"(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'resolveUsernameStrict(address)'(
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsername(address)"(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resolveUsernameStrict(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<BigNumber>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'symbol()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyClub(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyManager()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     timeallyPromotionalBucket(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     /**
      * Private method that transfers tokens to receiver.
      * @param _receiver : Address of receiver.
      * @param _value : Number of tokens to transfer.
      */
-    transfer(_receiver: string, _value: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+    transfer(
+      _receiver: string,
+      _value: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Private method that transfers tokens to receiver.
      * @param _receiver : Address of receiver.
      * @param _value : Number of tokens to transfer.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       _receiver: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1274,7 +1567,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : address The address which you want to transfer to.
      * @param _value : uint256 the amount of tokens to be transferred.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       _owner: string,
       _receiver: string,
       _value: BigNumberish,
@@ -1299,7 +1592,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : Address of native tokens receiver.
      * @param _value : Amount of prepaid es tokens to convert.
      */
-    'transferLiquid(address,uint256)'(
+    "transferLiquid(address,uint256)"(
       _receiver: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1308,12 +1601,18 @@ export class PrepaidEs extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     updateAuthorization(
       _username: BytesLike,
@@ -1321,7 +1620,7 @@ export class PrepaidEs extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -1329,7 +1628,7 @@ export class PrepaidEs extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "validatorManager()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1349,7 +1648,7 @@ export class PrepaidEs extends Contract {
      * @param _delegate : address The address which will spend the funds.
      * @param _owner : address The address which owns the funds.
      */
-    'allowance(address,address)'(
+    "allowance(address,address)"(
       _owner: string,
       _delegate: string,
       overrides?: CallOverrides
@@ -1371,7 +1670,7 @@ export class PrepaidEs extends Contract {
      * @param _delegate : The address which will spend the funds.
      * @param _value : The amount of tokens to be spent.
      */
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       _delegate: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1381,62 +1680,71 @@ export class PrepaidEs extends Contract {
      * Gets the prepaid balance of a holder.
      * @param _owner : Address of tokens owner.
      */
-    balanceOf(_owner: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    balanceOf(
+      _owner: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Gets the prepaid balance of a holder.
      * @param _owner : Address of tokens owner.
      */
-    'balanceOf(address)'(_owner: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balanceOf(address)"(
+      _owner: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Converts native tokens to wrapped format.
      * @param _destination : Address on which prepaid to be credited.
      */
-    convertToESP(_destination: string, overrides?: PayableOverrides): Promise<PopulatedTransaction>;
+    convertToESP(
+      _destination: string,
+      overrides?: PayableOverrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Converts native tokens to wrapped format.
      * @param _destination : Address on which prepaid to be credited.
      */
-    'convertToESP(address)'(
+    "convertToESP(address)"(
       _destination: string,
       overrides?: PayableOverrides
     ): Promise<PopulatedTransaction>;
 
     dayswappers(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'dayswappers()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "dayswappers()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     initialize(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'initialize()'(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "initialize()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
-    'isAuthorized(bytes32)'(
+    "isAuthorized(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'isAuthorized(address)'(
+    "isAuthorized(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     kycDapp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'kycDapp()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "kycDapp()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'name()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nrtManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'nrtManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "nrtManager()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Returns the address of the current owner.
@@ -1446,19 +1754,24 @@ export class PrepaidEs extends Contract {
     /**
      * Returns the address of the current owner.
      */
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     prepaidEs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'prepaidEs()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "prepaidEs()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     randomnessManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'randomnessManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "randomnessManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    resolveAddress(_username: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveAddress(
+      _username: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveAddress(bytes32)'(
+    "resolveAddress(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1468,14 +1781,17 @@ export class PrepaidEs extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveAddressStrict(bytes32)'(
+    "resolveAddressStrict(bytes32)"(
       _username: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    resolveUsername(_wallet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    resolveUsername(
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'resolveUsername(address)'(
+    "resolveUsername(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1485,34 +1801,46 @@ export class PrepaidEs extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    'resolveUsernameStrict(address)'(
+    "resolveUsernameStrict(address)"(
       _wallet: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    setKycDapp(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    setKycDapp(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    'setKycDapp(address)'(_kycDapp: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    "setKycDapp(address)"(
+      _kycDapp: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'symbol()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyClub(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyClub()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyClub()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     timeallyManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'timeallyManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    timeallyPromotionalBucket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    timeallyPromotionalBucket(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'timeallyPromotionalBucket()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "timeallyPromotionalBucket()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     /**
      * Private method that transfers tokens to receiver.
@@ -1530,7 +1858,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : Address of receiver.
      * @param _value : Number of tokens to transfer.
      */
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       _receiver: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1555,7 +1883,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : address The address which you want to transfer to.
      * @param _value : uint256 the amount of tokens to be transferred.
      */
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       _owner: string,
       _receiver: string,
       _value: BigNumberish,
@@ -1580,7 +1908,7 @@ export class PrepaidEs extends Contract {
      * @param _receiver : Address of native tokens receiver.
      * @param _value : Amount of prepaid es tokens to convert.
      */
-    'transferLiquid(address,uint256)'(
+    "transferLiquid(address,uint256)"(
       _receiver: string,
       _value: BigNumberish,
       overrides?: Overrides
@@ -1589,12 +1917,15 @@ export class PrepaidEs extends Contract {
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    transferOwnership(newOwner: string, overrides?: Overrides): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     /**
      * Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.
      */
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -1605,7 +1936,7 @@ export class PrepaidEs extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    'updateAuthorization(bytes32,bool)'(
+    "updateAuthorization(bytes32,bool)"(
       _username: BytesLike,
       _newStatus: boolean,
       overrides?: Overrides
@@ -1613,6 +1944,8 @@ export class PrepaidEs extends Contract {
 
     validatorManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'validatorManager()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "validatorManager()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

@@ -2,23 +2,38 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, Overrides, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  Overrides,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Erc721HolderInterface extends ethers.utils.Interface {
   functions: {
-    'onERC721Received(address,address,uint256,bytes)': FunctionFragment;
+    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'onERC721Received',
+    functionFragment: "onERC721Received",
     values: [string, string, BigNumberish, BytesLike]
   ): string;
 
-  decodeFunctionResult(functionFragment: 'onERC721Received', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -51,7 +66,7 @@ export class Erc721Holder extends Contract {
     /**
      * See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`.
      */
-    'onERC721Received(address,address,uint256,bytes)'(
+    "onERC721Received(address,address,uint256,bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
@@ -74,7 +89,7 @@ export class Erc721Holder extends Contract {
   /**
    * See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`.
    */
-  'onERC721Received(address,address,uint256,bytes)'(
+  "onERC721Received(address,address,uint256,bytes)"(
     arg0: string,
     arg1: string,
     arg2: BigNumberish,
@@ -97,7 +112,7 @@ export class Erc721Holder extends Contract {
     /**
      * See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`.
      */
-    'onERC721Received(address,address,uint256,bytes)'(
+    "onERC721Received(address,address,uint256,bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
@@ -123,7 +138,7 @@ export class Erc721Holder extends Contract {
     /**
      * See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`.
      */
-    'onERC721Received(address,address,uint256,bytes)'(
+    "onERC721Received(address,address,uint256,bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
@@ -147,7 +162,7 @@ export class Erc721Holder extends Contract {
     /**
      * See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`.
      */
-    'onERC721Received(address,address,uint256,bytes)'(
+    "onERC721Received(address,address,uint256,bytes)"(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,

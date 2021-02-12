@@ -2,24 +2,35 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction } from 'ethers';
-import { Contract, ContractTransaction, CallOverrides } from '@ethersproject/contracts';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import {
+  ethers,
+  EventFilter,
+  Signer,
+  BigNumber,
+  BigNumberish,
+  PopulatedTransaction,
+} from "ethers";
+import {
+  Contract,
+  ContractTransaction,
+  CallOverrides,
+} from "@ethersproject/contracts";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface Ierc1820ImplementerInterface extends ethers.utils.Interface {
   functions: {
-    'canImplementInterfaceForAddress(bytes32,address)': FunctionFragment;
+    "canImplementInterfaceForAddress(bytes32,address)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: 'canImplementInterfaceForAddress',
+    functionFragment: "canImplementInterfaceForAddress",
     values: [BytesLike, string]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: 'canImplementInterfaceForAddress',
+    functionFragment: "canImplementInterfaceForAddress",
     data: BytesLike
   ): Result;
 
@@ -54,7 +65,7 @@ export class Ierc1820Implementer extends Contract {
     /**
      * Returns a special value (`ERC1820_ACCEPT_MAGIC`) if this contract implements `interfaceHash` for `account`. See {IERC1820Registry-setInterfaceImplementer}.
      */
-    'canImplementInterfaceForAddress(bytes32,address)'(
+    "canImplementInterfaceForAddress(bytes32,address)"(
       interfaceHash: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -75,7 +86,7 @@ export class Ierc1820Implementer extends Contract {
   /**
    * Returns a special value (`ERC1820_ACCEPT_MAGIC`) if this contract implements `interfaceHash` for `account`. See {IERC1820Registry-setInterfaceImplementer}.
    */
-  'canImplementInterfaceForAddress(bytes32,address)'(
+  "canImplementInterfaceForAddress(bytes32,address)"(
     interfaceHash: BytesLike,
     account: string,
     overrides?: CallOverrides
@@ -94,7 +105,7 @@ export class Ierc1820Implementer extends Contract {
     /**
      * Returns a special value (`ERC1820_ACCEPT_MAGIC`) if this contract implements `interfaceHash` for `account`. See {IERC1820Registry-setInterfaceImplementer}.
      */
-    'canImplementInterfaceForAddress(bytes32,address)'(
+    "canImplementInterfaceForAddress(bytes32,address)"(
       interfaceHash: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -116,7 +127,7 @@ export class Ierc1820Implementer extends Contract {
     /**
      * Returns a special value (`ERC1820_ACCEPT_MAGIC`) if this contract implements `interfaceHash` for `account`. See {IERC1820Registry-setInterfaceImplementer}.
      */
-    'canImplementInterfaceForAddress(bytes32,address)'(
+    "canImplementInterfaceForAddress(bytes32,address)"(
       interfaceHash: BytesLike,
       account: string,
       overrides?: CallOverrides
@@ -136,7 +147,7 @@ export class Ierc1820Implementer extends Contract {
     /**
      * Returns a special value (`ERC1820_ACCEPT_MAGIC`) if this contract implements `interfaceHash` for `account`. See {IERC1820Registry-setInterfaceImplementer}.
      */
-    'canImplementInterfaceForAddress(bytes32,address)'(
+    "canImplementInterfaceForAddress(bytes32,address)"(
       interfaceHash: BytesLike,
       account: string,
       overrides?: CallOverrides

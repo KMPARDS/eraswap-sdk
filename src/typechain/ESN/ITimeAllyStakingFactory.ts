@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { ITimeAllyStaking } from './ITimeAllyStaking';
+import type { ITimeAllyStaking } from "./ITimeAllyStaking";
 
 export class ITimeAllyStakingFactory {
-  static connect(address: string, signerOrProvider: Signer | Provider): ITimeAllyStaking {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ITimeAllyStaking {
     return new Contract(address, _abi, signerOrProvider) as ITimeAllyStaking;
   }
 }
@@ -17,40 +20,40 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: '_increaseValue',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "_increaseValue",
+        type: "uint256",
       },
     ],
-    name: 'increaseIssTime',
+    name: "increaseIssTime",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'principal',
+    name: "principal",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'startMonth',
+    name: "startMonth",
     outputs: [
       {
-        internalType: 'uint32',
-        name: '',
-        type: 'uint32',
+        internalType: "uint32",
+        name: "",
+        type: "uint32",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
 ];
